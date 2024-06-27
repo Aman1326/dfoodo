@@ -1,0 +1,20 @@
+:root {
+  --primary-color: rgba(245, 134, 52, 1);
+  --black: #000000;
+  --white: #fff;
+  --text-grey: rgba(83, 89, 105, 1);
+  --green: rgba(38, 126, 62, 1);
+  --light-pink: rgba(250, 241, 241, 1);
+  --text-black: rgba(42, 45, 50, 1);
+}
+
+.App {
+  font-family: "Roboto";
+}
+
+.flexRowCenter {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
