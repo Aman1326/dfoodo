@@ -1,0 +1,56 @@
+.searchBar_container {
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    /* justify-content: flex-start; */
+    border-radius: 8px;
+    padding: 0.2rem 0.4rem;
+    background-color: var(--white);
+    gap: 0.1rem;
+}
+
+.searchBar_container img {
+    width: 15px;
+    height: 18px;
+}
+
+.locationSection_searchbar {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: fit-content;
+    row-gap: 1.5rem;
+    /* width: 100%; */
+    background-color: var(--white);
+}
+
+.locationSection_searchbar p {
+    color: var(--text-grey);
+    font-family: "Roboto";
+    font-weight: 400;
+    font-size: 16px;
+}
+
+.seachVenue_section_searchbar input {
+    border: none;
+    font-size: 14px;
+    color: var(--text-grey);
+    outline: none;
+    margin-left: 0.3rem;
+    background-color: var(--white);
+    width: 100%;
+}
+
+.seachVenue_section_searchbar input::placeholder {
+    font-family: "Roboto";
+    font-size: 14px;
+    color: var(--text-grey);
+}
+
+.seachVenue_section_searchbar {
+    background-color: var(--white);
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}

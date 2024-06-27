@@ -1,0 +1,159 @@
+.collections_section {
+    margin-top: 2rem;
+}
+
+/* popular venues section css */
+.popularVenues_section {
+    margin-top: 4rem;
+}
+
+.popularVenues_venue_container {
+    padding: 0.6rem 0.6rem;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-bottom: 1rem;
+    display: flex;
+    flex-direction: column;
+    font-family: "Roboto";
+    background: rgba(245, 245, 245, 1);
+    transition: ease-in 0.2s;
+}
+
+.popularVenues_venue_container:hover {
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px,
+        rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
+}
+
+.popularVenues_heading_container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.popularVenues_heading_container h3 {
+    color: rgba(42, 45, 50, 1);
+    font-weight: 600;
+}
+
+.popularVenues_heading_container a {
+    text-decoration: none;
+    color: var(--text-grey);
+    font-family: "Roboto";
+    font-size: 14px;
+}
+
+.popularVenues_heading_container a:hover {
+    text-decoration: underline;
+    color: var(--primary-color);
+}
+
+.venue_image_holder img {
+    width: 100%;
+}
+
+.venue_category_titles {
+    display: flex;
+    flex-direction: row;
+    color: var(--primary-color);
+    font-weight: 400;
+    gap: 0.2rem;
+    font-size: 14px;
+    align-items: center;
+    justify-content: center;
+}
+
+.venue_category_div {
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.venue_category_div p {
+    margin-bottom: 0;
+}
+
+.rating_greenDiv {
+    height: fit-content;
+    width: fit-content;
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+    border-radius: 4px;
+    padding: 0.1rem 0.3rem;
+    flex-direction: row;
+    color: var(--white);
+    font-size: 12px;
+    font-family: "Roboto";
+    font-weight: 700;
+    background-color: var(--green);
+}
+
+.rating_greenDiv img {
+    height: 15px;
+    width: 15px;
+}
+
+.venue_capacity_wrapper {
+    margin-top: auto;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-top: 0.5rem;
+}
+
+.venue_capacity_wrapper p {
+    color: var(--text-grey);
+    margin: 0;
+}
+
+.venue_address_wrapper desc {
+    margin-bottom: 0.2rem;
+    color: var(--text-grey);
+    font-family: "Roboto";
+    font-size: 14px;
+    font-weight: 400;
+}
+
+.venue_address_wrapper h6 {
+    font-size: 16px;
+    color: var(--text-black);
+    font-weight: 600;
+}
+
+.venue_cards_container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.pagination_controls {
+    display: flex;
+    flex-direction: row;
+    gap: 0.6rem;
+}
+
+.pagination_controls button {
+    background-color: var(--white);
+    border: 1px solid rgba(236, 237, 239, 1);
+    border-radius: 4px;
+    aspect-ratio: 1;
+    cursor: pointer;
+    width: 40px;
+}
+
+.pagination_controls button:hover {
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px,
+        rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
+}
+
+.seAll_span {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1rem;
+}
+
+.seAll_span p {
+    margin: 0;
+}
