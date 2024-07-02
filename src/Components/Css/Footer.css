@@ -1,0 +1,102 @@
+.footer_section {
+    margin-top: 4rem;
+}
+
+.left_section_footer {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+}
+
+.left_section_footer img {
+    width: 150px;
+    margin-bottom: 1rem;
+}
+
+.left_section_footer p {
+    font-size: 14px;
+    margin-bottom: 0;
+    color: var(--text-grey);
+    font-weight: 400;
+}
+
+.footer_about_my_venue {
+    padding: 0.5rem 0;
+}
+
+.footer_about_my_venue p {
+    margin-bottom: 0.5rem;
+}
+
+.footer_learn_more {
+    padding: 0.5rem 0;
+}
+
+.footer_learn_more ul,
+.footer_about_my_venue ul {
+    padding-left: 0rem;
+    list-style-type: none;
+}
+
+.footer_learn_more ul li,
+.footer_about_my_venue ul li {
+    font-size: 14px;
+    font-family: "Roboto";
+    cursor: pointer;
+    color: var(--text-grey);
+    text-decoration: none !important;
+    margin-bottom: 0.5rem;
+}
+
+.footer_learn_more ul li a,
+.footer_about_my_venue ul li a {
+    color: var(--text-grey);
+    text-decoration: none !important;
+}
+
+.footer_learn_more ul li:hover,
+.footer_about_my_venue ul li:hover {
+    font-weight: bolder;
+    color: var(--primary-color);
+}
+
+.footer_learn_more p {
+    margin-bottom: 0.5rem;
+    cursor: pointer;
+}
+
+.row_footer {
+    padding: 0.5rem 0.5rem;
+    justify-content: center;
+    display: flex;
+}
+
+.heading_text_footerlinks {
+    margin-bottom: 0;
+}
+
+.social_links {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+}
+
+.social_links a {
+    transition: 1s ease-in-out;
+}
+
+.social_links img {
+    width: 30px;
+    height: 30px;
+}
+
+.social_links a:hover {
+    transform: scale(1.1);
+}
+
+.post_footer_text p {
+    text-align: left;
+    color: var(--text-grey);
+    font-size: 14px;
+}

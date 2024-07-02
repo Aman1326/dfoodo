@@ -157,6 +157,7 @@
 
 .seAll_span p {
     margin: 0;
+    color: var(--primary-color);
 }
 
 .venue_discount_wrapper p {
@@ -171,7 +172,7 @@
 }
 
 .how_it_works_content {
-    padding: 1rem 2rem;
+    padding: 3rem 3rem;
     align-items: center;
     border-radius: 16px;
     margin-left: auto;
@@ -186,10 +187,14 @@
 
 .how_it_works_content_heading {
     display: flex;
-    margin-bottom: 1rem;
+    margin-bottom: 2rem;
     font-family: "Roboto";
     justify-content: center;
     color: var(--Primary-Color, rgba(243, 120, 53, 1));
+}
+
+.how_it_works_content {
+    padding-bottom: 3rem;
 }
 
 .how_it_works_content h6,
@@ -306,36 +311,34 @@
     font-size: 14px;
 }
 
-.leftSection img {
-    width: 100%;
-    border-top-left-radius: 18px;
-    border-bottom-left-radius: 18px;
-}
-
-.playStore_section {
+.are_you_a_venue_owner {
     display: flex;
-    flex-direction: row;
-    margin-left: auto;
-    font-family: "Roboto";
-    font-weight: 600;
-    margin-right: auto;
-    justify-content: center;
-}
-
-.rightSection {
-    display: flex;
+    text-align: center;
     flex-direction: column;
-    align-items: center;
+    font-family: "Roboto";
     justify-content: center;
-    border-top-right-radius: 18px;
-    border-bottom-right-radius: 18px;
 }
 
-.playStore_section img {
-    width: 20%;
+.are_you_a_venue_owner h6,
+.are_you_a_venue_owner p {
+    color: var(--text-grey);
+}
+
+.are_you_a_venue_owner button {
+    color: var(--white);
+    border: none;
+    margin-left: auto;
+    margin-right: auto;
+    width: fit-content;
+    background: rgba(227, 55, 69, 1);
+    border-radius: 5px;
+    padding: 0.4rem 1rem;
+    font-family: "Roboto";
+    font-size: 14px;
 
 }
 
-.download_now_section {
-    margin-top: 2rem;
+.areyoua_venue_owner_section {
+    margin-top: 3rem;
+    margin-bottom: 2rem;
 }

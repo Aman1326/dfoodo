@@ -20,9 +20,10 @@ import discoverbg1 from "../Assets/squareImg1.png";
 import discoverbg2 from "../Assets/squareImg1.png";
 import discoverbg3 from "../Assets/squareImg1.png";
 import discoverbg4 from "../Assets/squareImg1.png";
-import appStore from "../Assets/appStore.png";
-import playStore from "../Assets/googlepPlay.png";
-import phoneimg from "../Assets/phoenImage.png";
+
+import DownloadApp from "./DownloadApp";
+import AreYouAVenueOwner from "./AreYouAVenueOwner";
+import Footer from "./Footer";
 function Home() {
   const venues_data_labeled = [
     {
@@ -649,6 +650,7 @@ function Home() {
                           How to have the best time at the East Bay’s only two-…
                         </h6>
                         <p>April 30, 2024</p>
+                        <hr />
                       </div>
                     </div>
                     <div className="smaller_container_discoverMore">
@@ -659,6 +661,7 @@ function Home() {
                           Francisco
                         </h6>
                         <p>January 9, 2024</p>
+                        <hr />
                       </div>
                     </div>
                     <div className="smaller_container_discoverMore">
@@ -669,6 +672,7 @@ function Home() {
                           wishlist
                         </h6>
                         <p>December 15, 2023</p>
+                        <hr />
                       </div>
                     </div>
                     <div className="smaller_container_discoverMore">
@@ -678,6 +682,7 @@ function Home() {
                           How to have the best time at the East Bay’s only two-…
                         </h6>
                         <p>February 9, 2024</p>
+                        <hr />
                       </div>
                     </div>
                   </div>
@@ -686,26 +691,13 @@ function Home() {
             </div>
           </div>
         </section>
-        <section className="download_now_section">
-          <div className="container">
-            <div className="phoneContainer row">
-              <div className="col-lg-5 pr-0 leftSection">
-                <img src={phoneimg} alt="phone" />
-              </div>
-              <div
-                className="col-lg-7 pl-0 rightSection"
-                style={{ backgroundColor: "var(--orange-Color)" }}
-              >
-                <h3>Get the Dfoodo Diner App</h3>
-                <h3>Download now</h3>
-                <span className="playStore_section">
-                  <img src={appStore} alt="appstore" />
-                  <img src={playStore} alt="appstore" />
-                </span>
-              </div>
-            </div>
-          </div>
+        <section>
+          <DownloadApp />
         </section>
+        <section>
+          <AreYouAVenueOwner />
+        </section>
+        <Footer />
       </div>
     </div>
   );
