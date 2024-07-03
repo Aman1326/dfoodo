@@ -30,6 +30,7 @@
 }
 
 .footer_learn_more {
+    margin-top: 2rem;
     padding: 0.5rem 0;
 }
 
@@ -99,4 +100,29 @@
     text-align: left;
     color: var(--text-grey);
     font-size: 14px;
+}
+
+.third_row_selectLanguage_footer {
+    display: flex;
+    flex-direction: row;
+    width: fit-content;
+    padding: 0.2rem 0.4rem;
+    border: 1px solid grey;
+    border-radius: 5px;
+    margin-bottom: 1rem;
+}
+
+.third_row_selectLanguage_footer select {
+    border: none;
+    outline: none;
+    background-color: transparent;
+}
+
+.social_links_app_text p {
+    color: var(--text-grey);
+    font-size: 14px;
+}
+
+.social_links_app_text p:hover {
+    font-weight: 500;
 }

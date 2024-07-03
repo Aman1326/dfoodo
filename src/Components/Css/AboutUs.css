@@ -1,0 +1,61 @@
+.about-us-background {
+    position: relative;
+    background-image: url("/src/Assets/getHelpBg.png");
+    /* Ensure this path is correct */
+    background-size: cover;
+    background-position: center;
+    height: 60vh;
+    /* Adjust height as needed */
+    width: 100%;
+}
+
+.about-us-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    /* Ensure some transparency */
+    display: flex;
+    align-items: center;
+    justify-content: left;
+}
+
+.about-us-content {
+    z-index: 2;
+    color: white;
+    text-align: left;
+}
+
+.heading_aboutus {
+    margin-top: 2rem;
+    margin-bottom: 3rem;
+}
+
+.heading_aboutus h3 {
+    color: var(--primary-color);
+    font-family: "Roboto";
+}
+
+.right_section_image_aboutus {
+    display: flex;
+    justify-content: center;
+}
+
+.right_section_image_aboutus img {
+    width: 100%;
+}
+
+.text-section-aboutus {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.aboutContetn,
+.text-section-aboutus p {
+    color: var(--text-grey);
+    font-size: 16px;
+    line-height: 34px;
+}

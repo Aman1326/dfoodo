@@ -4,8 +4,7 @@ import "./Css/Footer.css";
 import logo1 from "../Assets/fb_logo.svg";
 import logo2 from "../Assets/twitter_logo.svg";
 import logo3 from "../Assets/yt_link.svg";
-// import logo4 from "../Assets/ig_logo.svg";
-// import logo5 from "../Assets/linkedIn_logo.svg";
+import earth from "../Assets/earth.svg";
 import { Link } from "react-router-dom";
 const Footer = () => {
   return (
@@ -15,76 +14,67 @@ const Footer = () => {
           <div className="col-lg-3 mb-3">
             <div className="left_section_footer">
               <img src={mainLogo} alt="mainlogo" />
-              <p>
-                Lorem Ipsum is simply dummy text of the printing and typesetting
-                industry.
-              </p>
-            </div>
-          </div>
-
-          <div className="col-lg-4 col-sm-6">
-            <div className="footer_about_my_venue">
-              <strong>
-                <Link
-                  to="aboutUs"
-                  style={{
-                    textDecoration: "none",
-                    color: "var(--grey)",
-                  }}
-                >
-                  {" "}
-                  <p className="heading_text_footerlinks">
-                    About Book My Venue
-                  </p>
-                </Link>
-              </strong>
-
-              <ul>
-                <li>
+              <div className="footer_about_my_venue">
+                <strong>
                   <Link
-                    to="/getHelp"
+                    to="aboutUs"
                     style={{
-                      color: "var(--text-grey)",
                       textDecoration: "none",
+                      color: "var(--grey)",
                     }}
                   >
-                    Contact
-                  </Link>{" "}
-                </li>
-                <li>
-                  <Link
-                    to="/blogs"
-                    style={{
-                      color: "var(--text-grey)",
-                      textDecoration: "none",
-                    }}
-                  >
-                    Blog
-                  </Link>{" "}
-                </li>
-                <li>
-                  <Link
-                    to="/registerMyVenue"
-                    style={{
-                      color: "var(--text-grey)",
-                      textDecoration: "none",
-                    }}
-                  >
-                    Are you a Venue Owner?
+                    {" "}
+                    <p className="heading_text_footerlinks">About Dfoodo</p>
                   </Link>
-                </li>
-                <li>
-                  <Link
-                    to="/getHelp"
-                    style={{
-                      color: "var(--text-grey)",
-                      textDecoration: "none",
-                    }}
-                  >
-                    Frequently asked Question
-                  </Link>
-                </li>
-              </ul>
+                </strong>
+
+                <ul>
+                  <li>
+                    <Link
+                      to="/getHelp"
+                      style={{
+                        color: "var(--text-grey)",
+                        textDecoration: "none",
+                      }}
+                    >
+                      Contact
+                    </Link>{" "}
+                  </li>
+                  <li>
+                    <Link
+                      to="/blogs"
+                      style={{
+                        color: "var(--text-grey)",
+                        textDecoration: "none",
+                      }}
+                    >
+                      Blog
+                    </Link>{" "}
+                  </li>
+                  <li>
+                    <Link
+                      to="/registerMyVenue"
+                      style={{
+                        color: "var(--text-grey)",
+                        textDecoration: "none",
+                      }}
+                    >
+                      Are you a restaurant Owner?
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      to="/getHelp"
+                      style={{
+                        color: "var(--text-grey)",
+                        textDecoration: "none",
+                      }}
+                    >
+                      Frequently asked Question
+                    </Link>
+                  </li>
+                </ul>
+              </div>
             </div>
           </div>
 
@@ -104,6 +94,19 @@ const Footer = () => {
                   <Link>Cookie consent</Link>
                 </li>
               </ul>
+            </div>
+          </div>
+
+          <div className="col-lg-4 col-sm-6">
+            <div className="footer_learn_more">
+              <div className="third_row_selectLanguage_footer">
+                <img src={earth} alt="earth" />
+                <select>
+                  <option>English</option>
+                  <option>Swedish</option>
+                  <option>English</option>
+                </select>
+              </div>
               <strong>
                 <p>Social links</p>
               </strong>
@@ -136,6 +139,9 @@ const Footer = () => {
                   </Link>
                 </li>
               </ul>
+              <div className="social_links_app_text">
+                <p>Apps For You</p>
+              </div>
             </div>
           </div>
           <hr />
