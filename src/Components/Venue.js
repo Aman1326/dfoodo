@@ -32,6 +32,7 @@ import filterimg5 from "../Assets/filterImg5.svg";
 import filterimg6 from "../Assets/filterImg6.svg";
 import filterimg7 from "../Assets/filterImg7.svg";
 import DownloadApp from "./DownloadApp";
+import contactus from "../Assets/averagePrice.svg";
 import Heart from "react-heart";
 const Venue = () => {
   //   const filters = ["Rating: 4,0+", "Popular", "Budget Friendly", "High Rated"];
@@ -80,7 +81,8 @@ const Venue = () => {
       Rating: 4.1,
       Name: "Majestic Manor",
       Address: "Royal Plaza, Anand Nagar",
-      Capacity: "180-600",
+      time: ["17:30", "18:00", "18:30", "19:00"],
+      time_discount: ["20%", "15%", "23%", "8%"],
       average_price: "5000",
       facilities: ["bar", "valet parking", "alcohol served"],
       facilities_images: [barPresent, valetParking, alcoholPresent],
@@ -91,7 +93,8 @@ const Venue = () => {
       Rating: 4.3,
       Name: "Business Hall",
       Address: "Tech Park, Sector 5, Downtown",
-      Capacity: "50-200",
+      time: ["17:30", "18:00", "18:30", "19:00"],
+      time_discount: ["20%", "20%", "20%", "20%"],
       average_price: "3000",
       facilities: ["bar", "valet parking", "alcohol served"],
       facilities_images: [barPresent, valetParking, alcoholPresent],
@@ -102,7 +105,8 @@ const Venue = () => {
       Rating: 4.8,
       Name: "Grand Arena",
       Address: "City Center, Main Square",
-      Capacity: "500-2000",
+      time: ["17:30", "18:00", "18:30", "19:00"],
+      time_discount: ["20%", "20%", "20%", "20%"],
       average_price: "8000",
       facilities: ["bar", "valet parking", "alcohol served"],
       facilities_images: [barPresent, valetParking, alcoholPresent],
@@ -113,7 +117,8 @@ const Venue = () => {
       Rating: 4.5,
       Name: "Royal Banquet Hall",
       Address: "East Wing, Palace Grounds",
-      Capacity: "100-400",
+      time: ["17:30", "18:00", "18:30", "19:00"],
+      time_discount: ["20%", "20%", "20%", "20%"],
       average_price: "4500",
       facilities: ["bar", "valet parking", "alcohol served"],
       facilities_images: [barPresent, valetParking, alcoholPresent],
@@ -124,7 +129,8 @@ const Venue = () => {
       Rating: 4.0,
       Name: "Summit Center",
       Address: "Highland Boulevard, Peak District",
-      Capacity: "150-400",
+      time: ["17:30", "18:00", "18:30", "19:00"],
+      time_discount: ["20%", "20%", "20%", "20%"],
       average_price: "4000",
       facilities: ["bar", "valet parking", "alcohol served"],
       facilities_images: [barPresent, valetParking, alcoholPresent],
@@ -135,7 +141,8 @@ const Venue = () => {
       Rating: 4.4,
       Name: "Paradise Point",
       Address: "Beachside, Coastal Highway",
-      Capacity: "200-600",
+      time: ["17:30", "18:00", "18:30", "19:00"],
+      time_discount: ["20%", "20%", "20%", "20%"],
       average_price: "5500",
       facilities: ["bar", "valet parking", "alcohol served"],
       facilities_images: [barPresent, valetParking, alcoholPresent],
@@ -146,7 +153,8 @@ const Venue = () => {
       Rating: 4.6,
       Name: "Empire Hall",
       Address: "Downtown, Main Street",
-      Capacity: "350-900",
+      time: ["17:30", "18:00", "18:30", "19:00"],
+      time_discount: ["20%", "20%", "20%", "20%"],
       average_price: "7000",
       facilities: ["bar", "valet parking", "alcohol served"],
       facilities_images: [barPresent, valetParking, alcoholPresent],
@@ -157,7 +165,8 @@ const Venue = () => {
       Rating: 4.1,
       Name: "Sunset Gardens",
       Address: "Hillside, Vista Drive",
-      Capacity: "180-600",
+      time: ["17:30", "18:00", "18:30", "19:00"],
+      time_discount: ["20%", "20%", "20%", "20%"],
       average_price: "5000",
       facilities: ["bar", "valet parking", "alcohol served"],
       facilities_images: [barPresent, valetParking, alcoholPresent],
@@ -168,7 +177,8 @@ const Venue = () => {
       Rating: 3.8,
       Name: "Happy Times Hall",
       Address: "Sunnyvale, Bright Road",
-      Capacity: "100-350",
+      time: ["17:30", "18:00", "18:30", "19:00"],
+      time_discount: ["20%", "20%", "20%", "20%"],
       average_price: "3800",
       facilities: ["bar", "valet parking", "alcohol served"],
       facilities_images: [barPresent, valetParking, alcoholPresent],
@@ -179,7 +189,8 @@ const Venue = () => {
       Rating: 4.5,
       Name: "Starlight Banquet",
       Address: "Midtown, Star Avenue",
-      Capacity: "300-800",
+      time: ["17:30", "18:00", "18:30", "19:00"],
+      time_discount: ["20%", "20%", "20%", "20%"],
       average_price: "6000",
       facilities: ["bar", "valet parking", "alcohol served"],
       facilities_images: [barPresent, valetParking, alcoholPresent],
@@ -190,7 +201,8 @@ const Venue = () => {
       Rating: 4.2,
       Name: "Harmony Hall",
       Address: "Harmony Street, Peace Park",
-      Capacity: "200-500",
+      time: ["17:30", "18:00", "18:30", "19:00"],
+      time_discount: ["20%", "20%", "20%", "20%"],
       average_price: "5000",
       facilities: ["bar", "valet parking", "alcohol served"],
       facilities_images: [barPresent, valetParking, alcoholPresent],
@@ -201,7 +213,8 @@ const Venue = () => {
       Rating: 4.0,
       Name: "Elegant Venue",
       Address: "Fashion Street, Glamour District",
-      Capacity: "250-650",
+      time: ["17:30", "18:00", "18:30", "19:00"],
+      time_discount: ["20%", "20%", "20%", "20%"],
       average_price: "4800",
       facilities: ["bar", "valet parking", "alcohol served"],
       facilities_images: [barPresent, valetParking, alcoholPresent],
@@ -212,7 +225,8 @@ const Venue = () => {
       Rating: 3.9,
       Name: "Joyful Hall",
       Address: "River Road, Lakeside",
-      Capacity: "150-400",
+      time: ["17:30", "18:00", "18:30", "19:00"],
+      time_discount: ["20%", "20%", "20%", "20%"],
       average_price: "3900",
       facilities: ["bar", "valet parking", "alcohol served"],
       facilities_images: [barPresent, valetParking, alcoholPresent],
@@ -223,7 +237,8 @@ const Venue = () => {
       Rating: 4.3,
       Name: "Royal Palace",
       Address: "Queen's Avenue, Majestic Park",
-      Capacity: "300-700",
+      time: ["17:30", "18:00", "18:30", "19:00"],
+      time_discount: ["20%", "20%", "20%", "20%"],
       average_price: "6500",
       facilities: ["bar", "valet parking", "alcohol served"],
       facilities_images: [barPresent, valetParking, alcoholPresent],
@@ -234,7 +249,8 @@ const Venue = () => {
       Rating: 4.4,
       Name: "Summit Hall",
       Address: "Mountain Road, High Peaks",
-      Capacity: "200-600",
+      time: ["17:30", "18:00", "18:30", "19:00"],
+      time_discount: ["20%", "20%", "20%", "20%"],
       average_price: "5500",
       facilities: ["bar", "valet parking", "alcohol served"],
       facilities_images: [barPresent, valetParking, alcoholPresent],
@@ -281,6 +297,16 @@ const Venue = () => {
 
   const [selectedTab, setSelectedTab] = useState(0);
   const [active, setActive] = useState(false);
+
+  const [likedVenues, setLikedVenues] = useState({});
+
+  // Toggle the like state for a specific venue
+  const toggleLike = (index) => {
+    setLikedVenues((prev) => ({
+      ...prev,
+      [index]: !prev[index],
+    }));
+  };
   return (
     <>
       <div venue_wrapper>
@@ -349,11 +375,8 @@ const Venue = () => {
                   <div className="popularVenues">
                     <div className="row mt-1">
                       {currentPaginationItems.map((venue, index) => (
-                        <div className="col-lg-6 col-12 margin24px">
-                          <div
-                            key={index}
-                            className="VenuePage_venue_container"
-                          >
+                        <div key={index} className="col-lg-6 col-12 margin24px">
+                          <div className="VenuePage_venue_container">
                             <div className="row m-0">
                               <div className="col-sm-5 px-0">
                                 <Link
@@ -365,6 +388,10 @@ const Venue = () => {
                                       src={venue.venue_image}
                                       alt="venueImg"
                                     />
+                                    <div className="venuePage_ratingSection">
+                                      <p>{venue.Rating}</p>
+                                      <img src={star} alt="star" />
+                                    </div>
                                   </div>
                                 </Link>
                               </div>
@@ -377,8 +404,8 @@ const Venue = () => {
                                     <div className="heart_section">
                                       <div style={{ width: "1.5rem" }}>
                                         <Heart
-                                          isActive={active}
-                                          onClick={() => setActive(!active)}
+                                          isActive={likedVenues[index] || false}
+                                          onClick={() => toggleLike(index)}
                                           activeColor="red"
                                           inactiveColor="red"
                                           animationTrigger="hover"
@@ -388,16 +415,15 @@ const Venue = () => {
                                     </div>
                                   </div>
                                   <p>{venue.Address}</p>
+
                                   <h6 className="avrgPrice">
-                                    Starting From ₹{venue.average_price}
+                                    <img
+                                      src={contactus}
+                                      alt="contactus"
+                                      width={15}
+                                    />
+                                    Average Price ₹{venue.average_price}
                                   </h6>
-                                  <span className="venuePage_venue_category_titles">
-                                    {venue.Venue.map((category, idx) => (
-                                      <p id="category_venuePage" key={idx}>
-                                        {category}
-                                      </p>
-                                    ))}
-                                  </span>
                                   <span className="venuePage_venue_category_titles mb-4">
                                     {venue.facilities.map((facility, idx) => (
                                       <div key={idx} className="facility_item">
@@ -413,8 +439,28 @@ const Venue = () => {
                                     ))}
                                   </span>
                                   <span className="venuePage_venue_capacity_wrapper">
-                                    <img src={person} alt="person" />
-                                    <p>{venue.Capacity} Capacity</p>
+                                    {venue.time &&
+                                      venue.time_discount &&
+                                      venue.time.length > 0 &&
+                                      venue.time_discount.length > 0 && (
+                                        <div className="time_discount_container">
+                                          {venue.time.map((time, idx) => (
+                                            <div
+                                              key={idx}
+                                              className="time_discount_section"
+                                            >
+                                              <div className="time_section">
+                                                <p>{time}</p>
+                                              </div>
+                                              <div className="discount_section">
+                                                <p>
+                                                  -{venue.time_discount[idx]}
+                                                </p>
+                                              </div>
+                                            </div>
+                                          ))}
+                                        </div>
+                                      )}
                                   </span>
                                 </div>
                               </div>

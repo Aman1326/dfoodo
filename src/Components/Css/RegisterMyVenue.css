@@ -1,0 +1,255 @@
+@import url("https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap");
+
+.register-venue-background {
+    position: relative;
+    background-image: url("/src/Assets/getHelpBg.png") !important;
+    /* Ensure this path is correct */
+    background-size: cover;
+    background-position: center;
+    height: 70vh;
+    /* Adjust height as needed */
+    width: 100%;
+}
+
+.register-venue-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    /* Ensure some transparency */
+    display: flex;
+    align-items: center;
+    justify-content: left !important;
+}
+
+.register_my_venue_wrapper {
+    position: relative;
+    display: flex;
+
+    justify-content: center;
+    margin-left: 0;
+    height: 100vh;
+    margin-right: 0;
+}
+
+.register-venue-form-container {
+    width: 80%;
+    z-index: 9;
+    top: -70px;
+    left: 50%;
+    transform: translateX(-50%);
+
+    position: absolute;
+    background-color: white;
+    padding: 1.5rem;
+    border-radius: 5px;
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px,
+        rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+}
+
+.register-venue-content {
+    padding-left: 4rem;
+    z-index: 2;
+    color: white;
+    font-family: "Roboto";
+    text-align: left;
+
+    h1 {
+        font-size: 40px;
+    }
+
+    p {
+        font-size: 20px;
+    }
+}
+
+.heroBottmHed {
+    padding-bottom: 4rem;
+}
+
+.register-venue-form-heading {
+    text-align: left;
+}
+
+.register-venue-form-heading h2 {
+    color: var(--primary-color);
+}
+
+.register-venue-form-heading p {
+    font-size: 25px;
+    font-weight: 500;
+    margin-bottom: 3px;
+}
+
+.venue-registration-form {
+    margin-top: 2rem;
+}
+
+.venue-registration-form label {
+    margin-bottom: 0.5rem;
+    font-weight: 400;
+}
+
+.venue-registration-form input::placeholder {
+    font-size: 14px;
+}
+
+.venue-registration-form input {
+    outline: none !important;
+}
+
+.venue-registration-form .row {
+    margin-bottom: 0.5rem;
+}
+
+.radio_buttons_reg_form,
+.radio_buttons_reg_form2 {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    flex-wrap: wrap;
+    /* padding-left: 1rem; */
+    gap: 0.5rem;
+}
+
+.radio_buttons_reg_form2 {
+    flex-wrap: wrap;
+    gap: 0.3rem;
+}
+
+.radio_buttons_reg_form label,
+.radio_buttons_reg_form2 label {
+    margin: 0;
+    font-size: 14px;
+    color: var(--text-grey);
+}
+
+.checkBox_registerMyVenue {
+    margin-top: 1rem;
+    display: flex;
+    justify-content: baseline;
+    flex-direction: row;
+    gap: 1rem;
+    align-items: center;
+}
+
+.checkBox_registerMyVenue button {
+    width: fit-content !important;
+    font-size: 12px;
+    padding: 0.4rem 0.9rem;
+    border-radius: 7px;
+    border: none;
+    margin-left: auto;
+    margin-right: 0.8rem;
+    background-color: var(--primary-color);
+    color: var(--white);
+}
+
+.checkBox_registerMyVenue p {
+    margin: 0;
+    font-family: "Raleway", sans-serif;
+    font-size: 14px;
+}
+
+.check_box_text {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+}
+
+.footer_section_regmyvenue {
+    margin-top: 2rem;
+}
+
+.custom-select {
+    border: none;
+    font-weight: 500;
+    padding-left: 0px;
+    border-radius: 0;
+    border-bottom: 1.3px solid black;
+    outline: none !important;
+}
+
+.DOBCalander {
+    display: flex;
+    width: 100%;
+    gap: 1rem;
+    outline: none !important;
+}
+
+.containerOfcheckBox {
+    height: 100%;
+    display: flex;
+    width: 100%;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+}
+
+.form-control {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+@media screen and (max-width: 650px) {
+    .register-venue-form-heading p {
+        font-size: 21px;
+        font-weight: 500;
+    }
+
+    .register-venue-form-heading desc {
+        font-size: 16px;
+    }
+
+    .venue-registration-form {
+        margin-top: 1rem;
+    }
+
+    .venue-registration-form label {
+        margin-top: 0.5rem;
+        margin-bottom: 0px;
+    }
+
+    .checkBox_registerMyVenue span p {
+        font-size: 10px;
+    }
+
+    .checkBox_registerMyVenue {
+        gap: 0.6rem;
+    }
+
+    .register-venue-form-container {
+        padding: 1rem;
+    }
+
+    .register-venue-content {
+        padding-left: 1rem;
+
+        h1 {
+            font-size: 32px;
+        }
+
+        p {
+            font-size: 20px;
+        }
+    }
+
+    .register-venue-form-container {
+        top: -100px;
+        width: 95%;
+    }
+
+    .register-venue-background {
+        height: 57vh;
+    }
+}
+
+
+.register_my_venue_middle_heading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
