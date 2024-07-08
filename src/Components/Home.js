@@ -118,9 +118,9 @@ function Home() {
                 in Gwalior, based on trends
               </h6>
             </div>
-            <div>
-              <Collections />
-            </div>
+          </div>
+          <div>
+            <Collections />
           </div>
         </section>
         {/* Popular Venues */}

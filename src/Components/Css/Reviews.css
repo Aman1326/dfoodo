@@ -1,0 +1,226 @@
+/* Add this CSS to your project's CSS file (e.g., App.css) */
+.reviews_section {
+    margin-top: 2rem;
+}
+
+.progress_container {
+    width: 90%;
+    height: fit-content;
+    background-color: #d6d6d6;
+    border-radius: 5px;
+    overflow: hidden;
+    margin-bottom: 1rem;
+    /* Add some space between progress bars */
+}
+
+.progress_bar {
+    height: 10px;
+    width: 0%;
+    background-color: var(--Green-Color, rgba(100, 156, 91, 1));
+    border-radius: 5px;
+    transition: width 0.3s ease;
+}
+
+.CircularProgressbar .CircularProgressbar-path {
+    stroke: var(--Green-Color, rgba(100, 156, 91, 1));
+}
+
+.CircularProgressbar .CircularProgressbar-text {
+    fill: var(--text-black);
+}
+
+.progress_text {
+    text-align: center;
+    display: flex;
+    font-size: 14px;
+    flex-direction: row;
+    font-family: "Roboto";
+    font-weight: 400;
+    margin-bottom: 1rem;
+}
+
+.button-container {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.progressbar_text_wrapper {
+    display: flex;
+    gap: 0.2rem;
+    align-items: center;
+    flex-direction: row-reverse;
+}
+
+
+/* circular bar  */
+.Circualr_progressBar_section {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: row;
+}
+
+.review_wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.text_rating_sectin {
+    display: flex;
+    gap: 1rem;
+    flex-direction: row;
+    margin-top: 3rem;
+}
+
+.text_rating_sectin h6,
+.text_rating_sectin p {
+    margin: 0;
+}
+
+.no_reviews {
+    display: flex;
+    flex-direction: column;
+}
+
+.no_reviews h6 {
+    margin: 0;
+}
+
+.no_reviews p {
+    font-size: 14px;
+    color: var(--text-grey);
+    font-family: "Roboto";
+}
+
+.linear_progressBar_section {
+    width: 100%;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.left_section_circularProgressBar {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.user_review_container {
+    margin-top: 3rem;
+}
+
+.user_review_wrapper {
+    display: flex;
+    gap: 0.4rem;
+    flex-direction: row;
+    align-items: center;
+}
+
+.user_review_rowcontainer {
+    width: 100%;
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.user_review_rowcontainer_name {
+    display: flex;
+    font-family: "Roboto";
+    font-size: 14px;
+    flex-direction: row;
+    gap: 0.5rem;
+}
+
+.user_review_rowcontainer_name h6 {
+    margin: 0;
+    ;
+}
+
+.user_review_rowcontainer_date {
+    font-family: "Roboto";
+    font-size: 14px;
+    color: var(--text-grey);
+}
+
+.user_review_like_report_section {
+    display: flex;
+    flex-direction: row;
+    gap: 2rem;
+}
+
+.user_review_description {
+    margin-top: 1rem;
+}
+
+.user_review_like {
+    display: flex;
+    gap: 0.5rem;
+    flex-direction: row;
+    align-items: center
+}
+
+.user_review_like p {
+    margin: 0;
+}
+
+.see_more_reviews {
+    display: flex;
+    margin-top: 1rem;
+    flex-direction: row;
+    justify-content: right;
+
+}
+
+.see_more_reviews img {
+    margin-left: 0.3rem;
+}
+
+.write_review_button {
+    display: flex;
+    margin-top: 1rem;
+    justify-content: right;
+}
+
+.write_review_button button {
+    width: fit-content;
+    padding: 0.4rem 1rem;
+    border: none;
+    border-radius: 5px;
+    background-color: var(--primary-color);
+    color: var(--white);
+}
+
+#load_more_button {
+    margin-top: 0;
+    width: fit-content;
+    border: none;
+    text-decoration: underline;
+    border-radius: 5px;
+    background-color: transparent;
+    color: rgb(33, 135, 231);
+}
+
+/* reviews modal css */
+.stars_text_wrapper {
+    display: flex;
+    justify-content: center;
+    gap: 7rem;
+    font-family: "Roboto";
+    font-weight: 400;
+
+}
+
+.stars_rating_section {
+    margin-top: 2rem;
+}
+
+.user_detail_section {
+    display: flex;
+    flex-direction: row;
+    gap: 2rem;
+    margin-left: 15%;
+    justify-content: left;
+}

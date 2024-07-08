@@ -1,0 +1,310 @@
+.image_gallery_section img {
+    width: 100%;
+    height: 100%;
+    padding: 0.1rem;
+}
+
+.imagegallery_verticle_images {
+    display: flex;
+    flex-direction: column;
+}
+
+.view_more_image_wrapper {
+    position: relative;
+}
+
+.view_more_image_wrapper p {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    margin: 0;
+    padding: 0.2rem;
+    border-radius: 5px;
+    color: white;
+    /* Change color as needed */
+}
+
+@media (max-width: 991px) {
+    .image_gallery_section .d-none {
+        display: none !important;
+    }
+
+    .image_gallery_section .d-lg-flex {
+        display: none !important;
+    }
+
+    .image_gallery_section .d-lg-none {
+        display: block !important;
+    }
+
+    .image_gallery_section {
+        height: auto;
+    }
+}
+
+/* venue tags section  */
+.venue_tags_section {
+    margin-top: 0.5rem;
+}
+
+.venue_tags_container {
+    display: flex;
+    flex-direction: row;
+    gap: 0.3rem;
+    overflow: auto;
+}
+
+.venue_tag {
+    border: 1px solid grey;
+    border-radius: 5px;
+    padding: 0.1rem 0.3rem;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.venue_tag:hover {
+    background-color: whitesmoke;
+}
+
+/* styling react tabs  */
+.venue_about_section {
+    margin-top: 4rem;
+}
+
+.tabs {
+    width: 100%;
+}
+
+.tab-buttons {
+    display: flex;
+    margin-bottom: 10px;
+}
+
+.tab-buttons button {
+    flex: 1;
+    background: transparent;
+    padding: 10px;
+    cursor: pointer;
+    border: none;
+    border-bottom: 2px solid transparent;
+}
+
+.tab-buttons button.active {
+    border-bottom: 2px solid var(--primary-color);
+}
+
+.about_venue_tabContent {
+    margin-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.about_venue_tabContent p {
+    font-family: "Roboto";
+    font-size: 14px;
+    color: var(--text-grey);
+}
+
+.read-more-section p {
+    display: inline-block;
+}
+
+.venue_features_section {
+    margin-top: 2rem;
+}
+
+.read-more-toggle:hover {
+    text-decoration: underline;
+}
+
+.venue_features_wrapper {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 3rem;
+    flex-direction: row;
+}
+
+.venue_features_wrapper p {
+    margin: 0;
+}
+
+/* -----------------------------________Calendy------------------------------- */
+
+.calenday_modelContainer {
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    border-radius: 10px;
+}
+
+.calendy_modelHead {
+    background-color: var(--text-grey);
+    padding: 1rem 1.5rem;
+    color: var(--white);
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.calendy_modelHead p {
+    margin: 0;
+}
+
+.calendy_modelHead h4 {
+    margin: 0;
+    font-weight: 600;
+}
+
+.calenday_modelSubHead {
+    background-color: var(--primary-color);
+    padding: 0.5rem;
+    text-align: center;
+}
+
+.calenday_modelSubHead p {
+    margin: 0;
+    color: var(--white);
+    font-size: 14px;
+}
+
+.calenday_modelScreen {
+    height: 450px;
+    padding: 2rem 1.5rem;
+    display: flex;
+    align-items: center;
+}
+
+.eventBox {
+    cursor: pointer;
+}
+
+.eventBox img {
+    width: 100%;
+}
+
+.eventBox p {
+    color: var(--text-grey);
+    font-size: 14px;
+    text-align: center;
+    margin-top: 0.3rem;
+}
+
+.ocsnDopdown {
+    width: 100%;
+    height: 40px;
+    background-color: var(--off-white);
+    padding: 0.5rem 1rem;
+    border-radius: 3px;
+    color: var(--text-grey);
+}
+
+.p-dropdown-items {
+    background-color: var(--off-white);
+    width: 100%;
+    color: var(--text-grey);
+}
+
+.p-dropdown-items li {
+    padding: 0.3rem 0;
+}
+
+.MuiDateCalendar-root {
+    width: 100% !important;
+}
+
+.calenderDiv {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.css-1wy8uaa-MuiButtonBase-root-MuiPickersDay-root.Mui-selected {
+    background-color: var(--text-grey) !important;
+}
+
+.timeBox {
+    border: 1px solid var(--primary-color);
+    border-radius: 7px;
+    padding: 0.5rem 1rem;
+    margin-bottom: 1rem;
+    cursor: pointer;
+    min-height: 60px;
+}
+
+.timeBox:hover {
+    background-color: var(--primary-color);
+    color: var(--white);
+}
+
+.timeBox:hover p {
+    color: var(--white);
+}
+
+.timeBox h6 {
+    font-size: 15px;
+    margin: 0;
+    margin-bottom: 0.3rem;
+}
+
+.timeBox p {
+    color: var(--text-grey);
+    font-size: 12px;
+    margin: 0;
+}
+
+.personBox {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.personInfo {
+    width: 100%;
+}
+
+.border0 {
+    border-radius: 0 !important;
+}
+
+.personInfo .react-international-phone-input-container .react-international-phone-country-selector-button,
+.personInfo .react-international-phone-input-container .react-international-phone-input {
+    border-radius: 0 !important;
+}
+
+.personInfo .PhoneloginButton {
+    width: 100%;
+    border-radius: 0;
+    height: 40px;
+    margin-top: 1.5rem;
+}
+
+.sentOtp {
+    color: var(--text-grey);
+    font-size: 14px;
+}
+
+.sentOtp span {
+    color: var(--primary-color);
+}
+
+.varifuy p {
+    margin-bottom: 1.5rem;
+}
+
+.varifuy input {
+    margin-bottom: 1.5rem;
+}
+
+.thankYou img {
+    width: 3rem;
+    margin-bottom: 1rem;
+}
+
+.thankYou {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
