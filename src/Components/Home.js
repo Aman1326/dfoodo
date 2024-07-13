@@ -17,17 +17,16 @@ import percentage from "../Assets/percentage.svg";
 import discoverbg_1 from "../Assets/Background.png";
 import discoverbg_2 from "../Assets/background1.png";
 import discoverbg1 from "../Assets/squareImg1.png";
-import discoverbg2 from "../Assets/squareImg1.png";
-import discoverbg3 from "../Assets/squareImg1.png";
-import discoverbg4 from "../Assets/squareImg1.png";
-
+import discoverbg2 from "../Assets/squareImg2.png";
+import discoverbg3 from "../Assets/squareImg3.png";
+import discoverbg4 from "../Assets/squareImg4.png";
 import DownloadApp from "./DownloadApp";
 import AreYouAVenueOwner from "./AreYouAVenueOwner";
 import Footer from "./Footer";
 function Home() {
   const venues_data_labeled = [
     {
-      venue_image: venueImg1,
+      venue_image: discoverbg4,
       Venue: ["French"],
       Rating: 4.1,
       Name: "Majestic Manor",
@@ -36,7 +35,7 @@ function Home() {
       Discount: "25",
     },
     {
-      venue_image: venueImg1,
+      venue_image: discoverbg2,
       Venue: ["French"],
       Rating: 4.3,
       Name: "Business Hall",
@@ -45,7 +44,7 @@ function Home() {
       Discount: "50",
     },
     {
-      venue_image: venueImg1,
+      venue_image: discoverbg3,
       Venue: ["French"],
       Rating: 4.8,
       Name: "Grand Arena",
@@ -54,7 +53,7 @@ function Home() {
       Discount: "45",
     },
     {
-      venue_image: venueImg1,
+      venue_image: discoverbg4,
       Venue: ["French"],
       Rating: 4.5,
       Name: "Royal Banquet Hall",
@@ -99,10 +98,10 @@ function Home() {
                 <img src={homebg} alt="home bg" id="homeBG" />
                 <div className="searchBar_container_homeScreen">
                   <div className="Heading_herosection">
-                    <h2>Secure your table for every special moment.</h2>
+                    <h1>Secure your table for every special moment.</h1>
                   </div>
                   <div className="searchBarInHeroSection">
-                    {/* <SearchBar /> */}
+                    <SearchBar />
                   </div>
                 </div>
               </div>

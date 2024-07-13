@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import "./Css/Header.css";
-import "react-international-phone/style.css";
 import { Link } from "react-router-dom";
+import "react-international-phone/style.css";
+import phone from "../Assets/mobilePhone.svg";
+import location from "../Assets/locationIcon.svg";
 import mainLogo from "../Assets/mainLogo.png";
 import { Modal, Button } from "react-bootstrap";
 import { PhoneInput } from "react-international-phone";
@@ -38,13 +40,40 @@ function Header() {
   const [showRegistrationModal, setShowRegistrationModal] = useState(false);
   const handleCloseRegistrationModal = () => setShowRegistrationModal(false);
   const handleShowRegistrationModal = () => setShowRegistrationModal(true);
+
+  const [selectedOption, setSelectedOption] = useState("");
+  const [isOpen, setIsOpen] = useState(false);
+  const options = [
+    { value: "Pembroke Pines", label: "Pembroke Pines" },
+    { value: "Orange", label: "Orange" },
+    { value: "Austin", label: "Austin" },
+    { value: "Pembroke Pines", label: "Pembroke Pines" },
+    { value: "Toledo", label: "Toledo" },
+    { value: "Fairfield", label: "Fairfield" },
+    { value: "Naperville", label: "Naperville" },
+  ];
+
+  const handleChangeDropDown1 = (option) => {
+    setSelectedOption(option.value);
+    setIsOpen(false);
+  };
   return (
     <>
+      <div className="upper_header_wrapper">
+        <div className="container">
+          <div className="upper_header_container">
+            {" "}
+            <Link to="/registerMyVenue">List My Restaurant</Link>
+            <Link>Get help</Link>
+            <p>EN</p>
+          </div>
+        </div>
+      </div>
       <nav class="navbar navbar-expand-lg bg-body-tertiary">
         <div class="container">
-          <a class="navbar-brand" href="#">
+          <Link class="navbar-brand" to="/">
             <img src={mainLogo} alt="mainLogo" width={150} />
-          </a>
+          </Link>
           <button
             class="navbar-toggler"
             type="button"
@@ -59,65 +88,66 @@ function Header() {
           <div class="collapse navbar-collapse" id="navbarScroll">
             <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll">
               <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#">
-                  Home
-                </a>
+                <span className="dropdown1">
+                  <label htmlFor="options">
+                    <img src={location} alt="location" />
+                  </label>
+                  <select
+                    id="options"
+                    value={selectedOption}
+                    onChange={handleChangeDropDown1}
+                  >
+                    {" "}
+                    <option value="" disabled hidden></option>
+                    {options.map((option) => (
+                      <option key={option.value} value={option.value}>
+                        {option.label}
+                      </option>
+                    ))}
+                  </select>
+                </span>
               </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">
-                  Link
-                </a>
-              </li>
-              <li class="nav-item dropdown">
-                <a
-                  class="nav-link dropdown-toggle"
-                  href="#"
-                  role="button"
-                  data-bs-toggle="dropdown"
-                  aria-expanded="false"
-                >
-                  Link
-                </a>
-                <ul class="dropdown-menu">
-                  <li>
-                    <a class="dropdown-item" href="#">
-                      Action
-                    </a>
-                  </li>
-                  <li>
-                    <a class="dropdown-item" href="#">
-                      Another action
-                    </a>
-                  </li>
-                  <li>
-                    <hr class="dropdown-divider" />
-                  </li>
-                  <li>
-                    <a class="dropdown-item" href="#">
-                      Something else here
-                    </a>
-                  </li>
-                </ul>
-              </li>
-              <li class="nav-item">
-                <Link
-                  class="nav-link"
-                  aria-disabled="true"
-                  onClick={handleOpenLoginModal}
-                >
-                  Login
-                </Link>
-              </li>
+              <li class="nav-item"></li>
             </ul>
             <form class="d-flex" role="search">
-              <input
-                class="form-control me-2"
-                type="search"
-                placeholder="Search"
-                aria-label="Search"
-              />
-              <button class="btn btn-outline-success" type="submit">
-                Search
+              <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll">
+                <li class="nav-item dropdown">
+                  <div className="mobile_phone_container">
+                    <a
+                      class="nav-link dropdown-toggle"
+                      href="#"
+                      role="button"
+                      data-bs-toggle="dropdown"
+                      aria-expanded="false"
+                    >
+                      <img src={phone} alt=" phone" /> MOBILE
+                    </a>
+                  </div>
+                  <ul class="dropdown-menu">
+                    <li>
+                      <a class="dropdown-item" href="#">
+                        Action
+                      </a>
+                    </li>
+                    <li>
+                      <a class="dropdown-item" href="#">
+                        Another action
+                      </a>
+                    </li>
+                    <li>
+                      <hr class="dropdown-divider" />
+                    </li>
+                    <li>
+                      <a class="dropdown-item" href="#">
+                        Something else here
+                      </a>
+                    </li>
+                  </ul>
+                </li>
+                <li class="nav-item"></li>
+              </ul>
+              <button className="loginButton" onClick={handleOpenLoginModal}>
+                Log in
               </button>
             </form>
           </div>

@@ -4,14 +4,9 @@
     flex-direction: row;
     /* justify-content: flex-start; */
     border-radius: 8px;
-    padding: 0.2rem 0.4rem;
+    padding: 0.2rem 1rem;
     background-color: var(--white);
     gap: 0.1rem;
-}
-
-.searchBar_container img {
-    width: 15px;
-    height: 18px;
 }
 
 .locationSection_searchbar {
@@ -35,10 +30,15 @@
     border: none;
     font-size: 14px;
     color: var(--text-grey);
-    outline: none;
     margin-left: 0.3rem;
+    outline: white !important;
     background-color: var(--white);
     width: 100%;
+}
+
+.seachVenue_section_searchbar input:focus {
+    outline: none !important;
+    box-shadow: none;
 }
 
 .seachVenue_section_searchbar input::placeholder {
@@ -51,6 +51,121 @@
     background-color: var(--white);
     align-items: center;
     display: flex;
+    padding: 0.1rem;
     flex-direction: row;
     width: 100%;
+}
+
+.searchBar_wrapper {
+    display: flex;
+    flex-direction: column;
+}
+
+.itemSearch {
+    display: flex;
+    gap: 1rem;
+    padding: 0.3rem 0.3rem;
+    text-decoration: none;
+    border-bottom: 0.5px solid grey;
+    flex-direction: row;
+}
+
+.searchItems a {
+    width: 100%;
+    text-decoration: none;
+}
+
+.itemSearch img {
+    width: 45px;
+    height: 45px;
+    margin-left: 0.5rem;
+    border-radius: 50%;
+    aspect-ratio: 1;
+}
+
+.search_result_text p {
+    margin: 0;
+    font-family: "Roboto";
+    font-size: 12px;
+    text-decoration: none;
+    color: var(--text-grey);
+}
+
+.search_result_text h6 {
+    margin: 0;
+    color: var(--text-grey);
+}
+
+.serachBxx {
+    position: relative;
+    height: 100%;
+    width: 100%;
+}
+
+.searchItems {
+    border-radius: 8px;
+    width: 100%;
+    position: absolute;
+    background-color: var(--white);
+}
+
+.drop_down_searchBar {
+    position: relative;
+    margin-top: 0.5rem;
+
+    background-color: var(--white);
+}
+
+.react-date-picker__wrapper {
+    border: none !important;
+    box-shadow: none !important;
+}
+
+.react-date-picker__inputGroup__input {
+    border: none !important;
+    outline: none !important;
+}
+
+.react-date-picker__button svg {
+    display: none !important;
+}
+
+.CalendarSection_searchbar {
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+}
+
+.react-date-picker__inputGroup {
+    width: fit;
+
+}
+
+.react-date-picker__button:enabled {
+    display: none;
+}
+
+.letsgo_button button {
+    background-color: var(--primary-color);
+    font-family: "Roboto";
+    font-size: 14px;
+    font-weight: 400;
+    width: fit-content;
+    border: none;
+    border-radius: 8px;
+    color: var(--white);
+    padding: 0.2rem 0.5rem;
+}
+
+.searchBar_wrapper {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    flex-direction: row;
+    gap: 1rem;
+}
+
+.searchBar_wrapper img {
+    width: 15px;
+    height: 15px;
 }

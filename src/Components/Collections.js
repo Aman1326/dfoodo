@@ -84,9 +84,6 @@ const Collections = () => {
       <section>
         <div className="browse_otherCities_section">
           <div className="container">
-            <div className="browse_otherCities_heading">
-              <h3>Browse Other Cities </h3>
-            </div>
             <div className="cities_mapped ">
               <Slider {...settings}>
                 {Browse_cities.map((venue, index) => (
