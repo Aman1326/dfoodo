@@ -9,6 +9,9 @@ import GetHelp from "./Components/GetHelp";
 import AboutUs from "./Components/Aboutus";
 import RegisterMyVenue from "./Components/RegisterMyVenue";
 import DetailedVenue from "./Components/DetailedVenue";
+import Blog from "./Components/Blog";
+import DetailedBlogs from "./Components/DetailedBlogs";
+import ProfilePage from "./Components/ProfilePage";
 
 function App() {
   return (
@@ -22,6 +25,9 @@ function App() {
           <Route path="aboutUs" element={<AboutUs />} />
           <Route path="registerMyVenue" element={<RegisterMyVenue />} />
           <Route path="detailedVenue" element={<DetailedVenue />} />
+          <Route path="blogs" element={<Blog />} />
+          <Route path="detailed-blog" element={<DetailedBlogs />} />
+          <Route path="profile" element={<ProfilePage />} />
         </Routes>
       </BrowserRouter>
     </div>

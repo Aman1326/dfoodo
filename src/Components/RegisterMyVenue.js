@@ -54,23 +54,23 @@ const RegisterMyVenue = () => {
                 >
                   <div className="row">
                     <div className="col-md-6">
-                      <label htmlFor="venueName">Business Name*</label>
+                      <label htmlFor="venueName">First Name</label>
                       <input
                         type="text"
-                        id="Business_Name"
-                        name="Business_Name"
+                        id="First Name"
+                        name="First Name"
                         className="form-control"
                         placeholder="Enter the name of your Business"
                       />
                     </div>
                     <div className="col-md-6">
                       <label htmlFor="venueLocation d-flex flex-row">
-                        City*
+                        Last Name
                       </label>
                       <input
                         type="text"
-                        id="City"
-                        name="City"
+                        id="last Name"
+                        name="last Name"
                         className="form-control"
                         placeholder="Mumbai"
                       />
@@ -78,21 +78,21 @@ const RegisterMyVenue = () => {
                   </div>
                   <div className="row">
                     <div className="col-md-6">
-                      <label htmlFor="contactPerson">Your Name*</label>
+                      <label htmlFor="contactPerson">Your Email</label>
                       <input
                         type="text"
-                        id="Owner_Name"
-                        name="Owner_Name"
+                        id="Your Email"
+                        name="Your Email"
                         className="form-control"
                         placeholder="Enter your Full Name"
                       />
                     </div>
                     <div className="col-md-6">
-                      <label htmlFor="contactEmail">Contact*</label>
+                      <label htmlFor="contactEmail">Restaurant Name</label>
                       <input
                         type="number"
-                        id="Contact"
-                        name="Contact"
+                        id="Restaurant Name"
+                        name="Restaurant Name"
                         className="form-control"
                         placeholder="Enter your Mobile No."
                       />
@@ -100,40 +100,26 @@ const RegisterMyVenue = () => {
                   </div>
                   <div className="row">
                     <div className="col-md-6">
-                      <label htmlFor="phone">Email*</label>
+                      <label htmlFor="phone">Restaurant Email</label>
                       <input
                         type="text"
-                        id="Email"
-                        name="Email"
+                        id="Restaurant Name"
+                        name="Restaurant Name"
                         className="form-control"
-                        placeholder="Enter your Email Address"
+                        placeholder="Enter business Email Address"
                       />
-                    </div>
-                    <div className="col-md-6 mt-3">
-                      <label>Key Objective</label>
-                      <br />
-                      <span className="radio_buttons_reg_form2">
-                        <input type="radio" id="1" name="objective" value="1" />
-                        <label htmlFor="1">Get More Business</label>
-                        <br />
-                        <input type="radio" id="2" name="objective" value="2" />
-                        <label htmlFor="2">Get More Visibility</label>
-                        <br />
-                        <input type="radio" id="3" name="objective" value="3" />
-                        <label htmlFor="3">Both</label>
-                      </span>
                     </div>
                   </div>
                   <div className="row">
-                    <div className="col-md-6">
-                      <label htmlFor="additionalInfo">Comments*</label>
-                      <textarea
+                    <div className="col-md-12">
+                      <label htmlFor="additionalInfo">Restaurant Address</label>
+                      <input
                         id="comment"
                         name="comment"
                         className="form-control"
-                        placeholder="Notes"
+                        placeholder="Restaurant Address"
                         rows="4"
-                      ></textarea>
+                      ></input>
                     </div>
                   </div>
                   <div className="containerOfcheckBox">
@@ -162,7 +148,7 @@ const RegisterMyVenue = () => {
         </div>
       </section>
       <section>
-        <div className="container">
+        <div className="container-lg">
           <div className="row">
             <div className="col-md-8 m-auto register_my_venue_middle_heading">
               <h1>
@@ -171,17 +157,43 @@ const RegisterMyVenue = () => {
               </h1>
             </div>
           </div>
+          <div className="pink_section_row row mt-4">
+            <div className="col-md-4">
+              <div className="pink_bg">
+                <img src={picture1} alt="picture1" />
+                <h3>Enhance your online presence.</h3>
+                <p>As the leading restaurant discovery and booking platform.</p>
+              </div>
+            </div>
+            <div className="col-md-4">
+              <div className="pink_bg">
+                <img src={picture2} alt="picture1" />
+                <h3>Increase your dining area occupancy.</h3>
+                <p>
+                  A mutually beneficial business model with no risk for your
+                  restaurant.
+                </p>
+              </div>
+            </div>
+            <div className="col-md-4">
+              <div className=" pink_bg">
+                <img src={picture3} alt="picture1" />
+                <h3>Manage and reduce no-shows.</h3>
+                <p>
+                  Reduce your no-shows with DFOODO tools, including automatic
+                  confirmation emails and SMS.
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
-      <section>
-        <div className="container">
-          <div className="row">
-            <div className="col-md-4">
-              <div className="first_container"></div>
-            </div>
-            <div className="col-md-4"></div>
-            <div className="col-md-4"></div>
-          </div>
+      <section className="row">
+        <div className="pre_footer_text_regMyVenue col-md-6 m-auto">
+          <h1>Ready to enthrall more diners at your restaurant?</h1>
+          <h6>
+            Start your partnership with DFOODO today, cancel whenever you need!
+          </h6>
         </div>
       </section>
       <section className="footer_section_regmyvenue">

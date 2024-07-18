@@ -253,3 +253,32 @@
     align-items: center;
     text-align: center;
 }
+
+.pink_bg {
+    background-color: #FFE9EB;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    border-radius: 8px;
+    padding: 0.5rem 1rem;
+    height: 350px;
+    aspect-ratio: 1;
+}
+
+.pre_footer_text_regMyVenue {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    font-family: "Roboto";
+}
+
+.pre_footer_text_regMyVenue h1 {
+    margin-top: 4rem;
+    font-weight: 400;
+}
+
+.pre_footer_text_regMyVenue h6 {
+    font-weight: 400;
+}

@@ -25,46 +25,9 @@
     /* Change color as needed */
 }
 
-@media (max-width: 991px) {
-    .image_gallery_section .d-none {
-        display: none !important;
-    }
-
-    .image_gallery_section .d-lg-flex {
-        display: none !important;
-    }
-
-    .image_gallery_section .d-lg-none {
-        display: block !important;
-    }
-
-    .image_gallery_section {
-        height: auto;
-    }
-}
-
-/* venue tags section  */
-.venue_tags_section {
-    margin-top: 0.5rem;
-}
-
-.venue_tags_container {
-    display: flex;
-    flex-direction: row;
-    gap: 0.3rem;
-    overflow: auto;
-}
-
-.venue_tag {
-    border: 1px solid grey;
-    border-radius: 5px;
-    padding: 0.1rem 0.3rem;
-    font-size: 14px;
-    cursor: pointer;
-}
-
-.venue_tag:hover {
-    background-color: whitesmoke;
+.wrapper_carousel img {
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
 }
 
 /* styling react tabs  */
@@ -136,18 +99,33 @@
 .calenday_modelContainer {
     box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
     border-radius: 10px;
+    width: fit-content;
 }
 
 .calendy_modelHead {
-    background-color: var(--text-grey);
-    padding: 1rem 1.5rem;
-    color: var(--white);
+    background: rgba(249, 250, 250, 1);
+    padding: 0.5rem 1.5rem;
+    color: var(--text-black);
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
 }
 
+.todays_booking {
+    background: rgba(210, 232, 244, 1);
+    color: var(--text-grey);
+    width: fit-content;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    padding: 0rem 0.5rem;
+    margin: auto;
+    border-radius: 25px;
+}
+
 .calendy_modelHead p {
     margin: 0;
+    color: var(--text-grey);
+    font-family: "Roboto";
 }
 
 .calendy_modelHead h4 {
@@ -156,8 +134,12 @@
 }
 
 .calenday_modelSubHead {
-    background-color: var(--primary-color);
-    padding: 0.5rem;
+    margin-top: 0.5rem !important;
+    background: rgba(228, 228, 228, 1);
+    width: 90%;
+    margin: auto;
+    border-radius: 9px;
+
     text-align: center;
 }
 
@@ -168,8 +150,8 @@
 }
 
 .calenday_modelScreen {
-    height: 450px;
-    padding: 2rem 1.5rem;
+    height: 400px;
+    padding: 1rem 1.5rem;
     display: flex;
     align-items: center;
 }
@@ -307,4 +289,130 @@
     align-items: center;
     justify-content: center;
     text-align: center;
+}
+
+.steps {
+    background-color: var(--secondary-black);
+    display: flex;
+    width: fit-content;
+    font-size: 14px;
+    padding: 0.2rem 0.9rem;
+    flex-direction: row;
+
+    img {
+        width: 20px;
+        height: 20px;
+    }
+}
+
+.black_section_carousel {
+    border-bottom-left-radius: 19px;
+    border-bottom-right-radius: 19px;
+    padding: 0.8rem 1rem;
+    font-family: "Roboto";
+    color: var(--white);
+    background-color: var(--secondary-black);
+}
+
+.black_section_carousel h6 {
+    margin: 0;
+}
+
+.black_section_carousel p {
+    font-size: 14px;
+}
+
+.black_section_carousel img {
+    width: 20px;
+    height: 20px;
+}
+
+.first_row_black_section_carousel {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.french_text {
+    border: 1px solid var(--white);
+    padding: 0.2rem 0.8rem;
+    border-radius: 50px 50px 50px 50px;
+}
+
+.reviews_black_section {
+    margin-right: 0.5rem;
+}
+
+.fade-img {
+    position: relative;
+}
+
+.view_photos {
+    position: absolute;
+    top: 0;
+}
+
+/* <img src= {
+     view_photos
+ }
+
+ alt="view_photos"
+ className="view_photos"
+ /> */
+
+.fade-img:after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, var(--secondary-black) 100%);
+
+    height: 40%;
+}
+
+.venuePage_venueCategory_heading img {
+    width: 14px;
+}
+
+.venuePage_venueCategory_heading a {
+    font-size: 14px;
+}
+
+.menu_image_wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.menu_image_wrapper img {
+    width: 250px;
+}
+
+.want_more_section {
+    background-color: var(--secondary-black);
+    color: var(--white);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 0.5rem 1rem;
+    align-items: center;
+    width: fit-content;
+    border-radius: 8px;
+    margin-top: 0.5rem;
+    width: 100%;
+}
+
+.want_more_section img {
+    width: 25px;
+    padding: 0.3rem;
+    border: 1px solid var(--white);
+    border-radius: 50%;
+    aspect-ratio: 1;
+    margin-left: 30px;
+}
+
+.want_more_section h6,
+.want_more_section p {
+    margin: 0;
 }

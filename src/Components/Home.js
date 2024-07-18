@@ -6,7 +6,6 @@ import homebg from "../Assets/homebg.png";
 import SearchBar from "./SearchBar";
 import Collections from "./Collections";
 import star from "../Assets/star.svg";
-import person from "../Assets/person.svg";
 import rigthArrow from "../Assets/rightArrow.svg";
 import leftArrow from "../Assets/leftArrow.svg";
 import venueImg1 from "../Assets/venue1.png";

@@ -13,9 +13,9 @@ import bar5 from "../Assets/bar5.png";
 import bar6 from "../Assets/bar6.png";
 import bar7 from "../Assets/bar7.png";
 import rigthArrow from "../Assets/rightArrow.svg";
+import rightArrow from "../Assets/rightArrow.svg";
 import leftArrow from "../Assets/leftArrow.svg";
 import star from "../Assets/star.svg";
-import person from "../Assets/person.svg";
 // import ListYourVenue from "./ListYourVenue";
 import Footer from "./Footer";
 // import VenueCategories from "./VenueCategories";
@@ -23,7 +23,6 @@ import barPresent from "../Assets/bars-3x.png.svg";
 import alcoholPresent from "../Assets/alcohol-served3x.png.svg";
 import valetParking from "../Assets/valet-parking3x.png.svg";
 import home from "../Assets/home_backbtn.svg";
-import right from "../Assets/right_arrow_grey.svg";
 import filterimg1 from "../Assets/filterImg1.svg";
 import filterimg2 from "../Assets/filterImg2.svg";
 import filterimg3 from "../Assets/filterImg3.svg";
@@ -313,18 +312,15 @@ const Venue = () => {
         <Header />
         {/* venue categories section */}
         <section>
-          <div className="container-lg mt-3">
+          <div className="container-lg mt-3 mb-1">
             <div className="venuePage_venueCategory_heading">
-              <Link to="/">
-                <img src={home} alt="hdbhjb" width={"14px"} />
-              </Link>{" "}
-              <img src={right} alt="right" />
-              <Link to="/venue">Paris restaurants</Link>
-              <img src={right} alt="right" />
-              <Link>TT nagar</Link>
+              <Link to="/">Home</Link>
+              <img src={rightArrow} alt="rightArrow" />
+              <Link>Pais Restaurants</Link>
+              <img src={rightArrow} alt="rightArrow" />
+              <Link> {"<restaurant name>"} </Link>
             </div>
           </div>
-          {/* <VenueCategories /> */}
         </section>
         <section>
           <div className="filters_section">

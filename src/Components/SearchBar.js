@@ -114,7 +114,7 @@ const SearchBar = () => {
               id="selectPersons"
               options={personOptions}
               onChange={handlePersonChange}
-              placeholder="Number of People"
+              placeholder="People"
               styles={customStyles}
             />
             <img src={line} alt="line" />

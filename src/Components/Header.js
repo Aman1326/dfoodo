@@ -8,6 +8,7 @@ import mainLogo from "../Assets/mainLogo.png";
 import { Modal, Button } from "react-bootstrap";
 import { PhoneInput } from "react-international-phone";
 import "react-international-phone/style.css";
+import qr from "../Assets/QR.png";
 function Header() {
   const [showLoginModal, setShowLoginModal] = useState(false);
   const [showEmailLoginModal, setShowEmailLoginModal] = useState(false);
@@ -18,7 +19,9 @@ function Header() {
   const [otp, setOtp] = useState(""); // State to manage the entered OTP
 
   const handleCloseLoginModal = () => setShowLoginModal(false);
-  const handleOpenLoginModal = () => setShowLoginModal(true);
+  const handleOpenLoginModal = () => {
+    setShowLoginModal(true);
+  };
   const handleLoginSubmit = () => {
     // Assume sending OTP is successful
     if (
@@ -56,6 +59,13 @@ function Header() {
   const handleChangeDropDown1 = (option) => {
     setSelectedOption(option.value);
     setIsOpen(false);
+  };
+
+  //download app qr modal
+  const [showModal, setShowModal] = useState(false);
+
+  const handleOpenModal = () => {
+    setShowModal(true);
   };
   return (
     <>
@@ -115,40 +125,25 @@ function Header() {
                   <div className="mobile_phone_container">
                     <a
                       class="nav-link dropdown-toggle"
-                      href="#"
-                      role="button"
-                      data-bs-toggle="dropdown"
-                      aria-expanded="false"
+                      onClick={handleOpenModal}
                     >
                       <img src={phone} alt=" phone" /> MOBILE
                     </a>
                   </div>
-                  <ul class="dropdown-menu">
-                    <li>
-                      <a class="dropdown-item" href="#">
-                        Action
-                      </a>
-                    </li>
-                    <li>
-                      <a class="dropdown-item" href="#">
-                        Another action
-                      </a>
-                    </li>
-                    <li>
-                      <hr class="dropdown-divider" />
-                    </li>
-                    <li>
-                      <a class="dropdown-item" href="#">
-                        Something else here
-                      </a>
-                    </li>
-                  </ul>
                 </li>
                 <li class="nav-item"></li>
               </ul>
-              <button className="loginButton" onClick={handleOpenLoginModal}>
+              <Link
+                className="loginButton"
+                style={{
+                  textDecoration: "none",
+                  alignItems: "center",
+                  width: "fitContent",
+                }}
+                onClick={handleOpenLoginModal}
+              >
                 Log in
-              </button>
+              </Link>
             </form>
           </div>
         </div>
@@ -274,7 +269,7 @@ function Header() {
       >
         <Modal.Header closeButton></Modal.Header>
         <Modal.Body className="useRegistration_body">
-          <h6>Welcome to Book My Venue </h6>
+          <h6>Welcome to Dfoodo </h6>
           <p>Create your account and quickly make a reservation </p>
           <form className="userRegistration_form">
             <div className="mb-3">
@@ -313,6 +308,21 @@ function Header() {
             </div>
             <button className="userResgistrationContinuebtn">Continue</button>
           </form>
+        </Modal.Body>
+      </Modal>
+
+      <Modal
+        show={showModal}
+        onHide={() => setShowModal(false)}
+        centered
+        className="success_modal_reg modal-md"
+      >
+        <Modal.Body>
+          <div className="phoneApp_modal_register_my_venue ">
+            <h3>Find the best restaurants around you using Dfoodo App!</h3>
+            <p>Download TheFork app by scanning the QR code</p>
+            <img src={qr} alt="altqr" />
+          </div>
         </Modal.Body>
       </Modal>
     </>

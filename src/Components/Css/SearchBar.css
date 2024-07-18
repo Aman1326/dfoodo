@@ -1,6 +1,5 @@
 .searchBar_container {
     display: flex;
-    width: 100%;
     flex-direction: row;
     /* justify-content: flex-start; */
     border-radius: 8px;
@@ -146,6 +145,7 @@
 }
 
 .letsgo_button button {
+    height: 100%;
     background-color: var(--primary-color);
     font-family: "Roboto";
     font-size: 14px;
@@ -154,7 +154,7 @@
     border: none;
     border-radius: 8px;
     color: var(--white);
-    padding: 0.2rem 0.5rem;
+    padding: 0.2rem 1rem;
 }
 
 .searchBar_wrapper {
