@@ -12,6 +12,7 @@ import DetailedVenue from "./Components/DetailedVenue";
 import Blog from "./Components/Blog";
 import DetailedBlogs from "./Components/DetailedBlogs";
 import ProfilePage from "./Components/ProfilePage";
+import OnBoarding from "./Components/OnBoarding";
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
           <Route path="blogs" element={<Blog />} />
           <Route path="detailed-blog" element={<DetailedBlogs />} />
           <Route path="profile" element={<ProfilePage />} />
+          <Route path="onBoarding" element={<OnBoarding />} />
         </Routes>
       </BrowserRouter>
     </div>

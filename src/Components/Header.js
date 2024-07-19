@@ -9,6 +9,7 @@ import { Modal, Button } from "react-bootstrap";
 import { PhoneInput } from "react-international-phone";
 import "react-international-phone/style.css";
 import qr from "../Assets/QR.png";
+import { useLocation } from "react-router-dom";
 function Header() {
   const [showLoginModal, setShowLoginModal] = useState(false);
   const [showEmailLoginModal, setShowEmailLoginModal] = useState(false);
@@ -67,16 +68,22 @@ function Header() {
   const handleOpenModal = () => {
     setShowModal(true);
   };
+
+  //fetch location of the app:
+  const locationn = useLocation();
+
   return (
     <>
       <div className="upper_header_wrapper">
         <div className="container">
-          <div className="upper_header_container">
-            {" "}
-            <Link to="/registerMyVenue">List My Restaurant</Link>
-            <Link>Get help</Link>
-            <p>EN</p>
-          </div>
+          {locationn.pathname !== "/onBoarding" && (
+            <div className="upper_header_container">
+              {" "}
+              <Link to="/registerMyVenue">List My Restaurant</Link>
+              <Link>Get help</Link>
+              <p>EN</p>
+            </div>
+          )}
         </div>
       </div>
       <nav class="navbar navbar-expand-lg bg-body-tertiary">
@@ -98,24 +105,26 @@ function Header() {
           <div class="collapse navbar-collapse" id="navbarScroll">
             <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll">
               <li class="nav-item">
-                <span className="dropdown1">
-                  <label htmlFor="options">
-                    <img src={location} alt="location" />
-                  </label>
-                  <select
-                    id="options"
-                    value={selectedOption}
-                    onChange={handleChangeDropDown1}
-                  >
-                    {" "}
-                    <option value="" disabled hidden></option>
-                    {options.map((option) => (
-                      <option key={option.value} value={option.value}>
-                        {option.label}
-                      </option>
-                    ))}
-                  </select>
-                </span>
+                {locationn.pathname !== "/onBoarding" && (
+                  <span className="dropdown1">
+                    <label htmlFor="options">
+                      <img src={location} alt="location" />
+                    </label>
+                    <select
+                      id="options"
+                      value={selectedOption}
+                      onChange={handleChangeDropDown1}
+                    >
+                      {" "}
+                      <option value="" disabled hidden></option>
+                      {options.map((option) => (
+                        <option key={option.value} value={option.value}>
+                          {option.label}
+                        </option>
+                      ))}
+                    </select>
+                  </span>
+                )}
               </li>
               <li class="nav-item"></li>
             </ul>
@@ -123,12 +132,14 @@ function Header() {
               <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll">
                 <li class="nav-item dropdown">
                   <div className="mobile_phone_container">
-                    <a
-                      class="nav-link dropdown-toggle"
-                      onClick={handleOpenModal}
-                    >
-                      <img src={phone} alt=" phone" /> MOBILE
-                    </a>
+                    {locationn.pathname !== "/onBoarding" && (
+                      <a
+                        class="nav-link dropdown-toggle"
+                        onClick={handleOpenModal}
+                      >
+                        <img src={phone} alt=" phone" /> MOBILE
+                      </a>
+                    )}
                   </div>
                 </li>
                 <li class="nav-item"></li>

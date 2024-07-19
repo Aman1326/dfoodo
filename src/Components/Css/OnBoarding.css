@@ -1,0 +1,115 @@
+.onBoarding_page_wrapper {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url(/src/Assets/bgOnBoarding.png);
+    background-size: cover;
+
+}
+
+.complete_scetion_wrapper_onBoarding {
+    border-radius: 8px;
+    margin: auto;
+    display: flex;
+    font-family: "Roboto";
+    flex-direction: row;
+    justify-content: center;
+    justify-content: center;
+
+}
+
+.left_section_onboardingHome {
+    overflow: hidden;
+    display: flex;
+    color: var(--white);
+    flex-direction: column;
+    align-items: center;
+}
+
+.left_section_onboardingHome span {
+    overflow: hidden;
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    flex-direction: row;
+    align-items: center;
+}
+
+.left_section_onboardingHome h1,
+.left_section_onboardingHome h3,
+.left_section_onboardingHome h6 {
+    font-weight: 700;
+    margin-bottom: 0;
+}
+
+.right_section_onboardingHome h1,
+.right_section_onboardingHome h3,
+.right_section_onboardingHome h6 {
+    margin-bottom: 0;
+}
+
+.right_section_onboardingHome {
+    display: flex;
+    height: fit-content;
+    border-radius: 8px;
+    overflow: hidden;
+    padding-top: 1rem;
+    text-align: center;
+    flex-direction: column;
+    background-color: var(--white);
+}
+
+.right_section_onboardingHome span {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    text-align: center;
+    flex-direction: row;
+    margin-bottom: 1rem;
+    margin-left: 2rem;
+
+}
+
+#description_right_section_onboardingHome {
+    color: var(--text-grey);
+}
+
+.right_section_onboardingHome span p {
+    color: #256FEF;
+    margin-bottom: 0;
+
+
+}
+
+.register_my_venue_btn_onBoarding {
+    background-color: var(--primary-color);
+    border: none;
+    border-bottom-left-radius: 8px;
+    color: var(--white);
+    padding: 0.5rem;
+    border-bottom-right-radius: 8px;
+}
+
+
+
+/* on boarding form css starts  */
+
+.left_onboarding_form_wrapper img {
+    width: 70%;
+}
+
+.left_onboarding_form_wrapper h1 {
+    color: var(--primary-color);
+}
+
+.left_onboarding_form_wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: left;
+}
+
+.progressBar_span_right_onboarding_form_wrapper {
+    width: 100%;
+}
