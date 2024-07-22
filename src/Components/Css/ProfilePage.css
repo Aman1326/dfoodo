@@ -6,7 +6,7 @@
     padding: 3rem 3rem;
     border-radius: 50% 50%;
     aspect-ratio: 1;
-    background-color: var(--secondary-black);
+    background-color: var(--light-black);
     position: relative;
 }
 
@@ -18,13 +18,11 @@
 .camera_icon_background {
     width: fit-content;
     position: absolute;
-    width: 15px;
     bottom: 0;
+    padding: 0.5rem 0.5rem;
+    cursor: pointer;
     right: 10px;
     display: flex;
-    vertical-align: center;
-
-    padding: 0.5rem 0.5rem;
     align-items: center;
     border-radius: 50%;
     background-color: var(--primary-color);
@@ -51,4 +49,18 @@
     display: flex;
     color: var(--text-grey);
     flex-direction: column;
+}
+
+.update_button_profile_page {
+    margin-left: auto;
+}
+
+.update_button_profile_page a {
+    text-decoration: none;
+    color: var(--white);
+    font-family: "Roboto";
+    padding: 0.6rem 1rem;
+    border-radius: 5px;
+    background-color: var(--light-black);
+    ;
 }

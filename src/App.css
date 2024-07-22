@@ -9,6 +9,7 @@
   --text-black: rgba(42, 45, 50, 1);
   --secondary-black: rgba(42, 45, 50, 1);
   --orange-Color: rgba(243, 120, 53, 1);
+  --light-black: #535969;
 }
 
 .App {
@@ -20,4 +21,14 @@
   flex-direction: row;
   justify-content: center;
   align-items: center;
+}
+
+.flexRow {
+  display: flex;
+  flex-direction: row;
+}
+
+.flexCol {
+  display: flex;
+  flex-direction: column;
 }

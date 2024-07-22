@@ -17,6 +17,7 @@ import img2 from "../Assets/filterImg2.svg";
 import img3 from "../Assets/filterImg3.svg";
 import img4 from "../Assets/filterImg4.svg";
 import img5 from "../Assets/filterImg5.svg";
+import { Link } from "react-router-dom";
 const OnBoarding = () => {
   const [view, setView] = useState("home"); // Initial state is 'home'
 
@@ -53,14 +54,37 @@ const OnBoarding = () => {
   ];
 
   // check box steps array
+
+  const initialLabelCount = 8; // Initial number of labels to display
+  const [labelCount, setLabelCount] = useState(initialLabelCount);
+
   const items = [
     { imgSrc: img1, label: "Label 1" },
     { imgSrc: img2, label: "Label 2" },
     { imgSrc: img3, label: "Label 3" },
     { imgSrc: img4, label: "Label 4" },
     { imgSrc: img5, label: "Label 5" },
+    { imgSrc: img3, label: "Label 3" },
+    { imgSrc: img4, label: "Label 4" },
+    { imgSrc: img5, label: "Label 5" },
+    { imgSrc: img1, label: "Label 1" },
+    { imgSrc: img2, label: "Label 2" },
+    { imgSrc: img3, label: "Label 3" },
+    { imgSrc: img4, label: "Label 4" },
+    { imgSrc: img2, label: "Label 2" },
+    { imgSrc: img3, label: "Label 3" },
+    { imgSrc: img4, label: "Label 4" },
+    { imgSrc: img5, label: "Label 5" },
+    { imgSrc: img3, label: "Label 3" },
     // Add more items as needed
   ];
+
+  // Function to load more labels
+  const loadMoreLabels = () => {
+    // Increase labelCount by 8 when "Load More" is clicked
+    setLabelCount(labelCount + 8);
+  };
+
   return (
     <>
       <Header />
@@ -146,15 +170,17 @@ const OnBoarding = () => {
                     <img src={pana} alt="pana" />
                   </div>
                 </div>
-                <div className="col-md-6">
-                  <button onClick={decreaseProgress}>
-                    <img src={back} alt="back" />
-                  </button>
-                  <div>
+                <div className="col-md-5">
+                  <div className="back_btn_progressbar_wrapper">
+                    <Link onClick={decreaseProgress}>
+                      <img src={back} alt="back" />
+                    </Link>
                     <span className="progressBar_span_right_onboarding_form_wrapper">
                       <ProgressBar now={progress} />
                     </span>
-                    <div>
+                  </div>
+                  <div>
+                    <div className="card_container_onboarding">
                       <Card>
                         <Card.Body>
                           {currentState === 0 && (
@@ -162,39 +188,43 @@ const OnBoarding = () => {
                               <h2>Restaurant Details</h2>
                               <Card.Text>
                                 <form className="form_step1">
-                                  <input
-                                    type="text"
-                                    placeholder="Restaurant name"
-                                  />
-                                  <input
-                                    type="text"
-                                    placeholder="Restaurant Address"
-                                  />
-                                  <span>
-                                    {" "}
+                                  <div className="step_zero">
                                     <input
-                                      type="phone"
-                                      placeholder="Restaurant Contact Phone no."
+                                      type="text"
+                                      placeholder="Restaurant name"
                                     />
-                                    <button>verify</button>
-                                  </span>
-                                  <Select options={options} />
-                                  <div>
+                                    <input
+                                      type="text"
+                                      placeholder="Restaurant Address"
+                                    />
                                     <span>
                                       {" "}
                                       <input
                                         type="number"
-                                        placeholder="Pincode"
+                                        placeholder="Restaurant Contact Phone no."
                                       />
-                                      <input type="text" placeholder="City" />
+                                      <Link id="green_verifyButton">
+                                        Verify
+                                      </Link>
                                     </span>
-                                  </div>
-                                  <div>
-                                    <span>
-                                      {" "}
-                                      <button>Enter restaurant name</button>
-                                      <button>Search</button>
-                                    </span>
+                                    <Select options={options} />
+                                    <div>
+                                      <span>
+                                        {" "}
+                                        <input
+                                          type="number"
+                                          placeholder="Pincode"
+                                        />
+                                        <input type="text" placeholder="City" />
+                                      </span>
+                                    </div>
+                                    <div>
+                                      <span>
+                                        {" "}
+                                        <Link>Enter restaurant name</Link>
+                                        <Link>Search</Link>
+                                      </span>
+                                    </div>
                                   </div>
                                 </form>
                               </Card.Text>
@@ -205,71 +235,86 @@ const OnBoarding = () => {
                               <form className="form_step2">
                                 <h2>Restaurant Type</h2>
                                 <div className="checkBoxes">
-                                  <span>
+                                  <div>
                                     <h6>Dinein</h6>
-                                    <label>
-                                      DineIn refers to the act of eating a meal
-                                      at a restaurant rather than taking it to
-                                      go
-                                    </label>
-                                    <input type="checkbox" />
-                                  </span>
-                                  <span>
+                                    <span>
+                                      <label>
+                                        DineIn refers to the act of eating a
+                                        meal at <br /> a restaurant rather than
+                                        taking it to go
+                                      </label>
+                                      <input type="checkbox" />
+                                    </span>
+                                  </div>
+                                  <div>
                                     <h6>Take a way</h6>
-                                    <label>
-                                      Take away means purchasing food from a
-                                      restaurant to consume elsewhere, often
-                                      packaged for convenience
-                                    </label>
-                                    <input type="checkbox" />
-                                  </span>
-                                  <span>
+                                    <span>
+                                      <label>
+                                        Take away means purchasing food from a{" "}
+                                        <br />
+                                        restaurant to consume elsewhere, often
+                                        packaged <br /> for convenience
+                                      </label>
+                                      <input type="checkbox" />
+                                    </span>
+                                  </div>
+                                  <div>
                                     <h6>Delivery</h6>
-                                    <label>
-                                      Delivery means bringing ordered items,
-                                      typically food, from a business to a
-                                      customer's specified location
-                                    </label>
-                                    <input type="checkbox" />
-                                  </span>
+                                    <span>
+                                      <label>
+                                        Delivery means bringing ordered items,
+                                        typically food,
+                                        <br /> from a business to a customer's
+                                        specified location
+                                      </label>
+                                      <input type="checkbox" />
+                                    </span>
+                                  </div>
                                 </div>
                               </form>
                             </Card.Text>
                           )}
                           {currentState === 2 && (
                             <Card.Text>
-                              <div>
+                              <div className="checkBoxes">
+                                <h2>Restaurant Bank Details</h2>
                                 <form className="form_step3_first">
-                                  <h2>Restaurant Bank Details</h2>
                                   <input type="text" placeholder="Bank name" />
                                   <input
                                     type="number"
                                     placeholder="Bank IFSC code"
                                   />
-                                  <input
-                                    type="number"
-                                    placeholder="Bank Account number"
-                                  />
-                                  <button>Verify</button>
+                                  <span className="flexRow spanCss">
+                                    {" "}
+                                    <input
+                                      type="number"
+                                      placeholder="Bank Account number"
+                                    />
+                                    <Link id="green_verifyButton">Verify</Link>
+                                  </span>
                                 </form>
-                                <form className="form_step3_second">
+                                <form className="form_step3_first">
                                   <h2>Restaurant Documents</h2>
                                   <div>
-                                    <span>
+                                    <span className="spanCss">
                                       <input
                                         type="number"
                                         placeholder="Enter FSSAI number"
                                       />
-                                      <button>Verify</button>
+                                      <Link id="green_verifyButton">
+                                        Verify
+                                      </Link>
                                     </span>
                                   </div>
                                   <div>
-                                    <span>
+                                    <span className="spanCss">
                                       <input
                                         type="number"
                                         placeholder="Enter GSTIN number"
                                       />
-                                      <button>Verify</button>
+                                      <Link id="green_verifyButton">
+                                        Verify
+                                      </Link>
                                     </span>
                                   </div>
                                 </form>
@@ -280,7 +325,7 @@ const OnBoarding = () => {
                             <Card.Text>
                               <div>
                                 <h2>Restaurant Manager Details </h2>
-                                <form>
+                                <form className="form_step3_first">
                                   <input
                                     type="number"
                                     placeholder="Restaurant Manager name"
@@ -289,12 +334,12 @@ const OnBoarding = () => {
                                     type="number"
                                     placeholder="Restaurant Manager Email id"
                                   />
-                                  <span>
+                                  <span className="spanCss">
                                     <input
                                       type="number"
                                       placeholder="Restaurant Manager Contact Phone no."
                                     />
-                                    <button>Verify</button>
+                                    <Link id="green_verifyButton">Verify</Link>
                                   </span>
                                 </form>
                               </div>
@@ -305,50 +350,85 @@ const OnBoarding = () => {
                               <div>
                                 <div>
                                   <h2>Restaurant Features</h2>
-                                  <form>
-                                    {items.map((item, index) => (
-                                      <div key={index} className="form-check">
-                                        <img
-                                          src={item.imgSrc}
-                                          alt={item.label}
-                                          style={{
-                                            width: "50px",
-                                            height: "50px",
-                                          }}
-                                        />
-                                        <input
-                                          type="checkbox"
-                                          className="form-check-input"
-                                          id={`checkbox${index}`}
-                                        />
-                                        <label
-                                          className="form-check-label"
-                                          htmlFor={`checkbox${index}`}
+                                  <form className="row">
+                                    {items
+                                      .slice(0, labelCount)
+                                      .map((item, index) => (
+                                        <div
+                                          key={index}
+                                          className="col-md-6 mb-3 "
                                         >
-                                          {item.label}
-                                        </label>
-                                      </div>
-                                    ))}
+                                          <span className="checkBox_step4_onboarding">
+                                            <input
+                                              type="checkbox"
+                                              className="form-check-input"
+                                              id={`checkbox${index}`}
+                                            />
+                                            <img
+                                              src={item.imgSrc}
+                                              alt={item.label}
+                                            />
+
+                                            <label
+                                              className="form-check-label"
+                                              htmlFor={`checkbox${index}`}
+                                            >
+                                              {item.label}
+                                            </label>
+                                          </span>
+                                        </div>
+                                      ))}
+                                    {labelCount < items.length && (
+                                      <Link
+                                        onClick={loadMoreLabels}
+                                        style={{
+                                          textDecoration: "none",
+                                          textAlign: "right",
+                                          fontSize: "14px",
+                                        }}
+                                      >
+                                        +Load More
+                                      </Link>
+                                    )}
                                   </form>
                                 </div>
                                 <div>
                                   <h2>Restaurant Cuisines</h2>
-                                  <form>
-                                    {items.map((item, index) => (
-                                      <div key={index} className="form-check">
-                                        <input
-                                          type="checkbox"
-                                          className="form-check-input"
-                                          id={`checkbox${index}`}
-                                        />
-                                        <label
-                                          className="form-check-label"
-                                          htmlFor={`checkbox${index}`}
+                                  <form className="row">
+                                    {items
+                                      .slice(0, labelCount)
+                                      .map((item, index) => (
+                                        <div
+                                          key={index}
+                                          className="col-md-6 mb-3"
                                         >
-                                          {item.label}
-                                        </label>
-                                      </div>
-                                    ))}
+                                          <span className="checkBox_step4_onboarding">
+                                            <input
+                                              type="checkbox"
+                                              className="form-check-input"
+                                              id={`checkbox${index}`}
+                                            />
+                                            <label
+                                              className="form-check-label"
+                                              htmlFor={`checkbox${index}`}
+                                            >
+                                              {item.label}
+                                            </label>
+                                          </span>
+                                        </div>
+                                      ))}
+                                    {labelCount < items.length && (
+                                      <Link
+                                        onClick={loadMoreLabels}
+                                        style={{
+                                          textDecoration: "none",
+                                          textAlign: "right",
+                                          fontSize: "14px",
+                                        }}
+                                      >
+                                        +Load More
+                                      </Link>
+                                    )}
                                   </form>
                                 </div>
                               </div>
@@ -457,14 +537,14 @@ const OnBoarding = () => {
                                     type="text"
                                     placeholder="Enter PAN Card number"
                                   />
-                                  <button>Verify</button>
+                                  <Link>Verify</Link>
                                 </span>
                                 <span>
                                   <input
                                     type="text"
                                     placeholder="Restaurant Owner Phone no."
                                   />
-                                  <button>Verify</button>
+                                  <Link>Verify</Link>
                                 </span>
                               </div>
                             </Card.Text>
@@ -479,9 +559,11 @@ const OnBoarding = () => {
                         </Card.Body>
                       </Card>
                     </div>
-                    <span>
-                      <button onClick={increaseProgress}>Skip</button>
-                      <button onClick={increaseProgress}>Continue</button>
+                    <span className="continue_skip_button_wrapper">
+                      <Link onClick={increaseProgress} id="skip_btn_onboarding">
+                        Skip
+                      </Link>
+                      <Link onClick={increaseProgress}>Continue</Link>
                     </span>
                   </div>
                 </div>

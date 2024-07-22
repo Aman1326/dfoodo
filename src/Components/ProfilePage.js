@@ -4,6 +4,7 @@ import Header from "./Header";
 import camera from "../Assets/camera.svg";
 import message from "../Assets/messageSvg.svg";
 import phone from "../Assets/phoneSvg.svg";
+import { Link } from "react-router-dom";
 const ProfilePage = () => {
   return (
     <>
@@ -29,6 +30,9 @@ const ProfilePage = () => {
                   <img src={message} alt="phone" />
                   <p>xyz@gmail.com</p>
                 </span>
+              </div>
+              <div className="update_button_profile_page">
+                <Link>Update Profile</Link>
               </div>
             </div>
           </section>
