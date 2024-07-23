@@ -10,9 +10,9 @@ import AboutUs from "./Components/Aboutus";
 import RegisterMyVenue from "./Components/RegisterMyVenue";
 import DetailedVenue from "./Components/DetailedVenue";
 import Blog from "./Components/Blog";
-import DetailedBlogs from "./Components/DetailedBlogs";
 import ProfilePage from "./Components/ProfilePage";
 import OnBoarding from "./Components/OnBoarding";
+import Blog2 from "./Components/Blog2";
 
 function App() {
   return (
@@ -27,7 +27,7 @@ function App() {
           <Route path="registerMyVenue" element={<RegisterMyVenue />} />
           <Route path="detailedVenue" element={<DetailedVenue />} />
           <Route path="blogs" element={<Blog />} />
-          <Route path="detailed-blog" element={<DetailedBlogs />} />
+          <Route path="blog/blog_detail/:id" element={<Blog2 />} />
           <Route path="profile" element={<ProfilePage />} />
           <Route path="onBoarding" element={<OnBoarding />} />
         </Routes>

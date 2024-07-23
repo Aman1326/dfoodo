@@ -13,13 +13,13 @@ import DatePicker from "react-date-picker";
 import line from "../Assets/line.svg";
 const SearchBar = () => {
   const locations = [
-    { value: "Use my location", label: "Use my Location" },
-    { value: "Chennai", label: "Chennai" },
-    { value: "Pune", label: "Pune" },
-    { value: "Mumbai", label: "Mumbai" },
-    { value: "Kolkata", label: "Kolkata" },
-    { value: "Jaipur", label: "Jaipur" },
-    { value: "Bhopal", label: "Bhopal" },
+    { value: "6:30 PM", label: "6:30 PM" },
+    { value: "6:30 PM", label: "6:30 PM" },
+    { value: "6:30 PM", label: "6:30 PM" },
+    { value: "6:30 PM", label: "6:30 PM" },
+    { value: "6:30 PM", label: "6:30 PM" },
+    { value: "6:30 PM", label: "6:30 PM" },
+    { value: "6:30 PM", label: "6:30 PM" },
     // Add more locations as needed
   ];
   const [selectedLocation, setSelectedLocation] = useState(null);
@@ -78,9 +78,13 @@ const SearchBar = () => {
   const personOptions = [
     { value: 1, label: "1 People" },
     { value: 2, label: "2 People" },
-    { value: 3, label: "3 People" },
     { value: 4, label: "4 People" },
-    { value: 5, label: "5 People " },
+    { value: 6, label: "6 People" },
+    { value: 8, label: "8 People " },
+    { value: 10, label: "10 People " },
+    { value: 15, label: "15People " },
+    { value: 20, label: "20People " },
+    { value: "larger Party", label: "larger Party " },
     // Add more options as needed
   ];
   const handlePersonChange = (selectedOption) => {

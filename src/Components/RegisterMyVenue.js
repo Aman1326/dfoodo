@@ -1,13 +1,72 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./Css/RegisterMyVenue.css";
 import Footer from "./Footer";
 import Header from "./Header";
 import picture1 from "../Assets/deck.svg";
 import picture2 from "../Assets/add_shopping_cart.svg";
 import picture3 from "../Assets/eye_tracking.svg";
+import { Link } from "react-router-dom";
+import Successs from "../Assets/check.png";
+import { Modal, Button } from "react-bootstrap";
 
-import bg from "../Assets/getHelpBg.png";
+import {
+  check_vaild_save,
+  combiled_form_data,
+  empty_form,
+  handleAphabetsChange,
+  handleEmailChange,
+  handleError,
+  handleIaphabetnumberChange,
+  handleNumbersChange,
+  ////handleSuccess,
+} from "../CommonJquery/CommonJquery.js";
+import {
+  server_post_data,
+  save_restaurantOwnerdetails,
+} from "../ServiceConnection/serviceconnection.js";
+import $ from "jquery";
 const RegisterMyVenue = () => {
+  const handleSaveChangesdynamic = async (
+    form_data,
+    save_restaurantOwnerdetails
+  ) => {
+    let vaild_data = check_vaild_save(form_data);
+    // seterror_show("");
+    if (!$("#availability").prop("checked")) {
+      vaild_data = false;
+    }
+    if (vaild_data) {
+      let fd_from = combiled_form_data(form_data, null);
+      await server_post_data(save_restaurantOwnerdetails, fd_from)
+        .then((Response) => {
+          if (Response.data.error) {
+            // handleError(Response.data.message);
+          } else {
+            handleOpenModal();
+            empty_form(form_data);
+          }
+        })
+        .catch((error) => {});
+    }
+  };
+
+  //success modal
+  const [showModal, setShowModal] = useState(false);
+
+  const handleOpenModal = () => {
+    setShowModal(true);
+  };
+
+  useEffect(() => {
+    let timer;
+    if (showModal) {
+      timer = setTimeout(() => {
+        setShowModal(false);
+      }, 3000); // 3000ms = 3 seconds
+    }
+    return () => clearTimeout(timer);
+  }, [showModal]);
+
   return (
     <>
       <Header />
@@ -57,8 +116,8 @@ const RegisterMyVenue = () => {
                       <label htmlFor="venueName">First Name</label>
                       <input
                         type="text"
-                        id="First Name"
-                        name="First Name"
+                        id="Owner_fname"
+                        name="Owner_fname"
                         className="form-control"
                         placeholder="Enter the name of your Business"
                       />
@@ -69,8 +128,8 @@ const RegisterMyVenue = () => {
                       </label>
                       <input
                         type="text"
-                        id="last Name"
-                        name="last Name"
+                        id="Owner_lname"
+                        name="Owner_lname"
                         className="form-control"
                         placeholder="Mumbai"
                       />
@@ -81,8 +140,8 @@ const RegisterMyVenue = () => {
                       <label htmlFor="contactPerson">Your Email</label>
                       <input
                         type="text"
-                        id="Your Email"
-                        name="Your Email"
+                        id="Email"
+                        name="Email"
                         className="form-control"
                         placeholder="Enter your Full Name"
                       />
@@ -90,11 +149,11 @@ const RegisterMyVenue = () => {
                     <div className="col-md-6">
                       <label htmlFor="contactEmail">Restaurant Name</label>
                       <input
-                        type="number"
-                        id="Restaurant Name"
-                        name="Restaurant Name"
+                        type="text"
+                        id="restaurant_name"
+                        name="restaurant_name"
                         className="form-control"
-                        placeholder="Enter your Mobile No."
+                        placeholder="Enter restaurant name"
                       />
                     </div>
                   </div>
@@ -103,10 +162,20 @@ const RegisterMyVenue = () => {
                       <label htmlFor="phone">Restaurant Email</label>
                       <input
                         type="text"
-                        id="Restaurant Name"
-                        name="Restaurant Name"
+                        id="restaurant_website"
+                        name="restaurant_website"
                         className="form-control"
                         placeholder="Enter business Email Address"
+                      />
+                    </div>
+                    <div className="col-md-6">
+                      <label htmlFor="phone">Phone no.</label>
+                      <input
+                        type="text"
+                        id="Contact"
+                        name="Contact"
+                        className="form-control"
+                        placeholder="Enter phone no."
                       />
                     </div>
                   </div>
@@ -114,8 +183,8 @@ const RegisterMyVenue = () => {
                     <div className="col-md-12">
                       <label htmlFor="additionalInfo">Restaurant Address</label>
                       <input
-                        id="comment"
-                        name="comment"
+                        id="restaurant_address"
+                        name="restaurant_address"
                         className="form-control"
                         placeholder="Restaurant Address"
                         rows="4"
@@ -138,7 +207,16 @@ const RegisterMyVenue = () => {
                       </span>
                     </div>
                     <div className="checkBox_registerMyVenue">
-                      <button type="submit">Next </button>
+                      <Link
+                        onClick={() =>
+                          handleSaveChangesdynamic(
+                            "vanueregistration",
+                            save_restaurantOwnerdetails
+                          )
+                        }
+                      >
+                        Next{" "}
+                      </Link>
                     </div>
                   </div>
                 </form>
@@ -199,6 +277,20 @@ const RegisterMyVenue = () => {
       <section className="footer_section_regmyvenue">
         <Footer />
       </section>
+
+      <Modal
+        show={showModal}
+        onHide={() => setShowModal(false)}
+        centered
+        className="success_modal_reg "
+      >
+        <Modal.Body>
+          <div className="success_modal_register_my_venue ">
+            <img src={Successs} alt="success" />
+            <h3>Your request have been submitted successfully !</h3>
+          </div>
+        </Modal.Body>
+      </Modal>
     </>
   );
 };

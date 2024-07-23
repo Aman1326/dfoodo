@@ -1,0 +1,152 @@
+.blog-background {
+    position: relative;
+    background-image: url("/src/Assets/getHelpBg.png");
+    /* Ensure this path is correct */
+    background-size: cover;
+    background-position: center;
+    height: 60vh;
+    /* Adjust height as needed */
+    width: 100%;
+}
+
+.blog-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    /* Ensure some transparency */
+    display: flex;
+    align-items: center;
+    justify-content: left;
+}
+
+.blogHeading {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+
+    h3 {
+        font-size: 30px;
+    }
+}
+
+.blog_content {
+    color: var(--white);
+}
+
+/* App.css */
+.pagination-btn {
+    border-radius: 50%;
+    /* Makes the buttons circular */
+    width: 40px;
+    /* Adjust size as needed */
+    height: 40px;
+    /* Adjust size as needed */
+    padding: 0;
+    /* Removes default padding */
+}
+
+.pagination-btn-orange {
+    background-color: orange;
+    /* Sets the background color to orange */
+    color: white;
+    /* Sets the text color to white for better visibility */
+    border: none;
+    /* Removes default border */
+}
+
+.blog_text_author {
+    display: flex;
+    flex-direction: row;
+    font-size: 14px;
+    justify-content: left;
+    gap: 0.7rem;
+}
+
+.page-item:first-child .page-link {
+    border-top-left-radius: 50% !important;
+    border-bottom-left-radius: 50% !important;
+    background-color: var(--primary-color);
+    color: var(--white);
+}
+
+.page-item:last-child .page-link {
+    border-top-left-radius: 50% !important;
+    border-bottom-right-radius: 50% !important;
+    border-top-right-radius: 50% !important;
+}
+
+.page-item {
+    gap: 2rem;
+}
+
+.page-item:not(:first-child) .page-link {
+    background-color: var(--primary-color);
+    color: var(--white);
+}
+
+.blog_content_section {
+    border-radius: 15px;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.blog_content_section img {
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+}
+
+.blog_content_section h5 {
+    color: var(--text-black);
+    margin-bottom: 0.3rem;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: normal;
+}
+
+.blog_content_section p {
+    color: var(--text-blue);
+    margin-bottom: 0.3rem;
+    font-size: 14px;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: normal;
+}
+
+.paginationBlogs {
+    margin-top: 2rem;
+}
+
+.pagination {
+    gap: 0.5rem;
+    outline: transparent !important;
+    border: transparent !important;
+}
+
+@media screen and (max-width: 650px) {
+    .blogHeading h3 {
+        font-size: 25px;
+        margin-bottom: 0px;
+    }
+
+    .card {
+        width: 100%;
+        margin: 0;
+        margin-bottom: 1.5rem;
+    }
+}
+
+.writterBy {
+    color: var(--text-blue);
+    margin-bottom: 0.2rem;
+    font-size: 14px;
+}

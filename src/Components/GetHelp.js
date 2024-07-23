@@ -7,9 +7,20 @@ import headphone from "../Assets/headphoneSvg.svg";
 import upArrow from "../Assets/downArrowBlack.svg";
 import Footer from "./Footer";
 import Header from "./Header";
+import DOMPurify from "dompurify";
 import DownloadApp from "./DownloadApp";
+import { Link } from "react-router-dom";
+
+import {
+  server_post_data,
+  get_all_faq,
+  handleError,
+} from "../ServiceConnection/serviceconnection.js";
+
 const GetHelp = () => {
   const [activeIndex, setActiveIndex] = useState(null);
+  const [getFaq, SetFaq] = useState([]);
+  const [getSocialLinks, SetSocialLinks] = useState([]);
 
   const handleClick = (index) => {
     setActiveIndex(index === activeIndex ? null : index);
@@ -41,7 +52,25 @@ const GetHelp = () => {
         "Data can be passed between components using props (from parent to child) and state management libraries like Redux or the Context API.",
     },
   ];
+  const master_data_get = async () => {
+    const fd = new FormData();
 
+    await server_post_data(get_all_faq, fd)
+      .then((Response) => {
+        if (Response.data.error) {
+          console.log(Response.data.message);
+        } else {
+          SetFaq(Response.data.message.data);
+          if (Response.data.message.data_faq_webite.length > 0) {
+            SetSocialLinks(Response.data.message.data_faq_webite[0]);
+          }
+        }
+      })
+      .catch((error) => {});
+  };
+  useEffect(() => {
+    master_data_get();
+  }, []);
   return (
     <>
       <Header />
@@ -57,18 +86,20 @@ const GetHelp = () => {
                 <div className="contact_section_left">
                   <span className="row_text">
                     <img src={message} alt="phone" />
-                    <h6>demo@gmail.com</h6>
+                    <h6>{getSocialLinks.website_email}</h6>
                   </span>
                   <span className="row_text">
                     <img src={phone} alt="phone" />
-                    <h6>+1012 3456 789</h6>
+                    <h6>
+                      {getSocialLinks.website_contact_no_first}
+                      {getSocialLinks.website_contact_no_second != "" &&
+                        getSocialLinks.website_contact_no_second != undefined &&
+                        "," + getSocialLinks.website_contact_no_second}
+                    </h6>
                   </span>
                   <span className="row_text">
                     <img src={location} alt="phone" />
-                    <h6>
-                      132 Dartmouth Street Boston, Massachusetts 02156 United
-                      States
-                    </h6>
+                    <h6>{getSocialLinks.website_address}</h6>
                   </span>
                 </div>
               </div>
@@ -77,7 +108,13 @@ const GetHelp = () => {
                   <div>
                     <img src={headphone} alt="headphone" />
                     <p>Connect with us via chat</p>
-                    <button>Chat with us</button>
+                    <Link
+                      aria-label="Chat on WhatsApp"
+                      to="https://wa.me/+919209403405"
+                      target="blank"
+                    >
+                      Chat with us
+                    </Link>
                   </div>
                 </div>
               </div>
@@ -93,7 +130,7 @@ const GetHelp = () => {
                 <h2>FAQS</h2>
               </div>
               <div className="accordion">
-                {faqData.map((item, index) => (
+                {getFaq.map((item, index) => (
                   <div key={index} className="accordion-item bgColorr">
                     <div
                       className={`accordion-title ${
@@ -114,7 +151,12 @@ const GetHelp = () => {
                     </div>
                     {index === activeIndex && (
                       <div className="accordion-content">
-                        <p className="accordion-content-text">{item.answer}</p>
+                        <p
+                          className="accordion-content-text"
+                          dangerouslySetInnerHTML={{
+                            __html: DOMPurify.sanitize(item.answer_name),
+                          }}
+                        />
                       </div>
                     )}
                   </div>

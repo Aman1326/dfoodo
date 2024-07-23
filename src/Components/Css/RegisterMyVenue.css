@@ -97,7 +97,7 @@
 }
 
 .venue-registration-form input {
-    outline: none !important;
+    box-shadow: none !important;
 }
 
 .venue-registration-form .row {
@@ -135,13 +135,14 @@
     align-items: center;
 }
 
-.checkBox_registerMyVenue button {
+.checkBox_registerMyVenue a {
     width: fit-content !important;
     font-size: 12px;
     padding: 0.4rem 0.9rem;
     border-radius: 7px;
     border: none;
     margin-left: auto;
+    text-decoration: none;
     margin-right: 0.8rem;
     background-color: var(--primary-color);
     color: var(--white);

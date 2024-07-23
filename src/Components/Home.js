@@ -578,7 +578,7 @@ function Home() {
                 <div className="col-lg-4 col-md-6 mb-3">
                   <div className="discoverMore_container">
                     <Link
-                      to="/blogs"
+                      to="//blog/blog_detail/:id"
                       style={{
                         textDecoration: "none",
                         color: "var(--text-black)",
@@ -610,7 +610,7 @@ function Home() {
                 <div className="col-lg-4 col-md-6 mb-3">
                   <div className="discoverMore_container">
                     <Link
-                      to="/blogs"
+                      to="//blog/blog_detail/:id"
                       style={{
                         textDecoration: "none",
                         color: "var(--text-black)",

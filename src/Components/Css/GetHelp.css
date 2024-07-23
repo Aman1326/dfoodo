@@ -52,11 +52,16 @@
     width: 100%;
 }
 
+.gethelp_right_section p {
+    margin-bottom: 3rem;
+}
+
 .gethelp_right_section img {
     margin-bottom: 1rem;
 }
 
-.gethelp_right_section button {
+.gethelp_right_section a {
+    text-decoration: none;
     background-color: var(--primary-color);
     color: var(--white);
     font-family: "Roboto";
