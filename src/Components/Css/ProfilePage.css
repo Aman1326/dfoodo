@@ -34,6 +34,7 @@
     border-radius: 11px;
     display: flex;
     align-items: center;
+    margin-bottom: 1rem;
 }
 
 .header_Section_profile_page {
@@ -62,5 +63,283 @@
     padding: 0.6rem 1rem;
     border-radius: 5px;
     background-color: var(--light-black);
-    ;
+    transition: 0.1s ease-in;
+}
+
+.update_button_profile_page a:hover {
+    background-color: var(--primary-color);
+}
+
+
+
+.vertical-tabs {
+    padding-bottom: 10px;
+    height: 100%;
+    background-color: white;
+    display: flex;
+    border-radius: 5px;
+}
+
+.react-tabs__tab-panel--selected {
+    width: 78vw;
+    background: rgba(249, 249, 249, 1);
+    border-radius: 5px;
+}
+
+.tab-list {
+    height: 50vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    border-right: 1px solid #ccc;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    padding-left: 0rem;
+    padding-right: 0.8rem;
+    margin: 0;
+}
+
+.tab-list h3 {
+    padding-left: 20px;
+}
+
+.tab {
+    font-family: "Roboto";
+    padding: 10px 20px;
+    cursor: pointer;
+    outline: none;
+    list-style: none;
+    border-radius: 5px;
+    margin-bottom: 0.5rem;
+}
+
+.tab img {
+    margin-right: 0.3rem;
+}
+
+.tab:last-child {
+    border-bottom: none;
+}
+
+.active-tab {
+    background-color: var(--light-grey);
+}
+
+.TabPanel {
+    margin: 0;
+    padding: 0;
+}
+
+.settings_section {
+    position: relative;
+}
+
+.tab-panel {
+    display: block;
+}
+
+.back-button {
+    display: none;
+    /* Hide back button by default */
+}
+
+.reservations_section {
+    display: flex;
+    gap: 1rem;
+}
+
+.reservations_section button {
+    border: none;
+    background: none;
+}
+
+.reservations_section hr {
+
+    margin: 0;
+
+}
+
+.favourite_section {
+    padding: 1rem 3rem;
+}
+
+.settings_section_profile_page {
+
+    padding: 2rem 2rem;
+}
+
+.settings_text_profile_page {
+    padding: 1rem 1rem;
+    border: 1px solid grey;
+    border-radius: 5px;
+    width: max-content;
+
+    p {
+        color: var(--text-grey);
+    }
+}
+
+.toggle_switches_settings {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+
+    span {
+        display: flex;
+        gap: 0.5rem;
+    }
+}
+
+/* toggle button  css*/
+/* The switch - the box around the slider */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 55px;
+    height: 29px;
+}
+
+/* Hide default HTML checkbox */
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 22px;
+    width: 22px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+input:checked+.slider {
+    background-color: var(--primary-color);
+}
+
+input:focus+.slider {
+    box-shadow: 0 0 1px var(--primary-color);
+}
+
+input:checked+.slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+}
+
+.slider.round {
+    border-radius: 34px;
+}
+
+.slider.round:before {
+    border-radius: 50%;
+}
+
+/* profile section css */
+.profile_pafe_form input {
+    border-top: none;
+    border-right: none;
+    box-shadow: none !important;
+    border-left: none;
+    background: transparent;
+    border-radius: 0rem;
+    border-bottom: 1.3px solid black;
+    margin-bottom: 0.2rem;
+    font-weight: 500;
+    font-family: "Roboto";
+}
+
+.profile_pafe_form input:focus {
+    background: transparent;
+}
+
+.profile_pafe_form label {
+    margin: 0 !important;
+}
+
+.birth_date_profile {
+    margin-top: auto;
+}
+
+#phoneNumberProfilePage {
+    width: 100%;
+}
+
+.react-international-phone-input-container .react-international-phone-input {
+    width: 100%;
+}
+
+
+.profile_section {
+    padding: 0.5rem 2rem;
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px,
+        rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+    border-radius: 10px;
+}
+
+.radio_buttons_reg_form {
+    display: flex;
+}
+
+.profile_section label {
+    margin-top: 0.5rem !important;
+}
+
+.radio_buttons_reg_form input[type="radio"] {
+    margin-top: 0.5rem;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    width: 15px;
+    height: 15px;
+    border: 1px solid black;
+    border-radius: 50%;
+    outline: none;
+    cursor: pointer;
+    position: relative;
+    vertical-align: middle;
+}
+
+.radio_buttons_reg_form input[type="radio"]:before {
+    content: "";
+    width: 13px;
+    height: 13px;
+    border-radius: 50%;
+    background: var(--primary-color);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    transition: transform 0.2s ease-in-out;
+}
+
+.radio_buttons_reg_form input[type="radio"]:checked:before {
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.radio_buttons_reg_form label {
+    margin-left: 5px;
+    vertical-align: middle;
+}
+
+.error-message {
+    font-size: 13px;
+    color: red;
 }

@@ -4,8 +4,6 @@ import city1 from "../Assets/city1.png";
 import city2 from "../Assets/city2.png";
 import city3 from "../Assets/city3.png";
 import city4 from "../Assets/city4.png";
-import city5 from "../Assets/city5.png";
-import city6 from "../Assets/city6.png";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -16,8 +14,6 @@ const Collections = () => {
     { image: city2, description: "Bhopal" },
     { image: city3, description: "Nasik" },
     { image: city4, description: "Indore" },
-    { image: city5, description: "Pune" },
-    { image: city6, description: "Ujjain" },
   ];
   // Custom Next Arrow
   const NextArrow = (props) => {
