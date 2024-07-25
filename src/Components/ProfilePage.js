@@ -15,6 +15,7 @@ import valetParking from "../Assets/valet-parking3x.png.svg";
 import star from "../Assets/star.svg";
 import Heart from "react-heart";
 import contactus from "../Assets/averagePrice.svg";
+import calendar from "../Assets/calendarSearchBar.svg";
 import Successs from "../Assets/check.png";
 import { PhoneInput } from "react-international-phone";
 import { Modal } from "react-bootstrap";
@@ -425,8 +426,85 @@ const ProfilePage = () => {
                     </div>
                     <hr width={"100%"} />
                     <div className="row">
-                      <div className="tab-content col-lg-8">
-                        {activeTab === "upcomming" && <p>upcomming</p>}
+                      <div className="tab-content col-md-12">
+                        {activeTab === "upcomming" && (
+                          <div>
+                            <div className="container_venues_profile_page">
+                              <h6 className="profile_page_upcomming_section_heading">
+                                Upcoming reservations
+                              </h6>
+                              <div className="row">
+                                {currentPaginationItems.map((venue, index) => (
+                                  <div
+                                    key={index}
+                                    className="col-12 margin24px"
+                                  >
+                                    <div className="row m-0 px-2 container_profile_section_venue">
+                                      <div className="col-sm-4 px-0">
+                                        <Link
+                                          to="/detailedVenue"
+                                          style={{ textDecoration: "none" }}
+                                        >
+                                          <div className="venuePage_image_container ProfilePage_image_container">
+                                            <img
+                                              src={venue.venue_image}
+                                              alt="venueImg"
+                                            />
+                                          </div>
+                                        </Link>
+                                      </div>
+                                      <div className="col-sm-8 p-0">
+                                        <div className="venuePage_text_section ProfilePage_text_section">
+                                          <div className="venueContainer_rowtext">
+                                            <div className="venueContainer_nameAndAddress ">
+                                              <h6>{venue.Name}</h6>
+                                            </div>
+                                          </div>
+                                          <span>
+                                            <img />
+                                            <p>{venue.Address}</p>
+                                          </span>
+
+                                          <div className="venue_details_profile_page">
+                                            <span className="people_span">
+                                              <img
+                                                src={contactus}
+                                                alt="contactus"
+                                              />
+                                              <strong>2</strong>
+                                            </span>
+                                            <span className="people_span">
+                                              <img
+                                                src={calendar}
+                                                alt="calendar"
+                                              />
+                                              <strong>
+                                                Mon, Jun 10 at 6:30PM
+                                              </strong>
+                                            </span>
+                                          </div>
+                                          <div className="venue_details_profile_page">
+                                            <span className="people_span">
+                                              <strong>
+                                                <h6>Modify</h6>
+                                              </strong>
+                                            </span>
+                                            |
+                                            <span className="people_span">
+                                              <strong>
+                                                <h6>Cancel</h6>
+                                              </strong>
+                                            </span>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                ))}
+                              </div>
+                            </div>
+                          </div>
+                        )}
                         {activeTab === "past&cancel" && <p>past&cancel</p>}
                       </div>
                     </div>

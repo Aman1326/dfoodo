@@ -80,7 +80,7 @@ function Header() {
             <div className="upper_header_container">
               {" "}
               <Link to="/registerMyVenue">List My Restaurant</Link>
-              <Link>Get help</Link>
+              <Link to="/getHelp">Get help</Link>
               <p>EN</p>
             </div>
           )}

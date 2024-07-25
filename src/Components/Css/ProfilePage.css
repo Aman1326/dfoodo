@@ -71,6 +71,9 @@
 }
 
 
+.tabs {
+    margin-top: -3rem;
+}
 
 .vertical-tabs {
     padding-bottom: 10px;
@@ -342,4 +345,57 @@ input:checked+.slider:before {
 .error-message {
     font-size: 13px;
     color: red;
+}
+
+
+.venue_details_profile_page {
+    display: flex;
+    gap: 1rem;
+}
+
+.people_span {
+    display: flex;
+    gap: 0.2rem;
+    align-items: center;
+
+    h6 {
+        color: var(--primary-color);
+    }
+}
+
+.ProfilePage_image_container {
+    display: flex;
+    align-items: center;
+
+    img {
+        width: 150px !important;
+        height: 150px !important;
+        aspect-ratio: 1 !important;
+    }
+}
+
+.ProfilePage_text_section {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    width: 100%;
+}
+
+.profile_page_upcomming_section_heading {
+    margin-left: 1rem;
+    padding-bottom: 1rem;
+}
+
+.container_profile_section_venue {
+    padding: 0.5rem;
+    cursor: pointer;
+    border-radius: 8px;
+    background: var(--white);
+    box-shadow: 0px 2px 2px 0px #0000002E;
+    height: 180px;
+    width: 100%;
+}
+
+.container_venues_profile_page {
+    padding: 1rem;
+    overflow-y: auto;
 }
