@@ -1,6 +1,6 @@
 /* browse cities */
 .browse_otherCities_section {
-    margin-top: 4rem;
+    margin-top: 1rem;
 }
 
 .browse_otherCities_heading h3 {
@@ -23,12 +23,6 @@
     text-align: center;
 }
 
-.city-image {
-    cursor: pointer;
-    width: 100%;
-    height: auto;
-}
-
 .city-description {
     margin-top: 10px;
     text-align: center;
@@ -40,12 +34,58 @@
 
 .slick-prev:before,
 .slick-next:before {
+    right: -9px !important;
     color: var(--primary-color) !important;
     font-size: 30px !important;
     background: transparent !important;
 }
 
+.slick-next {
+    right: -2px !important;
+}
+
+
 .slick-prev,
 .slick-next {
     background: transparent !important;
+}
+
+.cities_mapped {
+    padding-left: 2rem;
+    margin: auto;
+}
+
+.city-item {
+    position: relative;
+    width: fit-content;
+    height: fit-content;
+}
+
+.city-image {
+    cursor: pointer;
+    width: 95%;
+    height: 95%;
+    aspect-ratio: 1;
+    border-radius: 5px;
+}
+
+.city_description {
+    position: absolute;
+    bottom: 10px;
+    left: 20px;
+    cursor: pointer;
+
+    h6 {
+        margin: 0;
+        color: var(--white);
+    }
+
+    p {
+        margin: 0;
+        color: var(--primary-color);
+    }
+
+    span {
+        gap: 0.2rem;
+    }
 }

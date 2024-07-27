@@ -4,6 +4,8 @@ import "./Css/Footer.css";
 import logo1 from "../Assets/fb_logo.svg";
 import logo2 from "../Assets/twitter_logo.svg";
 import logo3 from "../Assets/yt_link.svg";
+import logo4 from "../Assets/igIcon.svg";
+import logo5 from "../Assets/linkedInIcon.svg";
 import earth from "../Assets/earth.svg";
 import { Link } from "react-router-dom";
 const Footer = () => {
@@ -130,12 +132,12 @@ const Footer = () => {
                 <li>
                   <Link>
                     {" "}
-                    <img src={logo3} alt="logo1" />
+                    <img src={logo4} alt="logo1" />
                   </Link>
                 </li>
                 <li>
                   <Link>
-                    <img src={logo3} alt="logo1" />
+                    <img src={logo5} alt="logo1" />
                   </Link>
                 </li>
               </ul>

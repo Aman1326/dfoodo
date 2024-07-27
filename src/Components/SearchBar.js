@@ -19,7 +19,7 @@ const SearchBar = () => {
     { value: "6:30 PM", label: "6:30 PM" },
     { value: "6:30 PM", label: "6:30 PM" },
     { value: "6:30 PM", label: "6:30 PM" },
-    { value: "6:30 PM", label: "6:30 PM" },
+    { value: "6:40 PM", label: "6:40 PM" },
     // Add more locations as needed
   ];
   const [selectedLocation, setSelectedLocation] = useState(null);
@@ -97,9 +97,12 @@ const SearchBar = () => {
         <div className="searchBar_container">
           <div className="CalendarSection_searchbar">
             <img src={calendar} alt="calendar" />
-            <DatePicker onChange={setDate} value={date} />
-            <img src={dropdown} alt="dropdown" />
-            <img src={line} alt="line" />
+            <DatePicker
+              onChange={setDate}
+              value={date}
+              className="datepicker"
+            />
+            <img src={line} alt="line" className="verticle_line" />
           </div>
           <div className="locationSection_searchbar">
             <img src={clock} alt="clock" />
@@ -110,7 +113,7 @@ const SearchBar = () => {
               placeholder="Time"
               styles={customStyles}
             />
-            <img src={line} alt="line" />
+            <img src={line} alt="line" className="verticle_line" />
           </div>
           <div className="locationSection_searchbar">
             <img src={person} alt="clock" />
@@ -121,13 +124,14 @@ const SearchBar = () => {
               placeholder="People"
               styles={customStyles}
             />
-            <img src={line} alt="line" />
+            <img src={line} alt="line" className="verticle_line" />
           </div>
           <div className="seachVenue_section_searchbar">
             <img src={searchIcon} alt="search icon" />
             <input placeholder="Location, Restaurant, or Cuisine" />
           </div>
         </div>
+
         <div className="letsgo_button">
           <button>Let's go</button>
         </div>

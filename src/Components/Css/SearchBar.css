@@ -169,3 +169,62 @@
     width: 15px;
     height: 15px;
 }
+
+@media (max-width: 830px) {
+    .searchBar_container {
+        flex-direction: column;
+        gap: 0.5rem;
+        background: transparent;
+    }
+
+    .datepicker {
+        padding: 0.2rem 1rem;
+    }
+
+    .verticle_line {
+        display: none;
+    }
+
+    .CalendarSection_searchbar {
+        background-color: var(--white);
+        color: var(--text-grey);
+        justify-content: left;
+        padding: 0rem 1rem;
+        border-radius: 5px;
+    }
+
+    .seachVenue_section_searchbar {
+        width: 100%;
+        padding: 0.4rem 1rem;
+        border-radius: 5px;
+    }
+
+    .locationSection_searchbar {
+        width: 100%;
+        justify-content: left;
+        padding: 0rem 1rem;
+        border-radius: 5px;
+    }
+
+    .letsgo_button button {
+        height: fit-content;
+        display: flex;
+        width: 100%;
+        justify-content: center;
+        padding: 0.4rem 1rem;
+    }
+
+    .letsgo_button {
+        padding: 0rem 1rem;
+    }
+
+    .searchBar_wrapper {
+        flex-direction: column;
+        justify-content: center;
+        gap: 0.3rem;
+    }
+
+    .seAll_span {
+        display: none;
+    }
+}

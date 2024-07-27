@@ -56,10 +56,9 @@
     text-decoration: none !important;
 }
 
-.footer_learn_more ul li:hover,
-.footer_about_my_venue ul li:hover {
-    font-weight: bolder;
-    color: var(--primary-color);
+.footer_learn_more ul li a:hover,
+.footer_about_my_venue ul li a:hover {
+    color: var(--primary-color) !important;
 }
 
 .footer_learn_more p {
@@ -75,6 +74,7 @@
 
 .heading_text_footerlinks {
     margin-bottom: 0;
+    font-weight: 500 !important;
 }
 
 .social_links {
@@ -90,10 +90,11 @@
 .social_links img {
     width: 30px;
     height: 30px;
+    transition: 0.2s ease-in-out;
 }
 
-.social_links a:hover {
-    transform: scale(1.1);
+.social_links img:hover {
+    transform: scale(1.2);
 }
 
 .post_footer_text p {
@@ -124,5 +125,5 @@
 }
 
 .social_links_app_text p:hover {
-    font-weight: 500;
+    color: var(--primary-color);
 }

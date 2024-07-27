@@ -76,6 +76,8 @@
     .venuePage_image_container img {
         width: 100% !important;
     }
+
+
 }
 
 @media screen and (max-width: 768px) {
@@ -98,6 +100,7 @@
     height: 100%;
     object-fit: cover;
     border-radius: 10px;
+    aspect-ratio: 1;
 }
 
 .venuePage_image_container {

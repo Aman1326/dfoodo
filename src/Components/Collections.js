@@ -7,13 +7,15 @@ import city4 from "../Assets/city4.png";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-const Collections = () => {
+import right from "../Assets/rightArrow_white.svg";
+import { APL_LINK } from "../ServiceConnection/serviceconnection";
+const Collections = ({ data }) => {
   //browse cities section
   const Browse_cities = [
-    { image: city1, description: "Mumbai" },
-    { image: city2, description: "Bhopal" },
-    { image: city3, description: "Nasik" },
-    { image: city4, description: "Indore" },
+    { image: city1, description: "Veggie Friendly", places: "8 Places" },
+    { image: city2, description: "Wine bars", places: "8 Places" },
+    { image: city3, description: "High Discount", places: "8 Places" },
+    { image: city4, description: "Outdoor Seating ", places: "8 Places" },
   ];
   // Custom Next Arrow
   const NextArrow = (props) => {
@@ -43,7 +45,7 @@ const Collections = () => {
     infinite: true,
     speed: 500,
     slidesToShow: 4,
-    slidesToScroll: 1,
+    slidesToScroll: 2,
     nextArrow: <NextArrow />,
     prevArrow: <PrevArrow />,
     responsive: [
@@ -79,17 +81,23 @@ const Collections = () => {
       {/* browse other cities */}
       <section>
         <div className="browse_otherCities_section">
-          <div className="container">
+          <div className="container-lg">
             <div className="cities_mapped ">
               <Slider {...settings}>
-                {Browse_cities.map((venue, index) => (
+                {data.map((venue, index) => (
                   <div key={index} className="city-item">
                     <img
                       className="city-image"
-                      src={venue.image}
+                      src={`${APL_LINK}/assets/${venue.category_master_image}`}
                       alt={`Venue ${index + 1}`}
                     />
-                    <div className="city-description">{venue.description}</div>
+                    <div className="city_description">
+                      <h6>{venue.category_master_name}</h6>
+                      <span className="d-flex flex-row">
+                        <p>{venue.category_count} Places</p>
+                        <img src={right} alt="right" />
+                      </span>
+                    </div>
                   </div>
                 ))}
               </Slider>

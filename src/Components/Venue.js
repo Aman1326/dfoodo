@@ -12,9 +12,9 @@ import bar4 from "../Assets/bar4.png";
 import bar5 from "../Assets/bar5.png";
 import bar6 from "../Assets/bar6.png";
 import bar7 from "../Assets/bar7.png";
-import rigthArrow from "../Assets/rightArrow.svg";
 import rightArrow from "../Assets/rightArrow.svg";
-import leftArrow from "../Assets/leftArrow.svg";
+import rigthArrow from "../Assets/right_svg_button.svg";
+import leftArrow from "../Assets/left_svg_button.svg";
 import star from "../Assets/star.svg";
 // import ListYourVenue from "./ListYourVenue";
 import Footer from "./Footer";
@@ -343,7 +343,7 @@ const Venue = () => {
           </div>
         </section>
         <section className="found_venues_section">
-          <div className="container">
+          <div className="container-lg">
             <section>
               <div className="popularVenues_section">
                 <div className="">
@@ -371,7 +371,7 @@ const Venue = () => {
                   <div className="popularVenues">
                     <div className="row mt-1">
                       {currentPaginationItems.map((venue, index) => (
-                        <div key={index} className="col-lg-6 col-12 margin24px">
+                        <div key={index} className="col-xl-6 col-12 margin24px">
                           <div className="VenuePage_venue_container">
                             <div className="row m-0">
                               <div className="col-sm-5 px-0">

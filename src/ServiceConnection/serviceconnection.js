@@ -1,7 +1,7 @@
 import axios from "axios";
 import { retrieveData } from "../LocalConnection/LocalConnection.js";
 const appauth_key = "logoacedamy@2029";
-let APL_LINK = "http://192.168.1.7:8000/";
+let APL_LINK = "http://192.168.1.11:8000/";
 let Website_URL = "https://www.logoacademy.co/";
 let local_server_link_react = APL_LINK + "api/web_link/";
 
@@ -13,6 +13,8 @@ const get_all_faq = local_server_link_react + "get_all_faq/";
 const save_restaurantOwnerdetails =
   local_server_link_react + "save_restaurantOwnerdetails/";
 const update_profile = local_server_link_react + "update_profile/";
+const get_landingpage_webapp =
+  local_server_link_react + "get_landingpage_webapp/";
 
 const server_post_data = async (url_for, form_data) => {
   // const headers = {
@@ -38,4 +40,5 @@ export {
   get_all_faq,
   save_restaurantOwnerdetails,
   update_profile,
+  get_landingpage_webapp,
 };

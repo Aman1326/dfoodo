@@ -119,7 +119,7 @@ const RegisterMyVenue = () => {
                         id="Owner_fname"
                         name="Owner_fname"
                         className="form-control"
-                        placeholder="Enter the name of your Business"
+                        placeholder="first name "
                       />
                     </div>
                     <div className="col-md-6">
@@ -131,7 +131,7 @@ const RegisterMyVenue = () => {
                         id="Owner_lname"
                         name="Owner_lname"
                         className="form-control"
-                        placeholder="Mumbai"
+                        placeholder="last name"
                       />
                     </div>
                   </div>
@@ -143,7 +143,7 @@ const RegisterMyVenue = () => {
                         id="Email"
                         name="Email"
                         className="form-control"
-                        placeholder="Enter your Full Name"
+                        placeholder="Enter your Email"
                       />
                     </div>
                     <div className="col-md-6">

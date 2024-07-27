@@ -34,3 +34,21 @@
 .download_now_section {
     margin-top: 2rem;
 }
+
+@media (max-width:991px) {
+    .leftSection img {
+        border-top-right-radius: 5px;
+        border-top-left-radius: 5px;
+        border-bottom-right-radius: 0px;
+        border-bottom-left-radius: 0px;
+    }
+
+    .rightSection {
+        text-align: center;
+        padding: 1rem 2rem;
+        border-bottom-right-radius: 5px;
+        border-bottom-left-radius: 5px;
+        border-top-right-radius: 0px;
+        border-top-left-radius: 0px;
+    }
+}

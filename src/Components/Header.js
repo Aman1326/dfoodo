@@ -48,13 +48,8 @@ function Header() {
   const [selectedOption, setSelectedOption] = useState("");
   const [isOpen, setIsOpen] = useState(false);
   const options = [
-    { value: "Pembroke Pines", label: "Pembroke Pines" },
-    { value: "Orange", label: "Orange" },
-    { value: "Austin", label: "Austin" },
-    { value: "Pembroke Pines", label: "Pembroke Pines" },
-    { value: "Toledo", label: "Toledo" },
-    { value: "Fairfield", label: "Fairfield" },
-    { value: "Naperville", label: "Naperville" },
+    { value: "India", label: "India" },
+    { value: "Sweden", label: "Sweden" },
   ];
 
   const handleChangeDropDown1 = (option) => {
@@ -128,7 +123,7 @@ function Header() {
               </li>
               <li class="nav-item"></li>
             </ul>
-            <form class="d-flex" role="search">
+            <form class="d-flex mobile_wrapper_header" role="search">
               <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll">
                 <li class="nav-item dropdown">
                   <div className="mobile_phone_container">
