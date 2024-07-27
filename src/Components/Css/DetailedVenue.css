@@ -488,3 +488,10 @@
     background: var(--light-black);
     margin-left: -15px;
 }
+
+.square {
+    border-top-right-radius: 5px !important;
+    border-bottom-right-radius: 5px !important;
+    background: var(--light-black);
+    padding: 0.2rem;
+}

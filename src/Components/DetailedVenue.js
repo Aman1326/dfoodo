@@ -507,7 +507,7 @@ const DetailedVenue = () => {
                           <img src={rightArrowWhite} alt="rightArrowWhite" />
                           <img src={preview} alt="preview" />
                         </span>
-                        <div class="rhombus"></div>
+                        <div class="square"></div>
                       </div>
                     )}
                   </div>
