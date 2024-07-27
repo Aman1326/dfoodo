@@ -225,6 +225,60 @@ const DetailedVenue = () => {
     },
   ];
 
+  const time_discounts = [
+    {
+      time: [
+        "17:30",
+        "18:00",
+        "18:30",
+        "19:00",
+        "19:00",
+        "19:00",
+        "19:00",
+        "19:00",
+        ,
+        "19:00",
+        ,
+        "19:00",
+        ,
+        "19:00",
+        ,
+        "19:00",
+        ,
+        "19:00",
+        ,
+        "19:00",
+        "19:00",
+      ],
+      time_discount: [
+        "20%",
+        "15%",
+        "23%",
+        "8%",
+        "8%",
+        "8%",
+        "8%",
+        "8%",
+        "8%",
+        "8%",
+        ,
+        "8%",
+        ,
+        "8%",
+        ,
+        "8%",
+        ,
+        "8%",
+      ],
+    },
+  ];
+  // Map the arrays into a single array of objects
+  const mappedTimeDiscounts = time_discounts[0].time.map((time, index) => {
+    return {
+      time: time || "N/A",
+      discount: time_discounts[0].time_discount[index] || "N/A",
+    };
+  });
   const [eventSelected, setEventSelected] = useState(null);
 
   const handleSelection = (selectedValue) => {
@@ -403,7 +457,7 @@ const DetailedVenue = () => {
               </div>
 
               <div
-                className=" col-lg-4"
+                className="col-lg-4"
                 style={{
                   position: "fixed",
                   top: "17%",
@@ -442,72 +496,76 @@ const DetailedVenue = () => {
                   </div>
                   <div className="calenday_modelScreen">
                     {step === 0 && (
-                      <div className="eventSelect">
-                        <div className="row">
-                          {events.map((event, index) => (
-                            <div key={index} className="col-4">
-                              <div
-                                className="eventBox"
-                                onClick={() => {
-                                  setSelectedCardValue(event.label);
-                                  setStep(1);
-                                }}
-                              >
-                                <img src={event.image} alt={event.label} />
-                                <p>{event.label}</p>
-                              </div>
-                            </div>
-                          ))}
-                        </div>
-                        <div className="eventDropdown">
-                          <Dropdown
-                            value={eventSelected}
-                            onChange={(e) => {
-                              handleSelection(e.value);
-                              setStep(2);
-                            }}
-                            options={eventData}
-                            optionLabel="label"
-                            placeholder="Others"
-                            className="ocsnDopdown"
-                          />
-                        </div>
-                      </div>
-                    )}
-                    {step === 1 && (
                       <div className="calenderDiv">
                         <LocalizationProvider dateAdapter={AdapterDayjs}>
                           <DateCalendar
                             value={value}
                             onChange={() => {
                               handleDateSelection();
-                              setStep(2);
+                              setStep(1);
                             }}
                             minDate={dayjs()} // Optional: Set minimum selectable date
                           />
                         </LocalizationProvider>
                       </div>
                     )}
-                    {step === 2 && (
-                      <div className="selectTime">
-                        <div className="row">
-                          {timePeriods.map((period, index) => (
-                            <div className="col-6" key={index}>
-                              <div
-                                className="timeBox"
-                                onClick={() => {
-                                  setSelectedTime(period.label);
-                                  setStep(3);
-                                }}
-                              >
-                                <h6>{period.label}</h6>
-                                <p>
-                                  {period.startTime} to {period.endTime}
-                                </p>
+                    {step === 1 && (
+                      <div>
+                        <h6 className="calendar_modal_heading">Booking Time</h6>
+                        <div className="">
+                          <span className="venuePage_venue_capacity_wrapper">
+                            {mappedTimeDiscounts.length > 0 && (
+                              <div className="time_discount_container_detailedVenue">
+                                {mappedTimeDiscounts.map((item, idx) => (
+                                  <div
+                                    key={idx}
+                                    className="time_discount_section"
+                                    onClick={() => setStep(2)}
+                                  >
+                                    <div className="time_section">
+                                      <p>{item.time}</p>
+                                    </div>
+                                    <div className="discount_section">
+                                      <p>-{item.discount}</p>
+                                    </div>
+                                  </div>
+                                ))}
                               </div>
-                            </div>
-                          ))}
+                            )}
+                          </span>
                         </div>
+                      </div>
+                    )}
+                    {step === 2 && (
+                      <div className="wrapper_calendar_modal">
+                        <h6 className="calendar_modal_heading">
+                          Number of Guests
+                        </h6>
+                        <div className="guests_calendar_modal">
+                          <p>2</p>
+                          <p>4</p>
+                          <p>6</p>
+                          <p>8</p>
+                        </div>
+                        <input
+                          type="number"
+                          placeholder="Enter no of guests.."
+                        />
+                        <h6 className="calendar_modal_heading">
+                          Number of Children
+                        </h6>
+                        <input
+                          type="number"
+                          placeholder="Enter no of children.."
+                        />
+
+                        <h6 className="calendar_modal_heading">
+                          Number of Pets
+                        </h6>
+                        <input
+                          type="number"
+                          placeholder="Enter no of children.."
+                        />
                       </div>
                     )}
                     {step === 3 && (

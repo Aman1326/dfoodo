@@ -434,7 +434,7 @@ const Venue = () => {
                                       </div>
                                     ))}
                                   </span>
-                                  <span className="venuePage_venue_capacity_wrapper">
+                                  <span className="venuePage_venue_capacity_wrapper ">
                                     {venue.time &&
                                       venue.time_discount &&
                                       venue.time.length > 0 &&

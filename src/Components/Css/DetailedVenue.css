@@ -99,7 +99,7 @@
 .calenday_modelContainer {
     box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
     border-radius: 10px;
-    width: fit-content;
+    width: 100%;
 }
 
 .calendy_modelHead {
@@ -118,7 +118,9 @@
     display: flex;
     justify-content: center;
     padding: 0rem 0.5rem;
-    margin: auto;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 0.2rem;
     border-radius: 25px;
 }
 
@@ -150,25 +152,10 @@
 }
 
 .calenday_modelScreen {
-    height: 400px;
-    padding: 1rem 1.5rem;
-    display: flex;
-    align-items: center;
-}
-
-.eventBox {
-    cursor: pointer;
-}
-
-.eventBox img {
+    height: 380px;
     width: 100%;
-}
-
-.eventBox p {
-    color: var(--text-grey);
-    font-size: 14px;
-    text-align: center;
-    margin-top: 0.3rem;
+    padding: 1rem 1rem;
+    display: flex;
 }
 
 .ocsnDopdown {
@@ -203,36 +190,6 @@
 
 .css-1wy8uaa-MuiButtonBase-root-MuiPickersDay-root.Mui-selected {
     background-color: var(--text-grey) !important;
-}
-
-.timeBox {
-    border: 1px solid var(--primary-color);
-    border-radius: 7px;
-    padding: 0.5rem 1rem;
-    margin-bottom: 1rem;
-    cursor: pointer;
-    min-height: 60px;
-}
-
-.timeBox:hover {
-    background-color: var(--primary-color);
-    color: var(--white);
-}
-
-.timeBox:hover p {
-    color: var(--white);
-}
-
-.timeBox h6 {
-    font-size: 15px;
-    margin: 0;
-    margin-bottom: 0.3rem;
-}
-
-.timeBox p {
-    color: var(--text-grey);
-    font-size: 12px;
-    margin: 0;
 }
 
 .personBox {
@@ -415,4 +372,58 @@
 .want_more_section h6,
 .want_more_section p {
     margin: 0;
+}
+
+.time_discount_container_detailedVenue {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 0.5rem !important;
+    cursor: pointer;
+    justify-content: center;
+
+    .discount_section p:hover {
+        background-color: var(--secondary-black);
+        color: var(--white);
+    }
+}
+
+.calendar_modal_heading {
+    display: flex;
+    justify-content: center;
+}
+
+.guests_calendar_modal {
+    display: flex;
+    gap: 0.3rem;
+    justify-content: center;
+    margin-bottom: 1rem;
+
+    p {
+        border: 1px solid grey;
+        padding: 0.5rem 1.5rem;
+        margin: 0;
+        font-family: "Roboto";
+        font-size: 14px;
+        border-radius: 5px;
+    }
+
+    p:hover {
+        background-color: var(--light-pink);
+        cursor: pointer;
+    }
+}
+
+.wrapper_calendar_modal {
+    width: 100%;
+    text-align: left;
+
+    input {
+        width: 100%;
+        box-shadow: none;
+        outline: none;
+        padding: 0.4rem 1rem;
+        border-radius: 5px;
+        border: 1px solid grey;
+        margin-bottom: 0.5rem;
+    }
 }
