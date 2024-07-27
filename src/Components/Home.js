@@ -183,7 +183,7 @@ function Home() {
               </div>
               <div className="popularVenues">
                 <div className="venue_cards_container row mt-1">
-                  {/* {restaurantByCountry &&
+                  {restaurantByCountry &&
                     restaurantByCountry.length > 0 &&
                     restaurantByCountry.map((venue, index) => (
                       <div className="col-lg-3 col-md-4 col-sm-6" key={index}>
@@ -207,11 +207,13 @@ function Home() {
                             <div className="venueDetailCOntainer">
                               <div className="venue_category_div">
                                 <span className="venue_category_titles">
-                                  {venue.Venue.map((category, idx) => (
-                                    <React.Fragment key={idx}>
-                                      <p>{category}</p>
-                                    </React.Fragment>
-                                  ))}
+                                  {venue.Venue &&
+                                    venue.Venue.length > 0 &&
+                                    venue.Venue.map((category, idx) => (
+                                      <React.Fragment key={idx}>
+                                        <p>{category}</p>
+                                      </React.Fragment>
+                                    ))}
                                 </span>
                                 <div className="rating_greenDiv">
                                   <p>{venue.Rating}</p>
@@ -234,7 +236,7 @@ function Home() {
                           </Link>
                         </div>
                       </div>
-                    ))} */}
+                    ))}
                 </div>
               </div>
             </div>
