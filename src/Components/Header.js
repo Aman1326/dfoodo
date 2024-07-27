@@ -47,15 +47,6 @@ function Header() {
 
   const [selectedOption, setSelectedOption] = useState("");
   const [isOpen, setIsOpen] = useState(false);
-  const options = [
-    { value: "India", label: "India" },
-    { value: "Sweden", label: "Sweden" },
-  ];
-
-  const handleChangeDropDown1 = (option) => {
-    setSelectedOption(option.value);
-    setIsOpen(false);
-  };
 
   //download app qr modal
   const [showModal, setShowModal] = useState(false);
@@ -102,22 +93,9 @@ function Header() {
               <li class="nav-item">
                 {locationn.pathname !== "/onBoarding" && (
                   <span className="dropdown1">
-                    <label htmlFor="options">
+                    <label>
                       <img src={location} alt="location" />
                     </label>
-                    <select
-                      id="options"
-                      value={selectedOption}
-                      onChange={handleChangeDropDown1}
-                    >
-                      {" "}
-                      <option value="" disabled hidden></option>
-                      {options.map((option) => (
-                        <option key={option.value} value={option.value}>
-                          {option.label}
-                        </option>
-                      ))}
-                    </select>
                   </span>
                 )}
               </li>

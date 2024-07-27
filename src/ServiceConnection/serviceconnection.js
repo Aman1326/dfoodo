@@ -9,7 +9,7 @@ const retrievedAdminId = retrieveData("admin_id");
 const get_blog_data_website =
   local_server_link_react + "get_blog_data_website/";
 const blog_details_website = local_server_link_react + "blog_details_website/";
-const get_all_faq = local_server_link_react + "get_all_faq/";
+const get_all_faq_website = local_server_link_react + "get_all_faq_website/";
 const save_restaurantOwnerdetails =
   local_server_link_react + "save_restaurantOwnerdetails/";
 const update_profile = local_server_link_react + "update_profile/";
@@ -37,7 +37,7 @@ export {
   server_post_data,
   get_blog_data_website,
   blog_details_website,
-  get_all_faq,
+  get_all_faq_website,
   save_restaurantOwnerdetails,
   update_profile,
   get_landingpage_webapp,

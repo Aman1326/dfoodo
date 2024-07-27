@@ -241,24 +241,11 @@
     text-decoration: underline;
 }
 
-.dropdown1 select {
-    border: none;
-    background-color: transparent;
-    width: 1rem;
-    outline: none;
-}
-
-.dropdown1 select option {
-    font-family: "Roboto";
-    font-size: 14px;
-    font-weight: 400;
-    color: var(--secondary-black);
-}
-
-
 .dropdown1 {
-    display: flex;
-    align-items: center;
+    img {
+        cursor: pointer;
+        width: 16px;
+    }
 }
 
 .phoneApp_modal_register_my_venue {

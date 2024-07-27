@@ -141,7 +141,6 @@
     width: 90%;
     margin: auto;
     border-radius: 9px;
-
     text-align: center;
 }
 
@@ -198,63 +197,16 @@
     justify-content: center;
 }
 
-.personInfo {
-    width: 100%;
-}
-
-.border0 {
-    border-radius: 0 !important;
-}
-
-.personInfo .react-international-phone-input-container .react-international-phone-country-selector-button,
-.personInfo .react-international-phone-input-container .react-international-phone-input {
-    border-radius: 0 !important;
-}
-
-.personInfo .PhoneloginButton {
-    width: 100%;
-    border-radius: 0;
-    height: 40px;
-    margin-top: 1.5rem;
-}
-
-.sentOtp {
-    color: var(--text-grey);
-    font-size: 14px;
-}
-
-.sentOtp span {
-    color: var(--primary-color);
-}
-
-.varifuy p {
-    margin-bottom: 1.5rem;
-}
-
-.varifuy input {
-    margin-bottom: 1.5rem;
-}
-
-.thankYou img {
-    width: 3rem;
-    margin-bottom: 1rem;
-}
-
-.thankYou {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-}
-
 .steps {
-    background-color: var(--secondary-black);
+    background-color: var(--light-black);
     display: flex;
+    gap: 1.2rem;
     width: fit-content;
     font-size: 14px;
-    padding: 0.2rem 0.9rem;
+    padding: 0.2rem 1rem;
     flex-direction: row;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
 
     img {
         width: 20px;
@@ -389,7 +341,7 @@
 
 .calendar_modal_heading {
     display: flex;
-    justify-content: center;
+    justify-content: left;
 }
 
 .guests_calendar_modal {
@@ -426,4 +378,113 @@
         border: 1px solid grey;
         margin-bottom: 0.5rem;
     }
+
+    a {
+        margin-top: 2rem;
+
+        display: flex;
+        justify-content: center !important;
+        background-color: var(--primary-color);
+        text-decoration: none;
+        color: var(--white);
+        padding: 0.4rem 1rem;
+        border-radius: 5px;
+
+
+    }
+}
+
+.details_step_calendar_modal {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    color: var(--text-grey);
+
+    span {
+        display: flex;
+        justify-content: left;
+        text-align: left;
+        height: fit-content;
+        align-items: center;
+    }
+
+    input {
+        background: #EDEDED;
+        border: none;
+        padding: 0.4rem 1rem;
+        margin-top: 0.5rem;
+    }
+
+    h6 {
+        margin: 0;
+        padding-right: 1rem;
+    }
+
+    p {
+        margin: 0;
+    }
+
+    label {
+        margin-left: 1rem;
+        font-family: "Roboto";
+        font-size: 14px;
+        align-items: center;
+    }
+}
+
+.checkBoxUnique {
+    width: fit-content !important;
+}
+
+.final_step_wrapper {
+    background: #EDEBEB;
+
+    margin: auto;
+    text-align: center;
+
+    p {
+        background-color: var(--white);
+        color: var(--text-black);
+        padding: 0.4rem 1.5rem;
+        border-radius: 5px;
+    }
+
+    span {
+        margin: auto;
+    }
+}
+
+.calenday_modelScreen.greyBackground {
+    background: #EDEBEB;
+    display: flex;
+
+}
+
+.confirmed_booking_span {
+    margin-top: auto;
+    margin-bottom: auto;
+
+    h6 {
+        color: var(--green);
+        font-weight: 600;
+    }
+
+    desc {
+        font-size: 14px;
+        font-weight: 500;
+    }
+
+}
+
+.css-23p0if-MuiButtonBase-root-MuiPickersDay-root.Mui-selected {
+    background-color: var(--light-black) !important;
+}
+
+.rhombus {
+    height: 30px;
+    /* adjust to control the size  */
+    aspect-ratio: 1;
+    clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%);
+    background: var(--light-black);
+    margin-left: -15px;
 }

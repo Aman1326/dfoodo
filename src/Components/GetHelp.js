@@ -13,7 +13,7 @@ import { Link } from "react-router-dom";
 
 import {
   server_post_data,
-  get_all_faq,
+  get_all_faq_website,
   handleError,
 } from "../ServiceConnection/serviceconnection.js";
 
@@ -55,12 +55,13 @@ const GetHelp = () => {
   const master_data_get = async () => {
     const fd = new FormData();
 
-    await server_post_data(get_all_faq, fd)
+    await server_post_data(get_all_faq_website, fd)
       .then((Response) => {
         if (Response.data.error) {
           console.log(Response.data.message);
         } else {
           SetFaq(Response.data.message.data);
+          console.log(Response.data.message);
           if (Response.data.message.data_faq_webite.length > 0) {
             SetSocialLinks(Response.data.message.data_faq_webite[0]);
           }

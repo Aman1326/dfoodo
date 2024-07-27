@@ -36,6 +36,7 @@ import rightArrowIcon from "../Assets/rightArrowIcon.svg";
 
 import personCalendar from "../Assets/personSvg_detailedVenue.svg";
 import calendarfrom from "../Assets/calendar_detailedVenue.svg";
+import preview from "../Assets/preview.svg";
 import rightArrow from "../Assets/rightArrow.svg";
 
 import locationsvg from "../Assets/locationSvg.svg";
@@ -204,27 +205,6 @@ const DetailedVenue = () => {
     },
   ];
 
-  const numberRanges = [
-    {
-      label: "Less than 100",
-    },
-    {
-      label: "100-200",
-    },
-    {
-      label: "200-300",
-    },
-    {
-      label: "300-400",
-    },
-    {
-      label: "400-500",
-    },
-    {
-      label: "Above 500",
-    },
-  ];
-
   const time_discounts = [
     {
       time: [
@@ -249,6 +229,7 @@ const DetailedVenue = () => {
         ,
         "19:00",
         "19:00",
+        "19:00",
       ],
       time_discount: [
         "20%",
@@ -268,6 +249,7 @@ const DetailedVenue = () => {
         ,
         "8%",
         ,
+        "8%",
         "8%",
       ],
     },
@@ -318,7 +300,7 @@ const DetailedVenue = () => {
   const [selectedDate, setSelectedDate] = useState(dayjs());
   const [selectedTime, setSelectedTime] = useState(null);
   const [selectedGuestCount, setSelectedGuestCount] = useState(null);
-
+  const greyBackgroundClass = step === 4 ? "greyBackground" : "";
   return (
     <>
       <div className="detailed_venue_wrapper">
@@ -471,30 +453,67 @@ const DetailedVenue = () => {
                       <h4>Find a table</h4>
                       <p>Book for free</p>
                     </div>
-                    <span className="todays_booking">
-                      🔥 Already 8 bookings today
-                    </span>
+                    {step !== 4 && (
+                      <span className="todays_booking">
+                        🔥 Already 8 bookings today
+                      </span>
+                    )}
                   </div>
                   <div className="calenday_modelSubHead">
                     {step === 0 && (
-                      <span className="steps">
-                        <img src={calendarfrom} alt="calendarfrom" />
-                        <p>Date</p>
-                      </span>
+                      <div className="d-flex">
+                        <span className="steps firstStep">
+                          <span className="d-flex">
+                            <img src={calendarfrom} alt="calendarfrom" />
+                            <p>Date</p>
+                          </span>
+                        </span>
+                        <div class="rhombus"></div>
+                      </div>
                     )}
-                    {step === 1 && <p>Selection Date</p>}
-                    {step === 2 && <p>What Time is your {selectedCardValue}</p>}
+                    {step === 1 && (
+                      <div className="d-flex">
+                        <span className="steps">
+                          <img src={calendarfrom} alt="calendarfrom" />
+                          <p>Date</p>
+                          <img src={rightArrowWhite} alt="rightArrowWhite" />
+                          <img src={timerClock} alt="timerClock" />
+                        </span>
+                        <div class="rhombus"></div>
+                      </div>
+                    )}
+                    {step === 2 && (
+                      <div className="d-flex">
+                        <span className="steps">
+                          <img src={calendarfrom} alt="calendarfrom" />
+                          <p>Date</p>
+                          <img src={rightArrowWhite} alt="rightArrowWhite" />
+                          <img src={timerClock} alt="timerClock" />
+                          <img src={rightArrowWhite} alt="rightArrowWhite" />
+                          <img src={personCalendar} alt="personCalendar" />
+                        </span>
+                        <div class="rhombus"></div>
+                      </div>
+                    )}
                     {step === 3 && (
-                      <p>
-                        How many guests do you expect for your{" "}
-                        {selectedCardValue}
-                      </p>
-                    )}
-                    {step === 4 && (
-                      <p>Please Enter Your Details to Get A Quote</p>
+                      <div className="d-flex">
+                        <span className="steps">
+                          <img src={calendarfrom} alt="calendarfrom" />
+                          <p>Date</p>
+                          <img src={rightArrowWhite} alt="rightArrowWhite" />
+                          <img src={timerClock} alt="timerClock" />
+                          <img src={rightArrowWhite} alt="rightArrowWhite" />
+                          <img src={personCalendar} alt="personCalendar" />
+                          <img src={rightArrowWhite} alt="rightArrowWhite" />
+                          <img src={preview} alt="preview" />
+                        </span>
+                        <div class="rhombus"></div>
+                      </div>
                     )}
                   </div>
-                  <div className="calenday_modelScreen">
+                  <div
+                    className={`calenday_modelScreen ${greyBackgroundClass}`}
+                  >
                     {step === 0 && (
                       <div className="calenderDiv">
                         <LocalizationProvider dateAdapter={AdapterDayjs}>
@@ -546,153 +565,87 @@ const DetailedVenue = () => {
                           <p>4</p>
                           <p>6</p>
                           <p>8</p>
+                          <p>10</p>
                         </div>
                         <input
-                          type="number"
+                          type="phone"
                           placeholder="Enter no of guests.."
                         />
                         <h6 className="calendar_modal_heading">
                           Number of Children
                         </h6>
                         <input
-                          type="number"
+                          type="phone"
                           placeholder="Enter no of children.."
                         />
 
                         <h6 className="calendar_modal_heading">
                           Number of Pets
                         </h6>
-                        <input
-                          type="number"
-                          placeholder="Enter no of children.."
-                        />
+                        <input type="phone" placeholder="Enter no of pets.." />
+
+                        <span>
+                          <Link onClick={() => setStep(3)}>Next</Link>
+                        </span>
                       </div>
                     )}
                     {step === 3 && (
-                      <div className="selectTime">
-                        <div className="row">
-                          {numberRanges.map((period, index) => (
-                            <div className="col-6" key={index}>
-                              <div
-                                className="timeBox personBox"
-                                onClick={() => {
-                                  setSelectedGuestCount(period.label);
-                                  setStep(4);
-                                }}
-                              >
-                                <h6>{period.label}</h6>
-                              </div>
-                            </div>
-                          ))}
+                      <div className="wrapper_calendar_modal">
+                        <h6 className="calendar_modal_heading">
+                          Review Details
+                        </h6>
+                        <div className="details_step_calendar_modal">
+                          <span className="row">
+                            <h6 className="col-4">Date: </h6>
+                            <p className="col-8">17.Nov.2024 | 17:50</p>
+                          </span>
+                          <span className="row">
+                            <h6 className="col-4">Person: </h6>
+                            <p className="col-8">02</p>
+                          </span>
+                          <span className="row">
+                            <h6 className="col-4">Children: </h6>
+                            <p className="col-8">00</p>
+                          </span>
+                          <span className="row">
+                            <h6 className="col-4">Pets: </h6>
+                            <p className="col-8">00</p>
+                          </span>
+                          <span className="row">
+                            <h6 className="col-4">Discount: </h6>
+                            <p className="col-8">20%</p>
+                          </span>
+
+                          <input
+                            type="text"
+                            placeholder="Add Instruction/Comment"
+                          />
+
+                          <span>
+                            {" "}
+                            <input type="checkbox" className="checkBoxUnique" />
+                            <label>
+                              I agree to the Terms & Conditions & Privacy Policy
+                            </label>
+                          </span>
+                          <Link onClick={() => setStep(4)}>Book Now</Link>
                         </div>
                       </div>
                     )}
                     {step === 4 && (
-                      <div className="personInfo">
-                        {!otpSent ? (
-                          <>
-                            <input
-                              type="name"
-                              id="name"
-                              name="name"
-                              placeholder="Enter Your Name"
-                              className="mt-2 form-control border0"
-                              value={userName}
-                              onChange={(e) => setUserName(e.target.value)}
-                            />
-                            <PhoneInput
-                              id="phone"
-                              name="phone"
-                              placeholder="Phone Number"
-                              className="mt-2 border0"
-                              defaultCountry="in"
-                              value={userNumber}
-                              onChange={(phone) => setUserNumber(phone)}
-                            />
-                            <input
-                              type="email"
-                              id="email"
-                              name="email"
-                              placeholder="Enter Email ID "
-                              className="mt-2 form-control border0"
-                              value={userEmail}
-                              onChange={(e) => setUserEmail(e.target.value)}
-                            />
-                          </>
-                        ) : (
-                          <div className="varifuy">
-                            <h6>Verify It’s you</h6>
-                            <p className="sentOtp">
-                              we’ve Sent a code to <span>{userNumber}</span>.
-                              Enter the code to continue
-                            </p>
-                            <input
-                              type="text"
-                              id="otp"
-                              name="otp"
-                              placeholder="Enter verification code"
-                              className="mt-2 form-control border0"
-                              value={otp}
-                              onChange={(e) => setOtp(e.target.value)}
-                            />
-                          </div>
-                        )}
-                        {!otpSent ? (
-                          <button
-                            className="PhoneloginButton"
-                            onClick={handleLoginSubmit}
-                            style={{
-                              backgroundColor:
-                                (isPhoneLogin && !isPhoneNumberValid) ||
-                                (!isPhoneLogin && !isEmailValid)
-                                  ? "grey"
-                                  : "",
-                              borderColor:
-                                (isPhoneLogin && !isPhoneNumberValid) ||
-                                (!isPhoneLogin && !isEmailValid)
-                                  ? "grey"
-                                  : "",
-                              cursor:
-                                (isPhoneLogin && !isPhoneNumberValid) ||
-                                (!isPhoneLogin && !isEmailValid)
-                                  ? "not-allowed"
-                                  : "pointer",
-                            }}
-                            disabled={
-                              (isPhoneLogin && !isPhoneNumberValid) ||
-                              (!isPhoneLogin && !isEmailValid)
-                            }
-                          >
-                            Continue
-                          </button>
-                        ) : (
-                          <button
-                            className="PhoneloginButton"
-                            onClick={() => {
-                              handleOtpSubmit();
-                              handleShowRegistrationModal();
-                              setStep(5);
-                            }}
-                            style={{
-                              backgroundColor: otp.length < 4 ? "grey" : "",
-                              borderColor: otp.length < 4 ? "grey" : "",
-                              cursor:
-                                otp.length < 4 ? "not-allowed" : "pointer",
-                            }}
-                            disabled={otp.length < 4}
-                          >
-                            Confirm OTP
-                          </button>
-                        )}
-                      </div>
-                    )}
-                    {step === 5 && (
-                      <div className="thankYou">
-                        <img src={Successs} alt="success-icon" />
-                        <h6>
-                          Thank your for your interest our Team will connect to
-                          you Soon
-                        </h6>
+                      <div className="final_step_wrapper">
+                        <h6>Reservation </h6>
+                        <span>
+                          <p>17 No, 2024 • 7 Person • 9.00 PM</p>
+                        </span>
+
+                        <div className="confirmed_booking_span">
+                          <h6>Booking Confirmed! </h6>
+                          <desc>
+                            Your reservation is now secured. Thank you for
+                            choosing us!
+                          </desc>
+                        </div>
                       </div>
                     )}
                   </div>
