@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./Css/DetailedVenue.css";
 import Header from "./Header";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import img1 from "../Assets/imageGallery3.png";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
@@ -46,7 +46,20 @@ import avgpriceIcon from "../Assets/averagePriceDetailedVenue.svg";
 import Menu from "./Menu";
 import rightArrowWhite from "../Assets/rightArrow_white.svg";
 import view_photos from "../Assets/view_photos.svg";
+import {
+  server_post_data,
+  get_restropage_webapp,
+  imageApi,
+} from "../ServiceConnection/serviceconnection.js";
+
+let login_flag_res = "0";
+let customer_id = "1";
+let customer_name = "0";
+let customer_mobile_no = "0";
+let customer_email = "0";
 const DetailedVenue = () => {
+  const location = useLocation();
+  const currentUrl = location.pathname.substring(1);
   const [showLoginModal, setShowLoginModal] = useState(false);
   const [showEmailLoginModal, setShowEmailLoginModal] = useState(false);
   const [isPhoneLogin, setIsPhoneLogin] = useState(true); // State to toggle between phone and email
@@ -54,6 +67,7 @@ const DetailedVenue = () => {
   const [userEmail, setUserEmail] = useState("");
   const [userName, setUserName] = useState("");
   const [searchShow, setsearchShow] = useState(false);
+  const [detail, setDetail] = useState(false);
   const [thankYouOpen, setthankYouOpen] = useState(false);
   const [otpSent, setOtpSent] = useState(false); // State to manage OTP view
   const [otp, setOtp] = useState(""); // State to manage the entered OTP
@@ -75,15 +89,15 @@ const DetailedVenue = () => {
       setIsReadMore(!isReadMore);
     };
 
-    const text =
-      "Airport City Hotel, Jessore Road, Kolkata, is a perfect venue to host your social and corporate events. It is located off Jessore Road, within the locale of Khalisha Kota. It is also close to the Airport City Phase I, which is well-known among the locals How to Reach Airport City Hotel Placed off Jessore Road, Kolkata Airport Hotel is 12 minutes away from Durganagar Railway Station, 10 minutes away from Noapara Metro Station, and about 25 minutes away from Netaji Subhash Chandra Bose International Airport. Owing to the excellent connectivity of the hotel, it is easily accessible for everyone.";
-
-    const maxLength = 500; // Set the number of characters for the truncated text
+    const text = detail.restaurant_about;
+    const maxLength = 500;
 
     return (
       <div className="read-more-section ">
         <p>
-          {isReadMore ? `${text.slice(0, maxLength)}...` : text}
+          {isReadMore
+            ? `${detail.restaurant_about && text.slice(0, maxLength)}...`
+            : text}
           <span
             onClick={toggleReadMore}
             className="read-more-toggle"
@@ -265,6 +279,30 @@ const DetailedVenue = () => {
   const [selectedTime, setSelectedTime] = useState(null);
   const [selectedGuestCount, setSelectedGuestCount] = useState(null);
 
+  const master_data_get = async () => {
+    // setshowLoaderAdmin(true);
+    const fd = new FormData();
+    fd.append("current_url", "/" + currentUrl);
+    fd.append("restuarant_id", customer_id);
+    await server_post_data(get_restropage_webapp, fd)
+      .then((Response) => {
+        if (Response.data.error) {
+          // handleError(Response.data.message);
+        } else {
+          console.log(Response.data.message);
+          setDetail(Response.data.message.restro);
+        }
+        // setshowLoaderAdmin(false);
+      })
+      .catch((error) => {
+        // setshowLoaderAdmin(false);
+      });
+  };
+
+  useEffect(() => {
+    master_data_get();
+  }, []);
+
   return (
     <>
       <div className="detailed_venue_wrapper">
@@ -342,7 +380,7 @@ const DetailedVenue = () => {
                   }
                 >
                   <div>
-                    <img src={img1} alt="img1" />
+                    <img src={imageApi + detail.restaurant_image} alt="img1" />
                   </div>
                   <div>
                     <img src={img1} alt="img2" />
@@ -363,25 +401,27 @@ const DetailedVenue = () => {
                 <div className="black_section_carousel">
                   <span className="first_row_black_section_carousel">
                     <div>
-                      <h6>L Imprative</h6>
-                      <p>R City Mall, Ghatkopar West</p>
+                      <h6>{detail.restaurant_name}</h6>
+                      <p>{detail.restaurant_full_adrress}</p>
                     </div>
                     <div className="first_row_black_section_carousel">
                       <p>1.16 km</p>
                       <img src={locationsvg} alt="location" />
                     </div>
                   </span>
-                  <span className="first_row_black_section_carousel">
+                  <span className="first_row_black_section_carousel align-items-center">
                     <div className="french_text">
                       <h6>French</h6>
                     </div>
-                    <div className="first_row_black_section_carousel">
+                    <div className="first_row_black_section_carousel align-items-center">
                       <span className="d-flex reviews_black_section">
                         <img src={redStar} alt="redStar" />
-                        <p>4.3</p>
+                        <p className="m-0">{detail.total_service_rating_sum}</p>
                       </span>
                       <span>
-                        <p>149 reviews</p>
+                        <p className="m-0">
+                          {detail.review && detail.review.length} reviews
+                        </p>
                       </span>
                     </div>
                   </span>
@@ -678,35 +718,49 @@ const DetailedVenue = () => {
                 <div className="tab-content col-lg-8">
                   {activeTab === "about" && (
                     <div className="about_venue_tabContent">
-                      <h2>Airport City Hotel, Jessore Road, Kolkata</h2>
-                      <p>
-                        Airport City Hotel, 259, Jessore Rd, Khalisha Kota,
-                        Birati, Kolkata, West Bengal 700081 
-                      </p>
+                      <h2>{detail.restaurant_name}</h2>
+                      <p>{detail.restaurant_full_adrress}</p>
                       <h6>About this venue</h6>
                       <ReadMore />
                       <div className="venue_features_section row">
-                        {features_venue.map((features, idx) => (
-                          <div
-                            className="col-lg-3 venue_features_wrapper"
-                            key={idx}
-                          >
-                            <img
-                              src={features.venue_feature_image}
-                              alt="{features.venue_feature_name}"
-                            />
-                            <p className="venue_feature_name">
-                              {features.venue_feature_name}
-                            </p>
-                          </div>
-                        ))}
+                        {detail.amenities &&
+                          detail.amenities.length > 0 &&
+                          detail.amenities.map((features, idx) => (
+                            <div
+                              className="col-lg-3 venue_features_wrapper"
+                              key={idx}
+                            >
+                              <img
+                                src={imageApi + features.image}
+                                alt="{features.venue_feature_name}"
+                              />
+                              <p className="venue_feature_name">
+                                {features.amenities_name}
+                              </p>
+                            </div>
+                          ))}
                       </div>
                       <section className="Reviews_section">
-                        <Menu />
+                        <div className="menu_wrapper">
+                          <div className="menu_wrapper_heading mt-2 mb-2">
+                            <h3>Restaurant Menu</h3>
+                          </div>
+                          <div className="menu_image_wrapper ">
+                            {detail.menuimages &&
+                              detail.menuimages.length > 0 &&
+                              detail.menuimages.map((menu_img, idx) => (
+                                <img
+                                  key={idx}
+                                  src={imageApi + menu_img.image_name}
+                                  alt="menu_img"
+                                />
+                              ))}
+                          </div>
+                        </div>
                         <Reviews />
                         <div className="see_more_reviews">
                           <Link onClick={() => setActiveTab("reviews")}>
-                            See more reviews (2083)
+                            See more reviews ({detail.review.length})
                             <img src={right} alt="right" />
                           </Link>
                         </div>

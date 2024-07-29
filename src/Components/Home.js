@@ -26,9 +26,9 @@ import Footer from "./Footer";
 import {
   server_post_data,
   get_landingpage_webapp,
-  APL_LINK,
+  imageApi,
 } from "../ServiceConnection/serviceconnection.js";
-let mohsinvariable;
+import { handleLinkClick } from "../CommonJquery/CommonJquery.js";
 function Home() {
   const [likedVenues, setLikedVenues] = useState({});
   const [SEOloop, setSEOloop] = useState([]);
@@ -37,6 +37,7 @@ function Home() {
   const [blogs, Setblogs] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [country, setCountry] = useState("");
+  const [city, setCity] = useState("");
   const [restaurantByCountry, setRestaurantByCountry] = useState([]);
   const [restaurantByCity, setRestaurantByCity] = useState([]);
 
@@ -59,22 +60,36 @@ function Home() {
         if (Response.data.error) {
           // handleError(Response.data.message.title_name);
         } else {
+          console.log(Response.data.message);
           SetVenueData(Response.data.message.venue_active_data);
           Settestimonials(Response.data.message.testimonial_active_data);
           Setblogs(Response.data.message.blog_active_data);
           setSEOloop(Response.data.message.seo_loop);
           setCollection(Response.data.message.category_active_data);
           setCountry(Response.data.message.countries_name);
+          setCity(Response.data.message.cities_name);
           setRestaurantByCountry(Response.data.message.restro_country);
           setRestaurantByCity(Response.data.message.restro_city);
-          mohsinvariable = Response.data.message.restro_country;
-          console.log(Response.data.message.restro_country);
+          console.log(Response.data.message.restro_city);
         }
       })
       .catch((error) => {});
   };
 
-  console.log(restaurantByCountry);
+  const match_and_return_seo_link = (v_id) => {
+    let data_seo_link_final = "/restro/restro_detail/" + v_id;
+    let data_seo_link = data_seo_link_final;
+    if (SEOloop) {
+      const matchedItem = SEOloop.find((data) => {
+        return data_seo_link === data.call_function_name;
+      });
+
+      if (matchedItem) {
+        data_seo_link_final = matchedItem.pretty_function_name;
+      }
+    }
+    return data_seo_link_final;
+  };
 
   const handlePrevClick = () => {
     setCurrentIndex((prevIndex) =>
@@ -108,10 +123,9 @@ function Home() {
 
   const indexOfLastItem = currentPaginationPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  // const currentPaginationItems =
-  //   restaurantByCountry &&
-  //   restaurantByCountry.slice(indexOfFirstItem, indexOfLastItem);
-  // console.log(currentPaginationItems);
+  const currentPaginationItems =
+    restaurantByCountry &&
+    restaurantByCountry.slice(indexOfFirstItem, indexOfLastItem);
 
   useEffect(() => {
     master_data_get();
@@ -183,13 +197,115 @@ function Home() {
               </div>
               <div className="popularVenues">
                 <div className="venue_cards_container row mt-1">
-                  {restaurantByCountry &&
-                    restaurantByCountry.length > 0 &&
-                    restaurantByCountry.map((venue, index) => (
+                  {currentPaginationItems &&
+                    currentPaginationItems.length > 0 &&
+                    currentPaginationItems.map((venue, index) => (
                       <div className="col-lg-3 col-md-4 col-sm-6" key={index}>
                         <div className="popularVenues_venue_container">
                           <div className="venue_image_holder">
-                            <img src={venue.venue_image} alt="venueImg" />
+                            <img
+                              src={imageApi + venue.restaurant_image}
+                              alt="venueImg"
+                            />
+                            <Heart
+                              className="heart_icon"
+                              isActive={likedVenues[index] || false}
+                              onClick={() => toggleLike(index)}
+                              activeColor="red"
+                              inactiveColor="red"
+                              animationTrigger="hover"
+                              animationScale={1.1}
+                            />
+                          </div>
+                          <Link
+                            onClick={() =>
+                              handleLinkClick(
+                                match_and_return_seo_link(venue.primary_id)
+                              )
+                            }
+                            style={{ textDecoration: "none" }}
+                          >
+                            <div className="venueDetailCOntainer">
+                              <div className="venue_category_div">
+                                <span className="venue_category_titles">
+                                  {/* {venue.Venue &&
+                                    venue.Venue.length > 0 &&
+                                    venue.Venue.map((category, idx) => (
+                                      <React.Fragment key={idx}>
+                                        <p>{category}</p>
+                                      </React.Fragment>
+                                    ))} */}
+                                  <p>{"FRENCH"}</p>
+                                </span>
+                                <div className="rating_greenDiv">
+                                  <p>{venue.rating}</p>
+                                  <img src={star} alt="star" />
+                                </div>
+                              </div>
+                              <div className="venue_address_wrapper">
+                                <h6 className="venue_address_heading">
+                                  {venue.restaurant_name}
+                                </h6>
+                                <desc className="ellipsis">
+                                  {venue.restaurant_temorary_adrress}
+                                </desc>
+                                <span className="venue_capacity_wrapper">
+                                  <p>€{venue.restaurant_price} average price</p>
+                                </span>
+                                <span className="venue_discount_wrapper">
+                                  <p>-{venue.discount_upto}%</p>
+                                </span>
+                              </div>
+                            </div>
+                          </Link>
+                        </div>
+                      </div>
+                    ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section>
+          <div className="popularVenues_section">
+            <div className="container">
+              <div className="popularVenues_heading_container">
+                <h3>Popular Restaurants in {city} </h3>
+                <span className="seAll_span">
+                  <Link>
+                    <p>
+                      <strong>See All</strong>
+                    </p>
+                  </Link>
+                  <div className="pagination_controls">
+                    <button
+                      onClick={handlePreviousPage}
+                      disabled={currentPaginationPage === 1}
+                    >
+                      <img src={leftArrow} alt="leftArrow" />
+                    </button>
+                    <button
+                      onClick={handleNextPage}
+                      disabled={currentPaginationPage === totalPaginationPages}
+                    >
+                      <img src={rigthArrow} alt="rightArrow" />
+                    </button>
+                  </div>
+                </span>
+              </div>
+              <div className="popularVenues">
+                <div className="venue_cards_container row mt-1">
+                  {restaurantByCity &&
+                    restaurantByCity.length > 0 &&
+                    restaurantByCity.map((venue, index) => (
+                      <div className="col-lg-3 col-md-4 col-sm-6" key={index}>
+                        <div className="popularVenues_venue_container">
+                          <div className="venue_image_holder">
+                            <img
+                              src={imageApi + venue.restaurant_image}
+                              alt="venueImg"
+                            />
                             <Heart
                               className="heart_icon"
                               isActive={likedVenues[index] || false}
@@ -207,29 +323,32 @@ function Home() {
                             <div className="venueDetailCOntainer">
                               <div className="venue_category_div">
                                 <span className="venue_category_titles">
-                                  {venue.Venue &&
+                                  {/* {venue.Venue &&
                                     venue.Venue.length > 0 &&
                                     venue.Venue.map((category, idx) => (
                                       <React.Fragment key={idx}>
                                         <p>{category}</p>
                                       </React.Fragment>
-                                    ))}
+                                    ))} */}
+                                  <p>{"FRENCH"}</p>
                                 </span>
                                 <div className="rating_greenDiv">
-                                  <p>{venue.Rating}</p>
+                                  <p>{venue.rating}</p>
                                   <img src={star} alt="star" />
                                 </div>
                               </div>
                               <div className="venue_address_wrapper">
                                 <h6 className="venue_address_heading">
-                                  {venue.Name}
+                                  {venue.restaurant_name}
                                 </h6>
-                                <desc>{venue.Address}</desc>
+                                <desc className="ellipsis">
+                                  {venue.restaurant_temorary_adrress}
+                                </desc>
                                 <span className="venue_capacity_wrapper">
-                                  <p>€{venue.Capacity} average price</p>
+                                  <p>€{venue.restaurant_price} average price</p>
                                 </span>
                                 <span className="venue_discount_wrapper">
-                                  <p>-{venue.Discount}%</p>
+                                  <p>-{venue.discount_upto}%</p>
                                 </span>
                               </div>
                             </div>

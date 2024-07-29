@@ -5,7 +5,6 @@
   --text-grey: rgba(83, 89, 105, 1);
   --green: rgba(38, 126, 62, 1);
   --light-pink: rgba(250, 248, 248, 1);
-  ;
   --text-black: rgba(42, 45, 50, 1);
   --secondary-black: rgba(42, 45, 50, 1);
   --orange-Color: rgba(243, 120, 53, 1);
@@ -31,4 +30,25 @@
 .flexCol {
   display: flex;
   flex-direction: column;
+}
+
+.ellipsis {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+
+
+.ellipsis2 {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 200px;
+  height: 2.6em;
+  line-height: 1.3em;
 }
