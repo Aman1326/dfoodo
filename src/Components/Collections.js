@@ -8,6 +8,8 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import right from "../Assets/rightArrow_white.svg";
+import leftArrowIcon from "../Assets/leftArrowIcon.svg";
+import rightArrowSvg from "../Assets/rightArrowIcon.svg";
 import { APL_LINK } from "../ServiceConnection/serviceconnection";
 const Collections = ({ data }) => {
   //browse cities section
@@ -21,8 +23,9 @@ const Collections = ({ data }) => {
   const NextArrow = (props) => {
     const { className, style, onClick } = props;
     return (
-      <div
+      <img
         className={className}
+        src={rightArrowSvg}
         style={{ ...style, display: "block" }}
         onClick={onClick}
       />
@@ -33,7 +36,8 @@ const Collections = ({ data }) => {
   const PrevArrow = (props) => {
     const { className, style, onClick } = props;
     return (
-      <div
+      <img
+        src={leftArrowIcon}
         className={className}
         style={{ ...style, display: "block" }}
         onClick={onClick}

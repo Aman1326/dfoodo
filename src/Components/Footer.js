@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import mainLogo from "../Assets/mainLogo.png";
 import "./Css/Footer.css";
 import logo1 from "../Assets/fb_logo.svg";
@@ -9,13 +9,26 @@ import logo5 from "../Assets/linkedInIcon.svg";
 import earth from "../Assets/earth.svg";
 import { Link } from "react-router-dom";
 const Footer = () => {
+  const containerRef = useRef(null);
+
+  const scrollToTop = () => {
+    if (containerRef.current) {
+      containerRef.current.scrollTo({
+        top: 0,
+        behavior: "smooth", // Smooth scrolling animation
+      });
+    }
+  };
   return (
     <div className="footer_section">
       <div className="container">
         <div className="row row_footer">
           <div className="col-lg-3 mb-3">
             <div className="left_section_footer">
-              <img src={mainLogo} alt="mainlogo" />
+              <Link onClick={scrollToTop}>
+                {" "}
+                <img src={mainLogo} alt="mainlogo" />
+              </Link>
               <div className="footer_about_my_venue">
                 <strong>
                   <Link
@@ -75,6 +88,17 @@ const Footer = () => {
                       Frequently asked Question
                     </Link>
                   </li>
+                  <li>
+                    <Link
+                      to="/"
+                      style={{
+                        color: "var(--text-grey)",
+                        textDecoration: "none",
+                      }}
+                    >
+                      Restaurant near me
+                    </Link>
+                  </li>
                 </ul>
               </div>
             </div>
@@ -106,7 +130,6 @@ const Footer = () => {
                 <select>
                   <option>English</option>
                   <option>Swedish</option>
-                  <option>English</option>
                 </select>
               </div>
               <strong>

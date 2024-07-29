@@ -362,7 +362,14 @@ const ProfilePage = () => {
     "Reservation Canceled ",
   ];
 
-  console.log(text.success_text);
+  const venue_text = [
+    {
+      venue_image: bar1,
+      name: "venue name",
+    },
+  ];
+
+  const modalClass = ModalType === "cancel" ? "modal-md" : "modal-xl";
   return (
     <>
       <Header />
@@ -559,8 +566,8 @@ const ProfilePage = () => {
                     {currentPaginationItems.map((venue, index) => (
                       <div key={index} className="col-12 margin24px">
                         <div className="VenuePage_venue_container">
-                          <div className="row m-0">
-                            <div className="col-sm-5 px-0">
+                          <div className="row m-0 px-2 container_profile_section_venue">
+                            <div className="col-sm-4 px-0">
                               <Link
                                 to="/detailedVenue"
                                 style={{ textDecoration: "none" }}
@@ -574,7 +581,7 @@ const ProfilePage = () => {
                                 </div>
                               </Link>
                             </div>
-                            <div className="col-sm-7">
+                            <div className="col-sm-8">
                               <div className="venuePage_text_section">
                                 <div className="venueContainer_rowtext">
                                   <div className="venueContainer_nameAndAddress">
@@ -954,7 +961,7 @@ const ProfilePage = () => {
         show={showCancelModal}
         onHide={() => setShowCancelModal(false)}
         centered
-        className="modal-md"
+        className={modalClass}
       >
         <Modal.Header closeButton></Modal.Header>
         <Modal.Body>
@@ -975,7 +982,9 @@ const ProfilePage = () => {
                     </span>
                   </div>
                   <span className="buttons_cancel_modal">
-                    <button>Nevermind</button>
+                    <button onClick={() => setShowCancelModal(false)}>
+                      Nevermind
+                    </button>
                     <Link>Confirm Cancellation</Link>
                   </span>
                 </div>
@@ -983,8 +992,64 @@ const ProfilePage = () => {
             )}
             {ModalType === "modify" && (
               <>
-                <div>
-                  <p>cancel</p>
+                <div className="cancel_modal_style row">
+                  <div className="col-lg-8">
+                    <div className="row">
+                      <div className="col-sm-6 modify_modal_image">
+                        <img src={bar1} alt="bar1" />
+                      </div>
+                      <div className="col-sm-6">
+                        <div className="venuePage_text_section ProfilePage_text_section">
+                          <div className="venueContainer_rowtext">
+                            <div className="venueContainer_nameAndAddress ">
+                              <h6>{venue_text.name}</h6>
+                            </div>
+                          </div>
+                          <span className="reservation_text">
+                            <img src={OnBoardingTick} alt="OnBoardingTick" />
+                            <p>{text[0]}</p>
+                          </span>
+
+                          <div className="venue_details_profile_page">
+                            <span className="people_span">
+                              <img src={contactus} alt="contactus" />
+                              <strong>2</strong>
+                            </span>
+                            <span className="people_span">
+                              <img src={calendar} alt="calendar" />
+                              <strong>Mon, Jun 10 at 6:30PM</strong>
+                            </span>
+                          </div>
+                          <div className="venue_details_profile_page">
+                            <span
+                              className="people_span"
+                              onClick={() => {
+                                setModalType("modify");
+                                handleOpenCancelModal();
+                              }}
+                            >
+                              <strong>
+                                <h6>Modify</h6>
+                              </strong>
+                            </span>
+                            |
+                            <span
+                              className="people_span"
+                              onClick={() => {
+                                setModalType("cancel");
+                                handleOpenCancelModal();
+                              }}
+                            >
+                              <strong>
+                                <h6>Cancel</h6>
+                              </strong>
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="col-lg-4"></div>
                 </div>
               </>
             )}

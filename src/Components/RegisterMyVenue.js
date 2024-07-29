@@ -118,7 +118,7 @@ const RegisterMyVenue = () => {
                         type="text"
                         id="Owner_fname"
                         name="Owner_fname"
-                        className="form-control"
+                        className="form-control trio_mandatory"
                         placeholder="first name "
                       />
                     </div>
@@ -142,7 +142,7 @@ const RegisterMyVenue = () => {
                         type="text"
                         id="Email"
                         name="Email"
-                        className="form-control"
+                        className="form-control trio_mandatory"
                         placeholder="Enter your Email"
                       />
                     </div>
@@ -152,7 +152,7 @@ const RegisterMyVenue = () => {
                         type="text"
                         id="restaurant_name"
                         name="restaurant_name"
-                        className="form-control"
+                        className="form-control trio_mandatory"
                         placeholder="Enter restaurant name"
                       />
                     </div>
@@ -164,7 +164,7 @@ const RegisterMyVenue = () => {
                         type="text"
                         id="restaurant_website"
                         name="restaurant_website"
-                        className="form-control"
+                        className="form-control trio_mandatory"
                         placeholder="Enter business Email Address"
                       />
                     </div>
@@ -174,7 +174,7 @@ const RegisterMyVenue = () => {
                         type="text"
                         id="Contact"
                         name="Contact"
-                        className="form-control"
+                        className="form-control trio_mandatory"
                         placeholder="Enter phone no."
                       />
                     </div>
@@ -185,7 +185,7 @@ const RegisterMyVenue = () => {
                       <input
                         id="restaurant_address"
                         name="restaurant_address"
-                        className="form-control"
+                        className="form-control trio_mandatory"
                         placeholder="Restaurant Address"
                         rows="4"
                       ></input>

@@ -413,6 +413,7 @@ input:checked+.slider:before {
 
 .cancel_modal_style {
     font-family: "Roboto";
+    align-items: center;
     padding: 1rem 1.5rem;
 
     h5 {
@@ -426,7 +427,7 @@ input:checked+.slider:before {
 }
 
 .buttons_cancel_modal {
-    margin-top: 2rem;
+    margin-top: 2.5rem;
     display: flex;
     gap: 1rem;
 
@@ -449,4 +450,15 @@ input:checked+.slider:before {
 
 .modal-header .btn-close {
     box-shadow: none;
+}
+
+.modify_modal_image {
+    padding: 0;
+    width: fit-content;
+    height: fit-content;
+
+    img {
+        width: 150px;
+        aspect-ratio: 1;
+    }
 }
