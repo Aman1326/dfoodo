@@ -13,8 +13,12 @@ const get_all_faq_website = local_server_link_react + "get_all_faq_website/";
 const save_restaurantOwnerdetails =
   local_server_link_react + "save_restaurantOwnerdetails/";
 const update_profile = local_server_link_react + "update_profile/";
+const get_restropage_webapp =
+  local_server_link_react + "get_restropage_webapp/";
 const get_landingpage_webapp =
   local_server_link_react + "get_landingpage_webapp/";
+
+const imageApi = APL_LINK + "assets/";
 
 const server_post_data = async (url_for, form_data) => {
   // const headers = {
@@ -41,4 +45,6 @@ export {
   save_restaurantOwnerdetails,
   update_profile,
   get_landingpage_webapp,
+  imageApi,
+  get_restropage_webapp,
 };

@@ -25,7 +25,7 @@ function App() {
           <Route path="getHelp" element={<GetHelp />} />
           <Route path="aboutUs" element={<AboutUs />} />
           <Route path="registerMyVenue" element={<RegisterMyVenue />} />
-          <Route path="detailedVenue" element={<DetailedVenue />} />
+          <Route path="restro/restro_detail/:id" element={<DetailedVenue />} />
           <Route path="blogs" element={<Blog />} />
           <Route path="blog/blog_detail/:id" element={<Blog2 />} />
           <Route path="profile" element={<ProfilePage />} />
