@@ -53,14 +53,12 @@ function Home() {
   //get data
   const master_data_get = async () => {
     const fd = new FormData();
-    fd.append("country_id", 2);
+    fd.append("country", "Sweden");
     await server_post_data(get_landingpage_webapp, fd)
       .then((Response) => {
-        console.log(Response.data.message);
         if (Response.data.error) {
           // handleError(Response.data.message.title_name);
         } else {
-          console.log(Response.data.message);
           SetVenueData(Response.data.message.venue_active_data);
           Settestimonials(Response.data.message.testimonial_active_data);
           Setblogs(Response.data.message.blog_active_data);
@@ -70,7 +68,7 @@ function Home() {
           setCity(Response.data.message.cities_name);
           setRestaurantByCountry(Response.data.message.restro_country);
           setRestaurantByCity(Response.data.message.restro_city);
-          console.log(Response.data.message.restro_city);
+          console.log(Response.data.message);
         }
       })
       .catch((error) => {});

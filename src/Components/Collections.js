@@ -84,22 +84,24 @@ const Collections = ({ data }) => {
           <div className="container-lg">
             <div className="cities_mapped ">
               <Slider {...settings}>
-                {data.map((venue, index) => (
-                  <div key={index} className="city-item">
-                    <img
-                      className="city-image"
-                      src={`${APL_LINK}/assets/${venue.category_master_image}`}
-                      alt={`Venue ${index + 1}`}
-                    />
-                    <div className="city_description">
-                      <h6>{venue.category_master_name}</h6>
-                      <span className="d-flex flex-row">
-                        <p>{venue.category_count} Places</p>
-                        <img src={right} alt="right" />
-                      </span>
+                {data &&
+                  data.length > 0 &&
+                  data.map((venue, index) => (
+                    <div key={index} className="city-item">
+                      <img
+                        className="city-image"
+                        src={`${APL_LINK}/assets/${venue.category_master_image}`}
+                        alt={`Venue ${index + 1}`}
+                      />
+                      <div className="city_description">
+                        <h6>{venue.category_master_name}</h6>
+                        <span className="d-flex flex-row">
+                          <p>{venue.category_count} Places</p>
+                          <img src={right} alt="right" />
+                        </span>
+                      </div>
                     </div>
-                  </div>
-                ))}
+                  ))}
               </Slider>
             </div>
           </div>
