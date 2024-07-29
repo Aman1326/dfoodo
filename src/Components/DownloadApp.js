@@ -15,7 +15,7 @@ const DownloadApp = () => {
             className="col-lg-7 pl-0 rightSection"
             style={{ backgroundColor: "var(--orange-Color)" }}
           >
-            <h3>Get the Dfoodo Diner App</h3>
+            <h3>Get the Dfoodo Dinner App</h3>
             <h3>Download now</h3>
             <span className="playStore_section">
               <img src={appStore} alt="appstore" />
