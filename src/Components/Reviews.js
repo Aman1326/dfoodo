@@ -8,7 +8,8 @@ import flag from "../Assets/flag.svg";
 import { Link } from "react-router-dom";
 import { Modal, Button, Form } from "react-bootstrap";
 import { Rating } from "react-simple-star-rating";
-const Reviews = () => {
+import { formatDateStringdot } from "../CommonJquery/CommonJquery.js";
+const Reviews = ({ review, totalReview }) => {
   const value = 6.6;
   const normalizedValue = value / 10;
 
@@ -18,6 +19,8 @@ const Reviews = () => {
   const [progress3, setProgress3] = useState(6);
   const [progress4, setProgress4] = useState(3);
   const [progress5, setProgress5] = useState(9);
+  const reviews = review;
+  const totalReviews = totalReview;
 
   const incrementProgress = (setProgress) => {
     setProgress((prevProgress) => (prevProgress >= 10 ? 0 : prevProgress + 1));
@@ -215,17 +218,17 @@ const Reviews = () => {
                   <CircularProgressbar
                     value={normalizedValue}
                     maxValue={1}
-                    text={`${value}/10`}
+                    text={`${totalReviews.rating}/5`}
                     width={"120px"}
                   />
                   <span className="no_reviews">
                     <h6>Fabulous</h6>
-                    <p>6166 reviews</p>
+                    <p>{totalReviews.total_reviews} reviews</p>
                   </span>
                 </div>
                 <div className="text_rating_sectin">
                   <span>
-                    <p>9/10</p>
+                    <p>{totalReviews.total_location_rating_sum}/5</p>
                     <p>Location</p>
                   </span>
                   <div
@@ -239,7 +242,7 @@ const Reviews = () => {
                     }}
                   ></div>
                   <span>
-                    <p>9/10</p>
+                    <p>{totalReviews.total_service_rating_sum}/5</p>
                     <p>Service</p>
                   </span>
                   <div
@@ -253,7 +256,7 @@ const Reviews = () => {
                     }}
                   ></div>
                   <span>
-                    <p>9/10</p>
+                    <p>{totalReviews.total_ambience_rating_sum}/5</p>
                     <p>Ambience</p>
                   </span>
                 </div>
@@ -278,7 +281,7 @@ const Reviews = () => {
                       style={{ width: `${getProgressPercentage(progress1)}%` }}
                     ></div>
                   </div>
-                  <div className="progress_text">9-10</div>
+                  <div className="progress_text">5</div>
                 </div>
                 <div className="progressbar_text_wrapper">
                   <div className="progress_container">
@@ -287,7 +290,7 @@ const Reviews = () => {
                       style={{ width: `${getProgressPercentage(progress2)}%` }}
                     ></div>
                   </div>
-                  <div className="progress_text">7-8</div>
+                  <div className="progress_text">4</div>
                 </div>
 
                 <div className="progressbar_text_wrapper">
@@ -297,7 +300,7 @@ const Reviews = () => {
                       style={{ width: `${getProgressPercentage(progress3)}%` }}
                     ></div>
                   </div>
-                  <div className="progress_text">5-6</div>
+                  <div className="progress_text">3</div>
                 </div>
 
                 <div className="progressbar_text_wrapper">
@@ -307,7 +310,7 @@ const Reviews = () => {
                       style={{ width: `${getProgressPercentage(progress4)}%` }}
                     ></div>
                   </div>
-                  <div className="progress_text">3-4</div>
+                  <div className="progress_text">2</div>
                 </div>
 
                 <div className="progressbar_text_wrapper">
@@ -317,42 +320,42 @@ const Reviews = () => {
                       style={{ width: `${getProgressPercentage(progress5)}%` }}
                     ></div>
                   </div>
-                  <div className="progress_text">1-2</div>
+                  <div className="progress_text">1</div>
                 </div>
               </div>
             </div>
           </div>
-          {userReviews.slice(0, reviewsToShow).map((review, index) => (
+          {reviews.slice(0, reviewsToShow).map((review, index) => (
             <div key={index} className="user_review_container">
               <div className="user_review_wrapper">
                 <div>
-                  <img src={review.user_image} alt="profile" />
+                  <img src={profile} alt="profile" />
                 </div>
                 <div className="user_review_rowcontainer">
                   <div className="">
                     <div className="user_review_rowcontainer_name">
-                      <h6>{review.user_name}</h6>
+                      <h6>{review.customer_name}</h6>
                       <desc>{review.no_of_reviews}</desc>
                     </div>
                     <div className="user_review_rowcontainer_date">
-                      {review.entry_date}
+                      {formatDateStringdot(review.entry_date)}
                     </div>
                   </div>
-                  <div>{review.review_score}</div>
+                  <div>{review.rating}/5.0</div>
                 </div>
               </div>
               <div className="user_review_description">
-                <p>{review.user_review_description}</p>
+                <p>{review.comment}</p>
               </div>
               <div className="user_review_like_report_section">
                 <span className="user_review_like">
                   <img src={like} alt="like" />
                   <p>Like</p>
                 </span>
-                <span className="user_review_like">
+                {/* <span className="user_review_like">
                   <img src={flag} alt="flag" />
                   <p>Report</p>
-                </span>
+                </span> */}
               </div>
               <hr />
             </div>
