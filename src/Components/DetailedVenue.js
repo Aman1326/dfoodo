@@ -68,7 +68,8 @@ const DetailedVenue = () => {
   const [userEmail, setUserEmail] = useState("");
   const [userName, setUserName] = useState("");
   const [searchShow, setsearchShow] = useState(false);
-  const [detail, setDetail] = useState(false);
+  const [detail, setDetail] = useState([]);
+  const [reviews, setreviews] = useState([]);
   const [thankYouOpen, setthankYouOpen] = useState(false);
   const [otpSent, setOtpSent] = useState(false); // State to manage OTP view
   const [otp, setOtp] = useState(""); // State to manage the entered OTP
@@ -327,6 +328,8 @@ const DetailedVenue = () => {
         } else {
           console.log(Response.data.message);
           setDetail(Response.data.message.restro);
+          setreviews(Response.data.message.restro.review);
+          console.log(Response.data.message.restro.review);
         }
         // setshowLoaderAdmin(false);
       })
@@ -447,7 +450,7 @@ const DetailedVenue = () => {
                   </span>
                   <span className="first_row_black_section_carousel align-items-center">
                     <div className="french_text">
-                      <h6>French</h6>
+                      <h6>{detail.cuisie[0].cuisine_name}</h6>
                     </div>
                     <div className="first_row_black_section_carousel align-items-center">
                       <span className="d-flex reviews_black_section">
@@ -456,7 +459,7 @@ const DetailedVenue = () => {
                       </span>
                       <span>
                         <p className="m-0">
-                          {detail.review && detail.review.length} reviews
+                          {detail.review && detail.total_reviews} reviews
                         </p>
                       </span>
                     </div>
@@ -466,7 +469,8 @@ const DetailedVenue = () => {
                     <div className="first_row_black_section_carousel">
                       <img src={timerClock} alt="timerClock" />
                       <p style={{ marginBottom: "0" }}>
-                        Open from 11:30 AM - 01:30 AM
+                        Open from {detail.timing[0].start_time} -{" "}
+                        {detail.timing[0].end_time}
                       </p>
                     </div>
                     <div className="first_row_black_section_carousel">
@@ -573,24 +577,25 @@ const DetailedVenue = () => {
                         <h6 className="calendar_modal_heading">Booking Time</h6>
                         <div className="">
                           <span className="venuePage_venue_capacity_wrapper">
-                            {mappedTimeDiscounts.length > 0 && (
-                              <div className="time_discount_container_detailedVenue">
-                                {mappedTimeDiscounts.map((item, idx) => (
-                                  <div
-                                    key={idx}
-                                    className="time_discount_section"
-                                    onClick={() => setStep(2)}
-                                  >
-                                    <div className="time_section">
-                                      <p>{item.time}</p>
+                            {mappedTimeDiscounts &&
+                              mappedTimeDiscounts.length > 0 && (
+                                <div className="time_discount_container_detailedVenue">
+                                  {mappedTimeDiscounts.map((item, idx) => (
+                                    <div
+                                      key={idx}
+                                      className="time_discount_section"
+                                      onClick={() => setStep(2)}
+                                    >
+                                      <div className="time_section">
+                                        <p>{item.time}</p>
+                                      </div>
+                                      <div className="discount_section">
+                                        <p>-{item.discount}</p>
+                                      </div>
                                     </div>
-                                    <div className="discount_section">
-                                      <p>-{item.discount}</p>
-                                    </div>
-                                  </div>
-                                ))}
-                              </div>
-                            )}
+                                  ))}
+                                </div>
+                              )}
                           </span>
                         </div>
                       </div>
@@ -768,10 +773,11 @@ const DetailedVenue = () => {
                               ))}
                           </div>
                         </div>
-                        <Reviews />
+                        <Reviews review={reviews} totalReview={detail} />
                         <div className="see_more_reviews">
                           <Link onClick={() => setActiveTab("reviews")}>
-                            See more reviews ({detail.review.length})
+                            See more reviews (
+                            {detail.review && detail.review.length})
                             <img src={right} alt="right" />
                           </Link>
                         </div>
@@ -785,7 +791,7 @@ const DetailedVenue = () => {
                   )}
                   {activeTab === "reviews" && (
                     <div>
-                      <Reviews />
+                      <Reviews review={reviews} totalReview={detail} />
                     </div>
                   )}
                 </div>
