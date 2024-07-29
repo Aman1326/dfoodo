@@ -19,6 +19,7 @@ import calendar from "../Assets/calendarSearchBar.svg";
 import Successs from "../Assets/check.png";
 import { PhoneInput } from "react-international-phone";
 import { Modal } from "react-bootstrap";
+import OnBoardingTick from "../Assets/OnBoardingTick.svg";
 import $ from "jquery";
 import {
   update_profile,
@@ -346,6 +347,22 @@ const ProfilePage = () => {
     }
     return () => clearTimeout(timer);
   }, [showModal]);
+
+  //download app qr modal
+  const [showCancelModal, setShowCancelModal] = useState(false);
+  const [ModalType, setModalType] = useState("");
+
+  const handleOpenCancelModal = () => {
+    setShowCancelModal(true);
+  };
+
+  const text = [
+    "Reservation Confirmed",
+    "Waiting for Confirmation",
+    "Reservation Canceled ",
+  ];
+
+  console.log(text.success_text);
   return (
     <>
       <Header />
@@ -415,16 +432,18 @@ const ProfilePage = () => {
                         className={activeTab === "about" ? "active" : ""}
                         onClick={() => setActiveTab("upcomming")}
                       >
-                        <h6>upcomming</h6>
+                        <h6>Upcomming</h6>
                       </button>
                       <button
                         className={activeTab === "menu" ? "active" : ""}
-                        onClick={() => setActiveTab("past&cancel")}
+                        onClick={() => {
+                          setActiveTab("past&cancel");
+                        }}
                       >
-                        <h6>past&cancel</h6>
+                        <h6>Past & Cancel</h6>
                       </button>
                     </div>
-                    <hr width={"100%"} />
+                    <hr width={"100%"} style={{ marginTop: "0" }} />
                     <div className="row">
                       <div className="tab-content col-md-12">
                         {activeTab === "upcomming" && (
@@ -460,9 +479,12 @@ const ProfilePage = () => {
                                               <h6>{venue.Name}</h6>
                                             </div>
                                           </div>
-                                          <span>
-                                            <img />
-                                            <p>{venue.Address}</p>
+                                          <span className="reservation_text">
+                                            <img
+                                              src={OnBoardingTick}
+                                              alt="OnBoardingTick"
+                                            />
+                                            <p>{text[0]}</p>
                                           </span>
 
                                           <div className="venue_details_profile_page">
@@ -484,13 +506,25 @@ const ProfilePage = () => {
                                             </span>
                                           </div>
                                           <div className="venue_details_profile_page">
-                                            <span className="people_span">
+                                            <span
+                                              className="people_span"
+                                              onClick={() => {
+                                                setModalType("modify");
+                                                handleOpenCancelModal();
+                                              }}
+                                            >
                                               <strong>
                                                 <h6>Modify</h6>
                                               </strong>
                                             </span>
                                             |
-                                            <span className="people_span">
+                                            <span
+                                              className="people_span"
+                                              onClick={() => {
+                                                setModalType("cancel");
+                                                handleOpenCancelModal();
+                                              }}
+                                            >
                                               <strong>
                                                 <h6>Cancel</h6>
                                               </strong>
@@ -505,7 +539,7 @@ const ProfilePage = () => {
                             </div>
                           </div>
                         )}
-                        {activeTab === "past&cancel" && <p>past&cancel</p>}
+                        {activeTab === "past&cancel" && <p>Past & Cancel</p>}
                       </div>
                     </div>
                   </div>
@@ -915,6 +949,48 @@ const ProfilePage = () => {
           </section>
         </div>
       </div>
+
+      <Modal
+        show={showCancelModal}
+        onHide={() => setShowCancelModal(false)}
+        centered
+        className="modal-md"
+      >
+        <Modal.Header closeButton></Modal.Header>
+        <Modal.Body>
+          <div className="">
+            {ModalType === "cancel" && (
+              <>
+                <div className="cancel_modal_style">
+                  <h5>Are you sure you want to cancel this reservation?</h5>
+                  <h6>XYZ Restaurant Name</h6>
+                  <div className="venue_details_profile_page">
+                    <span className="people_span">
+                      <img src={contactus} alt="contactus" />
+                      <strong>2</strong>
+                    </span>
+                    <span className="people_span">
+                      <img src={calendar} alt="calendar" />
+                      <strong>Mon, Jun 10 at 6:30PM</strong>
+                    </span>
+                  </div>
+                  <span className="buttons_cancel_modal">
+                    <button>Nevermind</button>
+                    <Link>Confirm Cancellation</Link>
+                  </span>
+                </div>
+              </>
+            )}
+            {ModalType === "modify" && (
+              <>
+                <div>
+                  <p>cancel</p>
+                </div>
+              </>
+            )}
+          </div>
+        </Modal.Body>
+      </Modal>
     </>
   );
 };

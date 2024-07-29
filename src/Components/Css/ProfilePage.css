@@ -73,6 +73,7 @@
 
 .tabs {
     margin-top: -3rem;
+    padding: 0.5rem 0.5rem;
 }
 
 .vertical-tabs {
@@ -85,8 +86,12 @@
 
 .react-tabs__tab-panel--selected {
     width: 78vw;
-    background: rgba(249, 249, 249, 1);
     border-radius: 5px;
+}
+
+.container_venues_profile_page {
+    background: rgba(244, 244, 244, 1);
+    padding: 0.5rem 1rem;
 }
 
 .tab-list {
@@ -94,7 +99,6 @@
     display: flex;
     flex-direction: column;
     justify-content: left;
-    border-right: 1px solid #ccc;
     padding-top: 1rem;
     padding-bottom: 1rem;
     padding-left: 0rem;
@@ -148,7 +152,8 @@
 
 .reservations_section {
     display: flex;
-    gap: 1rem;
+    gap: 2rem;
+    padding-bottom: 1rem;
 }
 
 .reservations_section button {
@@ -157,8 +162,8 @@
 }
 
 .reservations_section hr {
-
-    margin: 0;
+    padding: 0;
+    margin: 0rem 0rem !important;
 
 }
 
@@ -351,6 +356,7 @@ input:checked+.slider:before {
 .venue_details_profile_page {
     display: flex;
     gap: 1rem;
+    color: var(--light-black);
 }
 
 .people_span {
@@ -360,6 +366,15 @@ input:checked+.slider:before {
 
     h6 {
         color: var(--primary-color);
+    }
+}
+
+.reservation_text {
+    display: flex;
+    align-items: center;
+
+    p {
+        margin: 0.2rem;
     }
 }
 
@@ -378,11 +393,12 @@ input:checked+.slider:before {
     padding-top: 1rem;
     padding-bottom: 1rem;
     width: 100%;
+    display: flex;
+    gap: 0.8rem;
 }
 
 .profile_page_upcomming_section_heading {
     margin-left: 1rem;
-    padding-bottom: 1rem;
 }
 
 .container_profile_section_venue {
@@ -395,7 +411,42 @@ input:checked+.slider:before {
     width: 100%;
 }
 
-.container_venues_profile_page {
-    padding: 1rem;
-    overflow-y: auto;
+.cancel_modal_style {
+    font-family: "Roboto";
+    padding: 1rem 1.5rem;
+
+    h5 {
+        color: var(--light-black);
+    }
+
+    h6 {
+        margin-top: 1rem;
+        color: var(--primary-color);
+    }
+}
+
+.buttons_cancel_modal {
+    margin-top: 2rem;
+    display: flex;
+    gap: 1rem;
+
+    button {
+        border: 1px solid var(--text-grey);
+        color: var(--primary-color);
+        background-color: var(--white);
+        border-radius: 5px;
+        padding: 0.2rem 1rem;
+    }
+
+    a {
+        color: var(--white);
+        background-color: var(--primary-color);
+        border-radius: 5px;
+        padding: 0.2rem 1rem;
+        text-decoration: none;
+    }
+}
+
+.modal-header .btn-close {
+    box-shadow: none;
 }
