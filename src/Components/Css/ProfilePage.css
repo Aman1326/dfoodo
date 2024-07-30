@@ -1,464 +1,596 @@
 .person_name {
-    color: var(--white);
-    font-family: "Roboto";
-    font-size: 20px;
-    width: fit-content;
-    padding: 3rem 3rem;
-    border-radius: 50% 50%;
-    aspect-ratio: 1;
-    background-color: var(--light-black);
-    position: relative;
+  color: var(--white);
+  font-family: "Roboto";
+  font-size: 20px;
+  width: fit-content;
+  padding: 3rem 3rem;
+  border-radius: 50% 50%;
+  aspect-ratio: 1;
+  background-color: var(--light-black);
+  position: relative;
 }
 
 .person_name h3 {
-    margin: 0;
+  margin: 0;
 }
 
-
 .camera_icon_background {
-    width: fit-content;
-    position: absolute;
-    bottom: 0;
-    padding: 0.5rem 0.5rem;
-    cursor: pointer;
-    right: 10px;
-    display: flex;
-    align-items: center;
-    border-radius: 50%;
-    background-color: var(--primary-color);
+  width: fit-content;
+  position: absolute;
+  bottom: 0;
+  padding: 0.5rem 0.5rem;
+  cursor: pointer;
+  right: 10px;
+  display: flex;
+  align-items: center;
+  border-radius: 50%;
+  background-color: var(--primary-color);
 }
 
 .profile_picture_section {
-    background-color: #FFE9EB;
-    padding: 2rem 2rem;
-    border-radius: 11px;
-    display: flex;
-    align-items: center;
-    margin-bottom: 1rem;
+  background-color: #ffe9eb;
+  padding: 2rem 2rem;
+  border-radius: 11px;
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
 }
 
 .header_Section_profile_page {
-    margin-top: 2rem;
+  margin-top: 2rem;
 }
 
 .profile_name_text_section {
-    margin-left: 1rem;
+  margin-left: 1rem;
 }
 
 .profile_name_text_section p {
-    margin: 0;
-    display: flex;
-    color: var(--text-grey);
-    flex-direction: column;
+  margin: 0;
+  display: flex;
+  color: var(--text-grey);
+  flex-direction: column;
 }
 
 .update_button_profile_page {
-    margin-left: auto;
+  margin-left: auto;
 }
 
 .update_button_profile_page a {
-    text-decoration: none;
-    color: var(--white);
-    font-family: "Roboto";
-    padding: 0.6rem 1rem;
-    border-radius: 5px;
-    background-color: var(--light-black);
-    transition: 0.1s ease-in;
+  text-decoration: none;
+  color: var(--white);
+  font-family: "Roboto";
+  padding: 0.6rem 1rem;
+  border-radius: 5px;
+  background-color: var(--light-black);
+  transition: 0.1s ease-in;
 }
 
 .update_button_profile_page a:hover {
-    background-color: var(--primary-color);
+  background-color: var(--primary-color);
 }
 
-
 .tabs {
-    margin-top: -3rem;
-    padding: 0.5rem 0.5rem;
+  margin-top: -3rem;
+  padding: 0.5rem 0.5rem;
 }
 
 .vertical-tabs {
-    padding-bottom: 10px;
-    height: 100%;
-    background-color: white;
-    display: flex;
-    border-radius: 5px;
+  padding-bottom: 10px;
+  height: 100%;
+  background-color: white;
+  display: flex;
+  border-radius: 5px;
 }
 
 .react-tabs__tab-panel--selected {
-    width: 78vw;
-    border-radius: 5px;
+  width: 78vw;
+  border-radius: 5px;
 }
 
 .container_venues_profile_page {
-    background: rgba(244, 244, 244, 1);
-    padding: 0.5rem 1rem;
+  background: rgba(244, 244, 244, 1);
+  padding: 0.5rem 1rem;
 }
 
 .tab-list {
-    height: 50vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: left;
-    padding-top: 1rem;
-    padding-bottom: 1rem;
-    padding-left: 0rem;
-    padding-right: 0.8rem;
-    margin: 0;
+  height: 50vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: left;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  padding-left: 0rem;
+  padding-right: 0.8rem;
+  margin: 0;
 }
 
 .tab-list h3 {
-    padding-left: 20px;
+  padding-left: 20px;
 }
 
 .tab {
-    font-family: "Roboto";
-    padding: 10px 20px;
-    cursor: pointer;
-    outline: none;
-    list-style: none;
-    border-radius: 5px;
-    margin-bottom: 0.5rem;
+  font-family: "Roboto";
+  padding: 10px 20px;
+  cursor: pointer;
+  outline: none;
+  list-style: none;
+  border-radius: 5px;
+  margin-bottom: 0.5rem;
 }
 
 .tab img {
-    margin-right: 0.3rem;
+  margin-right: 0.3rem;
 }
 
 .tab:last-child {
-    border-bottom: none;
+  border-bottom: none;
 }
 
 .active-tab {
-    background-color: var(--light-grey);
+  background-color: var(--light-grey);
 }
 
 .TabPanel {
-    margin: 0;
-    padding: 0;
+  margin: 0;
+  padding: 0;
 }
 
 .settings_section {
-    position: relative;
+  position: relative;
 }
 
 .tab-panel {
-    display: block;
+  display: block;
 }
 
 .back-button {
-    display: none;
-    /* Hide back button by default */
+  display: none;
+  /* Hide back button by default */
 }
 
 .reservations_section {
-    display: flex;
-    gap: 2rem;
-    padding-bottom: 1rem;
+  display: flex;
+  gap: 2rem;
+  padding-bottom: 1rem;
 }
 
 .reservations_section button {
-    border: none;
-    background: none;
+  border: none;
+  background: none;
 }
 
 .reservations_section hr {
-    padding: 0;
-    margin: 0rem 0rem !important;
-
+  padding: 0;
+  margin: 0rem 0rem !important;
 }
 
 .favourite_section {
-    padding: 1rem 3rem;
+  padding: 1rem 3rem;
 }
 
 .settings_section_profile_page {
-
-    padding: 2rem 2rem;
+  padding: 2rem 2rem;
 }
 
 .settings_text_profile_page {
-    padding: 1rem 1rem;
-    border: 1px solid grey;
-    border-radius: 5px;
-    width: max-content;
+  padding: 1rem 1rem;
+  border: 1px solid grey;
+  border-radius: 5px;
+  width: max-content;
 
-    p {
-        color: var(--text-grey);
-    }
+  p {
+    color: var(--text-grey);
+  }
 }
 
 .toggle_switches_settings {
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
 
-    span {
-        display: flex;
-        gap: 0.5rem;
-    }
+  span {
+    display: flex;
+    gap: 0.5rem;
+  }
 }
 
 /* toggle button  css*/
 /* The switch - the box around the slider */
 .switch {
-    position: relative;
-    display: inline-block;
-    width: 55px;
-    height: 29px;
+  position: relative;
+  display: inline-block;
+  width: 55px;
+  height: 29px;
 }
 
 /* Hide default HTML checkbox */
 .switch input {
-    opacity: 0;
-    width: 0;
-    height: 0;
+  opacity: 0;
+  width: 0;
+  height: 0;
 }
 
 .slider {
-    position: absolute;
-    cursor: pointer;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: #ccc;
-    -webkit-transition: .4s;
-    transition: .4s;
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
 }
 
 .slider:before {
-    position: absolute;
-    content: "";
-    height: 22px;
-    width: 22px;
-    left: 4px;
-    bottom: 4px;
-    background-color: white;
-    -webkit-transition: .4s;
-    transition: .4s;
+  position: absolute;
+  content: "";
+  height: 22px;
+  width: 22px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
 }
 
-input:checked+.slider {
-    background-color: var(--primary-color);
+input:checked + .slider {
+  background-color: var(--primary-color);
 }
 
-input:focus+.slider {
-    box-shadow: 0 0 1px var(--primary-color);
+input:focus + .slider {
+  box-shadow: 0 0 1px var(--primary-color);
 }
 
-input:checked+.slider:before {
-    -webkit-transform: translateX(26px);
-    -ms-transform: translateX(26px);
-    transform: translateX(26px);
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
 }
 
 .slider.round {
-    border-radius: 34px;
+  border-radius: 34px;
 }
 
 .slider.round:before {
-    border-radius: 50%;
+  border-radius: 50%;
 }
 
 /* profile section css */
 .profile_pafe_form input {
-    border-top: none;
-    border-right: none;
-    box-shadow: none !important;
-    border-left: none;
-    background: transparent;
-    border-radius: 0rem;
-    border-bottom: 1.3px solid black;
-    margin-bottom: 0.2rem;
-    font-weight: 500;
-    font-family: "Roboto";
+  border-top: none;
+  border-right: none;
+  box-shadow: none !important;
+  border-left: none;
+  background: transparent;
+  border-radius: 0rem;
+  border-bottom: 1.3px solid black;
+  margin-bottom: 0.2rem;
+  font-weight: 500;
+  font-family: "Roboto";
 }
 
 .profile_pafe_form input:focus {
-    background: transparent;
+  background: transparent;
 }
 
 .profile_pafe_form label {
-    margin: 0 !important;
+  margin: 0 !important;
 }
 
 .birth_date_profile {
-    margin-top: auto;
+  margin-top: auto;
 }
 
 #phoneNumberProfilePage {
-    width: 100%;
+  width: 100%;
 }
 
 .react-international-phone-input-container .react-international-phone-input {
-    width: 100%;
+  width: 100%;
 }
 
-
 .profile_section {
-    padding: 0.5rem 2rem;
-    box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px,
-        rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
-    border-radius: 10px;
+  padding: 0.5rem 2rem;
+  box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px,
+    rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+  border-radius: 10px;
 }
 
 .radio_buttons_reg_form {
-    display: flex;
+  display: flex;
 }
 
 .profile_section label {
-    margin-top: 0.5rem !important;
+  margin-top: 0.5rem !important;
 }
 
 .radio_buttons_reg_form input[type="radio"] {
-    margin-top: 0.5rem;
-    appearance: none;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    width: 15px;
-    height: 15px;
-    border: 1px solid black;
-    border-radius: 50%;
-    outline: none;
-    cursor: pointer;
-    position: relative;
-    vertical-align: middle;
+  margin-top: 0.5rem;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  width: 15px;
+  height: 15px;
+  border: 1px solid black;
+  border-radius: 50%;
+  outline: none;
+  cursor: pointer;
+  position: relative;
+  vertical-align: middle;
 }
 
 .radio_buttons_reg_form input[type="radio"]:before {
-    content: "";
-    width: 13px;
-    height: 13px;
-    border-radius: 50%;
-    background: var(--primary-color);
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%) scale(0);
-    transition: transform 0.2s ease-in-out;
+  content: "";
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  background: var(--primary-color);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  transition: transform 0.2s ease-in-out;
 }
 
 .radio_buttons_reg_form input[type="radio"]:checked:before {
-    transform: translate(-50%, -50%) scale(1);
+  transform: translate(-50%, -50%) scale(1);
 }
 
 .radio_buttons_reg_form label {
-    margin-left: 5px;
-    vertical-align: middle;
+  margin-left: 5px;
+  vertical-align: middle;
 }
 
 .error-message {
-    font-size: 13px;
-    color: red;
+  font-size: 13px;
+  color: red;
 }
 
-
 .venue_details_profile_page {
-    display: flex;
-    gap: 1rem;
-    color: var(--light-black);
+  display: flex;
+  gap: 1rem;
+  color: var(--light-black);
 }
 
 .people_span {
-    display: flex;
-    gap: 0.2rem;
-    align-items: center;
+  display: flex;
+  gap: 0.2rem;
+  align-items: center;
 
-    h6 {
-        color: var(--primary-color);
-    }
+  h6 {
+    color: var(--primary-color);
+  }
 }
 
 .reservation_text {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 
-    p {
-        margin: 0.2rem;
-    }
+  p {
+    margin: 0.2rem;
+  }
 }
 
 .ProfilePage_image_container {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 
-    img {
-        width: 150px !important;
-        height: 150px !important;
-        aspect-ratio: 1 !important;
-    }
+  img {
+    width: 150px !important;
+    height: 150px !important;
+    aspect-ratio: 1 !important;
+  }
 }
 
 .ProfilePage_text_section {
-    padding-top: 1rem;
-    padding-bottom: 1rem;
-    width: 100%;
-    display: flex;
-    gap: 0.8rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  width: 100%;
+  display: flex;
+  gap: 0.8rem;
 }
 
 .profile_page_upcomming_section_heading {
-    margin-left: 1rem;
+  margin-left: 1rem;
 }
 
 .container_profile_section_venue {
-    padding: 0.5rem;
-    cursor: pointer;
-    border-radius: 8px;
-    background: var(--white);
-    box-shadow: 0px 2px 2px 0px #0000002E;
-    height: 180px;
-    width: 100%;
+  padding: 0.5rem;
+  cursor: pointer;
+  border-radius: 8px;
+  background: var(--white);
+  box-shadow: 0px 2px 2px 0px #0000002e;
+  height: 180px;
+  width: 100%;
 }
 
 .cancel_modal_style {
-    font-family: "Roboto";
-    align-items: center;
-    padding: 1rem 1.5rem;
+  font-family: "Roboto";
+  align-items: center;
+  padding: 1rem 1.5rem;
 
-    h5 {
-        color: var(--light-black);
-    }
+  h5 {
+    color: var(--light-black);
+  }
 
-    h6 {
-        margin-top: 1rem;
-        color: var(--primary-color);
-    }
+  h6 {
+    margin-top: 1rem;
+    color: var(--primary-color);
+  }
 }
 
 .buttons_cancel_modal {
-    margin-top: 2.5rem;
-    display: flex;
-    gap: 1rem;
+  margin-top: 2.5rem;
+  display: flex;
+  gap: 1rem;
 
-    button {
-        border: 1px solid var(--text-grey);
-        color: var(--primary-color);
-        background-color: var(--white);
-        border-radius: 5px;
-        padding: 0.2rem 1rem;
-    }
+  button {
+    border: 1px solid var(--text-grey);
+    color: var(--primary-color);
+    background-color: var(--white);
+    border-radius: 5px;
+    padding: 0.2rem 1rem;
+  }
 
-    a {
-        color: var(--white);
-        background-color: var(--primary-color);
-        border-radius: 5px;
-        padding: 0.2rem 1rem;
-        text-decoration: none;
-    }
+  a {
+    color: var(--white);
+    background-color: var(--primary-color);
+    border-radius: 5px;
+    padding: 0.2rem 1rem;
+    text-decoration: none;
+  }
 }
 
 .modal-header .btn-close {
-    box-shadow: none;
+  box-shadow: none;
 }
 
 .modify_modal_image {
-    padding: 0;
-    width: fit-content;
-    height: fit-content;
+  padding: 0;
+  width: fit-content;
+  height: fit-content;
 
-    img {
-        width: 150px;
-        aspect-ratio: 1;
-    }
+  img {
+    width: 150px;
+    aspect-ratio: 1;
+  }
+}
+/*------------new Favrate Section-------*/
+.favourite_section2 {
+  padding: 1rem 3rem;
+  border-radius: 10px;
+  height: auto;
+  background-color: #f4f4f4;
+  display: flex;
+  flex-direction: column;
+}
+.fevorateContanrr {
+  gap: 1rem;
+  align-items: center;
+  background-color: white;
+  margin-top: 1rem;
+  overflow: hidden;
+  display: flex;
+  height: 100%;
+  padding: 1.3rem;
+
+  border-radius: 10px;
+  box-shadow: 0px 2px 2px 0px #0000002e;
+}
+.favImgs {
+  position: relative;
+  display: flex;
+
+  align-items: center;
+  width: 40%;
+  height: 100%;
+  img {
+    height: 100%;
+    width: 100%;
+  }
+}
+
+.SubmttBUTTTOnn {
+  border: none;
+  color: white;
+  font-size: 14px;
+  border-radius: 5px;
+  padding: 0.4rem 1rem;
+  background-color: #e33745;
+}
+.rightContainer {
+  width: 100%;
+  height: 100%;
+  display: flex;
+}
+.FaVCardcontent {
+  display: flex;
+  margin: 0 !important;
+  padding-top: 0.5rem;
+
+  height: 100%;
+  flex-direction: column;
+  justify-content: center;
+  p {
+    font-size: 13px;
+    margin: 0;
+  }
+  h5 {
+    font-size: 16px;
+  }
+}
+.AVrageSection {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 5px;
+  width: fit-content;
+  border-radius: 5px;
+  padding: 0.4rem 1.4rem;
+  background-color: #f8e8e9;
+  label {
+    font-size: 14px;
+
+    margin: 0 !important;
+  }
+  img {
+    height: 18px;
+    width: 18px;
+  }
+}
+.QuestionTOol {
+  height: 12px !important;
+  width: 12px !important;
+}
+
+.drinksSec {
+  padding-top: 10px;
+  gap: 8px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  label {
+    font-size: 14px;
+    margin: 0 !important;
+  }
+  img {
+    height: 12px;
+    width: 12px;
+  }
+}
+.TimingButtons {
+  padding-top: 0.4rem;
+  position: relative;
+  display: flex;
+}
+.timesBtns {
+  color: #535969;
+  font-weight: 600;
+  position: relative;
+  padding: 0.4rem 1rem;
+  font-size: 15px;
+  background-color: #faf8f8;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  p {
+    margin: 0;
+  }
+}
+.childtime {
+  color: #535969;
+  padding: 0rem 0.3rem;
+  border: 0.5px solid #535969;
+  top: 13;
+  background-color: white;
+  z-index: 30;
+
+  border-radius: 3px;
+  font-size: 14px;
+  position: absolute;
+}
+@media (max-width: 1200px) {
+  .fevorateContanrr {
+    align-items: start;
+    flex-direction: column;
+  }
 }

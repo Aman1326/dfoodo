@@ -14,6 +14,7 @@ const save_restaurantOwnerdetails =
   local_server_link_react + "save_restaurantOwnerdetails/";
 const update_profile = local_server_link_react + "update_profile/";
 const get_profile = local_server_link_react + "get_profile/";
+const get_favourite = local_server_link_react + "get_favourite/";
 const get_restropage_webapp =
   local_server_link_react + "get_restropage_webapp/";
 const get_landingpage_webapp =
@@ -49,4 +50,5 @@ export {
   imageApi,
   get_restropage_webapp,
   get_profile,
+  get_favourite,
 };
