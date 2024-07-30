@@ -91,7 +91,13 @@ const Collections = ({ data }) => {
                 {data &&
                   data.length > 0 &&
                   data.map((venue, index) => (
-                    <div key={index} className="city-item">
+                    <div
+                      key={index}
+                      // onClick={handleLinkClick(
+                      //   match_and_return_seo_link(venue.primary_id)
+                      // )}
+                      className="city-item"
+                    >
                       <img
                         className="city-image"
                         src={`${APL_LINK}/assets/${venue.category_master_image}`}
