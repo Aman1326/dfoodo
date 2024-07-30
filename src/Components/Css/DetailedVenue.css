@@ -1,6 +1,7 @@
 .image_gallery_section img {
   width: 100%;
   height: 100%;
+  aspect-ratio: 1.9;
   padding: 0.1rem;
 }
 
@@ -119,8 +120,8 @@
   justify-content: center;
   padding: 0rem 0.5rem;
   margin-left: auto;
-    margin-right: auto;
-    margin-top: 0.2rem;
+  margin-right: auto;
+  margin-top: 0.2rem;
   border-radius: 25px;
 }
 
@@ -151,10 +152,10 @@
 }
 
 .calenday_modelScreen {
-    height: 380px;
-    width: 100%;
-    padding: 1rem 1rem;
-    display: flex;
+  height: 380px;
+  width: 100%;
+  padding: 1rem 1rem;
+  display: flex;
 }
 
 .ocsnDopdown {
@@ -235,12 +236,8 @@
   border-radius: 0 !important;
 }
 
-.personInfo
-  .react-international-phone-input-container
-  .react-international-phone-country-selector-button,
-.personInfo
-  .react-international-phone-input-container
-  .react-international-phone-input {
+.personInfo .react-international-phone-input-container .react-international-phone-country-selector-button,
+.personInfo .react-international-phone-input-container .react-international-phone-input {
   border-radius: 0 !important;
 }
 
@@ -284,13 +281,14 @@
 .steps {
   background-color: var(--light-black);
   display: flex;
-    gap: 1.2rem;
+  gap: 1.2rem;
   width: fit-content;
   font-size: 14px;
   padding: 0.2rem 1rem;
   flex-direction: row;
-    border-top-left-radius: 5px;
-    border-bottom-left-radius: 5px;
+  cursor: pointer;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
 
   img {
     width: 20px;
@@ -358,11 +356,9 @@
   bottom: 0;
   left: 0;
   right: 0;
-  background: linear-gradient(
-    to bottom,
-    rgba(255, 255, 255, 0) 0%,
-    var(--secondary-black) 100%
-  );
+  background: linear-gradient(to bottom,
+      rgba(255, 255, 255, 0) 0%,
+      var(--secondary-black) 100%);
 
   height: 40%;
 }
@@ -414,171 +410,171 @@
 }
 
 .time_discount_container_detailedVenue {
-    display: flex !important;
-    flex-wrap: wrap !important;
-    gap: 0.5rem !important;
-    cursor: pointer;
-    justify-content: center;
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 0.5rem !important;
+  cursor: pointer;
+  justify-content: center;
 
-    .discount_section p:hover {
-        background-color: var(--secondary-black);
-        color: var(--white);
-    }
+  .discount_section p:hover {
+    background-color: var(--secondary-black);
+    color: var(--white);
+  }
 }
 
 .calendar_modal_heading {
-    display: flex;
-    justify-content: left;
+  display: flex;
+  justify-content: left;
 }
 
 .guests_calendar_modal {
-    display: flex;
-    gap: 0.3rem;
-    justify-content: center;
-    margin-bottom: 1rem;
+  display: flex;
+  gap: 0.3rem;
+  justify-content: center;
+  margin-bottom: 1rem;
 
-    p {
-        border: 1px solid grey;
-        padding: 0.5rem 1.5rem;
-        margin: 0;
-        font-family: "Roboto";
-        font-size: 14px;
-        border-radius: 5px;
-    }
+  p {
+    border: 1px solid grey;
+    padding: 0.5rem 1.5rem;
+    margin: 0;
+    font-family: "Roboto";
+    font-size: 14px;
+    border-radius: 5px;
+  }
 
-    p:hover {
-        background-color: var(--light-pink);
-        cursor: pointer;
-    }
+  p:hover {
+    background-color: var(--light-pink);
+    cursor: pointer;
+  }
 }
 
 .wrapper_calendar_modal {
+  width: 100%;
+  text-align: left;
+
+  input {
     width: 100%;
-    text-align: left;
+    box-shadow: none;
+    outline: none;
+    padding: 0.4rem 1rem;
+    border-radius: 5px;
+    border: 1px solid grey;
+    margin-bottom: 0.5rem;
+  }
 
-    input {
-        width: 100%;
-        box-shadow: none;
-        outline: none;
-        padding: 0.4rem 1rem;
-        border-radius: 5px;
-        border: 1px solid grey;
-        margin-bottom: 0.5rem;
-    }
+  a {
+    margin-top: 2rem;
 
-    a {
-        margin-top: 2rem;
-
-        display: flex;
-        justify-content: center !important;
-        background-color: var(--primary-color);
-        text-decoration: none;
-        color: var(--white);
-        padding: 0.4rem 1rem;
-        border-radius: 5px;
+    display: flex;
+    justify-content: center !important;
+    background-color: var(--primary-color);
+    text-decoration: none;
+    color: var(--white);
+    padding: 0.4rem 1rem;
+    border-radius: 5px;
 
 
-    }
+  }
 }
 
 .details_step_calendar_modal {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  color: var(--text-grey);
+
+  span {
     display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-    color: var(--text-grey);
+    justify-content: left;
+    text-align: left;
+    height: fit-content;
+    align-items: center;
+  }
 
-    span {
-        display: flex;
-        justify-content: left;
-        text-align: left;
-        height: fit-content;
-        align-items: center;
-    }
+  input {
+    background: #EDEDED;
+    border: none;
+    padding: 0.4rem 1rem;
+    margin-top: 0.5rem;
+  }
 
-    input {
-        background: #EDEDED;
-        border: none;
-        padding: 0.4rem 1rem;
-        margin-top: 0.5rem;
-    }
+  h6 {
+    margin: 0;
+    padding-right: 1rem;
+  }
 
-    h6 {
-        margin: 0;
-        padding-right: 1rem;
-    }
+  p {
+    margin: 0;
+  }
 
-    p {
-        margin: 0;
-    }
-
-    label {
-        margin-left: 1rem;
-        font-family: "Roboto";
-        font-size: 14px;
-        align-items: center;
-    }
+  label {
+    margin-left: 1rem;
+    font-family: "Roboto";
+    font-size: 14px;
+    align-items: center;
+  }
 }
 
 .checkBoxUnique {
-    width: fit-content !important;
+  width: fit-content !important;
 }
 
 .final_step_wrapper {
-    background: #EDEBEB;
+  background: #EDEBEB;
 
+  margin: auto;
+  text-align: center;
+
+  p {
+    background-color: var(--white);
+    color: var(--text-black);
+    padding: 0.4rem 1.5rem;
+    border-radius: 5px;
+  }
+
+  span {
     margin: auto;
-    text-align: center;
-
-    p {
-        background-color: var(--white);
-        color: var(--text-black);
-        padding: 0.4rem 1.5rem;
-        border-radius: 5px;
-    }
-
-    span {
-        margin: auto;
-    }
+  }
 }
 
 .calenday_modelScreen.greyBackground {
-    background: #EDEBEB;
-    display: flex;
+  background: #EDEBEB;
+  display: flex;
 
 }
 
 .confirmed_booking_span {
-    margin-top: auto;
-    margin-bottom: auto;
+  margin-top: auto;
+  margin-bottom: auto;
 
-    h6 {
-        color: var(--green);
-        font-weight: 600;
-    }
+  h6 {
+    color: var(--green);
+    font-weight: 600;
+  }
 
-    desc {
-        font-size: 14px;
-        font-weight: 500;
-    }
+  desc {
+    font-size: 14px;
+    font-weight: 500;
+  }
 
 }
 
 .css-23p0if-MuiButtonBase-root-MuiPickersDay-root.Mui-selected {
-    background-color: var(--light-black) !important;
+  background-color: var(--light-black) !important;
 }
 
 .rhombus {
-    height: 30px;
-    /* adjust to control the size  */
-    aspect-ratio: 1;
-    clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%);
-    background: var(--light-black);
-    margin-left: -15px;
+  height: 30px;
+  /* adjust to control the size  */
+  aspect-ratio: 1;
+  clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%);
+  background: var(--light-black);
+  margin-left: -15px;
 }
 
 .square {
-    border-top-right-radius: 5px !important;
-    border-bottom-right-radius: 5px !important;
-    background: var(--light-black);
-    padding: 0.2rem;
+  border-top-right-radius: 5px !important;
+  border-bottom-right-radius: 5px !important;
+  background: var(--light-black);
+  padding: 0.2rem;
 }
