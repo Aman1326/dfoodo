@@ -23,18 +23,14 @@ import OnBoardingTick from "../Assets/OnBoardingTick.svg";
 import $ from "jquery";
 import {
   update_profile,
+  get_profile,
   server_post_data,
 } from "../ServiceConnection/serviceconnection.js";
 import { retrieveData } from "../LocalConnection/LocalConnection.js";
 import {
-  check_vaild_save,
   combiled_form_data,
-  empty_form,
   handleAphabetsChange,
-  handleEmailChange,
-  handleError,
-  handleIaphabetnumberChange,
-  handleNumbersChange,
+
   ////handleSuccess,
 } from "../CommonJquery/CommonJquery.js";
 let customer_id = "0";
@@ -204,21 +200,25 @@ const ProfilePage = () => {
   const master_data_get = async () => {
     setshowLoaderAdmin(true);
     const fd = new FormData();
-    fd.append("call_id", customer_id);
-    await server_post_data(update_profile, fd)
+    fd.append("call_id", "1");
+    await server_post_data(get_profile, fd)
       .then((Response) => {
+        console.log(Response.data.message.guest_data);
         if (Response.data.error) {
           // handleError(Response.data.message);
         } else {
-          if (Response.data.message.owner_data.length > 0) {
-            seteditProfileData(Response.data.message.owner_data[0]);
-            setUserNumber(
-              Response.data.message.owner_data[0].owner_moblie_no_without_zip
-            );
+          if (Response.data.message.guest_data.length > 0) {
+            seteditProfileData(Response.data.message.guest_data[0]);
 
-            const ownerData = Response.data.message.owner_data[0];
-            if (ownerData.owner_dob) {
-              setDob(ownerData.owner_dob);
+            const ownerData = Response.data.message.guest_data[0];
+            console.log(ownerData.guest_dob);
+            if (ownerData.guest_dob) {
+              const dobArray = ownerData.guest_dob.split("-");
+              setDob({
+                day: parseInt(dobArray[2], 10),
+                month: parseInt(dobArray[1], 10),
+                year: parseInt(dobArray[0], 10),
+              });
             }
           }
         }
@@ -236,7 +236,7 @@ const ProfilePage = () => {
     let isValid = true;
 
     // Check first name
-    const firstName = document.getElementById("name").value.trim();
+    const firstName = document.getElementById("fname").value.trim();
     if (!firstName) {
       document.getElementById("nameError").innerText =
         "Please enter the first name";
@@ -297,7 +297,7 @@ const ProfilePage = () => {
     let fd_from = combiled_form_data(form_data, null);
     const dobString = `${year}-${month}-${day}`;
     fd_from.append("dob", dobString);
-    fd_from.append("call_id", customer_id);
+    fd_from.append("call_id", "1");
 
     try {
       setshowLoaderAdmin(true);
@@ -369,9 +369,8 @@ const ProfilePage = () => {
     },
   ];
 
-  console.log(venue_text.venue_name);
-
   const modalClass = ModalType === "cancel" ? "modal-md" : "modal-lg";
+
   return (
     <>
       <Header />
@@ -691,11 +690,11 @@ const ProfilePage = () => {
                                     </label>
                                     <input
                                       type="text"
-                                      id="name"
-                                      name="name"
+                                      id="fname"
+                                      name="fname"
                                       className="form-control"
                                       defaultValue={
-                                        editProfileData.owner_fname || ""
+                                        editProfileData.guest_fname || ""
                                       }
                                       onChange={handleInputChange}
                                     />
@@ -714,7 +713,7 @@ const ProfilePage = () => {
                                       name="lname"
                                       className="form-control"
                                       defaultValue={
-                                        editProfileData.owner_lname || ""
+                                        editProfileData.guest_lname || ""
                                       }
                                       onChange={handleInputChange}
                                     />
@@ -733,7 +732,7 @@ const ProfilePage = () => {
                                       name="email"
                                       className="form-control"
                                       defaultValue={
-                                        editProfileData.owner_email || ""
+                                        editProfileData.guest_email || ""
                                       }
                                       onChange={handleInputChange}
                                     />
@@ -789,20 +788,6 @@ const ProfilePage = () => {
                                       ></span>
                                     </div>
                                   </div>
-                                  <label htmlFor="venueLocation ">City*</label>
-                                  <input
-                                    type="text"
-                                    className="form-control trio_mandatory "
-                                    name="searchInput"
-                                    id="searchInput"
-                                    maxLength={30}
-                                    onChange={handleInputChange}
-                                    onInput={handleAphabetsChange}
-                                    style={{
-                                      width: "48%",
-                                      marginLeft: "0.5rem",
-                                    }}
-                                  />
                                 </div>
                                 <div className="row">
                                   <div className="col-md-6">
@@ -827,7 +812,7 @@ const ProfilePage = () => {
                                         name="gender"
                                         value="Male"
                                         defaultChecked={
-                                          editProfileData.owner_gender ===
+                                          editProfileData.guest_gender ===
                                             "Male" || ""
                                         }
                                       />
@@ -839,7 +824,7 @@ const ProfilePage = () => {
                                         name="gender"
                                         value="Female"
                                         defaultChecked={
-                                          editProfileData.owner_gender ===
+                                          editProfileData.guest_gender ===
                                             "Female" || ""
                                         }
                                       />
@@ -851,7 +836,7 @@ const ProfilePage = () => {
                                         name="gender"
                                         value="Others"
                                         defaultChecked={
-                                          editProfileData.owner_gender ===
+                                          editProfileData.guest_gender ===
                                             "Others" || ""
                                         }
                                       />
