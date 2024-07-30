@@ -162,7 +162,7 @@ function Home() {
             </div>
           </div>
           <div>
-            <Collections data={collection} />
+            <Collections data={collection} SEOloop={SEOloop} />
           </div>
         </section>
         {/* Popular Venues */}

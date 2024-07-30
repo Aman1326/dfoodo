@@ -14,33 +14,39 @@ import alcoholPresent from "../Assets/alcohol-served3x.png.svg";
 import valetParking from "../Assets/valet-parking3x.png.svg";
 import star from "../Assets/star.svg";
 import Heart from "react-heart";
+
 import contactus from "../Assets/averagePrice.svg";
+import qustionTOoltip from "../Assets/qustionTOoltip.svg";
 import calendar from "../Assets/calendarSearchBar.svg";
+import drink from "../Assets/drink.svg";
+import drink2 from "../Assets/drink2.svg";
+import drink3 from "../Assets/drink3.svg";
 import Successs from "../Assets/check.png";
 import { PhoneInput } from "react-international-phone";
 import { Modal } from "react-bootstrap";
 import OnBoardingTick from "../Assets/OnBoardingTick.svg";
+
 import $ from "jquery";
 import {
   update_profile,
+  get_profile,
+  get_favourite,
   server_post_data,
+  APL_LINK,
 } from "../ServiceConnection/serviceconnection.js";
 import { retrieveData } from "../LocalConnection/LocalConnection.js";
 import {
-  check_vaild_save,
   combiled_form_data,
-  empty_form,
   handleAphabetsChange,
-  handleEmailChange,
   handleError,
-  handleIaphabetnumberChange,
-  handleNumbersChange,
+
   ////handleSuccess,
 } from "../CommonJquery/CommonJquery.js";
 let customer_id = "0";
 const ProfilePage = () => {
   const [activeTabIndex, setActiveTabIndex] = useState(0);
   const [isTabPanelVisible, setIsTabPanelVisible] = useState(false);
+  const [getFavrate, setFavrate] = useState([]);
 
   const handleTabClick = (index) => {
     setActiveTabIndex(index);
@@ -161,16 +167,6 @@ const ProfilePage = () => {
     venues_data_labeled.length / itemsPerPage
   );
 
-  const handleNextPage = () => {
-    setCurrentPaginationPage((prevPage) =>
-      Math.min(prevPage + 1, totalPaginationPages)
-    );
-  };
-
-  const handlePreviousPage = () => {
-    setCurrentPaginationPage((prevPage) => Math.max(prevPage - 1, 1));
-  };
-
   const indexOfLastItem = currentPaginationPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const currentPaginationItems = venues_data_labeled.slice(
@@ -199,26 +195,30 @@ const ProfilePage = () => {
 
   useEffect(() => {
     master_data_get();
+    master_data_Favrate();
   }, []);
 
   const master_data_get = async () => {
     setshowLoaderAdmin(true);
     const fd = new FormData();
-    fd.append("call_id", customer_id);
-    await server_post_data(update_profile, fd)
+    fd.append("call_id", "1");
+    await server_post_data(get_profile, fd)
       .then((Response) => {
         if (Response.data.error) {
           // handleError(Response.data.message);
         } else {
-          if (Response.data.message.owner_data.length > 0) {
-            seteditProfileData(Response.data.message.owner_data[0]);
-            setUserNumber(
-              Response.data.message.owner_data[0].owner_moblie_no_without_zip
-            );
+          if (Response.data.message.guest_data.length > 0) {
+            seteditProfileData(Response.data.message.guest_data[0]);
 
-            const ownerData = Response.data.message.owner_data[0];
-            if (ownerData.owner_dob) {
-              setDob(ownerData.owner_dob);
+            const ownerData = Response.data.message.guest_data[0];
+
+            if (ownerData.guest_dob) {
+              const dobArray = ownerData.guest_dob.split("-");
+              setDob({
+                day: parseInt(dobArray[2], 10),
+                month: parseInt(dobArray[1], 10),
+                year: parseInt(dobArray[0], 10),
+              });
             }
           }
         }
@@ -229,6 +229,29 @@ const ProfilePage = () => {
       });
   };
 
+  const master_data_Favrate = async () => {
+    setshowLoaderAdmin(true);
+    try {
+      const fd = new FormData();
+
+      fd.append("call_id", "1");
+      fd.append("flag", "1");
+
+      const Response = await server_post_data(get_favourite, fd);
+      console.log("adadadadad", Response.data.message);
+      if (Response.data.error) {
+        handleError(Response.data.message);
+      } else {
+        console.log(Response.data.message.like_lt);
+        setFavrate(Response.data.message.like_lt);
+      }
+    } catch (error) {
+      handleError(error.message);
+    } finally {
+      setshowLoaderAdmin(false);
+    }
+  };
+  // console.log(getFavrate);
   const handleInputChange = (event) => {
     setFormChanged(true); // Set formChanged to true whenever there's an input change
   };
@@ -236,7 +259,7 @@ const ProfilePage = () => {
     let isValid = true;
 
     // Check first name
-    const firstName = document.getElementById("name").value.trim();
+    const firstName = document.getElementById("fname").value.trim();
     if (!firstName) {
       document.getElementById("nameError").innerText =
         "Please enter the first name";
@@ -297,7 +320,7 @@ const ProfilePage = () => {
     let fd_from = combiled_form_data(form_data, null);
     const dobString = `${year}-${month}-${day}`;
     fd_from.append("dob", dobString);
-    fd_from.append("call_id", customer_id);
+    fd_from.append("call_id", "1");
 
     try {
       setshowLoaderAdmin(true);
@@ -369,9 +392,8 @@ const ProfilePage = () => {
     },
   ];
 
-  console.log(venue_text.venue_name);
-
   const modalClass = ModalType === "cancel" ? "modal-md" : "modal-lg";
+
   return (
     <>
       <Header />
@@ -562,7 +584,7 @@ const ProfilePage = () => {
                 <button className="back-button" onClick={handleBackClick}>
                   Back
                 </button>
-                <div className="favourite_section">
+                {/* <div className="favourite_section">
                   <h6>My Favorite Restaurant </h6>
                   <div className="favourite_restaurant_cards_section row">
                     {currentPaginationItems.map((venue, index) => (
@@ -655,6 +677,57 @@ const ProfilePage = () => {
                       </div>
                     ))}
                   </div>
+                </div> */}
+                <div className="favourite_section2">
+                  <h6>My Favorite Restaurant</h6>
+                  <div className="container">
+                    {getFavrate.map((venue, index) => (
+                      <div className="fevorateContanrr" key={index}>
+                        <div className="favImgs">
+                          <img
+                            src={`${APL_LINK}/assets/${venue.data[0].menu_image}`}
+                            alt="venueImg"
+                          />
+                        </div>
+                        <div className="rightContainer">
+                          <div className="FaVCardcontent">
+                            <h5>{venue.data[0].restaurant_name}</h5>
+                            <p>{venue.data[0].restaurant_full_adrress}</p>
+                            <div className="AVrageSection">
+                              <img
+                                className="ContctSvgIon"
+                                src={contactus}
+                                alt="cont"
+                              />
+                              <label>
+                                ₹{venue.restaurant_price} Average Price
+                              </label>
+                              <img
+                                className="QuestionTOol"
+                                src={qustionTOoltip}
+                                alt="tooltip"
+                              />
+                            </div>
+                            <div className="drinksSec">
+                              <img src={drink} alt="drink" />
+                              <label>Bar</label>
+                              <img src={drink2} alt="drink2" />
+                              <label>Alcohol Served</label>
+                              <img src={drink3} alt="drink3" />
+                              <label>Valet Parking</label>
+                            </div>
+                            <div className="TimingButtons">
+                              <div className="timesBtns">
+                                <p>17:30</p>
+                                <div className="childtime">-20%</div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                    {showLoaderAdmin && <p>Loading...</p>}
+                  </div>
                 </div>
               </TabPanel>
               <TabPanel
@@ -691,11 +764,11 @@ const ProfilePage = () => {
                                     </label>
                                     <input
                                       type="text"
-                                      id="name"
-                                      name="name"
+                                      id="fname"
+                                      name="fname"
                                       className="form-control"
                                       defaultValue={
-                                        editProfileData.owner_fname || ""
+                                        editProfileData.guest_fname || ""
                                       }
                                       onChange={handleInputChange}
                                     />
@@ -714,7 +787,7 @@ const ProfilePage = () => {
                                       name="lname"
                                       className="form-control"
                                       defaultValue={
-                                        editProfileData.owner_lname || ""
+                                        editProfileData.guest_lname || ""
                                       }
                                       onChange={handleInputChange}
                                     />
@@ -733,7 +806,7 @@ const ProfilePage = () => {
                                       name="email"
                                       className="form-control"
                                       defaultValue={
-                                        editProfileData.owner_email || ""
+                                        editProfileData.guest_email || ""
                                       }
                                       onChange={handleInputChange}
                                     />
@@ -789,20 +862,6 @@ const ProfilePage = () => {
                                       ></span>
                                     </div>
                                   </div>
-                                  <label htmlFor="venueLocation ">City*</label>
-                                  <input
-                                    type="text"
-                                    className="form-control trio_mandatory "
-                                    name="searchInput"
-                                    id="searchInput"
-                                    maxLength={30}
-                                    onChange={handleInputChange}
-                                    onInput={handleAphabetsChange}
-                                    style={{
-                                      width: "48%",
-                                      marginLeft: "0.5rem",
-                                    }}
-                                  />
                                 </div>
                                 <div className="row">
                                   <div className="col-md-6">
@@ -827,7 +886,7 @@ const ProfilePage = () => {
                                         name="gender"
                                         value="Male"
                                         defaultChecked={
-                                          editProfileData.owner_gender ===
+                                          editProfileData.guest_gender ===
                                             "Male" || ""
                                         }
                                       />
@@ -839,7 +898,7 @@ const ProfilePage = () => {
                                         name="gender"
                                         value="Female"
                                         defaultChecked={
-                                          editProfileData.owner_gender ===
+                                          editProfileData.guest_gender ===
                                             "Female" || ""
                                         }
                                       />
@@ -851,7 +910,7 @@ const ProfilePage = () => {
                                         name="gender"
                                         value="Others"
                                         defaultChecked={
-                                          editProfileData.owner_gender ===
+                                          editProfileData.guest_gender ===
                                             "Others" || ""
                                         }
                                       />
@@ -864,9 +923,13 @@ const ProfilePage = () => {
                                   </div>
                                 </div>
                                 <div className="row">
-                                  <div className="col-md-12 checkBox_registerMyVenue">
+                                  <div
+                                    className="col-md-12 checkBox_registerMyVenue"
+                                    style={{ justifyContent: "end" }}
+                                  >
                                     <br />
                                     <button
+                                      className="SubmttBUTTTOnn"
                                       onClick={(e) => {
                                         e.preventDefault();
                                         handleSaveChangesdynamic(

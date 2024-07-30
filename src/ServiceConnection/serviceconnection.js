@@ -9,10 +9,13 @@ const retrievedAdminId = retrieveData("admin_id");
 const get_blog_data_website =
   local_server_link_react + "get_blog_data_website/";
 const blog_details_website = local_server_link_react + "blog_details_website/";
+const get_categorypage_webapp = local_server_link_react + "get_categorypage_webapp/";
 const get_all_faq_website = local_server_link_react + "get_all_faq_website/";
 const save_restaurantOwnerdetails =
   local_server_link_react + "save_restaurantOwnerdetails/";
 const update_profile = local_server_link_react + "update_profile/";
+const get_profile = local_server_link_react + "get_profile/";
+const get_favourite = local_server_link_react + "get_favourite/";
 const get_restropage_webapp =
   local_server_link_react + "get_restropage_webapp/";
 const get_landingpage_webapp =
@@ -47,4 +50,7 @@ export {
   get_landingpage_webapp,
   imageApi,
   get_restropage_webapp,
+  get_categorypage_webapp,
+  get_profile,
+  get_favourite,
 };

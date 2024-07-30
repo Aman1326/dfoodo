@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Modal, Button } from "react-bootstrap";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import Header from "./Header";
 import filter from "../Assets/filter.svg";
 import "../Components/Css/Venue.css";
@@ -33,8 +33,45 @@ import filterimg7 from "../Assets/filterImg7.svg";
 import DownloadApp from "./DownloadApp";
 import contactus from "../Assets/averagePrice.svg";
 import Heart from "react-heart";
+import {
+  server_post_data,
+  get_categorypage_webapp,
+} from "../ServiceConnection/serviceconnection";
+
+let login_flag_res = "0";
+let customer_id = "1";
+let customer_name = "0";
+let customer_mobile_no = "0";
+let customer_email = "0";
 const Venue = () => {
-  //   const filters = ["Rating: 4,0+", "Popular", "Budget Friendly", "High Rated"];
+  const location = useLocation();
+  const currentUrl = location.pathname.substring(1);
+  const [data, setData] = useState([]);
+
+  const master_data_get = async () => {
+    // setshowLoaderAdmin(true);
+    const fd = new FormData();
+    fd.append("current_url", "/" + currentUrl);
+    fd.append("restuarant_id", customer_id);
+    await server_post_data(get_categorypage_webapp, fd)
+      .then((Response) => {
+        if (Response.data.error) {
+          // handleError(Response.data.message);
+        } else {
+          console.log(Response.data.message);
+          setData(Response.data.message.restro_active_data);
+        }
+        // setshowLoaderAdmin(false);
+      })
+      .catch((error) => {
+        // setshowLoaderAdmin(false);
+      });
+  };
+
+  useEffect(() => {
+    master_data_get();
+  }, []);
+
   const filters = [
     {
       filter_image: filterimg1,
