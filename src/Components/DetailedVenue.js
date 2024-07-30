@@ -468,7 +468,7 @@ const DetailedVenue = () => {
                   <span className="first_row_black_section_carousel mb-4">
                     <div className="first_row_black_section_carousel">
                       <img src={timerClock} alt="timerClock" />
-                      {detail.timing && (
+                      {detail.timing && detail.timing.length > 0 && (
                         <p style={{ marginBottom: "0" }}>
                           Open from {detail.timing[0].start_time} -{" "}
                           {detail.timing[0].end_time}
