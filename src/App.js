@@ -13,6 +13,8 @@ import Blog from "./Components/Blog";
 import ProfilePage from "./Components/ProfilePage";
 import OnBoarding from "./Components/OnBoarding";
 import Blog2 from "./Components/Blog2";
+import TermsOfuse from "./Components/TermsOfuse";
+import PrivacyPolicy from "./Components/PrivacyPolicy";
 
 function App() {
   return (
@@ -30,6 +32,8 @@ function App() {
           <Route path="blog/blog_detail/:id" element={<Blog2 />} />
           <Route path="profile" element={<ProfilePage />} />
           <Route path="onBoarding" element={<OnBoarding />} />
+          <Route path="termsOfUse" element={<TermsOfuse />} />
+          <Route path="privacyPolicy" element={<PrivacyPolicy />} />
         </Routes>
       </BrowserRouter>
     </div>

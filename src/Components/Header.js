@@ -301,10 +301,11 @@ function Header() {
         centered
         className="success_modal_reg modal-md"
       >
+        <Modal.Header closeButton></Modal.Header>
         <Modal.Body>
           <div className="phoneApp_modal_register_my_venue ">
             <h3>Find the best restaurants around you using Dfoodo App!</h3>
-            <p>Download TheFork app by scanning the QR code</p>
+            <p>Download Dfoodo app by scanning the QR code</p>
             <img src={qr} alt="altqr" />
           </div>
         </Modal.Body>

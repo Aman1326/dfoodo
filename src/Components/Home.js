@@ -63,7 +63,7 @@ function Home() {
           Settestimonials(Response.data.message.testimonial_active_data);
           Setblogs(Response.data.message.blog_active_data);
           setSEOloop(Response.data.message.seo_loop);
-          setCollection(Response.data.message.category_active_data);
+          setCollection(Response.data.message.category_countsss);
           setCountry(Response.data.message.countries_name);
           setCity(Response.data.message.cities_name);
           setRestaurantByCountry(Response.data.message.restro_country);

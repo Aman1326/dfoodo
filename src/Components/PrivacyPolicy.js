@@ -1,28 +1,20 @@
 import React from "react";
 import Header from "./Header";
 import Footer from "./Footer";
-import "../Components/Css/TermsOfuse.css";
 
 const TermsOfuse = () => {
   return (
     <div className="howitworks_wrapper">
       <Header />
-      <div className=" container-lg headerSection_howitWorks col-lg-12">
+      <div className="container-lg">
         <div className="terms_imageContainer">
-          <div className="center_text_wrapper">
-            <h3>Terms and Conditions of Use</h3>
+          <div className="center_text_wrapper headingMargin">
+            <h3>Privacy Policy</h3>
           </div>
         </div>
       </div>
+
       <div className="container-lg privacy_policy_headingContainer">
-        <h5>
-          {" "}
-          Welcome to ShopUp App! These terms and conditions ("Terms") govern
-          your use of our ecommerce mobile application (the "App") and the
-          services provided therein. By accessing or using the App, you agree to
-          be bound by these Terms. If you do not agree with any part of these
-          Terms, you may not use the App.
-        </h5>
         <div className="termsAndConditions_points privacyPolicy_points">
           <ul>
             <li>

@@ -365,11 +365,13 @@ const ProfilePage = () => {
   const venue_text = [
     {
       venue_image: bar1,
-      name: "venue name",
+      venue_name: "venue name",
     },
   ];
 
-  const modalClass = ModalType === "cancel" ? "modal-md" : "modal-xl";
+  console.log(venue_text.venue_name);
+
+  const modalClass = ModalType === "cancel" ? "modal-md" : "modal-lg";
   return (
     <>
       <Header />

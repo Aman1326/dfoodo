@@ -41,17 +41,19 @@
 }
 
 .slick-next {
-    right: -2px !important;
+    right: 2px !important;
 }
 
 
 .slick-prev,
 .slick-next {
-    background: transparent !important;
+    top: 45% !important;
+    width: 30px !important;
+    height: 30px !important;
+    aspect-ratio: 1;
 }
 
 .cities_mapped {
-    padding-left: 2rem;
     margin: auto;
 }
 
