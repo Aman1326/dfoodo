@@ -11,7 +11,9 @@ import right from "../Assets/rightArrow_white.svg";
 import leftArrowIcon from "../Assets/leftArrowIcon.svg";
 import rightArrowSvg from "../Assets/rightArrowIcon.svg";
 import { APL_LINK } from "../ServiceConnection/serviceconnection";
-const Collections = ({ data }) => {
+import { handleLinkClick } from "../CommonJquery/CommonJquery";
+import { Link } from "react-router-dom";
+const Collections = ({ data, SEOloop }) => {
   //browse cities section
   const Browse_cities = [
     { image: city1, description: "Veggie Friendly", places: "8 Places" },
@@ -80,6 +82,22 @@ const Collections = ({ data }) => {
     ],
   };
 
+  const match_and_return_seo_link = (v_id, catagory) => {
+    let data_seo_link_final = "/restro/" + catagory + "/" + v_id;
+    let data_seo_link = data_seo_link_final;
+    if (SEOloop) {
+      const matchedItem = SEOloop.find((data) => {
+        return data_seo_link === data.call_function_name;
+      });
+
+      if (matchedItem) {
+        data_seo_link_final = matchedItem.pretty_function_name;
+      }
+    }
+    return data_seo_link_final;
+  };
+  console.log(data);
+
   return (
     <div>
       {/* browse other cities */}
@@ -91,25 +109,30 @@ const Collections = ({ data }) => {
                 {data &&
                   data.length > 0 &&
                   data.map((venue, index) => (
-                    <div
-                      key={index}
-                      // onClick={handleLinkClick(
-                      //   match_and_return_seo_link(venue.primary_id)
-                      // )}
-                      className="city-item"
-                    >
-                      <img
-                        className="city-image"
-                        src={`${APL_LINK}/assets/${venue.category_master_image}`}
-                        alt={`Venue ${index + 1}`}
-                      />
-                      <div className="city_description">
-                        <h6>{venue.category_master_name}</h6>
-                        <span className="d-flex flex-row">
-                          <p>{venue.category_count} Places</p>
-                          <img src={right} alt="right" />
-                        </span>
-                      </div>
+                    <div key={index} className="city-item">
+                      <Link
+                        onClick={() =>
+                          handleLinkClick(
+                            match_and_return_seo_link(
+                              venue.primary_id,
+                              venue.category_master_name
+                            )
+                          )
+                        }
+                      >
+                        <img
+                          className="city-image"
+                          src={`${APL_LINK}/assets/${venue.category_master_image}`}
+                          alt={`Venue ${index + 1}`}
+                        />
+                        <div className="city_description">
+                          <h6>{venue.category_master_name}</h6>
+                          <span className="d-flex flex-row">
+                            <p>{venue.category_count} Places</p>
+                            <img src={right} alt="right" />
+                          </span>
+                        </div>
+                      </Link>
                     </div>
                   ))}
               </Slider>

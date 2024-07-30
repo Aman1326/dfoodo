@@ -74,12 +74,7 @@ const DetailedVenue = () => {
   const [otpSent, setOtpSent] = useState(false); // State to manage OTP view
   const [otp, setOtp] = useState(""); // State to manage the entered OTP
 
-  const Venue_tags = [
-    "Wedding ",
-    "Engagement",
-    "Corporate Event",
-    "Birthday Party",
-  ];
+
   // react tabs:
   const [activeTab, setActiveTab] = useState("about");
 
@@ -116,109 +111,8 @@ const DetailedVenue = () => {
     );
   }
   //  array for venue features:
-  const features_venue = [
-    {
-      venue_feature_image: featureImg1,
-      venue_feature_name: "Buffet",
-    },
-    {
-      venue_feature_image: featureImg2,
-      venue_feature_name: "Coffee",
-    },
-    {
-      venue_feature_image: featureImg3,
-      venue_feature_name: "Pets Allowed",
-    },
-    {
-      venue_feature_image: featureImg4,
-      venue_feature_name: "Rooftop ",
-    },
-    {
-      venue_feature_image: featureImg5,
-      venue_feature_name: "Garden",
-    },
-    {
-      venue_feature_image: featureImg6,
-      venue_feature_name: "Bridal Suite",
-    },
-    {
-      venue_feature_image: featureImg7,
-      venue_feature_name: "Catering",
-    },
-    {
-      venue_feature_image: featureImg8,
-      venue_feature_name: "Outdoors ",
-    },
-  ];
-
-  const eventData = [
-    { label: "Conference" },
-    { label: "Workshop" },
-    { label: "Seminar" },
-    { label: "Meetup" },
-    { label: "Retreat" },
-    { label: "Exhibition" },
-  ];
-
-  const events = [
-    {
-      label: "Wedding",
-      image: Weeding,
-    },
-    {
-      label: "Event",
-      image: Event,
-    },
-    {
-      label: "Engagement",
-      image: Engagement,
-    },
-    {
-      label: "Birthday",
-      image: Birthday,
-    },
-    {
-      label: "Yoga",
-      image: Yoga,
-    },
-    {
-      label: "Photoshoot",
-      image: Photoshoot,
-    },
-  ];
-
-  const timePeriods = [
-    {
-      label: "Early Morning",
-      startTime: "5:00 AM",
-      endTime: "7:00 AM",
-    },
-    {
-      label: "Morning",
-      startTime: "7:00 AM",
-      endTime: "11:00 AM",
-    },
-    {
-      label: "Afternoon",
-      startTime: "12:00 PM",
-      endTime: "3:30 PM",
-    },
-    {
-      label: "Evening",
-      startTime: "4:00 PM",
-      endTime: "5:00 PM",
-    },
-    {
-      label: "Night",
-      startTime: "7:00 PM",
-      endTime: "12:00 AM", // technically next day, consider wrapping around
-    },
-    {
-      label: "Midnight",
-      startTime: "12:00 AM",
-      endTime: "3:00 AM",
-    },
-  ];
+  
+  
 
   const time_discounts = [
     {
