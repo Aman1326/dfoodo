@@ -450,7 +450,7 @@ const DetailedVenue = () => {
                   </span>
                   <span className="first_row_black_section_carousel align-items-center">
                     <div className="french_text">
-                      <h6>{detail.cuisie[0].cuisine_name}</h6>
+                      <h6>{detail.cuisie && detail.cuisie[0].cuisine_name}</h6>
                     </div>
                     <div className="first_row_black_section_carousel align-items-center">
                       <span className="d-flex reviews_black_section">
@@ -468,10 +468,12 @@ const DetailedVenue = () => {
                   <span className="first_row_black_section_carousel mb-4">
                     <div className="first_row_black_section_carousel">
                       <img src={timerClock} alt="timerClock" />
-                      <p style={{ marginBottom: "0" }}>
-                        Open from {detail.timing[0].start_time} -{" "}
-                        {detail.timing[0].end_time}
-                      </p>
+                      {detail.timing && detail.timing.length > 0 && (
+                        <p style={{ marginBottom: "0" }}>
+                          Open from {detail.timing[0].start_time} -{" "}
+                          {detail.timing[0].end_time}
+                        </p>
+                      )}
                     </div>
                     <div className="first_row_black_section_carousel">
                       <img src={avgpriceIcon} alt="avgpriceIcon" />
