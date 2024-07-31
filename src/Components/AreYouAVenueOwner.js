@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const AreYouAVenueOwner = () => {
   return (
@@ -11,7 +12,7 @@ const AreYouAVenueOwner = () => {
             <p>
               Tell us more about you and we will contact you as soon as possible
             </p>
-            <button>See more information</button>
+            <Link to="/registerMyVenue">See more information</Link>
           </div>
         </div>
       </div>
