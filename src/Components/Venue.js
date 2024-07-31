@@ -62,14 +62,15 @@ const Venue = () => {
     fd.append("call_id", "1");
     await server_post_data(get_restropage_webapp, fd)
       .then((Response) => {
-        console.log("Favorate  resto Data", Response.data.message.favourite);
         console.log("catagory dta", Response.data.message.restro);
 
         if (Response.data.error) {
           handleError(Response.data.message);
         } else {
-          SetVenueData(Response.data.message.restro || []);
+          const venues = Response.data.message.restro || [];
+          SetVenueData(venues);
           setHeartImages(Response.data.message.favourite || []);
+          setNumberOfVenuesFound(venues.length);
         }
         setshowLoaderAdmin(false);
       })
@@ -85,9 +86,6 @@ const Venue = () => {
     fd.append("call_id", "1");
     await server_post_data(get_restropage_webapp, fd)
       .then((Response) => {
-        console.log("Favorate  resto Data", Response.data.message.favourite);
-        console.log("catagory dta", Response.data.message.restro);
-
         if (Response.data.error) {
           handleError(Response.data.message);
         } else {
@@ -100,8 +98,6 @@ const Venue = () => {
         setshowLoaderAdmin(false);
       });
   };
-  console.log("CataData", GetVenueData);
-  console.log("HeatImg", HeartImg);
 
   useEffect(() => {
     master_data_get();
@@ -358,28 +354,22 @@ const Venue = () => {
                                     Average Price {venue.restaurant_price} ₹
                                   </h6>
                                   <span className="venuePage_venue_category_titles marginNone">
-                                    {venue.category &&
-                                      venue.category.map((cat, idx) => (
+                                    {venue.amenities?.map(
+                                      (amenity, amenityIndex) => (
                                         <div
-                                          key={idx}
-                                          className="category_item"
+                                          key={amenityIndex}
+                                          className="amenityItem"
                                         >
                                           <img
-                                            src={`${APL_LINK}/assets/${
-                                              cat.category_image ||
-                                              "default-category.png"
-                                            }`}
-                                            alt={
-                                              cat.category_name ||
-                                              "Category Image"
-                                            }
+                                            src={`${APL_LINK}/assets/${amenity.image}`}
+                                            alt={amenity.amenities_name}
                                           />
-                                          <p>
-                                            {cat.category_name ||
-                                              "No Category Name"}
-                                          </p>
+                                          <label>
+                                            {amenity.amenities_name}
+                                          </label>
                                         </div>
-                                      ))}
+                                      )
+                                    )}
                                   </span>
 
                                   <div className="TimingButtons2">
