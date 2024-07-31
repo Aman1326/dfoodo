@@ -5,13 +5,7 @@ import { Link, useLocation } from "react-router-dom";
 import Header from "./Header";
 import filter from "../Assets/filter.svg";
 import "../Components/Css/Venue.css";
-import bar1 from "../Assets/bar1.png";
-import bar2 from "../Assets/bar2.png";
-import bar3 from "../Assets/bar3.png";
-import bar4 from "../Assets/bar4.png";
-import bar5 from "../Assets/bar5.png";
-import bar6 from "../Assets/bar6.png";
-import bar7 from "../Assets/bar7.png";
+
 import rightArrow from "../Assets/rightArrow.svg";
 import rigthArrow from "../Assets/right_svg_button.svg";
 import leftArrow from "../Assets/left_svg_button.svg";
@@ -36,7 +30,11 @@ import Heart from "react-heart";
 import {
   server_post_data,
   get_categorypage_webapp,
+  save_favourite,
+  get_restropage_webapp,
+  APL_LINK,
 } from "../ServiceConnection/serviceconnection";
+import { handleError } from "../CommonJquery/CommonJquery.js";
 
 let login_flag_res = "0";
 let customer_id = "1";
@@ -46,27 +44,35 @@ let customer_email = "0";
 const Venue = () => {
   const location = useLocation();
   const currentUrl = location.pathname.substring(1);
+  const [active, setActive] = useState(false);
+  const [GetVenueData, SetVenueData] = useState([]);
+  const [likedVenues, setLikedVenues] = useState({});
   const [data, setData] = useState([]);
+  const [showLoaderAdmin, setshowLoaderAdmin] = useState([]);
+  const [numberOfVenuesFound, setNumberOfVenuesFound] = useState(0);
 
-  const master_data_get = async () => {
-    // setshowLoaderAdmin(true);
+  const master_data_get = async (category_id) => {
+    setshowLoaderAdmin(true);
     const fd = new FormData();
     fd.append("current_url", "/" + currentUrl);
-    fd.append("restuarant_id", customer_id);
-    await server_post_data(get_categorypage_webapp, fd)
+    fd.append("category_id", "category_id");
+
+    await server_post_data(get_restropage_webapp, fd)
       .then((Response) => {
+        console.log(Response.data.message.restro);
+
         if (Response.data.error) {
-          // handleError(Response.data.message);
+          handleError(Response.data.message);
         } else {
-          console.log(Response.data.message);
-          setData(Response.data.message.restro_active_data);
+          SetVenueData(Response.data.message.restro || []);
         }
-        // setshowLoaderAdmin(false);
+        setshowLoaderAdmin(false);
       })
       .catch((error) => {
-        // setshowLoaderAdmin(false);
+        setshowLoaderAdmin(false);
       });
   };
+  console.log("adadad", GetVenueData);
 
   useEffect(() => {
     master_data_get();
@@ -110,189 +116,7 @@ const Venue = () => {
       filter_name: "Alcohol Served  ",
     },
   ];
-  const venues_data_labeled = [
-    {
-      venue_image: bar1,
-      Venue: [" ₹500 Average Price"],
-      Rating: 4.1,
-      Name: "Majestic Manor",
-      Address: "Royal Plaza, Anand Nagar",
-      time: ["17:30", "18:00", "18:30", "19:00"],
-      time_discount: ["20%", "15%", "23%", "8%"],
-      average_price: "5000",
-      facilities: ["bar", "valet parking", "alcohol served"],
-      facilities_images: [barPresent, valetParking, alcoholPresent],
-    },
-    {
-      venue_image: bar2,
-      Venue: [" ₹500 Average Price"],
-      Rating: 4.3,
-      Name: "Business Hall",
-      Address: "Tech Park, Sector 5, Downtown",
-      time: ["17:30", "18:00", "18:30", "19:00"],
-      time_discount: ["20%", "20%", "20%", "20%"],
-      average_price: "3000",
-      facilities: ["bar", "valet parking", "alcohol served"],
-      facilities_images: [barPresent, valetParking, alcoholPresent],
-    },
-    {
-      venue_image: bar3,
-      Venue: [" ₹500 Average Price"],
-      Rating: 4.8,
-      Name: "Grand Arena",
-      Address: "City Center, Main Square",
-      time: ["17:30", "18:00", "18:30", "19:00"],
-      time_discount: ["20%", "20%", "20%", "20%"],
-      average_price: "8000",
-      facilities: ["bar", "valet parking", "alcohol served"],
-      facilities_images: [barPresent, valetParking, alcoholPresent],
-    },
-    {
-      venue_image: bar4,
-      Venue: [" ₹500 Average Price"],
-      Rating: 4.5,
-      Name: "Royal Banquet Hall",
-      Address: "East Wing, Palace Grounds",
-      time: ["17:30", "18:00", "18:30", "19:00"],
-      time_discount: ["20%", "20%", "20%", "20%"],
-      average_price: "4500",
-      facilities: ["bar", "valet parking", "alcohol served"],
-      facilities_images: [barPresent, valetParking, alcoholPresent],
-    },
-    {
-      venue_image: bar5,
-      Venue: [" ₹500 Average Price"],
-      Rating: 4.0,
-      Name: "Summit Center",
-      Address: "Highland Boulevard, Peak District",
-      time: ["17:30", "18:00", "18:30", "19:00"],
-      time_discount: ["20%", "20%", "20%", "20%"],
-      average_price: "4000",
-      facilities: ["bar", "valet parking", "alcohol served"],
-      facilities_images: [barPresent, valetParking, alcoholPresent],
-    },
-    {
-      venue_image: bar6,
-      Venue: [" ₹500 Average Price"],
-      Rating: 4.4,
-      Name: "Paradise Point",
-      Address: "Beachside, Coastal Highway",
-      time: ["17:30", "18:00", "18:30", "19:00"],
-      time_discount: ["20%", "20%", "20%", "20%"],
-      average_price: "5500",
-      facilities: ["bar", "valet parking", "alcohol served"],
-      facilities_images: [barPresent, valetParking, alcoholPresent],
-    },
-    {
-      venue_image: bar7,
-      Venue: [" ₹500 Average Price"],
-      Rating: 4.6,
-      Name: "Empire Hall",
-      Address: "Downtown, Main Street",
-      time: ["17:30", "18:00", "18:30", "19:00"],
-      time_discount: ["20%", "20%", "20%", "20%"],
-      average_price: "7000",
-      facilities: ["bar", "valet parking", "alcohol served"],
-      facilities_images: [barPresent, valetParking, alcoholPresent],
-    },
-    {
-      venue_image: bar1,
-      Venue: [" ₹500 Average Price"],
-      Rating: 4.1,
-      Name: "Sunset Gardens",
-      Address: "Hillside, Vista Drive",
-      time: ["17:30", "18:00", "18:30", "19:00"],
-      time_discount: ["20%", "20%", "20%", "20%"],
-      average_price: "5000",
-      facilities: ["bar", "valet parking", "alcohol served"],
-      facilities_images: [barPresent, valetParking, alcoholPresent],
-    },
-    {
-      venue_image: bar3,
-      Venue: [" ₹500 Average Price"],
-      Rating: 3.8,
-      Name: "Happy Times Hall",
-      Address: "Sunnyvale, Bright Road",
-      time: ["17:30", "18:00", "18:30", "19:00"],
-      time_discount: ["20%", "20%", "20%", "20%"],
-      average_price: "3800",
-      facilities: ["bar", "valet parking", "alcohol served"],
-      facilities_images: [barPresent, valetParking, alcoholPresent],
-    },
-    {
-      venue_image: bar4,
-      Venue: [" ₹500 Average Price"],
-      Rating: 4.5,
-      Name: "Starlight Banquet",
-      Address: "Midtown, Star Avenue",
-      time: ["17:30", "18:00", "18:30", "19:00"],
-      time_discount: ["20%", "20%", "20%", "20%"],
-      average_price: "6000",
-      facilities: ["bar", "valet parking", "alcohol served"],
-      facilities_images: [barPresent, valetParking, alcoholPresent],
-    },
-    {
-      venue_image: bar5,
-      Venue: [" ₹500 Average Price"],
-      Rating: 4.2,
-      Name: "Harmony Hall",
-      Address: "Harmony Street, Peace Park",
-      time: ["17:30", "18:00", "18:30", "19:00"],
-      time_discount: ["20%", "20%", "20%", "20%"],
-      average_price: "5000",
-      facilities: ["bar", "valet parking", "alcohol served"],
-      facilities_images: [barPresent, valetParking, alcoholPresent],
-    },
-    {
-      venue_image: bar3,
-      Venue: [" ₹500 Average Price"],
-      Rating: 4.0,
-      Name: "Elegant Venue",
-      Address: "Fashion Street, Glamour District",
-      time: ["17:30", "18:00", "18:30", "19:00"],
-      time_discount: ["20%", "20%", "20%", "20%"],
-      average_price: "4800",
-      facilities: ["bar", "valet parking", "alcohol served"],
-      facilities_images: [barPresent, valetParking, alcoholPresent],
-    },
-    {
-      venue_image: bar3,
-      Venue: [" ₹500 Average Price "],
-      Rating: 3.9,
-      Name: "Joyful Hall",
-      Address: "River Road, Lakeside",
-      time: ["17:30", "18:00", "18:30", "19:00"],
-      time_discount: ["20%", "20%", "20%", "20%"],
-      average_price: "3900",
-      facilities: ["bar", "valet parking", "alcohol served"],
-      facilities_images: [barPresent, valetParking, alcoholPresent],
-    },
-    {
-      venue_image: bar3,
-      Venue: [" ₹500 Average Price"],
-      Rating: 4.3,
-      Name: "Royal Palace",
-      Address: "Queen's Avenue, Majestic Park",
-      time: ["17:30", "18:00", "18:30", "19:00"],
-      time_discount: ["20%", "20%", "20%", "20%"],
-      average_price: "6500",
-      facilities: ["bar", "valet parking", "alcohol served"],
-      facilities_images: [barPresent, valetParking, alcoholPresent],
-    },
-    {
-      venue_image: bar3,
-      Venue: [" ₹500 Average Price"],
-      Rating: 4.4,
-      Name: "Summit Hall",
-      Address: "Mountain Road, High Peaks",
-      time: ["17:30", "18:00", "18:30", "19:00"],
-      time_discount: ["20%", "20%", "20%", "20%"],
-      average_price: "5500",
-      facilities: ["bar", "valet parking", "alcohol served"],
-      facilities_images: [barPresent, valetParking, alcoholPresent],
-    },
-  ];
-
+  const venues_data_labeled = GetVenueData;
   // pagination of popular venues
   const [currentPaginationPage, setCurrentPaginationPage] = useState(1);
   const itemsPerPage = 8;
@@ -317,7 +141,6 @@ const Venue = () => {
     indexOfFirstItem,
     indexOfLastItem
   );
-
   // filter modal states
   const [showFilterModal, setShowFilterModal] = useState(false);
   const [activeFilterTab, setActiveFilterTab] = useState("popularity");
@@ -332,16 +155,33 @@ const Venue = () => {
   };
 
   const [selectedTab, setSelectedTab] = useState(0);
-  const [active, setActive] = useState(false);
-
-  const [likedVenues, setLikedVenues] = useState({});
 
   // Toggle the like state for a specific venue
-  const toggleLike = (index) => {
-    setLikedVenues((prev) => ({
-      ...prev,
-      [index]: !prev[index],
-    }));
+  const handleHeartClick = async (index, id) => {
+    // Perform any necessary operations with id
+    handleSaveChangesdynamic(id);
+
+    // Toggle the liked status of the venue
+    const updatedLikedVenues = [...likedVenues];
+    updatedLikedVenues[index] = !updatedLikedVenues[index];
+    setLikedVenues(updatedLikedVenues);
+  };
+  const handleSaveChangesdynamic = async (id) => {
+    // seterror_show("");
+    const form_data = new FormData();
+
+    form_data.append("venue_id", id);
+    form_data.append("customer_id", "1");
+    form_data.append("flag", "0");
+    await server_post_data(save_favourite, form_data)
+      .then((Response) => {
+        if (Response.data.error) {
+          handleError(Response.data.message);
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
   return (
     <>
@@ -385,7 +225,7 @@ const Venue = () => {
               <div className="popularVenues_section">
                 <div className="">
                   <div className="popularVenues_heading_container">
-                    <h5>15 Venues Found</h5>
+                    <h5>{numberOfVenuesFound} Venues Found</h5>
                     <span className="seAll_span">
                       <div className="pagination_controls">
                         <button
@@ -418,11 +258,15 @@ const Venue = () => {
                                 >
                                   <div className="venuePage_image_container">
                                     <img
-                                      src={venue.venue_image}
-                                      alt="venueImg"
+                                      src={`${APL_LINK}/assets/${
+                                        venue.restaurant_image || "default.png"
+                                      }`}
+                                      alt={
+                                        venue.restaurant_name || "Venue Image"
+                                      }
                                     />
                                     <div className="venuePage_ratingSection">
-                                      <p>{venue.Rating}</p>
+                                      <p>{venue.rating || "N/A"}</p>
                                       <img src={star} alt="star" />
                                     </div>
                                   </div>
@@ -432,13 +276,20 @@ const Venue = () => {
                                 <div className="venuePage_text_section">
                                   <div className="venueContainer_rowtext">
                                     <div className="venueContainer_nameAndAddress">
-                                      <h6>{venue.Name}</h6>
+                                      <h6>
+                                        {venue.restaurant_name || "No Name"}
+                                      </h6>
                                     </div>
                                     <div className="heart_section">
                                       <div style={{ width: "1.5rem" }}>
                                         <Heart
                                           isActive={likedVenues[index] || false}
-                                          onClick={() => toggleLike(index)}
+                                          onClick={() =>
+                                            handleHeartClick(
+                                              index,
+                                              venue.primary_id
+                                            )
+                                          }
                                           activeColor="red"
                                           inactiveColor="red"
                                           animationTrigger="hover"
@@ -447,7 +298,9 @@ const Venue = () => {
                                       </div>
                                     </div>
                                   </div>
-                                  <p>{venue.Address}</p>
+                                  <p>
+                                    {venue.restaurant_full_adrress || "No  add"}
+                                  </p>
 
                                   <h6 className="avrgPrice">
                                     <img
@@ -455,46 +308,41 @@ const Venue = () => {
                                       alt="contactus"
                                       width={15}
                                     />
-                                    Average Price ₹{venue.average_price}
+                                    Average Price {venue.restaurant_price} ₹
                                   </h6>
-                                  <span className="venuePage_venue_category_titles mb-4">
-                                    {venue.facilities.map((facility, idx) => (
-                                      <div key={idx} className="facility_item">
-                                        <img
-                                          id="facilities_venuePage"
-                                          src={venue.facilities_images[idx]}
-                                          alt={facility}
-                                        />
-                                        <p id="facilities_venuePage">
-                                          {facility}
-                                        </p>
-                                      </div>
-                                    ))}
-                                  </span>
-                                  <span className="venuePage_venue_capacity_wrapper ">
-                                    {venue.time &&
-                                      venue.time_discount &&
-                                      venue.time.length > 0 &&
-                                      venue.time_discount.length > 0 && (
-                                        <div className="time_discount_container">
-                                          {venue.time.map((time, idx) => (
-                                            <div
-                                              key={idx}
-                                              className="time_discount_section"
-                                            >
-                                              <div className="time_section">
-                                                <p>{time}</p>
-                                              </div>
-                                              <div className="discount_section">
-                                                <p>
-                                                  -{venue.time_discount[idx]}
-                                                </p>
-                                              </div>
-                                            </div>
-                                          ))}
+                                  <span className="venuePage_venue_category_titles marginNone">
+                                    {venue.category &&
+                                      venue.category.map((cat, idx) => (
+                                        <div
+                                          key={idx}
+                                          className="category_item"
+                                        >
+                                          <img
+                                            src={`${APL_LINK}/assets/${
+                                              cat.category_image ||
+                                              "default-category.png"
+                                            }`}
+                                            alt={
+                                              cat.category_name ||
+                                              "Category Image"
+                                            }
+                                          />
+                                          <p>
+                                            {cat.category_name ||
+                                              "No Category Name"}
+                                          </p>
                                         </div>
-                                      )}
+                                      ))}
                                   </span>
+
+                                  <div className="TimingButtons2">
+                                    <div className="timesBtns">
+                                      <p>17:30</p>
+                                      <div className="childtime">
+                                        {venue.discount_upto}%
+                                      </div>
+                                    </div>
+                                  </div>
                                 </div>
                               </div>
                             </div>

@@ -14,6 +14,7 @@ const get_categorypage_webapp =
 const get_all_faq_website = local_server_link_react + "get_all_faq_website/";
 const save_restaurantOwnerdetails =
   local_server_link_react + "save_restaurantOwnerdetails/";
+const save_favourite = local_server_link_react + "save_favourite/";
 const update_profile = local_server_link_react + "update_profile/";
 const get_profile = local_server_link_react + "get_profile/";
 const get_favourite = local_server_link_react + "get_favourite/";
@@ -54,4 +55,5 @@ export {
   get_categorypage_webapp,
   get_profile,
   get_favourite,
+  save_favourite,
 };

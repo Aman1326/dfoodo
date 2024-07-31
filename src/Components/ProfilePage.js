@@ -18,15 +18,12 @@ import Heart from "react-heart";
 import contactus from "../Assets/averagePrice.svg";
 import qustionTOoltip from "../Assets/qustionTOoltip.svg";
 import calendar from "../Assets/calendarSearchBar.svg";
-import drink from "../Assets/drink.svg";
-import drink2 from "../Assets/drink2.svg";
-import drink3 from "../Assets/drink3.svg";
+
 import Successs from "../Assets/check.png";
 import { PhoneInput } from "react-international-phone";
 import { Modal } from "react-bootstrap";
 import OnBoardingTick from "../Assets/OnBoardingTick.svg";
 
-import $ from "jquery";
 import {
   update_profile,
   get_profile,
@@ -251,7 +248,7 @@ const ProfilePage = () => {
       setshowLoaderAdmin(false);
     }
   };
-  // console.log(getFavrate);
+  console.log(getFavrate);
   const handleInputChange = (event) => {
     setFormChanged(true); // Set formChanged to true whenever there's an input change
   };
@@ -584,160 +581,80 @@ const ProfilePage = () => {
                 <button className="back-button" onClick={handleBackClick}>
                   Back
                 </button>
-                {/* <div className="favourite_section">
-                  <h6>My Favorite Restaurant </h6>
-                  <div className="favourite_restaurant_cards_section row">
-                    {currentPaginationItems.map((venue, index) => (
-                      <div key={index} className="col-12 margin24px">
-                        <div className="VenuePage_venue_container">
-                          <div className="row m-0 px-2 container_profile_section_venue">
-                            <div className="col-sm-4 px-0">
-                              <Link
-                                to="/detailedVenue"
-                                style={{ textDecoration: "none" }}
-                              >
-                                <div className="venuePage_image_container">
-                                  <img src={venue.venue_image} alt="venueImg" />
-                                  <div className="venuePage_ratingSection">
-                                    <p>{venue.Rating}</p>
-                                    <img src={star} alt="star" />
-                                  </div>
-                                </div>
-                              </Link>
-                            </div>
-                            <div className="col-sm-8">
-                              <div className="venuePage_text_section">
-                                <div className="venueContainer_rowtext">
-                                  <div className="venueContainer_nameAndAddress">
-                                    <h6>{venue.Name}</h6>
-                                  </div>
-                                  <div className="heart_section">
-                                    <div style={{ width: "1.5rem" }}>
-                                      <Heart
-                                        isActive={likedVenues[index] || false}
-                                        onClick={() => toggleLike(index)}
-                                        activeColor="red"
-                                        inactiveColor="red"
-                                        animationTrigger="hover"
-                                        animationScale={1.5}
-                                      />
-                                    </div>
-                                  </div>
-                                </div>
-                                <p>{venue.Address}</p>
 
-                                <h6 className="avrgPrice">
-                                  <img
-                                    src={contactus}
-                                    alt="contactus"
-                                    width={15}
-                                  />
-                                  Average Price ₹{venue.average_price}
-                                </h6>
-                                <span className="venuePage_venue_category_titles mb-4">
-                                  {venue.facilities.map((facility, idx) => (
-                                    <div key={idx} className="facility_item">
-                                      <img
-                                        id="facilities_venuePage"
-                                        src={venue.facilities_images[idx]}
-                                        alt={facility}
-                                      />
-                                      <p id="facilities_venuePage">
-                                        {facility}
-                                      </p>
-                                    </div>
-                                  ))}
-                                </span>
-                                <span className="venuePage_venue_capacity_wrapper">
-                                  {venue.time &&
-                                    venue.time_discount &&
-                                    venue.time.length > 0 &&
-                                    venue.time_discount.length > 0 && (
-                                      <div className="time_discount_container">
-                                        {venue.time.map((time, idx) => (
-                                          <div
-                                            key={idx}
-                                            className="time_discount_section"
-                                          >
-                                            <div className="time_section">
-                                              <p>{time}</p>
-                                            </div>
-                                            <div className="discount_section">
-                                              <p>-{venue.time_discount[idx]}</p>
-                                            </div>
-                                          </div>
-                                        ))}
-                                      </div>
-                                    )}
-                                </span>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div> */}
                 <div className="favourite_section2">
                   <h6>My Favorite Restaurant</h6>
                   <div className="container">
                     {getFavrate.map((venue, index) => (
                       <div className="fevorateContanrr" key={index}>
                         <div className="leftCont">
-                          <div className="favImgs">
-                            <img
-                              src={`${APL_LINK}/assets/${venue.data[0].menu_image}`}
-                              alt="venueImg"
-                            />
-                          </div>
+                          {venue.data.map((item, itemIndex) => (
+                            <div className="favImgs" key={itemIndex}>
+                              <img
+                                src={`${APL_LINK}/assets/${
+                                  item.restaurant_image || ""
+                                }`}
+                                alt="venueImg"
+                              />
+                            </div>
+                          ))}
                         </div>
                         <div className="rightContainer">
                           <div className="ContnnrFavcratCard">
                             <div className="FaVCardcontent">
-                              <h5>{venue.data[0].restaurant_name}</h5>
-                              <p>{venue.data[0].restaurant_full_adrress}</p>
-                              <div className="AVrageSection">
-                                <img
-                                  className="ContctSvgIon"
-                                  src={contactus}
-                                  alt="cont"
-                                />
-                                <label>
-                                  ₹{venue.data[0].restaurant_price} Average
-                                  Price
-                                </label>
-                                <img
-                                  className="QuestionTOol"
-                                  src={qustionTOoltip}
-                                  alt="tooltip"
-                                />
-                              </div>
-                              <div className="drinksSec">
-                                {venue.data[0].amenities.map(
-                                  (amenity, Index) => (
-                                    <div key={Index} className="amenityItem">
-                                      <img
-                                        src={`${APL_LINK}/assets/${amenity.image}`}
-                                        alt={amenity.amenities_name}
-                                      />
-                                      <label>{amenity.amenities_name}</label>
+                              {venue.data.map((item, itemIndex) => (
+                                <div key={itemIndex}>
+                                  <h5>{item.restaurant_name || ""}</h5>
+                                  <p>{item.restaurant_full_address || ""}</p>
+                                  <div className="AVrageSection">
+                                    <img
+                                      className="ContctSvgIon"
+                                      src={contactus}
+                                      alt="cont"
+                                    />
+                                    <label>
+                                      ₹{item.restaurant_price} Average Price
+                                    </label>
+                                    <img
+                                      className="QuestionTOol"
+                                      src={qustionTOoltip}
+                                      alt="tooltip"
+                                    />
+                                  </div>
+                                  <div className="drinksSec">
+                                    {item.amenities?.map(
+                                      (amenity, amenityIndex) => (
+                                        <div
+                                          key={amenityIndex}
+                                          className="amenityItem"
+                                        >
+                                          <img
+                                            src={`${APL_LINK}/assets/${amenity.image}`}
+                                            alt={amenity.amenities_name}
+                                          />
+                                          <label>
+                                            {amenity.amenities_name}
+                                          </label>
+                                        </div>
+                                      )
+                                    )}
+                                  </div>
+                                  <div className="TimingButtons">
+                                    <div className="timesBtns">
+                                      <p>17:30</p>
+                                      <div className="childtime">
+                                        {item.discount_upto}%
+                                      </div>
                                     </div>
-                                  )
-                                )}
-                              </div>
-                              <div className="TimingButtons">
-                                <div className="timesBtns">
-                                  <p>17:30</p>
-                                  <div className="childtime">
-                                    {venue.data[0].discount_upto}%
                                   </div>
                                 </div>
-                              </div>
+                              ))}
                             </div>
                           </div>
                         </div>
                       </div>
                     ))}
+
                     {showLoaderAdmin && <p>Loading...</p>}
                   </div>
                 </div>
