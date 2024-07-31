@@ -46,13 +46,15 @@ let customer_email = "0";
 const Venue = () => {
   const location = useLocation();
   const currentUrl = location.pathname.substring(1);
-  const [active, setActive] = useState(false);
+
   const [GetVenueData, SetVenueData] = useState([]);
-  const [likedVenues, setLikedVenues] = useState({});
-  const [data, setData] = useState([]);
+
   const [showLoaderAdmin, setshowLoaderAdmin] = useState([]);
   const [numberOfVenuesFound, setNumberOfVenuesFound] = useState(0);
+
   const [HeartImg, setHeartImages] = useState([]);
+
+  const [breadcrumbs, setBreadcrumbs] = useState([]);
 
   const master_data_get = async (category_id) => {
     setshowLoaderAdmin(true);
@@ -69,28 +71,28 @@ const Venue = () => {
         } else {
           const venues = Response.data.message.restro || [];
           SetVenueData(venues);
+
           setHeartImages(Response.data.message.favourite || []);
+
           setNumberOfVenuesFound(venues.length);
-        }
-        setshowLoaderAdmin(false);
-      })
-      .catch((error) => {
-        setshowLoaderAdmin(false);
-      });
-  };
-  const master_filter_data_get = async (category_id) => {
-    setshowLoaderAdmin(true);
-    const fd = new FormData();
-    fd.append("current_url", "/" + currentUrl);
-    fd.append("category_id", "category_id");
-    fd.append("call_id", "1");
-    await server_post_data(get_restropage_webapp, fd)
-      .then((Response) => {
-        if (Response.data.error) {
-          handleError(Response.data.message);
-        } else {
-          SetVenueData(Response.data.message.restro || []);
-          setHeartImages(Response.data.message.favourite || []);
+          const restroData = Response.data.message.restro || [];
+          const venueData = restroData[0] || {};
+          const catagoryData = restroData[0].category[0] || {};
+          console.log("tarun", catagoryData);
+
+          // Extract categories
+          const newBreadcrumbs = [
+            { name: "Home", path: "/" },
+            {
+              name: venueData.restaurant_country || "",
+            },
+            { name: venueData.restaurant_city || "" },
+            {
+              name: catagoryData.category_master_name || "",
+              path: "",
+            },
+          ];
+          setBreadcrumbs(newBreadcrumbs);
         }
         setshowLoaderAdmin(false);
       })
@@ -99,9 +101,30 @@ const Venue = () => {
       });
   };
 
+  // const master_filter_data_get = async (category_id) => {
+  //   setshowLoaderAdmin(true);
+  //   const fd = new FormData();
+  //   fd.append("current_url", "/" + currentUrl);
+  //   fd.append("category_id", "category_id");
+  //   fd.append("call_id", "1");
+  //   await server_post_data(get_restropage_webapp, fd)
+  //     .then((Response) => {
+  //       if (Response.data.error) {
+  //         handleError(Response.data.message);
+  //       } else {
+  //         SetVenueData(Response.data.message.restro || []);
+  //         setHeartImages(Response.data.message.favourite || []);
+  //       }
+  //       setshowLoaderAdmin(false);
+  //     })
+  //     .catch((error) => {
+  //       setshowLoaderAdmin(false);
+  //     });
+  // };
+
   useEffect(() => {
     master_data_get();
-    master_filter_data_get();
+    // master_filter_data_get();
   }, []);
 
   const filters = [
@@ -169,7 +192,6 @@ const Venue = () => {
   );
   // filter modal states
   const [showFilterModal, setShowFilterModal] = useState(false);
-  const [activeFilterTab, setActiveFilterTab] = useState("popularity");
 
   const handleCloseFilterModal = () => setShowFilterModal(false);
   const handleShowFilterModal = () => setShowFilterModal(true);
@@ -181,7 +203,7 @@ const Venue = () => {
   };
 
   const [selectedTab, setSelectedTab] = useState(0);
-  const [selectedIndexes, setSelectedIndexes] = useState([]);
+
   // Toggle the like state for a specific venue
   const handleHeartClick = async (venueId) => {
     try {
@@ -194,7 +216,6 @@ const Venue = () => {
       )
         ? HeartImg.filter((fav) => fav.restaurant_id !== venueId) // Remove from favorites
         : [...HeartImg, { restaurant_id: venueId }];
-      console.log(updatedFavorites);
 
       // Update state with the new list of favorites
       setHeartImages(updatedFavorites);
@@ -234,11 +255,16 @@ const Venue = () => {
         <section>
           <div className="container-lg mt-3 mb-1">
             <div className="venuePage_venueCategory_heading">
-              <Link to="/">Home</Link>
-              <img src={rightArrow} alt="rightArrow" />
-              <Link>Pais Restaurants</Link>
-              <img src={rightArrow} alt="rightArrow" />
-              <Link> {"<restaurant name>"} </Link>
+              {breadcrumbs.map((crumb, index) => (
+                <React.Fragment key={index}>
+                  {index > 0 && <img src={rightArrow} alt="rightArrow" />}
+                  {index === breadcrumbs.length - 1 ? (
+                    <span>{crumb.name}</span>
+                  ) : (
+                    <Link to={crumb.path}>{crumb.name}</Link>
+                  )}
+                </React.Fragment>
+              ))}
             </div>
           </div>
         </section>
