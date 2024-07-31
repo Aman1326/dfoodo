@@ -2,7 +2,7 @@
     display: flex;
     flex-direction: row;
     /* justify-content: flex-start; */
-    border-radius: 8px;
+    border-radius: 3px;
     padding: 0.2rem 1rem;
     background-color: var(--white);
     gap: 0.1rem;
@@ -51,6 +51,8 @@
     align-items: center;
     display: flex;
     padding: 0.1rem;
+    padding: 0.2rem 0.1rem;
+    border-radius: 3px;
     flex-direction: row;
     width: 100%;
 }
@@ -227,4 +229,43 @@
     .seAll_span {
         display: none;
     }
+}
+
+.itemSearch {
+    display: flex;
+    gap: 1rem;
+    padding: 0.3rem 0.3rem;
+    text-decoration: none;
+    border-bottom: 0.5px solid grey;
+    flex-direction: row;
+}
+
+.searchItems a {
+    width: 100%;
+    text-decoration: none;
+}
+
+.itemSearch img {
+    width: 45px;
+    height: 45px;
+    margin-left: 0.5rem;
+    border-radius: 50%;
+    aspect-ratio: 1;
+}
+
+.searchItems a {
+    width: 100%;
+    text-decoration: none;
+}
+
+.searchItems {
+    border-radius: 8px;
+    width: 100%;
+    position: absolute;
+    background-color: var(--white);
+    z-index: 99999999999;
+    max-height: 165px;
+    overflow: hidden;
+    overflow-y: auto;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }

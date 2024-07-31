@@ -53,7 +53,7 @@ function Home() {
   //get data
   const master_data_get = async () => {
     const fd = new FormData();
-    fd.append("country", "Sweden");
+    fd.append("country", "India");
     await server_post_data(get_landingpage_webapp, fd)
       .then((Response) => {
         if (Response.data.error) {
@@ -248,7 +248,10 @@ function Home() {
                                   {venue.restaurant_temorary_adrress}
                                 </desc>
                                 <span className="venue_capacity_wrapper">
-                                  <p>€{venue.restaurant_price} average price</p>
+                                  <p>
+                                    {country == "India" ? "₹" : "$"}
+                                    {venue.restaurant_price} average price
+                                  </p>
                                 </span>
                                 <span className="venue_discount_wrapper">
                                   <p>-{venue.discount_upto}%</p>
