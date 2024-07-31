@@ -67,7 +67,7 @@ function Header() {
               {" "}
               <Link to="/registerMyVenue">List My Restaurant</Link>
               <Link to="/getHelp">Get help</Link>
-              <p>EN</p>
+              {/* <p>EN</p> */}
             </div>
           )}
         </div>

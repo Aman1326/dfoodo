@@ -129,7 +129,6 @@ function Home() {
   useEffect(() => {
     master_data_get();
   }, []);
-
   return (
     <div>
       <Header />
@@ -234,7 +233,7 @@ function Home() {
                                         <p>{category}</p>
                                       </React.Fragment>
                                     ))} */}
-                                  <p>{"FRENCH"}</p>
+                                  <p>{venue.cuisine}</p>
                                 </span>
                                 <div className="rating_greenDiv">
                                   <p>{venue.rating}</p>
@@ -336,7 +335,7 @@ function Home() {
                                         <p>{category}</p>
                                       </React.Fragment>
                                     ))} */}
-                                  <p>{"FRENCH"}</p>
+                                  <p>{venue.cuisine}</p>
                                 </span>
                                 <div className="rating_greenDiv">
                                   <p>{venue.rating}</p>
