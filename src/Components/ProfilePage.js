@@ -27,6 +27,7 @@ import {
   get_profile,
   get_favourite,
   server_post_data,
+  save_favourite,
   APL_LINK,
 } from "../ServiceConnection/serviceconnection.js";
 import { retrieveData } from "../LocalConnection/LocalConnection.js";
@@ -233,7 +234,7 @@ const ProfilePage = () => {
       fd.append("flag", "1");
 
       const Response = await server_post_data(get_favourite, fd);
-      console.log("adadadadad", Response.data.message);
+
       if (Response.data.error) {
         handleError(Response.data.message);
       } else {
@@ -246,9 +247,9 @@ const ProfilePage = () => {
       setshowLoaderAdmin(false);
     }
   };
-  console.log(getFavrate);
+
   const handleInputChange = (event) => {
-    setFormChanged(true); // Set formChanged to true whenever there's an input change
+    setFormChanged(true);
   };
   const handleSaveChangesdynamic = async (form_data, update_profile) => {
     let isValid = true;
@@ -389,6 +390,24 @@ const ProfilePage = () => {
 
   const modalClass = ModalType === "cancel" ? "modal-md" : "modal-lg";
 
+  const handleRemoveFavrate = async (index, venue_id) => {
+    const form_data = new FormData();
+    form_data.append("venue_id", venue_id);
+    form_data.append("customer_id", "1");
+    form_data.append("flag", "0");
+
+    try {
+      const response = await server_post_data(save_favourite, form_data);
+      if (response.data.error) {
+        handleError(response.data.message);
+      } else {
+        // Successfully removed favorite, reload the page
+        window.location.reload();
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <>
       <Header />
@@ -605,9 +624,12 @@ const ProfilePage = () => {
                                   <h5>{item.restaurant_name || ""}</h5>
                                   <div className="heart_section">
                                     <button
-                                    // onClick={() =>
-                                    //   handleHeartClick(venue.primary_id)
-                                    // }
+                                      onClick={() =>
+                                        handleRemoveFavrate(
+                                          index,
+                                          venue.primary_id
+                                        )
+                                      }
                                     >
                                       <img
                                         src={HeartRed}
