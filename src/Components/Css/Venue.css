@@ -4,7 +4,8 @@
   gap: 0.5rem;
 }
 
-.venuePage_venueCategory_heading a {
+.venuePage_venueCategory_heading a,
+.venuePage_venueCategory_heading span {
   color: var(--primary-color);
   text-decoration: none;
 }

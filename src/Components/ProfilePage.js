@@ -12,7 +12,7 @@ import bar2 from "../Assets/bar2.png";
 import barPresent from "../Assets/bars-3x.png.svg";
 import alcoholPresent from "../Assets/alcohol-served3x.png.svg";
 import valetParking from "../Assets/valet-parking3x.png.svg";
-
+import HeartRed from "../Assets/HeartRed.svg";
 import contactus from "../Assets/averagePrice.svg";
 import qustionTOoltip from "../Assets/qustionTOoltip.svg";
 import calendar from "../Assets/calendarSearchBar.svg";
@@ -603,6 +603,19 @@ const ProfilePage = () => {
                               {venue.data.map((item, itemIndex) => (
                                 <div key={itemIndex}>
                                   <h5>{item.restaurant_name || ""}</h5>
+                                  <div className="heart_section">
+                                    <button
+                                    // onClick={() =>
+                                    //   handleHeartClick(venue.primary_id)
+                                    // }
+                                    >
+                                      <img
+                                        src={HeartRed}
+                                        alt="Heart"
+                                        className="heart_icon favHeartIcon"
+                                      />
+                                    </button>
+                                  </div>
                                   <p>{item.restaurant_full_address || ""}</p>
                                   <div className="AVrageSection">
                                     <img
