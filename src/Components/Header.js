@@ -61,7 +61,7 @@ function Header() {
   return (
     <>
       <div className="upper_header_wrapper">
-        <div className="container">
+        <div className="container-lg">
           {locationn.pathname !== "/onBoarding" && (
             <div className="upper_header_container">
               {" "}
@@ -73,7 +73,7 @@ function Header() {
         </div>
       </div>
       <nav class="navbar navbar-expand-lg bg-body-tertiary">
-        <div class="container">
+        <div class="container-lg">
           <Link class="navbar-brand" to="/">
             <img src={mainLogo} alt="mainLogo" width={150} />
           </Link>

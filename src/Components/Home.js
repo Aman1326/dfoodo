@@ -135,7 +135,7 @@ function Home() {
       <div>
         <section className="heroSection">
           <div className="row container-lg m-auto">
-            <div className="heroSection_wrapper col-lg-12 col-12">
+            <div className="heroSection_wrapper p-0 col-lg-12 col-12">
               <img src={homebg} alt="home bg" id="homeBG" />
               <div className="searchBar_container_homeScreen">
                 <div className="Heading_herosection">
@@ -152,7 +152,7 @@ function Home() {
         </section>
 
         <section className="collections_section">
-          <div className="container">
+          <div className="container-lg">
             <div className="collections_sections_heading">
               <h3>Collections</h3>
               <h6>
@@ -168,7 +168,7 @@ function Home() {
         {/* Popular Venues */}
         <section>
           <div className="popularVenues_section">
-            <div className="container">
+            <div className="container-lg">
               <div className="popularVenues_heading_container">
                 <h3>Popular Restaurants in {country} </h3>
                 <span className="seAll_span">
@@ -267,7 +267,7 @@ function Home() {
 
         <section>
           <div className="popularVenues_section">
-            <div className="container">
+            <div className="container-lg">
               <div className="popularVenues_heading_container">
                 <h3>Popular Restaurants in {city} </h3>
                 <span className="seAll_span">
@@ -315,7 +315,11 @@ function Home() {
                             />
                           </div>
                           <Link
-                            to="/detailedVenue"
+                            onClick={() =>
+                              handleLinkClick(
+                                match_and_return_seo_link(venue.primary_id)
+                              )
+                            }
                             style={{ textDecoration: "none" }}
                           >
                             <div className="venueDetailCOntainer">

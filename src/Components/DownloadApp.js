@@ -6,13 +6,13 @@ import phoneimg from "../Assets/phoenImage.png";
 const DownloadApp = () => {
   return (
     <section className="download_now_section">
-      <div className="container">
+      <div className="container-lg">
         <div className="phoneContainer row">
-          <div className="col-lg-5 p-0 leftSection">
+          <div className="col-md-5 p-0 leftSection">
             <img src={phoneimg} alt="phone" />
           </div>
           <div
-            className="col-lg-7 pl-0 rightSection"
+            className="col-md-7 pl-0 rightSection"
             style={{ backgroundColor: "var(--orange-Color)" }}
           >
             <h3>Get the Dfoodo Dinner App</h3>
