@@ -157,7 +157,7 @@ function Home() {
               <h3>Collections</h3>
               <h6>
                 Explore curated lists of top restaurants, cafes, pubs, and bars
-                in Gwalior, based on trends
+                in {city}, based on trends
               </h6>
             </div>
           </div>
