@@ -77,17 +77,19 @@ const Venue = () => {
           setNumberOfVenuesFound(venues.length);
           const restroData = Response.data.message.restro || [];
           const venueData = restroData[0] || {};
+          const catagoryData = restroData[0].category[0] || {};
+          console.log("tarun", catagoryData);
 
+          // Extract categories
           const newBreadcrumbs = [
             { name: "Home", path: "/" },
             {
-              name: venueData.restaurant_country || "Country",
-              path: "/country",
+              name: venueData.restaurant_country || "",
             },
-            { name: venueData.restaurant_city || "City", path: "/city" },
+            { name: venueData.restaurant_city || "" },
             {
-              name: venueData.restaurant_name || "Restaurant",
-              path: "/restaurant",
+              name: catagoryData.category_master_name || "",
+              path: "",
             },
           ];
           setBreadcrumbs(newBreadcrumbs);
