@@ -50,8 +50,7 @@
     background-color: var(--white);
     align-items: center;
     display: flex;
-    padding: 0.1rem;
-    padding: 0.2rem 0.1rem;
+    padding: 0.2rem 0.5rem;
     border-radius: 3px;
     flex-direction: row;
     width: 100%;
@@ -147,12 +146,12 @@
 }
 
 .letsgo_button button {
-    height: 100%;
+    height: fit-content;
     background-color: var(--primary-color);
     font-family: "Roboto";
     font-size: 14px;
     font-weight: 400;
-    width: fit-content;
+    width: 100% !important;
     border: none;
     border-radius: 8px;
     color: var(--white);
@@ -196,8 +195,9 @@
     }
 
     .seachVenue_section_searchbar {
-        width: 100%;
-        padding: 0.4rem 1rem;
+        width: 95%;
+        margin: auto;
+        padding: 0.4rem 0.5rem;
         border-radius: 5px;
     }
 

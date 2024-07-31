@@ -54,6 +54,7 @@ function Home() {
   const master_data_get = async () => {
     const fd = new FormData();
     fd.append("country", "India");
+    fd.append("city", "Bhopal");
     await server_post_data(get_landingpage_webapp, fd)
       .then((Response) => {
         if (Response.data.error) {
@@ -142,7 +143,7 @@ function Home() {
                   <h1>Secure your table for every special moment.</h1>
                 </div>
                 <div className="serachBxx">
-                  <div className="searchBarInHeroSection w-100 px-sm-5 px-4">
+                  <div className="searchBarInHeroSection w-100 px-sm-7 px-4">
                     <SearchBar />
                   </div>
                 </div>
