@@ -265,6 +265,27 @@
     padding-bottom: 3rem;
 }
 
+@media (max-width:991px) {
+
+    .how_it_works_content {
+        padding-bottom: 3rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        text-align: center;
+        gap: 0.3rem;
+    }
+
+    .how_it_works_content img {
+        width: 60px;
+        color: var(--white);
+        margin-bottom: 0.5rem;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 0.5rem;
+    }
+}
+
 .how_it_works_content h6,
 .how_it_works_content p {
     margin-bottom: 0;
@@ -278,7 +299,8 @@
 .how_it_works_content img {
     width: 60px;
     color: var(--white);
-    margin-bottom: 1rem;
+    margin-bottom: 0.5rem;
+
 }
 
 #multiStars {
@@ -392,7 +414,7 @@
     color: var(--text-grey);
 }
 
-.are_you_a_venue_owner button {
+.are_you_a_venue_owner a {
     color: var(--white);
     border: none;
     margin-left: auto;
@@ -401,6 +423,7 @@
     background: rgba(227, 55, 69, 1);
     border-radius: 5px;
     padding: 0.4rem 1rem;
+    text-decoration: none;
     font-family: "Roboto";
     font-size: 14px;
 
