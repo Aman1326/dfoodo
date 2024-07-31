@@ -53,7 +53,7 @@ function Home() {
   //get data
   const master_data_get = async () => {
     const fd = new FormData();
-    fd.append("country", "Sweden");
+    fd.append("country", "India");
     await server_post_data(get_landingpage_webapp, fd)
       .then((Response) => {
         if (Response.data.error) {
@@ -135,7 +135,7 @@ function Home() {
       <div>
         <section className="heroSection">
           <div className="row container-lg m-auto">
-            <div className="heroSection_wrapper col-lg-12 col-12">
+            <div className="heroSection_wrapper p-0 col-lg-12 col-12">
               <img src={homebg} alt="home bg" id="homeBG" />
               <div className="searchBar_container_homeScreen">
                 <div className="Heading_herosection">
@@ -152,12 +152,12 @@ function Home() {
         </section>
 
         <section className="collections_section">
-          <div className="container">
+          <div className="container-lg">
             <div className="collections_sections_heading">
               <h3>Collections</h3>
               <h6>
                 Explore curated lists of top restaurants, cafes, pubs, and bars
-                in Gwalior, based on trends
+                in {city}, based on trends
               </h6>
             </div>
           </div>
@@ -168,7 +168,7 @@ function Home() {
         {/* Popular Venues */}
         <section>
           <div className="popularVenues_section">
-            <div className="container">
+            <div className="container-lg">
               <div className="popularVenues_heading_container">
                 <h3>Popular Restaurants in {country} </h3>
                 <span className="seAll_span">
@@ -248,7 +248,10 @@ function Home() {
                                   {venue.restaurant_temorary_adrress}
                                 </desc>
                                 <span className="venue_capacity_wrapper">
-                                  <p>€{venue.restaurant_price} average price</p>
+                                  <p>
+                                    {country == "India" ? "₹" : "$"}
+                                    {venue.restaurant_price} average price
+                                  </p>
                                 </span>
                                 <span className="venue_discount_wrapper">
                                   <p>-{venue.discount_upto}%</p>
@@ -267,7 +270,7 @@ function Home() {
 
         <section>
           <div className="popularVenues_section">
-            <div className="container">
+            <div className="container-lg">
               <div className="popularVenues_heading_container">
                 <h3>Popular Restaurants in {city} </h3>
                 <span className="seAll_span">
@@ -315,7 +318,11 @@ function Home() {
                             />
                           </div>
                           <Link
-                            to="/detailedVenue"
+                            onClick={() =>
+                              handleLinkClick(
+                                match_and_return_seo_link(venue.primary_id)
+                              )
+                            }
                             style={{ textDecoration: "none" }}
                           >
                             <div className="venueDetailCOntainer">

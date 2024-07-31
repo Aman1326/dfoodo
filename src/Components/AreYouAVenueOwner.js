@@ -6,7 +6,7 @@ const AreYouAVenueOwner = () => {
     <section className="areyoua_venue_owner_section">
       <div className="container">
         <div className="row">
-          <div className="are_you_a_venue_owner col-md-5 m-auto">
+          <div className="are_you_a_venue_owner col-lg-5 m-auto">
             <h2>Are you a restaurant owner?</h2>
             <h6>Register your Restaurant</h6>
             <p>

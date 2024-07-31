@@ -242,6 +242,16 @@
 }
 
 .dropdown1 {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    color: var(--text-grey);
+    font-weight: 500;
+
+    label {
+        cursor: pointer;
+    }
+
     img {
         cursor: pointer;
         width: 16px;

@@ -11,15 +11,21 @@ import "react-date-picker/dist/DatePicker.css";
 import "react-calendar/dist/Calendar.css";
 import DatePicker from "react-date-picker";
 import line from "../Assets/line.svg";
+import { Link } from "react-router-dom";
+import {
+  handleError,
+  handleIaphabetnumberChange,
+  handleLinkClick,
+} from "../CommonJquery/CommonJquery";
 const SearchBar = () => {
   const locations = [
+    { value: "2:30 PM", label: "2:30 PM" },
+    { value: "3:00 PM", label: "3:00 PM" },
+    { value: "3:30 PM", label: "3:30 PM" },
+    { value: "4:00 PM", label: "4:00 PM" },
+    { value: "4:30 PM", label: "4:30 PM" },
+    { value: "5:00 PM", label: "5:00 PM" },
     { value: "6:30 PM", label: "6:30 PM" },
-    { value: "6:30 PM", label: "6:30 PM" },
-    { value: "6:30 PM", label: "6:30 PM" },
-    { value: "6:30 PM", label: "6:30 PM" },
-    { value: "6:30 PM", label: "6:30 PM" },
-    { value: "6:30 PM", label: "6:30 PM" },
-    { value: "6:40 PM", label: "6:40 PM" },
     // Add more locations as needed
   ];
   const [selectedLocation, setSelectedLocation] = useState(null);
@@ -69,7 +75,7 @@ const SearchBar = () => {
       fontSize: "15px",
     }),
   };
-
+  const [productpath, setproductpath] = useState("");
   const handleLocationChange = (selectedOption) => {
     setSelectedLocation(selectedOption);
   };
@@ -91,6 +97,8 @@ const SearchBar = () => {
     // Handle the selection change
     console.log("Selected persons:", selectedOption);
   };
+  const [isSearchActive, setisSearchActive] = useState(false);
+  const [newproducts, setnewproducts] = useState([]);
   return (
     <>
       <div className="searchBar_wrapper">
@@ -124,16 +132,44 @@ const SearchBar = () => {
               placeholder="People"
               styles={customStyles}
             />
-            <img src={line} alt="line" className="verticle_line" />
           </div>
-          <div className="seachVenue_section_searchbar">
-            <img src={searchIcon} alt="search icon" />
-            <input placeholder="Location, Restaurant, or Cuisine" />
-          </div>
+        </div>
+        <div className="seachVenue_section_searchbar">
+          <img src={searchIcon} alt="search icon" />
+          <input placeholder="Location, Restaurant, or Cuisine" />
         </div>
 
         <div className="letsgo_button">
           <button>Let's go</button>
+        </div>
+        <div className="drop_down_searchBar">
+          {isSearchActive && (
+            <div className="searchItems">
+              {newproducts.map((item, index) => {
+                return (
+                  <Link key={index}>
+                    <div className="itemSearch">
+                      <img
+                        src={`${productpath}${item.venue_images}`}
+                        alt={item.venue_name}
+                      />
+                      <div className="search_result_text">
+                        <h6>{item.venue_name}</h6>
+                        <p>{item.map_address}</p>
+                      </div>
+                    </div>
+                  </Link>
+                );
+              })}
+              {newproducts && newproducts.length === 0 && (
+                <div className="itemSearch center_justify">
+                  <div>
+                    <h6>No Data Found</h6>
+                  </div>
+                </div>
+              )}
+            </div>
+          )}
         </div>
       </div>
     </>
