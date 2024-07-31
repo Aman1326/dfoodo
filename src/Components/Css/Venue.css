@@ -1,427 +1,456 @@
 .venuePage_venueCategory_heading {
-    display: flex;
-    flex-direction: row;
-    gap: 0.5rem;
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem;
 }
 
 .venuePage_venueCategory_heading a {
-    color: var(--primary-color);
-    text-decoration: none;
+  color: var(--primary-color);
+  text-decoration: none;
 }
 
 .filters_section {
-    margin-top: 2rem;
+  margin-top: 2rem;
 }
 
 .filters_wrapper {
-    background: rgba(245, 245, 245, 1);
-    padding: 1rem 0.5rem;
-    align-items: center;
-    border-radius: 5px;
-    box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.18);
-    overflow: auto;
+  background: rgba(245, 245, 245, 1);
+  padding: 1rem 0.5rem;
+  align-items: center;
+  border-radius: 5px;
+  box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.18);
+  overflow: auto;
 }
 
 .filters_wrapper ul {
-    display: flex;
-    margin: 0;
-    flex-direction: row;
-    gap: 0.3rem;
-    padding: 0;
-    list-style-type: none;
+  display: flex;
+  margin: 0;
+  flex-direction: row;
+  gap: 0.3rem;
+  padding: 0;
+  list-style-type: none;
 }
 
 #filter_filter_row {
-    background-color: var(--green);
-    color: var(--white);
-    font-family: "Roboto";
-    align-items: center;
-    border: none;
+  background-color: var(--green);
+  color: var(--white);
+  font-family: "Roboto";
+  align-items: center;
+  border: none;
 }
 
 .filters_wrapper ul li {
-    border: 1px solid rgba(255, 255, 255, 1);
-    border-radius: 5px;
-    padding: 0.1rem 0.5rem;
-    color: var(--text-grey);
-    align-items: center;
-    cursor: pointer;
+  border: 1px solid rgba(255, 255, 255, 1);
+  border-radius: 5px;
+  padding: 0.1rem 0.5rem;
+  color: var(--text-grey);
+  align-items: center;
+  cursor: pointer;
 
-    white-space: nowrap;
+  white-space: nowrap;
 }
 
 .filters_wrapper ul li:hover {
-    background-color: whitesmoke;
-    border: 1px solid rgba(255, 255, 255, 1);
+  background-color: whitesmoke;
+  border: 1px solid rgba(255, 255, 255, 1);
 }
 
 .found_venues_section_heading h6 {
-    color: var(--text-grey);
-    font-family: "Roboto";
-    font-weight: 600;
+  color: var(--text-grey);
+  font-family: "Roboto";
+  font-weight: 600;
 }
 
 /* venue page */
 .VenuePage_venue_container {
-    display: flex;
-    gap: 1rem;
-    padding: 0.5rem;
-    flex-direction: row;
-    border-radius: 10px;
-    justify-content: left;
-    box-shadow: 0px 2px 2px 0px #0000002e;
+  position: relative;
+  display: flex;
+  gap: 1rem;
+  padding: 0.5rem;
+  flex-direction: row;
+  border-radius: 10px;
+  justify-content: left;
+  box-shadow: 0px 2px 2px 0px #0000002e;
 }
 
 @media screen and (max-width: 991px) {
-    .venuePage_image_container img {
-        width: 100% !important;
-    }
-
-
+  .venuePage_image_container img {
+    width: 100% !important;
+  }
 }
 
 @media screen and (max-width: 768px) {
-    .VenuePage_venue_container {
-        flex-direction: column;
-    }
+  .VenuePage_venue_container {
+    flex-direction: column;
+  }
 
-    .venuePage_image_container img {
-        width: 100%;
-    }
+  .venuePage_image_container img {
+    width: 100%;
+  }
 }
 
 .VenuePage_venue_container:hover {
-    /* box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.18); */
-    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  /* box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.18); */
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }
 
 .venuePage_image_container img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: 10px;
-    aspect-ratio: 1;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 10px;
+  aspect-ratio: 1;
 }
 
 .venuePage_image_container {
-    width: fit-content;
-    height: 100%;
-    border-radius: 10px;
+  width: fit-content;
+  height: 100%;
+  border-radius: 10px;
 }
 
 #category_venuePage {
-    margin: 0;
-    width: fit-content;
-    padding: 0.2rem 0.4rem;
-    border-radius: 5px;
-    margin-bottom: 0.2rem;
-    background: rgba(248, 232, 233, 1);
+  margin: 0;
+  width: fit-content;
+  padding: 0.2rem 0.4rem;
+  border-radius: 5px;
+  margin-bottom: 0.2rem;
+  background: rgba(248, 232, 233, 1);
 }
 
 #facilities_venuePage {
-    margin: 0;
-    width: fit-content;
-    border-radius: 5px;
-    font-size: 12px;
+  margin: 0;
+  width: fit-content;
+  border-radius: 5px;
+  font-size: 12px;
 }
 
 .venuePage_venue_category_titles {
-    display: flex;
-    flex-direction: row;
-    gap: 0.4rem;
-    flex-wrap: wrap;
-    margin-top: 0.1rem;
-    margin-bottom: 0.5rem;
+  display: flex;
+  flex-direction: row;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+  margin-top: 0.1rem;
+  margin-bottom: 0.5rem;
 }
 
 .venueContainer_nameAndAddress {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 
 .venueContainer_rowtext {
-    display: flex;
-    width: 100%;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 0.3rem;
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.3rem;
 }
 
 .venueContainer_rowtext h6 {
-    margin: 0;
+  margin: 0;
 }
 
 .venuePage_venue_capacity_wrapper {
-    display: flex;
-    margin-top: auto;
-    flex-direction: row;
-    justify-content: center;
-    gap: 0.2rem;
+  display: flex;
+  margin-top: auto;
+  flex-direction: row;
+  justify-content: center;
+  gap: 0.2rem;
 
-    align-items: center;
+  align-items: center;
 }
 
 .time_discount_container {
-    display: flex;
-    flex-direction: row;
-    gap: 1.5rem;
-    gap: 1rem;
-    justify-content: space-evenly;
+  display: flex;
+  flex-direction: row;
+  gap: 1.5rem;
+  gap: 1rem;
+  justify-content: space-evenly;
 }
 
 .time_section p {
-    padding: 0.4rem 0.7rem;
-    font-family: "Roboto";
-    font-weight: 600;
-    margin: 0;
-    font-size: 16px;
-    border-radius: 2px;
-    border-radius: 5px;
-    background-color: var(--light-pink);
-    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  padding: 0.4rem 0.7rem;
+  font-family: "Roboto";
+  font-weight: 600;
+  margin: 0;
+  font-size: 16px;
+  border-radius: 2px;
+  border-radius: 5px;
+  background-color: var(--light-pink);
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 }
 
 .discount_section {
-    display: flex;
-    justify-content: center;
+  display: flex;
+  justify-content: center;
 }
 
 .discount_section p {
-    border: 1px solid var(--secondary-black);
-    width: fit-content;
-    padding: 0.1rem 0.7rem;
-    margin-top: -0.5rem;
-    background-color: white;
-    z-index: 9;
-    border-radius: 5px;
-    font-family: "Roboto";
-    font-weight: 600;
-    font-size: 12px;
+  border: 1px solid var(--secondary-black);
+  width: fit-content;
+  padding: 0.1rem 0.7rem;
+  margin-top: -0.5rem;
+  background-color: white;
+  z-index: 9;
+  border-radius: 5px;
+  font-family: "Roboto";
+  font-weight: 600;
+  font-size: 12px;
 }
 
 .avrgPrice {
-    font-weight: 500;
-    display: flex;
-    flex-direction: row;
-    gap: 0.2rem;
-    width: fit-content;
-    padding: 0.2rem 0.8rem;
-    border-radius: 5px;
-    background: rgba(248, 232, 233, 1);
-    font-family: "Roboto";
-    font-size: 14px;
+  font-weight: 500;
+  display: flex;
+  flex-direction: row;
+  gap: 0.2rem;
+  width: fit-content;
+  padding: 0.2rem 0.8rem;
+  border-radius: 5px;
+  background: rgba(248, 232, 233, 1);
+  font-family: "Roboto";
+  font-size: 14px;
 }
 
 .venuePage_text_section {
-    gap: 2px;
-    font-size: 14px;
-    width: 100%;
-    padding-top: 2rem;
-    color: var(--text-black);
-    display: flex;
-    text-decoration: none;
-    flex-direction: column;
+  gap: 2px;
+  font-size: 14px;
+  width: 100%;
+  padding-top: 2rem;
+  color: var(--text-black);
+  display: flex;
+  text-decoration: none;
+  flex-direction: column;
 }
 
 .venuePage_listyourVenue_section {
-    margin-top: 4rem;
+  margin-top: 4rem;
 }
 
 .facility_item {
-    display: flex;
-    border-radius: 5px;
-    flex-wrap: nowrap;
-    padding: 0.2rem 0.4rem;
-    gap: 0.2rem;
+  display: flex;
+  border-radius: 5px;
+  flex-wrap: nowrap;
+  padding: 0.2rem 0.4rem;
+  gap: 0.2rem;
 }
 
 .margin24px {
-    margin-bottom: 24px;
+  margin-bottom: 24px;
 }
 
 .searchBarContainer {
-    margin: 0.5rem auto;
-    width: 90%;
-    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
-    border-radius: 10px;
+  margin: 0.5rem auto;
+  width: 90%;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+  border-radius: 10px;
 }
 
 .stars_text_wrapper label {
-    width: 100px;
+  width: 100px;
 }
 
 .filter-modal {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    font-family: "Roboto";
-    right: auto;
-    bottom: auto;
-    margin-right: -50%;
-    transform: translate(-50%, -50%);
-    background: white;
-    padding: 20px;
-    border-radius: 4px;
-    outline: none;
-    width: 600px;
-    max-width: 90%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  font-family: "Roboto";
+  right: auto;
+  bottom: auto;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);
+  background: white;
+  padding: 20px;
+  border-radius: 4px;
+  outline: none;
+  width: 600px;
+  max-width: 90%;
 }
 
 .filter-modal-overlay {
-    background-color: rgba(0, 0, 0, 0.75);
+  background-color: rgba(0, 0, 0, 0.75);
 }
 
 .close-button {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    background: none;
-    border: none;
-    font-size: 24px;
-    cursor: pointer;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
 }
 
 .vertical-tabs {
-    display: flex;
-    font-family: "Roboto";
-    justify-content: left;
-
+  display: flex;
+  font-family: "Roboto";
+  justify-content: left;
 }
 
 .vertical-tab-list {
-    display: flex;
-    padding: 0;
-    list-style-type: none;
-    flex-direction: column;
-    margin-right: 1rem;
-    width: 30%;
+  display: flex;
+  padding: 0;
+  list-style-type: none;
+  flex-direction: column;
+  margin-right: 1rem;
+  width: 30%;
 }
 
 .vertical-tab-list .react-tabs__tab {
-    margin-bottom: 0.5rem;
-    padding: 0.5rem 1rem;
-    cursor: pointer;
-    border-radius: 5px;
-    outline: none;
+  margin-bottom: 0.5rem;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  border-radius: 5px;
+  outline: none;
 }
 
 .vertical-tab-list .react-tabs__tab--selected {
-    /* background-color: lightgrey; */
-    background-image: linear-gradient(to left, rgba(0, 0, 0, 0) 97%, var(--primary-color) 20%);
+  /* background-color: lightgrey; */
+  background-image: linear-gradient(
+    to left,
+    rgba(0, 0, 0, 0) 97%,
+    var(--primary-color) 20%
+  );
 }
 
 .modal-footer {
-    display: flex;
-    justify-content: right;
-    margin-top: 20px;
+  display: flex;
+  justify-content: right;
+  margin-top: 20px;
 }
 
 .colored_text_verticle_tabs {
-    color: var(--primary-color);
-    font-family: "Roboto";
-    font-size: 14px;
-    font-weight: 600;
+  color: var(--primary-color);
+  font-family: "Roboto";
+  font-size: 14px;
+  font-weight: 600;
 }
 
 .filters_modal_venuesPage {
-    display: flex;
-    flex-direction: column;
-    gap: 0.1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
 }
 
 .filters_modal_venuesPage label {
-    font-family: "Roboto";
-    font-size: 16px;
-    display: flex;
-    flex-direction: row;
-    gap: 0.5rem;
-    font-weight: 500;
+  font-family: "Roboto";
+  font-size: 16px;
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem;
+  font-weight: 500;
 }
 
 .filters_modal_heading {
-    font-family: "Roboto";
-    font-size: 24px;
+  font-family: "Roboto";
+  font-size: 24px;
 }
 
 #filters_modal {
-    height: 40vh;
+  height: 40vh;
 }
 
 .filter_modal_button button {
-    background-color: var(--primary-color);
-    color: var(--white);
-    border: none;
-    font-family: "Roboto";
-    font-weight: 400;
-    border-radius: 5px;
-
+  background-color: var(--primary-color);
+  color: var(--white);
+  border: none;
+  font-family: "Roboto";
+  font-weight: 400;
+  border-radius: 5px;
 }
 
 .filter_modal_button button:hover {
-    background-color: var(--primary-color);
-    color: var(--white);
-    border: none;
-    font-family: "Roboto";
-    font-weight: 400;
-    border-radius: 5px;
+  background-color: var(--primary-color);
+  color: var(--white);
+  border: none;
+  font-family: "Roboto";
+  font-weight: 400;
+  border-radius: 5px;
 }
 
 .filters_section_row img {
-    width: 15px;
+  width: 15px;
 }
 
 .filters_section_row {
-    align-items: center;
-    background-color: var(--white);
-    display: flex;
-    flex-direction: row;
-    gap: 0.2rem;
+  align-items: center;
+  background-color: var(--white);
+  display: flex;
+  flex-direction: row;
+  gap: 0.2rem;
 }
 
 .venuePage_ratingSection {
-    display: flex;
-    gap: 0.2rem;
-    flex-direction: row;
-    align-items: center;
-    border-radius: 5px;
-    color: var(--white);
-    font-weight: 600;
-    justify-content: space-between;
-    padding: 0.1rem 0.4rem;
+  display: flex;
+  gap: 0.2rem;
+  flex-direction: row;
+  align-items: center;
+  border-radius: 5px;
+  color: var(--white);
+  font-weight: 600;
+  justify-content: space-between;
+  padding: 0.1rem 0.4rem;
 }
 
 .venuePage_ratingSection p {
-    margin: 0;
-    font-size: 14px;
+  margin: 0;
+  font-size: 14px;
 }
 
 .venuePage_ratingSection img {
-    width: 15px;
-    height: 15px;
+  width: 15px;
+  height: 15px;
 }
 
 .venuePage_image_container {
-    position: relative;
-    /* Ensure the container can have positioned children */
+  position: relative;
+  /* Ensure the container can have positioned children */
 }
 
-
-
 .venuePage_ratingSection {
-    position: absolute;
-    /* Position the rating section absolutely within the container */
-    bottom: 10px;
-    /* Adjust the bottom position as needed */
-    right: 10px;
-    /* Adjust the right position as needed */
-    background-color: var(--green);
-    color: white;
-    /* Optional: text color */
-    border-radius: 5px;
-    /* Optional: rounded corners */
-    display: flex;
-    /* Align items in a row */
-    align-items: center;
-    /* Center items vertically */
+  position: absolute;
+  /* Position the rating section absolutely within the container */
+  bottom: 10px;
+  /* Adjust the bottom position as needed */
+  right: 10px;
+  /* Adjust the right position as needed */
+  background-color: var(--green);
+  color: white;
+  /* Optional: text color */
+  border-radius: 5px;
+  /* Optional: rounded corners */
+  display: flex;
+  /* Align items in a row */
+  align-items: center;
+  /* Center items vertically */
+}
+.marginNone {
+  margin: 0 !important;
+  p {
+    margin: 0 !important;
+  }
+}
+.TimingButtons2 {
+  padding-top: 0.4rem;
+  padding-bottom: 1rem;
+  position: relative;
+  display: flex;
+}
+
+.heart_section {
+  button {
+    outline: none;
+    background-color: transparent;
+    border: none;
+  }
+}
+.favHeartIcon {
+  background-color: transparent;
+  top: 15px;
+  right: 14px;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+.heart_section button:hover .favHeartIcon {
+  transform: scale(1.2);
+  opacity: 0.8;
 }
