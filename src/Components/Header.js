@@ -94,7 +94,7 @@ function Header() {
                 {locationn.pathname !== "/onBoarding" && (
                   <span className="dropdown1">
                     <label>
-                      <img src={location} alt="location" />
+                      <img src={location} alt="location" /> Bhopal
                     </label>
                   </span>
                 )}

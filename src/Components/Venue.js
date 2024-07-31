@@ -52,21 +52,25 @@ const Venue = () => {
   const [data, setData] = useState([]);
   const [showLoaderAdmin, setshowLoaderAdmin] = useState([]);
   const [numberOfVenuesFound, setNumberOfVenuesFound] = useState(0);
+  const [HeartImg, setHeartImages] = useState([]);
 
   const master_data_get = async (category_id) => {
     setshowLoaderAdmin(true);
     const fd = new FormData();
     fd.append("current_url", "/" + currentUrl);
     fd.append("category_id", "category_id");
-
+    fd.append("call_id", "1");
     await server_post_data(get_restropage_webapp, fd)
       .then((Response) => {
-        console.log(Response.data.message.restro);
+        console.log("catagory dta", Response.data.message.restro);
 
         if (Response.data.error) {
           handleError(Response.data.message);
         } else {
-          SetVenueData(Response.data.message.restro || []);
+          const venues = Response.data.message.restro || [];
+          SetVenueData(venues);
+          setHeartImages(Response.data.message.favourite || []);
+          setNumberOfVenuesFound(venues.length);
         }
         setshowLoaderAdmin(false);
       })
@@ -74,10 +78,30 @@ const Venue = () => {
         setshowLoaderAdmin(false);
       });
   };
-  console.log("adadad", GetVenueData);
+  const master_filter_data_get = async (category_id) => {
+    setshowLoaderAdmin(true);
+    const fd = new FormData();
+    fd.append("current_url", "/" + currentUrl);
+    fd.append("category_id", "category_id");
+    fd.append("call_id", "1");
+    await server_post_data(get_restropage_webapp, fd)
+      .then((Response) => {
+        if (Response.data.error) {
+          handleError(Response.data.message);
+        } else {
+          SetVenueData(Response.data.message.restro || []);
+          setHeartImages(Response.data.message.favourite || []);
+        }
+        setshowLoaderAdmin(false);
+      })
+      .catch((error) => {
+        setshowLoaderAdmin(false);
+      });
+  };
 
   useEffect(() => {
     master_data_get();
+    master_filter_data_get();
   }, []);
 
   const filters = [
@@ -159,17 +183,32 @@ const Venue = () => {
   const [selectedTab, setSelectedTab] = useState(0);
   const [selectedIndexes, setSelectedIndexes] = useState([]);
   // Toggle the like state for a specific venue
-  const handleHeartClick = async (index, id) => {
-    handleSaveChangesdynamic(id);
-    const updatedIndexes = [...selectedIndexes];
-    const selectedIndex = updatedIndexes.indexOf(index);
-    if (selectedIndex === -1) {
-      updatedIndexes.push(index);
-    } else {
-      updatedIndexes.splice(selectedIndex, 1);
+  const handleHeartClick = async (venueId) => {
+    try {
+      // Assuming you have a function to handle save changes dynamically
+      await handleSaveChangesdynamic(venueId);
+
+      // Toggle favorite status
+      const updatedFavorites = HeartImg.some(
+        (fav) => fav.restaurant_id === venueId
+      )
+        ? HeartImg.filter((fav) => fav.restaurant_id !== venueId) // Remove from favorites
+        : [...HeartImg, { restaurant_id: venueId }];
+      console.log(updatedFavorites);
+
+      // Update state with the new list of favorites
+      setHeartImages(updatedFavorites);
+
+      // Optionally, you can update the backend or local storage here
+    } catch (error) {
+      console.error("Error updating favorite status:", error);
     }
-    setSelectedIndexes(updatedIndexes);
   };
+
+  const isFavorite = (venueId) => {
+    return HeartImg.some((fav) => fav.restaurant_id === venueId);
+  };
+
   const handleSaveChangesdynamic = async (id) => {
     // seterror_show("");
     const form_data = new FormData();
@@ -287,15 +326,12 @@ const Venue = () => {
                                     <div className="heart_section">
                                       <button
                                         onClick={() =>
-                                          handleHeartClick(
-                                            index,
-                                            venue.primary_id
-                                          )
+                                          handleHeartClick(venue.primary_id)
                                         }
                                       >
                                         <img
                                           src={
-                                            selectedIndexes.includes(index)
+                                            isFavorite(venue.primary_id)
                                               ? HeartRed
                                               : Heart
                                           }
@@ -318,28 +354,22 @@ const Venue = () => {
                                     Average Price {venue.restaurant_price} ₹
                                   </h6>
                                   <span className="venuePage_venue_category_titles marginNone">
-                                    {venue.category &&
-                                      venue.category.map((cat, idx) => (
+                                    {venue.amenities?.map(
+                                      (amenity, amenityIndex) => (
                                         <div
-                                          key={idx}
-                                          className="category_item"
+                                          key={amenityIndex}
+                                          className="amenityItem"
                                         >
                                           <img
-                                            src={`${APL_LINK}/assets/${
-                                              cat.category_image ||
-                                              "default-category.png"
-                                            }`}
-                                            alt={
-                                              cat.category_name ||
-                                              "Category Image"
-                                            }
+                                            src={`${APL_LINK}/assets/${amenity.image}`}
+                                            alt={amenity.amenities_name}
                                           />
-                                          <p>
-                                            {cat.category_name ||
-                                              "No Category Name"}
-                                          </p>
+                                          <label>
+                                            {amenity.amenities_name}
+                                          </label>
                                         </div>
-                                      ))}
+                                      )
+                                    )}
                                   </span>
 
                                   <div className="TimingButtons2">

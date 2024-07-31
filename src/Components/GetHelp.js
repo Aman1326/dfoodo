@@ -111,7 +111,7 @@ const GetHelp = () => {
                     <p>Connect with us via chat</p>
                     <Link
                       aria-label="Chat on WhatsApp"
-                      to="https://wa.me/+919209403405"
+                      to="https://wa.me/"
                       target="blank"
                     >
                       Chat with us

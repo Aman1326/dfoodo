@@ -13,13 +13,13 @@ import DatePicker from "react-date-picker";
 import line from "../Assets/line.svg";
 const SearchBar = () => {
   const locations = [
+    { value: "2:30 PM", label: "2:30 PM" },
+    { value: "3:00 PM", label: "3:00 PM" },
+    { value: "3:30 PM", label: "3:30 PM" },
+    { value: "4:00 PM", label: "4:00 PM" },
+    { value: "4:30 PM", label: "4:30 PM" },
+    { value: "5:00 PM", label: "5:00 PM" },
     { value: "6:30 PM", label: "6:30 PM" },
-    { value: "6:30 PM", label: "6:30 PM" },
-    { value: "6:30 PM", label: "6:30 PM" },
-    { value: "6:30 PM", label: "6:30 PM" },
-    { value: "6:30 PM", label: "6:30 PM" },
-    { value: "6:30 PM", label: "6:30 PM" },
-    { value: "6:40 PM", label: "6:40 PM" },
     // Add more locations as needed
   ];
   const [selectedLocation, setSelectedLocation] = useState(null);

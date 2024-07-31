@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import "./Css/DetailedVenue.css";
 import Header from "./Header";
 import { Link, useLocation } from "react-router-dom";
@@ -47,6 +47,7 @@ import avgpriceIcon from "../Assets/averagePriceDetailedVenue.svg";
 import Menu from "./Menu";
 import rightArrowWhite from "../Assets/rightArrow_white.svg";
 import view_photos from "../Assets/view_photos.svg";
+import AddBtn from "../Assets/addNewInput.svg";
 import {
   server_post_data,
   get_restropage_webapp,
@@ -60,6 +61,7 @@ let customer_mobile_no = "0";
 let customer_email = "0";
 const DetailedVenue = () => {
   const location = useLocation();
+  const footerRef = useRef(null);
   const currentUrl = location.pathname.substring(1);
   const [showLoginModal, setShowLoginModal] = useState(false);
   const [showEmailLoginModal, setShowEmailLoginModal] = useState(false);
@@ -73,7 +75,6 @@ const DetailedVenue = () => {
   const [thankYouOpen, setthankYouOpen] = useState(false);
   const [otpSent, setOtpSent] = useState(false); // State to manage OTP view
   const [otp, setOtp] = useState(""); // State to manage the entered OTP
-
 
   // react tabs:
   const [activeTab, setActiveTab] = useState("about");
@@ -111,8 +112,6 @@ const DetailedVenue = () => {
     );
   }
   //  array for venue features:
-  
-  
 
   const time_discounts = [
     {
@@ -217,13 +216,13 @@ const DetailedVenue = () => {
     fd.append("restuarant_id", customer_id);
     await server_post_data(get_restropage_webapp, fd)
       .then((Response) => {
+        console.log(Response.data.message);
         if (Response.data.error) {
           // handleError(Response.data.message);
         } else {
-          console.log(Response.data.message);
           setDetail(Response.data.message.restro);
           setreviews(Response.data.message.restro.review);
-          console.log(Response.data.message.restro.review);
+          console.log(Response.data.message.restro[0].review);
         }
         // setshowLoaderAdmin(false);
       })
@@ -234,6 +233,94 @@ const DetailedVenue = () => {
 
   useEffect(() => {
     master_data_get();
+  }, []);
+
+  let child_length = 4;
+  let pet_length = 4;
+  let guest_length = 4;
+  const [selectedchild, setselectedchild] = useState(0);
+  const [addCustomChild, setAddCustomChild] = useState(false);
+  const [selectedpet, setselectedpet] = useState(0);
+  const [addCustomPet, setAddCustomPet] = useState(false);
+  const [selectedGuest, setselectedGuest] = useState(0);
+  const [addCustomGuest, setAddCustomGuest] = useState(false);
+  const SelectedChangeChild = (child_name, click_type) => {
+    if (click_type === "1") {
+      setselectedchild(child_name);
+      setAddCustomChild(false);
+    } else {
+      child_name.target.value = child_name.target.value.replace(/[^0-9]/g, "");
+      if (child_name.target.value === "") {
+        child_name.target.value = 1;
+      } else if (Number(child_name.target.value) < 1) {
+        child_name.target.value = 1;
+      }
+      setselectedchild(child_name.target.value);
+    }
+  };
+  const addCustomChildInput = () => {
+    setAddCustomChild(true);
+    setselectedchild("");
+  };
+
+  const SelectedChangePet = (pet_name, click_type) => {
+    if (click_type === "1") {
+      setselectedpet(pet_name);
+      setAddCustomPet(false);
+    } else {
+      pet_name.target.value = pet_name.target.value.replace(/[^0-9]/g, "");
+      if (pet_name.target.value === "") {
+        pet_name.target.value = 1;
+      } else if (Number(pet_name.target.value) < 1) {
+        pet_name.target.value = 1;
+      }
+      setselectedpet(pet_name.target.value);
+    }
+  };
+  const addCustomPetInput = () => {
+    setAddCustomPet(true);
+    setselectedpet("");
+  };
+  const SelectedChangeGuest = (pet_name, click_type) => {
+    if (click_type === "1") {
+      setselectedGuest(pet_name);
+      setAddCustomGuest(false);
+    } else {
+      pet_name.target.value = pet_name.target.value.replace(/[^0-9]/g, "");
+      if (pet_name.target.value === "") {
+        pet_name.target.value = 1;
+      } else if (Number(pet_name.target.value) < 1) {
+        pet_name.target.value = 1;
+      }
+      setselectedGuest(pet_name.target.value);
+    }
+  };
+  const addCustomGuestInput = () => {
+    setAddCustomGuest(true);
+    setselectedGuest("");
+  };
+  const [isFooterVisible, setIsFooterVisible] = useState(false);
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 992);
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsFooterVisible(entry.isIntersecting);
+      },
+      {
+        root: null,
+        threshold: 0.6, // 10% of the footer must be visible to trigger the callback
+      }
+    );
+
+    if (footerRef.current) {
+      observer.observe(footerRef.current);
+    }
+
+    return () => {
+      if (footerRef.current) {
+        observer.unobserve(footerRef.current);
+      }
+    };
   }, []);
   const greyBackgroundClass = step === 4 ? "greyBackground" : "";
   return (
@@ -416,7 +503,11 @@ const DetailedVenue = () => {
                         <span className="steps">
                           <img src={calendarfrom} alt="calendarfrom" />
                           <p>Date</p>
-                          <img src={rightArrowWhite} alt="rightArrowWhite" />
+                          <img
+                            src={rightArrowWhite}
+                            alt="rightArrowWhite"
+                            className="rightArrowWhite"
+                          />
                           <img src={timerClock} alt="timerClock" />
                         </span>
                         <div class="rhombus"></div>
@@ -427,9 +518,17 @@ const DetailedVenue = () => {
                         <span className="steps">
                           <img src={calendarfrom} alt="calendarfrom" />
                           <p>Date</p>
-                          <img src={rightArrowWhite} alt="rightArrowWhite" />
+                          <img
+                            src={rightArrowWhite}
+                            alt="rightArrowWhite"
+                            className="rightArrowWhite"
+                          />
                           <img src={timerClock} alt="timerClock" />
-                          <img src={rightArrowWhite} alt="rightArrowWhite" />
+                          <img
+                            src={rightArrowWhite}
+                            alt="rightArrowWhite"
+                            className="rightArrowWhite"
+                          />
                           <img src={personCalendar} alt="personCalendar" />
                         </span>
                         <div class="rhombus"></div>
@@ -440,11 +539,23 @@ const DetailedVenue = () => {
                         <span className="steps">
                           <img src={calendarfrom} alt="calendarfrom" />
                           <p>Date</p>
-                          <img src={rightArrowWhite} alt="rightArrowWhite" />
+                          <img
+                            src={rightArrowWhite}
+                            alt="rightArrowWhite"
+                            className="rightArrowWhite"
+                          />
                           <img src={timerClock} alt="timerClock" />
-                          <img src={rightArrowWhite} alt="rightArrowWhite" />
+                          <img
+                            src={rightArrowWhite}
+                            alt="rightArrowWhite"
+                            className="rightArrowWhite"
+                          />
                           <img src={personCalendar} alt="personCalendar" />
-                          <img src={rightArrowWhite} alt="rightArrowWhite" />
+                          <img
+                            src={rightArrowWhite}
+                            alt="rightArrowWhite"
+                            className="rightArrowWhite"
+                          />
                           <img src={preview} alt="preview" />
                         </span>
                         <div class="square"></div>
@@ -501,7 +612,7 @@ const DetailedVenue = () => {
                         <h6 className="calendar_modal_heading">
                           Number of Guests
                         </h6>
-                        <div className="guests_calendar_modal">
+                        {/* <div className="guests_calendar_modal">
                           <p>2</p>
                           <p>4</p>
                           <p>6</p>
@@ -511,19 +622,156 @@ const DetailedVenue = () => {
                         <input
                           type="phone"
                           placeholder="Enter no of guests.."
-                        />
+                        /> */}
+                        <div className="resrvDateSelect">
+                          <ul>
+                            {Array.from(
+                              { length: guest_length },
+                              (_, index) => index + 1
+                            ).map((digit, index) => (
+                              <li key={index}>
+                                <div
+                                  className={`dateBox ${
+                                    selectedGuest === index
+                                      ? "selectedFormItems"
+                                      : ""
+                                  }`}
+                                  onClick={() =>
+                                    SelectedChangeGuest(index, "1")
+                                  }
+                                >
+                                  <p>{index}</p>
+                                </div>
+                              </li>
+                            ))}
+                            <li
+                              className={`${
+                                addCustomGuest ? " " : "hideInput"
+                              }`}
+                            >
+                              <div className="customRsrvInput">
+                                <input
+                                  type="text"
+                                  maxLength={3}
+                                  defaultValue={selectedGuest}
+                                  name="custom_pet_count"
+                                  onChange={(e) => SelectedChangeGuest(e, "2")}
+                                />
+                              </div>
+                            </li>
+                          </ul>
+                          <div
+                            className={`addInputBtn ${
+                              addCustomPet ? "hideInput" : ""
+                            }`}
+                            onClick={addCustomGuestInput}
+                          >
+                            <img src={AddBtn} alt="add btn" />
+                          </div>
+                        </div>
+                        {/* ===== */}
                         <h6 className="calendar_modal_heading">
                           Number of Children
                         </h6>
-                        <input
+                        {/* <input
                           type="phone"
                           placeholder="Enter no of children.."
-                        />
+                        /> */}
+                        <div className="resrvDateSelect">
+                          <ul>
+                            {Array.from(
+                              { length: child_length },
+                              (_, index) => index + 1
+                            ).map((digit, index) => (
+                              <li key={index}>
+                                <div
+                                  className={`dateBox ${
+                                    selectedchild === index
+                                      ? "selectedFormItems"
+                                      : ""
+                                  }`}
+                                  onClick={() =>
+                                    SelectedChangeChild(index, "1")
+                                  }
+                                >
+                                  <p>{index}</p>
+                                </div>
+                              </li>
+                            ))}
+                            <li
+                              className={`${
+                                addCustomChild ? " " : "hideInput"
+                              }`}
+                            >
+                              <div className="customRsrvInput">
+                                <input
+                                  type="text"
+                                  maxLength={3}
+                                  defaultValue={selectedchild}
+                                  name="custom_child_count"
+                                  onBlur={(e) => SelectedChangeChild(e, "2")}
+                                  placeholder="No. of Child"
+                                />
+                              </div>
+                            </li>
+                          </ul>
+                          <div
+                            className={`addInputBtn ${
+                              addCustomChild ? "hideInput" : ""
+                            }`}
+                            onClick={addCustomChildInput}
+                          >
+                            <img src={AddBtn} alt="addbtn" />
+                          </div>
+                        </div>
 
                         <h6 className="calendar_modal_heading">
                           Number of Pets
                         </h6>
-                        <input type="phone" placeholder="Enter no of pets.." />
+                        {/* <input type="phone" placeholder="Enter no of pets.." /> */}
+                        <div className="resrvDateSelect">
+                          <ul>
+                            {Array.from(
+                              { length: pet_length },
+                              (_, index) => index + 1
+                            ).map((digit, index) => (
+                              <li key={index}>
+                                <div
+                                  className={`dateBox ${
+                                    selectedpet === index
+                                      ? "selectedFormItems"
+                                      : ""
+                                  }`}
+                                  onClick={() => SelectedChangePet(index, "1")}
+                                >
+                                  <p>{index}</p>
+                                </div>
+                              </li>
+                            ))}
+                            <li
+                              className={`${addCustomPet ? " " : "hideInput"}`}
+                            >
+                              <div className="customRsrvInput">
+                                <input
+                                  type="text"
+                                  maxLength={3}
+                                  defaultValue={selectedpet}
+                                  name="custom_pet_count"
+                                  onChange={(e) => SelectedChangePet(e, "2")}
+                                  placeholder="No. of Pets"
+                                />
+                              </div>
+                            </li>
+                          </ul>
+                          <div
+                            className={`addInputBtn ${
+                              addCustomPet ? "hideInput" : ""
+                            }`}
+                            onClick={addCustomPetInput}
+                          >
+                            <img src={AddBtn} alt="Barley's Dashboard" />
+                          </div>
+                        </div>
 
                         <span>
                           <Link onClick={() => setStep(3)}>Next</Link>

@@ -157,7 +157,7 @@ function Home() {
               <h3>Collections</h3>
               <h6>
                 Explore curated lists of top restaurants, cafes, pubs, and bars
-                in Gwalior, based on trends
+                in {city}, based on trends
               </h6>
             </div>
           </div>
@@ -358,6 +358,54 @@ function Home() {
                         </div>
                       </div>
                     ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* how does it works section */}
+        <section className="how_does_it_work_section">
+          <div className="how_does_it_work_wrapper">
+            <div className="container-lg">
+              <div className="row how_it_works_content">
+                <div className="how_it_works_content_heading">
+                  <h5>How does it work?</h5>
+                </div>
+                <div className="col-lg-3">
+                  <div className="sigle_star_section">
+                    <img src={str1} alt="star" />
+                    <h6>Best choice</h6>
+                    <p>
+                      An unrivaled selection of restaurants forwhatever you want
+                    </p>
+                  </div>
+                </div>
+                <div className="col-lg-3">
+                  <div className="multi_star_section">
+                    <img src={str2} alt="star" id="multiStars" />
+                    <h6>User reviews</h6>
+                    <p>
+                      Recommendations and reviews from a powerful community.
+                    </p>
+                  </div>
+                </div>
+                <div className="col-lg-3">
+                  <div className="percentage_section">
+                    <img src={percentage} alt="star" />
+                    <h6>Exclusive benefits</h6>
+                    <p>
+                      Offers for many restaurants and lots of other benefits
+                      with our loyalty program.
+                    </p>
+                  </div>
+                </div>
+                <div className="col-lg-3">
+                  <div className="sigle_star_section">
+                    <img src={tick} alt="star" />
+                    <h6>Easy reservation</h6>
+                    <p>Instant, free, everywhere. 24/7</p>
+                  </div>
                 </div>
               </div>
             </div>

@@ -121,7 +121,7 @@
   padding: 0rem 0.5rem;
   margin-left: auto;
   margin-right: auto;
-  margin-top: 0.2rem;
+  margin-top: 0.5rem;
   border-radius: 25px;
 }
 
@@ -281,7 +281,7 @@
 .steps {
   background-color: var(--light-black);
   display: flex;
-  gap: 1.2rem;
+  gap: 1.5rem;
   width: fit-content;
   font-size: 14px;
   padding: 0.2rem 1rem;
@@ -451,6 +451,9 @@
 .wrapper_calendar_modal {
   width: 100%;
   text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
 
   input {
     width: 100%;
@@ -463,7 +466,7 @@
   }
 
   a {
-    margin-top: 2rem;
+    margin-top: auto;
 
     display: flex;
     justify-content: center !important;
@@ -577,4 +580,84 @@
   border-bottom-right-radius: 5px !important;
   background: var(--light-black);
   padding: 0.2rem;
+}
+
+.rightArrowWhite {
+  width: 10px !important;
+}
+
+.resrvDateSelect ul {
+  padding: 0;
+  display: flex;
+  list-style: none;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0;
+  width: 100%;
+}
+
+.resrvDateSelect,
+.resrvDateSelect ul li {
+  width: 100%;
+  margin-bottom: 0.3rem;
+}
+
+.resrvDateSelect ul li p {
+  text-align: center !important;
+  margin: 0;
+  font-size: 14px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  cursor: pointer;
+  aspect-ratio: 1.5;
+  border: 1px solid grey;
+  border-radius: 5px;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+
+}
+
+.selectedFormItems {
+  background-color: var(--light-black) !important;
+  border-radius: 5px;
+  color: var(--white) !important;
+}
+
+.selectedFormItems p {
+  color: var(--white-text) !important;
+}
+
+.hideInput {
+  display: none;
+}
+
+.resrvDateSelect {
+  position: relative;
+}
+
+.addInputBtn {
+  position: absolute;
+  right: -11px;
+  top: 10px;
+  width: 1.5rem;
+  height: 1.5rem;
+  cursor: pointer;
+}
+
+.addInputBtn img {
+  width: 100%;
+  margin-top: 5px;
+}
+
+.customRsrvInput input {
+  outline: none;
+  border-radius: 5px;
+  padding: 0.7rem 1rem;
+  font-size: 12px;
+  font-weight: 500;
+  text-align: center;
+  margin: 0;
 }
