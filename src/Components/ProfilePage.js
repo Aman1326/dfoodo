@@ -683,43 +683,55 @@ const ProfilePage = () => {
                   <div className="container">
                     {getFavrate.map((venue, index) => (
                       <div className="fevorateContanrr" key={index}>
-                        <div className="favImgs">
-                          <img
-                            src={`${APL_LINK}/assets/${venue.data[0].menu_image}`}
-                            alt="venueImg"
-                          />
+                        <div className="leftCont">
+                          <div className="favImgs">
+                            <img
+                              src={`${APL_LINK}/assets/${venue.data[0].menu_image}`}
+                              alt="venueImg"
+                            />
+                          </div>
                         </div>
                         <div className="rightContainer">
-                          <div className="FaVCardcontent">
-                            <h5>{venue.data[0].restaurant_name}</h5>
-                            <p>{venue.data[0].restaurant_full_adrress}</p>
-                            <div className="AVrageSection">
-                              <img
-                                className="ContctSvgIon"
-                                src={contactus}
-                                alt="cont"
-                              />
-                              <label>
-                                ₹{venue.restaurant_price} Average Price
-                              </label>
-                              <img
-                                className="QuestionTOol"
-                                src={qustionTOoltip}
-                                alt="tooltip"
-                              />
-                            </div>
-                            <div className="drinksSec">
-                              <img src={drink} alt="drink" />
-                              <label>Bar</label>
-                              <img src={drink2} alt="drink2" />
-                              <label>Alcohol Served</label>
-                              <img src={drink3} alt="drink3" />
-                              <label>Valet Parking</label>
-                            </div>
-                            <div className="TimingButtons">
-                              <div className="timesBtns">
-                                <p>17:30</p>
-                                <div className="childtime">-20%</div>
+                          <div className="ContnnrFavcratCard">
+                            <div className="FaVCardcontent">
+                              <h5>{venue.data[0].restaurant_name}</h5>
+                              <p>{venue.data[0].restaurant_full_adrress}</p>
+                              <div className="AVrageSection">
+                                <img
+                                  className="ContctSvgIon"
+                                  src={contactus}
+                                  alt="cont"
+                                />
+                                <label>
+                                  ₹{venue.data[0].restaurant_price} Average
+                                  Price
+                                </label>
+                                <img
+                                  className="QuestionTOol"
+                                  src={qustionTOoltip}
+                                  alt="tooltip"
+                                />
+                              </div>
+                              <div className="drinksSec">
+                                {venue.data[0].amenities.map(
+                                  (amenity, Index) => (
+                                    <div key={Index} className="amenityItem">
+                                      <img
+                                        src={`${APL_LINK}/assets/${amenity.image}`}
+                                        alt={amenity.amenities_name}
+                                      />
+                                      <label>{amenity.amenities_name}</label>
+                                    </div>
+                                  )
+                                )}
+                              </div>
+                              <div className="TimingButtons">
+                                <div className="timesBtns">
+                                  <p>17:30</p>
+                                  <div className="childtime">
+                                    {venue.data[0].discount_upto}%
+                                  </div>
+                                </div>
                               </div>
                             </div>
                           </div>

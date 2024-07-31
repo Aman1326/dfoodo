@@ -1,7 +1,7 @@
 import axios from "axios";
 import { retrieveData } from "../LocalConnection/LocalConnection.js";
 const appauth_key = "logoacedamy@2029";
-let APL_LINK = "http://192.168.1.11:8000/";
+let APL_LINK = "http://192.168.1.26:8000/";
 let Website_URL = "https://www.logoacademy.co/";
 let local_server_link_react = APL_LINK + "api/web_link/";
 
@@ -9,7 +9,8 @@ const retrievedAdminId = retrieveData("admin_id");
 const get_blog_data_website =
   local_server_link_react + "get_blog_data_website/";
 const blog_details_website = local_server_link_react + "blog_details_website/";
-const get_categorypage_webapp = local_server_link_react + "get_categorypage_webapp/";
+const get_categorypage_webapp =
+  local_server_link_react + "get_categorypage_webapp/";
 const get_all_faq_website = local_server_link_react + "get_all_faq_website/";
 const save_restaurantOwnerdetails =
   local_server_link_react + "save_restaurantOwnerdetails/";
