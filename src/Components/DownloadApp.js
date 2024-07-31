@@ -8,11 +8,11 @@ const DownloadApp = () => {
     <section className="download_now_section">
       <div className="container-lg">
         <div className="phoneContainer row">
-          <div className="col-md-5 p-0 leftSection">
+          <div className="col-sm-5 p-0 leftSection">
             <img src={phoneimg} alt="phone" />
           </div>
           <div
-            className="col-md-7 pl-0 rightSection"
+            className="col-sm-7 pl-0 rightSection"
             style={{ backgroundColor: "var(--orange-Color)" }}
           >
             <h3>Get the Dfoodo Dinner App</h3>
