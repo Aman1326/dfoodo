@@ -75,7 +75,7 @@ const DetailedVenue = () => {
   const [thankYouOpen, setthankYouOpen] = useState(false);
   const [otpSent, setOtpSent] = useState(false); // State to manage OTP view
   const [otp, setOtp] = useState(""); // State to manage the entered OTP
-
+  const [breadcrumbs, setBreadcrumbs] = useState([]);
   // react tabs:
   const [activeTab, setActiveTab] = useState("about");
 
@@ -180,34 +180,9 @@ const DetailedVenue = () => {
     setValue(newValue); // Update state with selected date
   };
 
-  const handleCloseLoginModal = () => setShowLoginModal(false);
-  const handleOpenLoginModal = () => setShowLoginModal(true);
-  const handleLoginSubmit = () => {
-    // Assume sending OTP is successful
-    if (
-      (isPhoneLogin && userNumber.length >= 10) ||
-      (!isPhoneLogin && userEmail.includes("@"))
-    ) {
-      setOtpSent(true);
-    }
-  };
-  const handleOtpSubmit = () => {
-    setthankYouOpen(true);
-  };
-  const isPhoneNumberValid = userNumber.length >= 10;
-  const isEmailValid = userEmail.includes("@");
-
-  // user registration modal after logging in after phone otp
-  const [showRegistrationModal, setShowRegistrationModal] = useState(false);
-  const handleCloseRegistrationModal = () => setShowRegistrationModal(false);
-  const handleShowRegistrationModal = () => setShowRegistrationModal(true);
-
   // states for calendar model:
-  const [selectedCardValue, setSelectedCardValue] = useState(null);
+
   const [step, setStep] = useState(0);
-  const [selectedDate, setSelectedDate] = useState(dayjs());
-  const [selectedTime, setSelectedTime] = useState(null);
-  const [selectedGuestCount, setSelectedGuestCount] = useState(null);
 
   const master_data_get = async () => {
     // setshowLoaderAdmin(true);
@@ -223,6 +198,25 @@ const DetailedVenue = () => {
           setDetail(Response.data.message.restro);
           setreviews(Response.data.message.restro.review);
           console.log(Response.data.message.restro[0].review);
+
+          const restroData = Response.data.message.restro || [];
+          const venueData = restroData[0] || {};
+          const catagoryData = restroData[0].category[0] || {};
+          console.log("tarun", catagoryData);
+
+          // Extract categories
+          const newBreadcrumbs = [
+            { name: "Home", path: "/" },
+            {
+              name: venueData.restaurant_country || "",
+            },
+            { name: venueData.restaurant_city || "" },
+            {
+              name: catagoryData.category_master_name || "",
+              path: "",
+            },
+          ];
+          setBreadcrumbs(newBreadcrumbs);
         }
         // setshowLoaderAdmin(false);
       })
@@ -330,11 +324,16 @@ const DetailedVenue = () => {
         <section>
           <div className="container-lg mt-3 mb-1">
             <div className="venuePage_venueCategory_heading">
-              <Link to="/">Home</Link>
-              <img src={rightArrow} alt="rightArrow" />
-              <Link>Pais Restaurants</Link>
-              <img src={rightArrow} alt="rightArrow" />
-              <Link> {"<restaurant name>"} </Link>
+              {breadcrumbs.map((crumb, index) => (
+                <React.Fragment key={index}>
+                  {index > 0 && <img src={rightArrow} alt="rightArrow" />}
+                  {index === breadcrumbs.length - 1 ? (
+                    <span>{crumb.name}</span>
+                  ) : (
+                    <Link to={crumb.path}>{crumb.name}</Link>
+                  )}
+                </React.Fragment>
+              ))}
             </div>
           </div>
         </section>

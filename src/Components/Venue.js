@@ -255,11 +255,6 @@ const Venue = () => {
         <section>
           <div className="container-lg mt-3 mb-1">
             <div className="venuePage_venueCategory_heading">
-              {/* <Link to="/">Home</Link>
-              <img src={rightArrow} alt="rightArrow" />
-              <Link>Pais Restaurants</Link>
-              <img src={rightArrow} alt="rightArrow" />
-              <Link> {"<restaurant name>"} </Link> */}
               {breadcrumbs.map((crumb, index) => (
                 <React.Fragment key={index}>
                   {index > 0 && <img src={rightArrow} alt="rightArrow" />}
