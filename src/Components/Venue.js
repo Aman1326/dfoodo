@@ -13,6 +13,8 @@ import star from "../Assets/star.svg";
 // import ListYourVenue from "./ListYourVenue";
 import Footer from "./Footer";
 // import VenueCategories from "./VenueCategories";
+import Heart from "../Assets/heart.svg";
+import HeartRed from "../Assets/HeartRed.svg";
 import barPresent from "../Assets/bars-3x.png.svg";
 import alcoholPresent from "../Assets/alcohol-served3x.png.svg";
 import valetParking from "../Assets/valet-parking3x.png.svg";
@@ -26,7 +28,7 @@ import filterimg6 from "../Assets/filterImg6.svg";
 import filterimg7 from "../Assets/filterImg7.svg";
 import DownloadApp from "./DownloadApp";
 import contactus from "../Assets/averagePrice.svg";
-import Heart from "react-heart";
+// import Heart from "react-heart";
 import {
   server_post_data,
   get_categorypage_webapp,
@@ -155,16 +157,18 @@ const Venue = () => {
   };
 
   const [selectedTab, setSelectedTab] = useState(0);
-
+  const [selectedIndexes, setSelectedIndexes] = useState([]);
   // Toggle the like state for a specific venue
   const handleHeartClick = async (index, id) => {
-    // Perform any necessary operations with id
     handleSaveChangesdynamic(id);
-
-    // Toggle the liked status of the venue
-    const updatedLikedVenues = [...likedVenues];
-    updatedLikedVenues[index] = !updatedLikedVenues[index];
-    setLikedVenues(updatedLikedVenues);
+    const updatedIndexes = [...selectedIndexes];
+    const selectedIndex = updatedIndexes.indexOf(index);
+    if (selectedIndex === -1) {
+      updatedIndexes.push(index);
+    } else {
+      updatedIndexes.splice(selectedIndex, 1);
+    }
+    setSelectedIndexes(updatedIndexes);
   };
   const handleSaveChangesdynamic = async (id) => {
     // seterror_show("");
@@ -281,21 +285,24 @@ const Venue = () => {
                                       </h6>
                                     </div>
                                     <div className="heart_section">
-                                      <div style={{ width: "1.5rem" }}>
-                                        <Heart
-                                          isActive={likedVenues[index] || false}
-                                          onClick={() =>
-                                            handleHeartClick(
-                                              index,
-                                              venue.primary_id
-                                            )
+                                      <button
+                                        onClick={() =>
+                                          handleHeartClick(
+                                            index,
+                                            venue.primary_id
+                                          )
+                                        }
+                                      >
+                                        <img
+                                          src={
+                                            selectedIndexes.includes(index)
+                                              ? HeartRed
+                                              : Heart
                                           }
-                                          activeColor="red"
-                                          inactiveColor="red"
-                                          animationTrigger="hover"
-                                          animationScale={1.5}
+                                          alt="Heart"
+                                          className="heart_icon favHeartIcon"
                                         />
-                                      </div>
+                                      </button>
                                     </div>
                                   </div>
                                   <p>

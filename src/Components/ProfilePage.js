@@ -12,8 +12,6 @@ import bar2 from "../Assets/bar2.png";
 import barPresent from "../Assets/bars-3x.png.svg";
 import alcoholPresent from "../Assets/alcohol-served3x.png.svg";
 import valetParking from "../Assets/valet-parking3x.png.svg";
-import star from "../Assets/star.svg";
-import Heart from "react-heart";
 
 import contactus from "../Assets/averagePrice.svg";
 import qustionTOoltip from "../Assets/qustionTOoltip.svg";

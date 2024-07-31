@@ -63,6 +63,7 @@
 
 /* venue page */
 .VenuePage_venue_container {
+  position: relative;
   display: flex;
   gap: 1rem;
   padding: 0.5rem;
@@ -434,4 +435,22 @@
   padding-bottom: 1rem;
   position: relative;
   display: flex;
+}
+
+.heart_section {
+  button {
+    outline: none;
+    background-color: transparent;
+    border: none;
+  }
+}
+.favHeartIcon {
+  background-color: transparent;
+  top: 15px;
+  right: 14px;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+.heart_section button:hover .favHeartIcon {
+  transform: scale(1.2);
+  opacity: 0.8;
 }
