@@ -1,444 +1,439 @@
 #homeBG {
-    width: 100%;
-    height: 50vh;
-    border-radius: 20px;
-    position: relative;
-    object-fit: cover;
+  width: 100%;
+  height: 50vh;
+  border-radius: 20px;
+  position: relative;
+  object-fit: cover;
 }
 
 .heroSection {
-    margin-top: 2rem;
+  margin-top: 2rem;
 }
 
 .heroSection_wrapper {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .searchBar_container_homeScreen {
-    position: absolute;
-    width: fit-content;
+  position: absolute;
+  width: fit-content;
 }
 
 .searchBarInHeroSection {
-    width: 100%;
-    height: 100%;
-    position: relative;
-    margin: auto;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  margin: auto;
 }
 
 .Heading_herosection {
-    padding: 0.5rem 0.5rem;
-    width: 100%;
-    flex-wrap: wrap;
+  padding: 0.5rem 0.5rem;
+  width: 100%;
+  flex-wrap: wrap;
 }
 
 .collections_section {
-    margin-top: 2rem;
+  margin-top: 2rem;
 }
 
 /* popular venues section css */
 .popularVenues_section {
-    margin-top: 4rem;
+  margin-top: 4rem;
 }
 
 .popularVenues_venue_container {
-    padding: 0.6rem 0.6rem;
-    cursor: pointer;
-    border-radius: 5px;
-    margin-bottom: 1rem;
-    display: flex;
-    flex-direction: column;
-    font-family: "Roboto";
-    transition: ease-in 0.2s;
-    box-shadow: 0px 0px 3.76px 0px rgba(0, 0, 0, 0.25);
+  padding: 0.6rem 0.6rem;
+  cursor: pointer;
+  border-radius: 5px;
+  margin-bottom: 1rem;
+  display: flex;
+  flex-direction: column;
+  font-family: "Roboto";
+  transition: ease-in 0.2s;
+  box-shadow: 0px 0px 3.76px 0px rgba(0, 0, 0, 0.25);
 }
 
 .slick-prev:before,
 .slick-next:before {
-    line-height: 0;
+  line-height: 0;
 }
 
-
 .popularVenues_heading_container {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
 .popularVenues_heading_container h3 {
-    color: rgba(42, 45, 50, 1);
-    font-weight: 600;
+  color: rgba(42, 45, 50, 1);
+  font-weight: 600;
 }
 
 .popularVenues_heading_container a {
-    text-decoration: none;
-    color: var(--text-grey);
-    font-family: "Roboto";
-    font-size: 14px;
+  text-decoration: none;
+  color: var(--text-grey);
+  font-family: "Roboto";
+  font-size: 14px;
 }
 
 .popularVenues_heading_container a:hover {
-    text-decoration: underline;
-    color: var(--primary-color);
+  text-decoration: underline;
+  color: var(--primary-color);
 }
 
 .venue_image_holder img {
-    width: 100%;
-    aspect-ratio: 1.3;
-    cursor: default;
-    transition: 0.3s ease-in-out;
-    border-radius: 5px;
+  width: 100%;
+  aspect-ratio: 1.3;
+  cursor: default;
+  transition: 0.3s ease-in-out;
+  border-radius: 5px;
 }
 
 .venue_image_holder img:hover {
-    transform: scale(0.97);
+  transform: scale(0.97);
 }
 
 .venue_image_holder {
-    position: relative;
+  position: relative;
 }
 
 .heart_icon {
-    position: absolute;
-    /* Position the heart icon absolutely */
-    top: 10px;
-    /* Adjust distance from the top */
-    right: 10px;
-    /* Adjust distance from the right */
-    z-index: 10;
-    /* Ensure it's above other content */
-    width: 30px;
-    background-color: var(--secondary-black);
-    padding: 0.2rem 0.3rem;
-    border-radius: 48%;
-    aspect-ratio: 1;
+  position: absolute;
+  /* Position the heart icon absolutely */
+  top: 10px;
+  /* Adjust distance from the top */
+  right: 10px;
+  /* Adjust distance from the right */
+  z-index: 10;
+  /* Ensure it's above other content */
+  width: 30px;
+  /* background-color: var(--secondary-black); */
+  padding: 0.2rem 0.3rem;
+  border-radius: 48%;
+  aspect-ratio: 1;
 }
 
 .venue_category_titles {
-    display: flex;
-    flex-direction: row;
-    color: var(--secondary-black);
-    font-weight: 600;
-    gap: 0.2rem;
-    margin-bottom: 0.5rem;
-    font-size: 14px;
-    align-items: center;
-    justify-content: center;
+  display: flex;
+  flex-direction: row;
+  color: var(--secondary-black);
+  font-weight: 600;
+  gap: 0.2rem;
+  margin-bottom: 0.5rem;
+  font-size: 14px;
+  align-items: center;
+  justify-content: center;
 }
 
 .venue_category_div {
-    margin-top: 1rem;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .venue_category_div p {
-    margin-bottom: 0;
+  margin-bottom: 0;
 }
 
 .rating_greenDiv {
-    height: fit-content;
-    width: fit-content;
-    display: flex;
-    align-items: center;
-    gap: 0.3rem;
-    border-radius: 4px;
-    padding: 0.1rem 0.3rem;
-    flex-direction: row;
-    color: var(--white);
-    font-size: 12px;
-    font-family: "Roboto";
-    font-weight: 700;
-    background-color: var(--green);
+  height: fit-content;
+  width: fit-content;
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  border-radius: 4px;
+  padding: 0.1rem 0.3rem;
+  flex-direction: row;
+  color: var(--white);
+  font-size: 12px;
+  font-family: "Roboto";
+  font-weight: 700;
+  background-color: var(--green);
 }
 
 .rating_greenDiv img {
-    height: 15px;
-    width: 15px;
+  height: 15px;
+  width: 15px;
 }
 
 .venue_capacity_wrapper {
-    margin-top: auto;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    margin-top: 0.5rem;
+  margin-top: auto;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-top: 0.5rem;
 }
 
 .venue_capacity_wrapper p {
-    color: var(--text-black);
-    margin: 0;
-    font-size: 14px;
+  color: var(--text-black);
+  margin: 0;
+  font-size: 14px;
 }
 
 .venue_address_wrapper desc {
-    margin-bottom: 0.2rem;
-    color: var(--text-black);
-    font-family: "Roboto";
-    font-size: 14px;
-    font-weight: 400;
+  margin-bottom: 0.2rem;
+  color: var(--text-black);
+  font-family: "Roboto";
+  font-size: 14px;
+  font-weight: 400;
 }
 
 .venue_address_wrapper h6 {
-    font-size: 16px;
-    color: var(--text-black);
-    font-weight: 600;
+  font-size: 16px;
+  color: var(--text-black);
+  font-weight: 600;
 }
 
 .venue_cards_container {
-    display: flex;
-    flex-wrap: wrap;
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .pagination_controls {
-    display: flex;
-    flex-direction: row;
-    gap: 0.6rem;
+  display: flex;
+  flex-direction: row;
+  gap: 0.6rem;
 }
 
 .pagination_controls button {
-    background-color: var(--white);
-    border: 1px solid rgba(236, 237, 239, 1);
-    border-radius: 4px;
-    aspect-ratio: 1;
-    cursor: pointer;
-    width: 40px;
+  background-color: var(--white);
+  border: 1px solid rgba(236, 237, 239, 1);
+  border-radius: 4px;
+  aspect-ratio: 1;
+  cursor: pointer;
+  width: 40px;
 }
 
 .pagination_controls button:hover {
-    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px,
-        rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px,
+    rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
 }
 
 .seAll_span {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 1rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 1rem;
 }
 
 .seAll_span p {
-    margin: 0;
-    color: var(--primary-color);
+  margin: 0;
+  color: var(--primary-color);
 }
 
 .venue_discount_wrapper p {
-    margin-top: 1.4rem;
-    margin-bottom: 0;
-    width: fit-content;
-    color: var(--white);
-    border-radius: 5px;
-    padding: 0.1rem 0.3rem;
-    font-size: 12px;
-    background: var(--Secondary-Color-Black, rgba(42, 45, 50, 1));
+  margin-top: 1.4rem;
+  margin-bottom: 0;
+  width: fit-content;
+  color: var(--white);
+  border-radius: 5px;
+  padding: 0.1rem 0.3rem;
+  font-size: 12px;
+  background: var(--Secondary-Color-Black, rgba(42, 45, 50, 1));
 }
 
 .how_it_works_content {
-    padding: 3rem 3rem;
-    align-items: center;
-    border-radius: 16px;
-    margin-left: auto;
-    margin-right: auto;
-    background: var(--Secondary-Color-Black, rgba(42, 45, 50, 1));
+  padding: 3rem 3rem;
+  align-items: center;
+  border-radius: 16px;
+  margin-left: auto;
+  margin-right: auto;
+  background: var(--Secondary-Color-Black, rgba(42, 45, 50, 1));
 }
 
-
 .how_does_it_work_section {
-    margin-top: 4rem;
+  margin-top: 4rem;
 }
 
 .how_it_works_content_heading {
-    display: flex;
-    margin-bottom: 2rem;
-    font-family: "Roboto";
-    justify-content: center;
-    color: var(--Primary-Color, rgba(243, 120, 53, 1));
+  display: flex;
+  margin-bottom: 2rem;
+  font-family: "Roboto";
+  justify-content: center;
+  color: var(--Primary-Color, rgba(243, 120, 53, 1));
 }
 
 .how_it_works_content {
-    padding-bottom: 3rem;
+  padding-bottom: 3rem;
 }
 
-@media (max-width:991px) {
+@media (max-width: 991px) {
+  .how_it_works_content {
+    padding-bottom: 3rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    gap: 0.3rem;
+  }
 
-    .how_it_works_content {
-        padding-bottom: 3rem;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        text-align: center;
-        gap: 0.3rem;
-    }
-
-    .how_it_works_content img {
-        width: 60px;
-        color: var(--white);
-        margin-bottom: 0.5rem;
-        margin-left: auto;
-        margin-right: auto;
-        margin-top: 0.5rem;
-    }
+  .how_it_works_content img {
+    width: 60px;
+    color: var(--white);
+    margin-bottom: 0.5rem;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 0.5rem;
+  }
 }
 
 .how_it_works_content h6,
 .how_it_works_content p {
-    margin-bottom: 0;
-    color: var(--white);
+  margin-bottom: 0;
+  color: var(--white);
 }
 
 .how_it_works_content p {
-    font-size: 14px;
+  font-size: 14px;
 }
 
 .how_it_works_content img {
-    width: 60px;
-    color: var(--white);
-    margin-bottom: 0.5rem;
-
+  width: 60px;
+  color: var(--white);
+  margin-bottom: 0.5rem;
 }
 
 #multiStars {
-    width: 110px;
-    margin-bottom: 2rem;
+  width: 110px;
+  margin-bottom: 2rem;
 }
 
 /* discover more section  */
 .discover_more_venues_section {
-    margin-top: 4rem;
+  margin-top: 4rem;
 }
 
 .discoverMore_container {
-    background-color: var(--light-pink);
-    border-radius: 10px;
+  background-color: var(--light-pink);
+  border-radius: 10px;
 }
 
 .discoverMore_containerText {
-    padding: 0.5rem 1.2rem;
+  padding: 0.5rem 1.2rem;
 }
 
 .discoverMore_container img {
-    width: 100%;
-    margin-bottom: 0.4rem;
+  width: 100%;
+  margin-bottom: 0.4rem;
 }
 
 .discoverMore_container p {
-    font-size: 14px;
-    color: var(--text-black);
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 2;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: normal;
+  font-size: 14px;
+  color: var(--text-black);
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: normal;
 }
 
 .discoverMore_container h6 {
-    padding-top: 0.5rem;
-    font-size: 21px;
-    margin-bottom: 0.5rem;
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 2;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: normal;
+  padding-top: 0.5rem;
+  font-size: 21px;
+  margin-bottom: 0.5rem;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: normal;
 }
 
 .discover_more_venues_heading h3 {
-    font-family: "Roboto";
-    font-weight: 600;
-    color: var(--text-black);
+  font-family: "Roboto";
+  font-weight: 600;
+  color: var(--text-black);
 }
 
 .verticle_container_discoverMore {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 }
 
 .smaller_container_discoverMore {
-    display: flex;
-    flex-direction: row;
-    gap: 0.5rem;
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem;
 }
 
 .smaller_container_discoverMore p {
-    margin: 0;
+  margin: 0;
 }
 
 .smaller_container_discoverMore hr {
-    margin: 0;
+  margin: 0;
 }
 
 .smaller_container_discoverMore img {
-    width: 80px;
-    height: 80px;
-    border-radius: 8px;
+  width: 80px;
+  height: 80px;
+  border-radius: 8px;
 }
 
 .heading_discoverMore {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    border-bottom: 1px solid var(--border-color);
-    gap: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-bottom: 1px solid var(--border-color);
+  gap: 0.5rem;
 }
 
 .heading_discoverMore h6 {
-    font-size: 14px;
-    font-weight: 700;
-    margin: 0;
+  font-size: 14px;
+  font-weight: 700;
+  margin: 0;
 }
 
 .heading_discoverMore p {
-    color: var(--primary-color);
-    font-size: 14px;
+  color: var(--primary-color);
+  font-size: 14px;
 }
 
 .are_you_a_venue_owner {
-    display: flex;
-    text-align: center;
-    flex-direction: column;
-    font-family: "Roboto";
-    justify-content: center;
+  display: flex;
+  text-align: center;
+  flex-direction: column;
+  font-family: "Roboto";
+  justify-content: center;
 }
 
 .are_you_a_venue_owner h6,
 .are_you_a_venue_owner p {
-    color: var(--text-grey);
+  color: var(--text-grey);
 }
 
 .are_you_a_venue_owner a {
-    color: var(--white);
-    border: none;
-    margin-left: auto;
-    margin-right: auto;
-    width: fit-content;
-    background: rgba(227, 55, 69, 1);
-    border-radius: 5px;
-    padding: 0.4rem 1rem;
-    text-decoration: none;
-    font-family: "Roboto";
-    font-size: 14px;
-
+  color: var(--white);
+  border: none;
+  margin-left: auto;
+  margin-right: auto;
+  width: fit-content;
+  background: rgba(227, 55, 69, 1);
+  border-radius: 5px;
+  padding: 0.4rem 1rem;
+  text-decoration: none;
+  font-family: "Roboto";
+  font-size: 14px;
 }
 
 .areyoua_venue_owner_section {
-    margin-top: 3rem;
-    margin-bottom: 2rem;
+  margin-top: 3rem;
+  margin-bottom: 2rem;
 }
 
-@media (max-width:420px) {
-    .how_it_works_content {
-        padding: 1rem 0rem;
-        gap: 1rem;
-        text-align: center;
-        justify-content: center;
-    }
+@media (max-width: 420px) {
+  .how_it_works_content {
+    padding: 1rem 0rem;
+    gap: 1rem;
+    text-align: center;
+    justify-content: center;
+  }
 }
