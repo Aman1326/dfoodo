@@ -27,7 +27,7 @@
   margin: 0;
   flex-direction: row;
   gap: 0.3rem;
-  padding: 0;
+  padding: 0rem 0rem 0.7rem 0rem;
   list-style-type: none;
 }
 
@@ -127,7 +127,7 @@
 .venuePage_venue_category_titles {
   display: flex;
   flex-direction: row;
-  gap: 0.4rem;
+  gap: 4px;
   flex-wrap: wrap;
   margin-top: 0.1rem;
   margin-bottom: 0.5rem;
@@ -453,4 +453,12 @@
 .heart_section button:hover .favHeartIcon {
   transform: scale(1.2);
   opacity: 0.8;
+}
+.amenityItem {
+  display: flex;
+  align-items: center;
+  padding: 2px;
+  img {
+    margin-right: 2px;
+  }
 }
