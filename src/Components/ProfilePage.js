@@ -138,12 +138,13 @@ const ProfilePage = () => {
     fd.append("call_id", "1");
     await server_post_data(get_reservation_webapp, fd)
       .then((Response) => {
-        console.log(Response.data.message.data_reservation);
+        console.log(Response.data.message.data_reservation[0].data_res);
         if (Response.data.error) {
           // handleError(Response.data.message);
         } else {
           setRegistration(
-            Response.data.message.data_reservation || "No data found"
+            Response.data.message.data_reservation[0].data_res ||
+              "No data found"
           );
         }
         setshowLoaderAdmin(false);
