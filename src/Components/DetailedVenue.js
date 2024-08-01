@@ -191,18 +191,14 @@ const DetailedVenue = () => {
     fd.append("restuarant_id", customer_id);
     await server_post_data(get_restropage_webapp, fd)
       .then((Response) => {
-        console.log(Response.data.message.restro[0]);
         if (Response.data.error) {
           // handleError(Response.data.message);
         } else {
-          setDetail(Response.data.message.restro);
-          setreviews(Response.data.message.restro.review);
-          console.log(Response.data.message.restro[0].review);
-
+          setDetail(Response.data.message.restro[0]);
+          setreviews(Response.data.message.restro[0].review);
           const restroData = Response.data.message.restro || [];
           const venueData = restroData[0] || {};
           const catagoryData = restroData[0].category[0] || {};
-          console.log("tarun", catagoryData);
 
           // Extract categories
           const newBreadcrumbs = [
@@ -338,280 +334,373 @@ const DetailedVenue = () => {
           </div>
         </section>
         {/* images gallery section */}
-        <section className="image_gallery_section">
+        <section>
           <div className="container-lg">
-            <div className="row d-none d-lg-flex">
-              <div className="col-lg-8 m-0 p-0 wrapper_carousel">
-                <Carousel
-                  className="fade-img"
-                  showIndicators={false}
-                  showStatus={false}
-                  showThumbs={false}
-                  renderArrowPrev={(clickHandler, hasPrev) =>
-                    hasPrev && (
-                      <button
-                        type="button"
-                        onClick={clickHandler}
-                        style={{
-                          position: "absolute",
-                          top: "50%",
-                          left: "15px",
-                          transform: "translateY(-50%)",
-                          zIndex: 2,
-                          background: "none",
-                          border: "none",
-                          cursor: "pointer",
-                          outline: "none",
-                        }}
+            <div className="row m-0">
+              <div className="col-lg-8 m-0 p-0">
+                <section className="image_gallery_section">
+                  <div className="row d-none d-lg-flex">
+                    <div className="wrapper_carousel">
+                      <Carousel
+                        className="fade-img"
+                        showIndicators={false}
+                        showStatus={false}
+                        showThumbs={false}
+                        renderArrowPrev={(clickHandler, hasPrev) =>
+                          hasPrev && (
+                            <button
+                              type="button"
+                              onClick={clickHandler}
+                              style={{
+                                position: "absolute",
+                                top: "50%",
+                                left: "15px",
+                                transform: "translateY(-50%)",
+                                zIndex: 2,
+                                background: "none",
+                                border: "none",
+                                cursor: "pointer",
+                                outline: "none",
+                              }}
+                            >
+                              <img
+                                src={leftArrowIcon}
+                                alt="Previous"
+                                style={{ width: "42px", height: "42px" }}
+                              />
+                            </button>
+                          )
+                        }
+                        renderArrowNext={(clickHandler, hasNext) =>
+                          hasNext && (
+                            <button
+                              type="button"
+                              onClick={clickHandler}
+                              style={{
+                                position: "absolute",
+                                top: "50%",
+                                right: "15px",
+                                transform: "translateY(-50%)",
+                                zIndex: 2,
+                                background: "none",
+                                border: "none",
+                                cursor: "pointer",
+                                outline: "none",
+                              }}
+                            >
+                              <img
+                                src={rightArrowIcon}
+                                alt="Next"
+                                style={{ width: "42px", height: "42px" }}
+                              />
+                            </button>
+                          )
+                        }
                       >
-                        <img
-                          src={leftArrowIcon}
-                          alt="Previous"
-                          style={{ width: "42px", height: "42px" }}
-                        />
-                      </button>
-                    )
-                  }
-                  renderArrowNext={(clickHandler, hasNext) =>
-                    hasNext && (
-                      <button
-                        type="button"
-                        onClick={clickHandler}
-                        style={{
-                          position: "absolute",
-                          top: "50%",
-                          right: "15px",
-                          transform: "translateY(-50%)",
-                          zIndex: 2,
-                          background: "none",
-                          border: "none",
-                          cursor: "pointer",
-                          outline: "none",
-                        }}
-                      >
-                        <img
-                          src={rightArrowIcon}
-                          alt="Next"
-                          style={{ width: "42px", height: "42px" }}
-                        />
-                      </button>
-                    )
-                  }
-                >
-                  <div>
-                    <img src={imageApi + detail.restaurant_image} alt="img1" />
-                  </div>
-                  <div>
-                    <img src={img1} alt="img2" />
-                  </div>
-                  <div>
-                    <img src={img1} alt="img3" />
-                  </div>
-                  <div>
-                    <img src={img1} alt="img3" />
-                  </div>
-                  <div>
-                    <img src={img1} alt="img3" />
-                  </div>
-                  <div>
-                    <img src={img1} alt="img3" />
-                  </div>
-                </Carousel>
-                <div className="black_section_carousel">
-                  <span className="first_row_black_section_carousel">
-                    <div>
-                      <h6>{detail.restaurant_name}</h6>
-                      <p>{detail.restaurant_full_adrress}</p>
-                    </div>
-                    <div className="first_row_black_section_carousel">
-                      <p>1.16 km</p>
-                      <img src={locationsvg} alt="location" />
-                    </div>
-                  </span>
-                  <span className="first_row_black_section_carousel align-items-center">
-                    <div className="french_text">
-                      <h6>{detail.cuisie && detail.cuisie[0].cuisine_name}</h6>
-                    </div>
-                    <div className="first_row_black_section_carousel align-items-center">
-                      <span className="d-flex reviews_black_section">
-                        <img src={redStar} alt="redStar" />
-                        <p className="m-0">{detail.total_service_rating_sum}</p>
-                      </span>
-                      <span>
-                        <p className="m-0">
-                          {detail.review && detail.total_reviews} reviews
-                        </p>
-                      </span>
-                    </div>
-                  </span>
-                  <hr />
-                  <span className="first_row_black_section_carousel mb-4">
-                    <div className="first_row_black_section_carousel">
-                      <img src={timerClock} alt="timerClock" />
-                      {detail.timing && detail.timing.length > 0 && (
-                        <p style={{ marginBottom: "0" }}>
-                          Open from {detail.timing[0].start_time} -{" "}
-                          {detail.timing[0].end_time}
-                        </p>
-                      )}
-                    </div>
-                    <div className="first_row_black_section_carousel">
-                      <img src={avgpriceIcon} alt="avgpriceIcon" />
-                      <p style={{ marginBottom: "0" }}>Average price €27</p>
-                      <img src={quesMark} alt="quesMark" />
-                    </div>
-                  </span>
-                </div>
-              </div>
-
-              <div
-                className="col-lg-4"
-                style={{
-                  position: "fixed",
-                  top: "17%",
-                  left: "64%",
-                  width: "400px",
-                }}
-              >
-                <div className="calenday_modelContainer">
-                  <div className="calenday_model-section">
-                    <div className="calendy_modelHead">
-                      <h4>Find a table</h4>
-                      <p>Book for free</p>
-                    </div>
-                    {step !== 4 && (
-                      <span className="todays_booking">
-                        🔥 Already 8 bookings today
-                      </span>
-                    )}
-                  </div>
-                  <div className="calenday_modelSubHead">
-                    {step === 0 && (
-                      <div className="d-flex">
-                        <span className="steps firstStep">
-                          <span className="d-flex">
-                            <img src={calendarfrom} alt="calendarfrom" />
-                            <p>Date</p>
-                          </span>
+                        {detail.images &&
+                          detail.images > 0 &&
+                          detail.images.map((image, index) => (
+                            <div key={index}>
+                              <img
+                                src={imageApi + image.image_name}
+                                alt={`img${index}`}
+                              />
+                            </div>
+                          ))}
+                      </Carousel>
+                      <div className="black_section_carousel">
+                        <span className="first_row_black_section_carousel">
+                          <div>
+                            <h6>{detail.restaurant_name}</h6>
+                            <p>{detail.restaurant_full_adrress}</p>
+                          </div>
+                          <div className="first_row_black_section_carousel">
+                            <p>1.16 km</p>
+                            <img src={locationsvg} alt="location" />
+                          </div>
                         </span>
-                        <div class="rhombus"></div>
-                      </div>
-                    )}
-                    {step === 1 && (
-                      <div className="d-flex">
-                        <span className="steps">
-                          <img src={calendarfrom} alt="calendarfrom" />
-                          <p>Date</p>
-                          <img
-                            src={rightArrowWhite}
-                            alt="rightArrowWhite"
-                            className="rightArrowWhite"
-                          />
-                          <img src={timerClock} alt="timerClock" />
+                        <span className="first_row_black_section_carousel align-items-center">
+                          <div className="french_text">
+                            <h6>
+                              {detail.cuisie && detail.cuisie[0].cuisine_name}
+                            </h6>
+                          </div>
+                          <div className="first_row_black_section_carousel align-items-center">
+                            <span className="d-flex reviews_black_section">
+                              <img src={redStar} alt="redStar" />
+                              <p className="m-0">
+                                {detail.total_service_rating_sum}
+                              </p>
+                            </span>
+                            <span>
+                              <p className="m-0">
+                                {detail.review && detail.total_reviews} reviews
+                              </p>
+                            </span>
+                          </div>
                         </span>
-                        <div class="rhombus"></div>
-                      </div>
-                    )}
-                    {step === 2 && (
-                      <div className="d-flex">
-                        <span className="steps">
-                          <img src={calendarfrom} alt="calendarfrom" />
-                          <p>Date</p>
-                          <img
-                            src={rightArrowWhite}
-                            alt="rightArrowWhite"
-                            className="rightArrowWhite"
-                          />
-                          <img src={timerClock} alt="timerClock" />
-                          <img
-                            src={rightArrowWhite}
-                            alt="rightArrowWhite"
-                            className="rightArrowWhite"
-                          />
-                          <img src={personCalendar} alt="personCalendar" />
+                        <hr />
+                        <span className="first_row_black_section_carousel mb-4">
+                          <div className="first_row_black_section_carousel">
+                            <img src={timerClock} alt="timerClock" />
+                            {detail.timing && detail.timing.length > 0 && (
+                              <p style={{ marginBottom: "0" }}>
+                                Open from {detail.timing[0].start_time} -{" "}
+                                {detail.timing[0].end_time}
+                              </p>
+                            )}
+                          </div>
+                          <div className="first_row_black_section_carousel">
+                            <img src={avgpriceIcon} alt="avgpriceIcon" />
+                            <p style={{ marginBottom: "0" }}>
+                              Average price €27
+                            </p>
+                            <img src={quesMark} alt="quesMark" />
+                          </div>
                         </span>
-                        <div class="rhombus"></div>
                       </div>
-                    )}
-                    {step === 3 && (
-                      <div className="d-flex">
-                        <span className="steps">
-                          <img src={calendarfrom} alt="calendarfrom" />
-                          <p>Date</p>
-                          <img
-                            src={rightArrowWhite}
-                            alt="rightArrowWhite"
-                            className="rightArrowWhite"
-                          />
-                          <img src={timerClock} alt="timerClock" />
-                          <img
-                            src={rightArrowWhite}
-                            alt="rightArrowWhite"
-                            className="rightArrowWhite"
-                          />
-                          <img src={personCalendar} alt="personCalendar" />
-                          <img
-                            src={rightArrowWhite}
-                            alt="rightArrowWhite"
-                            className="rightArrowWhite"
-                          />
-                          <img src={preview} alt="preview" />
-                        </span>
-                        <div class="square"></div>
-                      </div>
-                    )}
+                    </div>
                   </div>
-                  <div
-                    className={`calenday_modelScreen ${greyBackgroundClass}`}
-                  >
-                    {step === 0 && (
-                      <div className="calenderDiv">
-                        <LocalizationProvider dateAdapter={AdapterDayjs}>
-                          <DateCalendar
-                            value={value}
-                            onChange={() => {
-                              handleDateSelection();
-                              setStep(1);
-                            }}
-                            minDate={dayjs()} // Optional: Set minimum selectable date
-                          />
-                        </LocalizationProvider>
+                </section>
+                <section className="venue_about_section">
+                  <div className="container">
+                    <div className="tabs row">
+                      <div className="tab-buttons col-lg-3">
+                        <button
+                          className={activeTab === "about" ? "active" : ""}
+                          onClick={() => setActiveTab("about")}
+                        >
+                          About
+                        </button>
+                        <button
+                          className={activeTab === "menu" ? "active" : ""}
+                          onClick={() => setActiveTab("menu")}
+                        >
+                          Menu
+                        </button>
+                        <button
+                          className={activeTab === "reviews" ? "active" : ""}
+                          onClick={() => setActiveTab("reviews")}
+                        >
+                          Reviews
+                        </button>
                       </div>
-                    )}
-                    {step === 1 && (
-                      <div>
-                        <h6 className="calendar_modal_heading">Booking Time</h6>
-                        <div className="">
-                          <span className="venuePage_venue_capacity_wrapper">
-                            {mappedTimeDiscounts &&
-                              mappedTimeDiscounts.length > 0 && (
-                                <div className="time_discount_container_detailedVenue">
-                                  {mappedTimeDiscounts.map((item, idx) => (
+                      <div className="row">
+                        <div className="tab-content">
+                          {activeTab === "about" && (
+                            <div className="about_venue_tabContent">
+                              <h2>{detail.restaurant_name}</h2>
+                              <p>{detail.restaurant_full_adrress}</p>
+                              <h6>About this venue</h6>
+                              <ReadMore />
+                              <div className="venue_features_section row">
+                                {detail.amenities &&
+                                  detail.amenities.length > 0 &&
+                                  detail.amenities.map((features, idx) => (
                                     <div
+                                      className="col-lg-3 venue_features_wrapper"
                                       key={idx}
-                                      className="time_discount_section"
-                                      onClick={() => setStep(2)}
                                     >
-                                      <div className="time_section">
-                                        <p>{item.time}</p>
-                                      </div>
-                                      <div className="discount_section">
-                                        <p>-{item.discount}</p>
-                                      </div>
+                                      <img
+                                        src={imageApi + features.image}
+                                        alt="{features.venue_feature_name}"
+                                      />
+                                      <p className="venue_feature_name">
+                                        {features.amenities_name}
+                                      </p>
                                     </div>
                                   ))}
+                              </div>
+                              <section className="Reviews_section">
+                                <div className="menu_wrapper">
+                                  <div className="menu_wrapper_heading mt-2 mb-2">
+                                    <h3>Restaurant Menu</h3>
+                                  </div>
+                                  <div className="menu_image_wrapper ">
+                                    {detail.menuimages &&
+                                      detail.menuimages.length > 0 &&
+                                      detail.menuimages.map((menu_img, idx) => (
+                                        <img
+                                          key={idx}
+                                          src={imageApi + menu_img.image_name}
+                                          alt="menu_img"
+                                        />
+                                      ))}
+                                  </div>
                                 </div>
-                              )}
-                          </span>
+                                <Reviews
+                                  review={reviews}
+                                  totalReview={detail}
+                                />
+                                <div className="see_more_reviews">
+                                  <Link onClick={() => setActiveTab("reviews")}>
+                                    See more reviews (
+                                    {detail.review && detail.review.length})
+                                    <img src={right} alt="right" />
+                                  </Link>
+                                </div>
+                              </section>
+                            </div>
+                          )}
+                          {activeTab === "menu" && (
+                            <div>
+                              <Menu />
+                            </div>
+                          )}
+                          {activeTab === "reviews" && (
+                            <div>
+                              <Reviews review={reviews} totalReview={detail} />
+                            </div>
+                          )}
                         </div>
                       </div>
-                    )}
-                    {step === 2 && (
-                      <div className="wrapper_calendar_modal">
-                        <h6 className="calendar_modal_heading">
-                          Number of Guests
-                        </h6>
-                        {/* <div className="guests_calendar_modal">
+                    </div>
+                  </div>
+                </section>
+              </div>
+              <div className="col-lg-4">
+                <div className="sticky-container">
+                  <div className="calenday_modelContainer ">
+                    <div className="calenday_model-section">
+                      <div className="calendy_modelHead">
+                        <h4>Find a table</h4>
+                        <p>Book for free</p>
+                      </div>
+                      {step !== 4 && (
+                        <span className="todays_booking">
+                          🔥 Already 8 bookings today
+                        </span>
+                      )}
+                    </div>
+                    <div className="calenday_modelSubHead">
+                      {step === 0 && (
+                        <div className="d-flex">
+                          <span className="steps firstStep">
+                            <span className="d-flex">
+                              <img src={calendarfrom} alt="calendarfrom" />
+                              <p>Date</p>
+                            </span>
+                          </span>
+                          <div class="rhombus"></div>
+                        </div>
+                      )}
+                      {step === 1 && (
+                        <div className="d-flex">
+                          <span className="steps">
+                            <img src={calendarfrom} alt="calendarfrom" />
+                            <p>Date</p>
+                            <img
+                              src={rightArrowWhite}
+                              alt="rightArrowWhite"
+                              className="rightArrowWhite"
+                            />
+                            <img src={timerClock} alt="timerClock" />
+                          </span>
+                          <div class="rhombus"></div>
+                        </div>
+                      )}
+                      {step === 2 && (
+                        <div className="d-flex">
+                          <span className="steps">
+                            <img src={calendarfrom} alt="calendarfrom" />
+                            <p>Date</p>
+                            <img
+                              src={rightArrowWhite}
+                              alt="rightArrowWhite"
+                              className="rightArrowWhite"
+                            />
+                            <img src={timerClock} alt="timerClock" />
+                            <img
+                              src={rightArrowWhite}
+                              alt="rightArrowWhite"
+                              className="rightArrowWhite"
+                            />
+                            <img src={personCalendar} alt="personCalendar" />
+                          </span>
+                          <div class="rhombus"></div>
+                        </div>
+                      )}
+                      {step === 3 && (
+                        <div className="d-flex">
+                          <span className="steps">
+                            <img src={calendarfrom} alt="calendarfrom" />
+                            <p>Date</p>
+                            <img
+                              src={rightArrowWhite}
+                              alt="rightArrowWhite"
+                              className="rightArrowWhite"
+                            />
+                            <img src={timerClock} alt="timerClock" />
+                            <img
+                              src={rightArrowWhite}
+                              alt="rightArrowWhite"
+                              className="rightArrowWhite"
+                            />
+                            <img src={personCalendar} alt="personCalendar" />
+                            <img
+                              src={rightArrowWhite}
+                              alt="rightArrowWhite"
+                              className="rightArrowWhite"
+                            />
+                            <img src={preview} alt="preview" />
+                          </span>
+                          <div class="square"></div>
+                        </div>
+                      )}
+                    </div>
+                    <div
+                      className={`calenday_modelScreen ${greyBackgroundClass}`}
+                    >
+                      {step === 0 && (
+                        <div className="calenderDiv">
+                          <LocalizationProvider dateAdapter={AdapterDayjs}>
+                            <DateCalendar
+                              value={value}
+                              onChange={() => {
+                                handleDateSelection();
+                                setStep(1);
+                              }}
+                              minDate={dayjs()} // Optional: Set minimum selectable date
+                            />
+                          </LocalizationProvider>
+                        </div>
+                      )}
+                      {step === 1 && (
+                        <div>
+                          <h6 className="calendar_modal_heading">
+                            Booking Time
+                          </h6>
+                          <div className="">
+                            <span className="venuePage_venue_capacity_wrapper">
+                              {mappedTimeDiscounts &&
+                                mappedTimeDiscounts.length > 0 && (
+                                  <div className="time_discount_container_detailedVenue">
+                                    {mappedTimeDiscounts.map((item, idx) => (
+                                      <div
+                                        key={idx}
+                                        className="time_discount_section"
+                                        onClick={() => setStep(2)}
+                                      >
+                                        <div className="time_section">
+                                          <p>{item.time}</p>
+                                        </div>
+                                        <div className="discount_section">
+                                          <p>-{item.discount}</p>
+                                        </div>
+                                      </div>
+                                    ))}
+                                  </div>
+                                )}
+                            </span>
+                          </div>
+                        </div>
+                      )}
+                      {step === 2 && (
+                        <div className="wrapper_calendar_modal">
+                          <h6 className="calendar_modal_heading">
+                            Number of Guests
+                          </h6>
+                          {/* <div className="guests_calendar_modal">
                           <p>2</p>
                           <p>4</p>
                           <p>6</p>
@@ -622,321 +711,239 @@ const DetailedVenue = () => {
                           type="phone"
                           placeholder="Enter no of guests.."
                         /> */}
-                        <div className="resrvDateSelect">
-                          <ul>
-                            {Array.from(
-                              { length: guest_length },
-                              (_, index) => index + 1
-                            ).map((digit, index) => (
-                              <li key={index}>
-                                <div
-                                  className={`dateBox ${
-                                    selectedGuest === index
-                                      ? "selectedFormItems"
-                                      : ""
-                                  }`}
-                                  onClick={() =>
-                                    SelectedChangeGuest(index, "1")
-                                  }
-                                >
-                                  <p>{index}</p>
+                          <div className="resrvDateSelect">
+                            <ul>
+                              {Array.from(
+                                { length: guest_length },
+                                (_, index) => index + 1
+                              ).map((digit, index) => (
+                                <li key={index}>
+                                  <div
+                                    className={`dateBox ${
+                                      selectedGuest === index
+                                        ? "selectedFormItems"
+                                        : ""
+                                    }`}
+                                    onClick={() =>
+                                      SelectedChangeGuest(index, "1")
+                                    }
+                                  >
+                                    <p>{index}</p>
+                                  </div>
+                                </li>
+                              ))}
+                              <li
+                                className={`${
+                                  addCustomGuest ? " " : "hideInput"
+                                }`}
+                              >
+                                <div className="customRsrvInput">
+                                  <input
+                                    type="text"
+                                    maxLength={3}
+                                    defaultValue={selectedGuest}
+                                    name="custom_pet_count"
+                                    onChange={(e) =>
+                                      SelectedChangeGuest(e, "2")
+                                    }
+                                  />
                                 </div>
                               </li>
-                            ))}
-                            <li
-                              className={`${
-                                addCustomGuest ? " " : "hideInput"
+                            </ul>
+                            <div
+                              className={`addInputBtn ${
+                                addCustomPet ? "hideInput" : ""
                               }`}
+                              onClick={addCustomGuestInput}
                             >
-                              <div className="customRsrvInput">
-                                <input
-                                  type="text"
-                                  maxLength={3}
-                                  defaultValue={selectedGuest}
-                                  name="custom_pet_count"
-                                  onChange={(e) => SelectedChangeGuest(e, "2")}
-                                />
-                              </div>
-                            </li>
-                          </ul>
-                          <div
-                            className={`addInputBtn ${
-                              addCustomPet ? "hideInput" : ""
-                            }`}
-                            onClick={addCustomGuestInput}
-                          >
-                            <img src={AddBtn} alt="add btn" />
+                              <img src={AddBtn} alt="add btn" />
+                            </div>
                           </div>
-                        </div>
-                        {/* ===== */}
-                        <h6 className="calendar_modal_heading">
-                          Number of Children
-                        </h6>
-                        {/* <input
+                          {/* ===== */}
+                          <h6 className="calendar_modal_heading">
+                            Number of Children
+                          </h6>
+                          {/* <input
                           type="phone"
                           placeholder="Enter no of children.."
                         /> */}
-                        <div className="resrvDateSelect">
-                          <ul>
-                            {Array.from(
-                              { length: child_length },
-                              (_, index) => index + 1
-                            ).map((digit, index) => (
-                              <li key={index}>
-                                <div
-                                  className={`dateBox ${
-                                    selectedchild === index
-                                      ? "selectedFormItems"
-                                      : ""
-                                  }`}
-                                  onClick={() =>
-                                    SelectedChangeChild(index, "1")
-                                  }
-                                >
-                                  <p>{index}</p>
+                          <div className="resrvDateSelect">
+                            <ul>
+                              {Array.from(
+                                { length: child_length },
+                                (_, index) => index + 1
+                              ).map((digit, index) => (
+                                <li key={index}>
+                                  <div
+                                    className={`dateBox ${
+                                      selectedchild === index
+                                        ? "selectedFormItems"
+                                        : ""
+                                    }`}
+                                    onClick={() =>
+                                      SelectedChangeChild(index, "1")
+                                    }
+                                  >
+                                    <p>{index}</p>
+                                  </div>
+                                </li>
+                              ))}
+                              <li
+                                className={`${
+                                  addCustomChild ? " " : "hideInput"
+                                }`}
+                              >
+                                <div className="customRsrvInput">
+                                  <input
+                                    type="text"
+                                    maxLength={3}
+                                    defaultValue={selectedchild}
+                                    name="custom_child_count"
+                                    onBlur={(e) => SelectedChangeChild(e, "2")}
+                                    placeholder="No. of Child"
+                                  />
                                 </div>
                               </li>
-                            ))}
-                            <li
-                              className={`${
-                                addCustomChild ? " " : "hideInput"
+                            </ul>
+                            <div
+                              className={`addInputBtn ${
+                                addCustomChild ? "hideInput" : ""
                               }`}
+                              onClick={addCustomChildInput}
                             >
-                              <div className="customRsrvInput">
-                                <input
-                                  type="text"
-                                  maxLength={3}
-                                  defaultValue={selectedchild}
-                                  name="custom_child_count"
-                                  onBlur={(e) => SelectedChangeChild(e, "2")}
-                                  placeholder="No. of Child"
-                                />
-                              </div>
-                            </li>
-                          </ul>
-                          <div
-                            className={`addInputBtn ${
-                              addCustomChild ? "hideInput" : ""
-                            }`}
-                            onClick={addCustomChildInput}
-                          >
-                            <img src={AddBtn} alt="addbtn" />
+                              <img src={AddBtn} alt="addbtn" />
+                            </div>
                           </div>
-                        </div>
 
-                        <h6 className="calendar_modal_heading">
-                          Number of Pets
-                        </h6>
-                        {/* <input type="phone" placeholder="Enter no of pets.." /> */}
-                        <div className="resrvDateSelect">
-                          <ul>
-                            {Array.from(
-                              { length: pet_length },
-                              (_, index) => index + 1
-                            ).map((digit, index) => (
-                              <li key={index}>
-                                <div
-                                  className={`dateBox ${
-                                    selectedpet === index
-                                      ? "selectedFormItems"
-                                      : ""
-                                  }`}
-                                  onClick={() => SelectedChangePet(index, "1")}
-                                >
-                                  <p>{index}</p>
+                          <h6 className="calendar_modal_heading">
+                            Number of Pets
+                          </h6>
+                          {/* <input type="phone" placeholder="Enter no of pets.." /> */}
+                          <div className="resrvDateSelect">
+                            <ul>
+                              {Array.from(
+                                { length: pet_length },
+                                (_, index) => index + 1
+                              ).map((digit, index) => (
+                                <li key={index}>
+                                  <div
+                                    className={`dateBox ${
+                                      selectedpet === index
+                                        ? "selectedFormItems"
+                                        : ""
+                                    }`}
+                                    onClick={() =>
+                                      SelectedChangePet(index, "1")
+                                    }
+                                  >
+                                    <p>{index}</p>
+                                  </div>
+                                </li>
+                              ))}
+                              <li
+                                className={`${
+                                  addCustomPet ? " " : "hideInput"
+                                }`}
+                              >
+                                <div className="customRsrvInput">
+                                  <input
+                                    type="text"
+                                    maxLength={3}
+                                    defaultValue={selectedpet}
+                                    name="custom_pet_count"
+                                    onChange={(e) => SelectedChangePet(e, "2")}
+                                    placeholder="No. of Pets"
+                                  />
                                 </div>
                               </li>
-                            ))}
-                            <li
-                              className={`${addCustomPet ? " " : "hideInput"}`}
+                            </ul>
+                            <div
+                              className={`addInputBtn ${
+                                addCustomPet ? "hideInput" : ""
+                              }`}
+                              onClick={addCustomPetInput}
                             >
-                              <div className="customRsrvInput">
-                                <input
-                                  type="text"
-                                  maxLength={3}
-                                  defaultValue={selectedpet}
-                                  name="custom_pet_count"
-                                  onChange={(e) => SelectedChangePet(e, "2")}
-                                  placeholder="No. of Pets"
-                                />
-                              </div>
-                            </li>
-                          </ul>
-                          <div
-                            className={`addInputBtn ${
-                              addCustomPet ? "hideInput" : ""
-                            }`}
-                            onClick={addCustomPetInput}
-                          >
-                            <img src={AddBtn} alt="Barley's Dashboard" />
+                              <img src={AddBtn} alt="Barley's Dashboard" />
+                            </div>
                           </div>
-                        </div>
-
-                        <span>
-                          <Link onClick={() => setStep(3)}>Next</Link>
-                        </span>
-                      </div>
-                    )}
-                    {step === 3 && (
-                      <div className="wrapper_calendar_modal">
-                        <h6 className="calendar_modal_heading">
-                          Review Details
-                        </h6>
-                        <div className="details_step_calendar_modal">
-                          <span className="row">
-                            <h6 className="col-4">Date: </h6>
-                            <p className="col-8">17.Nov.2024 | 17:50</p>
-                          </span>
-                          <span className="row">
-                            <h6 className="col-4">Person: </h6>
-                            <p className="col-8">02</p>
-                          </span>
-                          <span className="row">
-                            <h6 className="col-4">Children: </h6>
-                            <p className="col-8">00</p>
-                          </span>
-                          <span className="row">
-                            <h6 className="col-4">Pets: </h6>
-                            <p className="col-8">00</p>
-                          </span>
-                          <span className="row">
-                            <h6 className="col-4">Discount: </h6>
-                            <p className="col-8">20%</p>
-                          </span>
-
-                          <input
-                            type="text"
-                            placeholder="Add Instruction/Comment"
-                          />
 
                           <span>
-                            {" "}
-                            <input type="checkbox" className="checkBoxUnique" />
-                            <label>
-                              I agree to the Terms & Conditions & Privacy Policy
-                            </label>
+                            <Link onClick={() => setStep(3)}>Next</Link>
                           </span>
-                          <Link onClick={() => setStep(4)}>Book Now</Link>
                         </div>
-                      </div>
-                    )}
-                    {step === 4 && (
-                      <div className="final_step_wrapper">
-                        <h6>Reservation </h6>
-                        <span>
-                          <p>17 No, 2024 • 7 Person • 9.00 PM</p>
-                        </span>
+                      )}
+                      {step === 3 && (
+                        <div className="wrapper_calendar_modal">
+                          <h6 className="calendar_modal_heading">
+                            Review Details
+                          </h6>
+                          <div className="details_step_calendar_modal">
+                            <span className="row">
+                              <h6 className="col-4">Date: </h6>
+                              <p className="col-8">17.Nov.2024 | 17:50</p>
+                            </span>
+                            <span className="row">
+                              <h6 className="col-4">Person: </h6>
+                              <p className="col-8">02</p>
+                            </span>
+                            <span className="row">
+                              <h6 className="col-4">Children: </h6>
+                              <p className="col-8">00</p>
+                            </span>
+                            <span className="row">
+                              <h6 className="col-4">Pets: </h6>
+                              <p className="col-8">00</p>
+                            </span>
+                            <span className="row">
+                              <h6 className="col-4">Discount: </h6>
+                              <p className="col-8">20%</p>
+                            </span>
 
-                        <div className="confirmed_booking_span">
-                          <h6>Booking Confirmed! </h6>
-                          <desc>
-                            Your reservation is now secured. Thank you for
-                            choosing us!
-                          </desc>
-                        </div>
-                      </div>
-                    )}
-                  </div>
-                </div>
+                            <input
+                              type="text"
+                              placeholder="Add Instruction/Comment"
+                            />
 
-                <div className="want_more_section">
-                  <span>
-                    <h6>Can’t find the available you want?</h6>
-                    <p>Find a table at a similar restaurant </p>
-                  </span>
-                  <img src={rightArrowWhite} alt="right" />
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-        <section className="venue_about_section">
-          <div className="container">
-            <div className="tabs row">
-              <div className="tab-buttons col-lg-3">
-                <button
-                  className={activeTab === "about" ? "active" : ""}
-                  onClick={() => setActiveTab("about")}
-                >
-                  About
-                </button>
-                <button
-                  className={activeTab === "menu" ? "active" : ""}
-                  onClick={() => setActiveTab("menu")}
-                >
-                  Menu
-                </button>
-                <button
-                  className={activeTab === "reviews" ? "active" : ""}
-                  onClick={() => setActiveTab("reviews")}
-                >
-                  Reviews
-                </button>
-              </div>
-              <div className="row">
-                <div className="tab-content col-lg-8">
-                  {activeTab === "about" && (
-                    <div className="about_venue_tabContent">
-                      <h2>{detail.restaurant_name}</h2>
-                      <p>{detail.restaurant_full_adrress}</p>
-                      <h6>About this venue</h6>
-                      <ReadMore />
-                      <div className="venue_features_section row">
-                        {detail.amenities &&
-                          detail.amenities.length > 0 &&
-                          detail.amenities.map((features, idx) => (
-                            <div
-                              className="col-lg-3 venue_features_wrapper"
-                              key={idx}
-                            >
-                              <img
-                                src={imageApi + features.image}
-                                alt="{features.venue_feature_name}"
+                            <span>
+                              {" "}
+                              <input
+                                type="checkbox"
+                                className="checkBoxUnique"
                               />
-                              <p className="venue_feature_name">
-                                {features.amenities_name}
-                              </p>
-                            </div>
-                          ))}
-                      </div>
-                      <section className="Reviews_section">
-                        <div className="menu_wrapper">
-                          <div className="menu_wrapper_heading mt-2 mb-2">
-                            <h3>Restaurant Menu</h3>
-                          </div>
-                          <div className="menu_image_wrapper ">
-                            {detail.menuimages &&
-                              detail.menuimages.length > 0 &&
-                              detail.menuimages.map((menu_img, idx) => (
-                                <img
-                                  key={idx}
-                                  src={imageApi + menu_img.image_name}
-                                  alt="menu_img"
-                                />
-                              ))}
+                              <label>
+                                I agree to the Terms & Conditions & Privacy
+                                Policy
+                              </label>
+                            </span>
+                            <Link onClick={() => setStep(4)}>Book Now</Link>
                           </div>
                         </div>
-                        <Reviews review={reviews} totalReview={detail} />
-                        <div className="see_more_reviews">
-                          <Link onClick={() => setActiveTab("reviews")}>
-                            See more reviews (
-                            {detail.review && detail.review.length})
-                            <img src={right} alt="right" />
-                          </Link>
+                      )}
+                      {step === 4 && (
+                        <div className="final_step_wrapper">
+                          <h6>Reservation </h6>
+                          <span>
+                            <p>17 No, 2024 • 7 Person • 9.00 PM</p>
+                          </span>
+
+                          <div className="confirmed_booking_span">
+                            <h6>Booking Confirmed! </h6>
+                            <desc>
+                              Your reservation is now secured. Thank you for
+                              choosing us!
+                            </desc>
+                          </div>
                         </div>
-                      </section>
+                      )}
                     </div>
-                  )}
-                  {activeTab === "menu" && (
-                    <div>
-                      <Menu />
-                    </div>
-                  )}
-                  {activeTab === "reviews" && (
-                    <div>
-                      <Reviews review={reviews} totalReview={detail} />
-                    </div>
-                  )}
+                  </div>
+                  <div className="want_more_section">
+                    <span>
+                      <h6>Can’t find the available you want?</h6>
+                      <p>Find a table at a similar restaurant </p>
+                    </span>
+                    <img src={rightArrowWhite} alt="right" />
+                  </div>
                 </div>
               </div>
             </div>

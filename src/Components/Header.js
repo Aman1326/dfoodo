@@ -75,7 +75,7 @@ function Header() {
           )}
         </div>
       </div>
-      <nav class="navbar navbar-expand-lg bg-body-tertiary">
+      <nav class="navbar stickyHeader navbar-expand-lg bg-body-tertiary">
         <div class="container-lg">
           <Link class="navbar-brand" to="/">
             <img src={mainLogo} alt="mainLogo" width={150} />
