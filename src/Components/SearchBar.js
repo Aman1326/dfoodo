@@ -133,10 +133,10 @@ const SearchBar = () => {
               styles={customStyles}
             />
           </div>
-          <div className="seachVenue_section_searchbar ">
-            <img src={searchIcon} alt="search icon" />
-            <input placeholder="Location, Restaurant, or Cuisine" />
-          </div>
+        </div>
+        <div className="seachVenue_section_searchbar ">
+          <img src={searchIcon} alt="search icon" />
+          <input placeholder="Location, Restaurant, or Cuisine" />
         </div>
 
         <div className="letsgo_button">
