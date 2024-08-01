@@ -36,7 +36,7 @@ import {
   get_restropage_webapp,
   APL_LINK,
 } from "../ServiceConnection/serviceconnection";
-import { handleError } from "../CommonJquery/CommonJquery.js";
+import { handleError, handleLinkClick } from "../CommonJquery/CommonJquery.js";
 
 let login_flag_res = "0";
 let customer_id = "1";
@@ -247,6 +247,22 @@ const Venue = () => {
         console.log(error);
       });
   };
+  const [SEOloop, setSEOloop] = useState([]);
+  const match_and_return_seo_link = (v_id) => {
+    let data_seo_link_final = "/restro/restro_detail/" + v_id;
+    let data_seo_link = data_seo_link_final;
+    if (SEOloop) {
+      const matchedItem = SEOloop.find((data) => {
+        return data_seo_link === data.call_function_name;
+      });
+
+      if (matchedItem) {
+        data_seo_link_final = matchedItem.pretty_function_name;
+      }
+    }
+    return data_seo_link_final;
+  };
+
   return (
     <>
       <div venue_wrapper>
@@ -322,7 +338,13 @@ const Venue = () => {
                             <div className="row m-0">
                               <div className="col-sm-5 px-0">
                                 <Link
-                                  to="/detailedVenue"
+                                  onClick={() => {
+                                    handleLinkClick(
+                                      match_and_return_seo_link(
+                                        venue.primary_id
+                                      )
+                                    );
+                                  }}
                                   style={{ textDecoration: "none" }}
                                 >
                                   <div className="venuePage_image_container">
