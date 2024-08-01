@@ -1,9 +1,6 @@
 import React from "react";
 import "./Css/Collections.css";
-import city1 from "../Assets/city1.png";
-import city2 from "../Assets/city2.png";
-import city3 from "../Assets/city3.png";
-import city4 from "../Assets/city4.png";
+
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -15,12 +12,7 @@ import { handleLinkClick } from "../CommonJquery/CommonJquery";
 import { Link } from "react-router-dom";
 const Collections = ({ data, SEOloop }) => {
   //browse cities section
-  const Browse_cities = [
-    { image: city1, description: "Veggie Friendly", places: "8 Places" },
-    { image: city2, description: "Wine bars", places: "8 Places" },
-    { image: city3, description: "High Discount", places: "8 Places" },
-    { image: city4, description: "Outdoor Seating ", places: "8 Places" },
-  ];
+
   // Custom Next Arrow
   const NextArrow = (props) => {
     const { className, style, onClick } = props;
