@@ -29,6 +29,7 @@ import {
   server_post_data,
   save_favourite,
   APL_LINK,
+  get_reservation_webapp,
 } from "../ServiceConnection/serviceconnection.js";
 import { retrieveData } from "../LocalConnection/LocalConnection.js";
 import {
@@ -44,6 +45,7 @@ const ProfilePage = () => {
   const [activeTabIndex, setActiveTabIndex] = useState(0);
   const [isTabPanelVisible, setIsTabPanelVisible] = useState(false);
   const [getFavrate, setFavrate] = useState([]);
+  const [GetRegistration, setRegistration] = useState([]);
 
   const handleTabClick = (index) => {
     setActiveTabIndex(index);
@@ -57,105 +59,7 @@ const ProfilePage = () => {
   const [activeTab, setActiveTab] = useState("upcomming");
 
   //favuorite restaurant details :
-  const venues_data_labeled = [
-    {
-      venue_image: bar1,
-      Venue: [" ₹500 Average Price"],
-      Rating: 4.1,
-      Name: "Majestic Manor",
-      Address: "Royal Plaza, Anand Nagar",
-      time: ["17:30", "18:00", "18:30", "19:00"],
-      time_discount: ["20%", "15%", "23%", "8%"],
-      average_price: "5000",
-      facilities: ["bar", "valet parking", "alcohol served"],
-      facilities_images: [barPresent, valetParking, alcoholPresent],
-    },
-    {
-      venue_image: bar2,
-      Venue: [" ₹500 Average Price"],
-      Rating: 4.3,
-      Name: "Business Hall",
-      Address: "Tech Park, Sector 5, Downtown",
-      time: ["17:30", "18:00", "18:30", "19:00"],
-      time_discount: ["20%", "20%", "20%", "20%"],
-      average_price: "3000",
-      facilities: ["bar", "valet parking", "alcohol served"],
-      facilities_images: [barPresent, valetParking, alcoholPresent],
-    },
-    {
-      venue_image: bar2,
-      Venue: [" ₹500 Average Price"],
-      Rating: 4.3,
-      Name: "Business Hall",
-      Address: "Tech Park, Sector 5, Downtown",
-      time: ["17:30", "18:00", "18:30", "19:00"],
-      time_discount: ["20%", "20%", "20%", "20%"],
-      average_price: "3000",
-      facilities: ["bar", "valet parking", "alcohol served"],
-      facilities_images: [barPresent, valetParking, alcoholPresent],
-    },
-    {
-      venue_image: bar2,
-      Venue: [" ₹500 Average Price"],
-      Rating: 4.3,
-      Name: "Business Hall",
-      Address: "Tech Park, Sector 5, Downtown",
-      time: ["17:30", "18:00", "18:30", "19:00"],
-      time_discount: ["20%", "20%", "20%", "20%"],
-      average_price: "3000",
-      facilities: ["bar", "valet parking", "alcohol served"],
-      facilities_images: [barPresent, valetParking, alcoholPresent],
-    },
-    {
-      venue_image: bar2,
-      Venue: [" ₹500 Average Price"],
-      Rating: 4.3,
-      Name: "Business Hall",
-      Address: "Tech Park, Sector 5, Downtown",
-      time: ["17:30", "18:00", "18:30", "19:00"],
-      time_discount: ["20%", "20%", "20%", "20%"],
-      average_price: "3000",
-      facilities: ["bar", "valet parking", "alcohol served"],
-      facilities_images: [barPresent, valetParking, alcoholPresent],
-    },
-    {
-      venue_image: bar2,
-      Venue: [" ₹500 Average Price"],
-      Rating: 4.3,
-      Name: "Business Hall",
-      Address: "Tech Park, Sector 5, Downtown",
-      time: ["17:30", "18:00", "18:30", "19:00"],
-      time_discount: ["20%", "20%", "20%", "20%"],
-      average_price: "3000",
-      facilities: ["bar", "valet parking", "alcohol served"],
-      facilities_images: [barPresent, valetParking, alcoholPresent],
-    },
-    {
-      venue_image: bar2,
-      Venue: [" ₹500 Average Price"],
-      Rating: 4.3,
-      Name: "Business Hall",
-      Address: "Tech Park, Sector 5, Downtown",
-      time: ["17:30", "18:00", "18:30", "19:00"],
-      time_discount: ["20%", "20%", "20%", "20%"],
-      average_price: "3000",
-      facilities: ["bar", "valet parking", "alcohol served"],
-      facilities_images: [barPresent, valetParking, alcoholPresent],
-    },
-    {
-      venue_image: bar2,
-      Venue: [" ₹500 Average Price"],
-      Rating: 4.3,
-      Name: "Business Hall",
-      Address: "Tech Park, Sector 5, Downtown",
-      time: ["17:30", "18:00", "18:30", "19:00"],
-      time_discount: ["20%", "20%", "20%", "20%"],
-      average_price: "3000",
-      facilities: ["bar", "valet parking", "alcohol served"],
-      facilities_images: [barPresent, valetParking, alcoholPresent],
-    },
-  ];
-
+  const venues_data_labeled = GetRegistration;
   // pagination of popular venues
   const [currentPaginationPage, setCurrentPaginationPage] = useState(1);
   const itemsPerPage = 8;
@@ -193,8 +97,9 @@ const ProfilePage = () => {
   useEffect(() => {
     master_data_get();
     master_data_Favrate();
+    master_Reservation_data_get();
   }, []);
-
+  //get --Profile data
   const master_data_get = async () => {
     setshowLoaderAdmin(true);
     const fd = new FormData();
@@ -226,6 +131,28 @@ const ProfilePage = () => {
       });
   };
 
+  //get reservation data
+  const master_Reservation_data_get = async () => {
+    setshowLoaderAdmin(true);
+    const fd = new FormData();
+    fd.append("call_id", "1");
+    await server_post_data(get_reservation_webapp, fd)
+      .then((Response) => {
+        console.log(Response.data.message.data_reservation);
+        if (Response.data.error) {
+          // handleError(Response.data.message);
+        } else {
+          setRegistration(
+            Response.data.message.data_reservation || "No data found"
+          );
+        }
+        setshowLoaderAdmin(false);
+      })
+      .catch((error) => {
+        setshowLoaderAdmin(false);
+      });
+  };
+  //get favrate vanue data
   const master_data_Favrate = async () => {
     setshowLoaderAdmin(true);
     try {
@@ -239,7 +166,6 @@ const ProfilePage = () => {
       if (Response.data.error) {
         handleError(Response.data.message);
       } else {
-        console.log(Response.data.message.like_lt);
         setFavrate(Response.data.message.like_lt);
       }
     } catch (error) {
@@ -248,7 +174,7 @@ const ProfilePage = () => {
       setshowLoaderAdmin(false);
     }
   };
-
+  //post profile or update profile
   const handleInputChange = (event) => {
     setFormChanged(true);
   };
@@ -391,7 +317,7 @@ const ProfilePage = () => {
   ];
 
   const modalClass = ModalType === "cancel" ? "modal-md" : "modal-lg";
-
+  //post or remove the venue data
   const handleRemoveFavrate = async (index, venue_id) => {
     const form_data = new FormData();
     form_data.append("venue_id", venue_id);
@@ -529,8 +455,14 @@ const ProfilePage = () => {
                                         >
                                           <div className="venuePage_image_container ProfilePage_image_container">
                                             <img
-                                              src={venue.venue_image}
-                                              alt="venueImg"
+                                              src={`${APL_LINK}/assets/${
+                                                venue.restaurant_image ||
+                                                "default.png"
+                                              }`}
+                                              alt={
+                                                venue.restaurant_name ||
+                                                "Venue Image"
+                                              }
                                             />
                                           </div>
                                         </Link>

@@ -17,6 +17,9 @@ const save_restaurantOwnerdetails =
 const save_favourite = local_server_link_react + "save_favourite/";
 const update_profile = local_server_link_react + "update_profile/";
 const get_profile = local_server_link_react + "get_profile/";
+const get_filter_data = local_server_link_react + "get_filter_data/";
+const get_reservation_webapp =
+  local_server_link_react + "get_reservation_webapp/";
 const get_favourite = local_server_link_react + "get_favourite/";
 const get_restropage_webapp =
   local_server_link_react + "get_restropage_webapp/";
@@ -56,4 +59,6 @@ export {
   get_profile,
   get_favourite,
   save_favourite,
+  get_filter_data,
+  get_reservation_webapp,
 };

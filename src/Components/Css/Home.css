@@ -447,6 +447,10 @@
   height: 22px !important;
   width: 22px !important;
 }
+.heartBttnn {
+  border: none;
+  background-color: transparent;
+}
 @media (max-width: 420px) {
   .how_it_works_content {
     padding: 1rem 0rem;

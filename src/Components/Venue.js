@@ -31,9 +31,9 @@ import contactus from "../Assets/averagePrice.svg";
 // import Heart from "react-heart";
 import {
   server_post_data,
-  get_categorypage_webapp,
   save_favourite,
   get_restropage_webapp,
+  get_filter_data,
   APL_LINK,
 } from "../ServiceConnection/serviceconnection";
 import { handleError, handleLinkClick } from "../CommonJquery/CommonJquery.js";
@@ -55,6 +55,7 @@ const Venue = () => {
   const [HeartImg, setHeartImages] = useState([]);
 
   const [breadcrumbs, setBreadcrumbs] = useState([]);
+  const [getfiltersData, setfiltersData] = useState([]);
 
   const master_data_get = async (category_id) => {
     setshowLoaderAdmin(true);
@@ -101,30 +102,30 @@ const Venue = () => {
       });
   };
 
-  // const master_filter_data_get = async (category_id) => {
-  //   setshowLoaderAdmin(true);
-  //   const fd = new FormData();
-  //   fd.append("current_url", "/" + currentUrl);
-  //   fd.append("category_id", "category_id");
-  //   fd.append("call_id", "1");
-  //   await server_post_data(get_restropage_webapp, fd)
-  //     .then((Response) => {
-  //       if (Response.data.error) {
-  //         handleError(Response.data.message);
-  //       } else {
-  //         SetVenueData(Response.data.message.restro || []);
-  //         setHeartImages(Response.data.message.favourite || []);
-  //       }
-  //       setshowLoaderAdmin(false);
-  //     })
-  //     .catch((error) => {
-  //       setshowLoaderAdmin(false);
-  //     });
-  // };
-
+  const master_filter_data_get = async () => {
+    setshowLoaderAdmin(true);
+    const fd = new FormData();
+    fd.append("current_url", "/" + currentUrl);
+    fd.append("category_id", "category_id");
+    fd.append("call_id", "1");
+    await server_post_data(get_filter_data, fd)
+      .then((Response) => {
+        console.log(Response.data.message);
+        if (Response.data.error) {
+          handleError(Response.data.message);
+        } else {
+          setfiltersData(Response.data.message || []);
+        }
+        setshowLoaderAdmin(false);
+      })
+      .catch((error) => {
+        setshowLoaderAdmin(false);
+      });
+  };
+  // console.log(get_filter_data);
   useEffect(() => {
     master_data_get();
-    // master_filter_data_get();
+    master_filter_data_get();
   }, []);
 
   const filters = [

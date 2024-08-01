@@ -294,6 +294,7 @@ function Home() {
                             /> */}
 
                             <button
+                              className="heartBttnn"
                               onClick={() => handleHeartClick(venue.primary_id)}
                             >
                               <img
