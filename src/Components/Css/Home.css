@@ -291,6 +291,14 @@
     margin-right: auto;
     margin-top: 0.5rem;
   }
+
+  .seAll_span p {
+    display: none;
+  }
+
+  .seAll_span {
+    margin-bottom: 0.5rem;
+  }
 }
 
 .how_it_works_content h6,
@@ -447,6 +455,7 @@
   height: 22px !important;
   width: 22px !important;
 }
+
 .heartBttnn {
   border: none;
   background-color: transparent;

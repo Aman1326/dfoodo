@@ -568,7 +568,7 @@ const DetailedVenue = () => {
                     </div>
                     <div className="calenday_modelSubHead">
                       {step === 0 && (
-                        <div className="d-flex">
+                        <div className="d-flex backgrwh">
                           <span className="steps firstStep">
                             <span className="d-flex">
                               <img src={calendarfrom} alt="calendarfrom" />

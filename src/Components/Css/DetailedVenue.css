@@ -237,12 +237,8 @@
   border-radius: 0 !important;
 }
 
-.personInfo
-  .react-international-phone-input-container
-  .react-international-phone-country-selector-button,
-.personInfo
-  .react-international-phone-input-container
-  .react-international-phone-input {
+.personInfo .react-international-phone-input-container .react-international-phone-country-selector-button,
+.personInfo .react-international-phone-input-container .react-international-phone-input {
   border-radius: 0 !important;
 }
 
@@ -286,7 +282,7 @@
 .steps {
   background-color: var(--light-black);
   display: flex;
-  gap: 1.5rem;
+  gap: 1.2rem;
   width: fit-content;
   font-size: 14px;
   padding: 0.2rem 1rem;
@@ -361,11 +357,9 @@
   bottom: 0;
   left: 0;
   right: 0;
-  background: linear-gradient(
-    to bottom,
-    rgba(255, 255, 255, 0) 0%,
-    var(--secondary-black) 100%
-  );
+  background: linear-gradient(to bottom,
+      rgba(255, 255, 255, 0) 0%,
+      var(--secondary-black) 100%);
 
   height: 40%;
 }
@@ -674,5 +668,4 @@
   position: sticky;
   top: 78px;
   align-self: flex-start;
-  padding-top: 1rem;
 }
