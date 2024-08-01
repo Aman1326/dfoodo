@@ -397,14 +397,16 @@ const DetailedVenue = () => {
                           )
                         }
                       >
-                        {detail.images.map((image, index) => (
-                          <div key={index}>
-                            <img
-                              src={imageApi + image.image_name}
-                              alt={`img${index}`}
-                            />
-                          </div>
-                        ))}
+                        {detail.images &&
+                          detail.images > 0 &&
+                          detail.images.map((image, index) => (
+                            <div key={index}>
+                              <img
+                                src={imageApi + image.image_name}
+                                alt={`img${index}`}
+                              />
+                            </div>
+                          ))}
                       </Carousel>
                       <div className="black_section_carousel">
                         <span className="first_row_black_section_carousel">
