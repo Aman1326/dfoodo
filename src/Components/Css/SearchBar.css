@@ -173,6 +173,10 @@
     height: 15px;
 }
 
+.datepicker {
+    z-index: 10000000;
+}
+
 @media (max-width: 830px) {
     .searchBar_container {
         flex-direction: column;
