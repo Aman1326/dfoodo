@@ -289,4 +289,8 @@
     gap: 0.2rem;
 }
 
-@media (max-width: 991px) {}
+.stickyHeader {
+    position: sticky;
+    top: 0;
+    z-index: 999;
+}
