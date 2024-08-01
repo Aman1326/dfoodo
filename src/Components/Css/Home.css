@@ -439,6 +439,14 @@
   margin-bottom: 2rem;
 }
 
+.HeartHomeIcon {
+  cursor: pointer !important;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  height: 22px !important;
+  width: 22px !important;
+}
 @media (max-width: 420px) {
   .how_it_works_content {
     padding: 1rem 0rem;
