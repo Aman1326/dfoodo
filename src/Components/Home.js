@@ -90,18 +90,6 @@ function Home() {
     return data_seo_link_final;
   };
 
-  const handlePrevClick = () => {
-    setCurrentIndex((prevIndex) =>
-      prevIndex === 0 ? testimonials.length - 1 : prevIndex - 1
-    );
-  };
-
-  const handleNextClick = () => {
-    setCurrentIndex((prevIndex) =>
-      prevIndex === testimonials.length - 1 ? 0 : prevIndex + 1
-    );
-  };
-
   // pagination of popular venues
   const [currentPaginationPage, setCurrentPaginationPage] = useState(1);
   const itemsPerPage = 4;
@@ -142,7 +130,7 @@ function Home() {
                   <h1>Secure your table for every special moment.</h1>
                 </div>
                 <div className="serachBxx">
-                  <div className="searchBarInHeroSection w-100 px-sm-12x">
+                  <div className="searchBarInHeroSection w-100 px-sm-12x px-2">
                     <SearchBar />
                   </div>
                 </div>
@@ -233,7 +221,7 @@ function Home() {
                                         <p>{category}</p>
                                       </React.Fragment>
                                     ))} */}
-                                  <p>{venue.cuisine}</p>
+                                  <p>{venue.cuisine}&nbsp;</p>
                                 </span>
                                 <div className="rating_greenDiv">
                                   <p>{venue.rating}</p>
@@ -335,7 +323,7 @@ function Home() {
                                         <p>{category}</p>
                                       </React.Fragment>
                                     ))} */}
-                                  <p>{venue.cuisine}</p>
+                                  <p>{venue.cuisine}&nbsp;</p>
                                 </span>
                                 <div className="rating_greenDiv">
                                   <p>{venue.rating}</p>

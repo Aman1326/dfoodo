@@ -33,7 +33,11 @@ const Collections = ({ data, SEOloop }) => {
       <img
         src={leftArrowIcon}
         className={className}
-        style={{ ...style, display: "block" }}
+        style={{
+          ...style,
+          display: "block",
+          opacity: "1",
+        }}
         onClick={onClick}
       />
     );
