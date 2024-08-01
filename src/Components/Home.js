@@ -13,24 +13,22 @@ import str2 from "../Assets/5stars.svg";
 import str1 from "../Assets/singleStar.svg";
 import tick from "../Assets/tick.svg";
 import percentage from "../Assets/percentage.svg";
-import discoverbg_1 from "../Assets/Background.png";
-import discoverbg_2 from "../Assets/background1.png";
-import discoverbg1 from "../Assets/squareImg1.png";
-import discoverbg2 from "../Assets/squareImg2.png";
-import discoverbg3 from "../Assets/squareImg3.png";
-import discoverbg4 from "../Assets/squareImg4.png";
+import Heart from "../Assets/heart.svg";
+import HeartRed from "../Assets/HeartRed.svg";
 import DownloadApp from "./DownloadApp";
 import AreYouAVenueOwner from "./AreYouAVenueOwner";
-import Heart from "react-heart";
+// import Heart from "react-heart";
 import Footer from "./Footer";
 import {
   server_post_data,
   get_landingpage_webapp,
   imageApi,
+  save_favourite,
 } from "../ServiceConnection/serviceconnection.js";
 import {
   handleLinkClick,
   inputdateformateChange,
+  handleError,
 } from "../CommonJquery/CommonJquery.js";
 function Home() {
   const [likedVenues, setLikedVenues] = useState({});
@@ -44,6 +42,7 @@ function Home() {
   const [restaurantByCountry, setRestaurantByCountry] = useState([]);
   const [restaurantByCity, setRestaurantByCity] = useState([]);
 
+  const [HeartImg, setHeartImages] = useState([]);
   const [collection, setCollection] = useState([]);
   // Toggle the like state for a specific venue
   const toggleLike = (index) => {
@@ -165,6 +164,49 @@ function Home() {
   useEffect(() => {
     master_data_get();
   }, []);
+
+  const handleHeartClick = async (venueId) => {
+    try {
+      // Assuming you have a function to handle save changes dynamically
+      await handleSaveChangesdynamic(venueId);
+
+      // Toggle favorite status
+      const updatedFavorites = HeartImg.some(
+        (fav) => fav.restaurant_id === venueId
+      )
+        ? HeartImg.filter((fav) => fav.restaurant_id !== venueId) // Remove from favorites
+        : [...HeartImg, { restaurant_id: venueId }];
+
+      // Update state with the new list of favorites
+      setHeartImages(updatedFavorites);
+
+      // Optionally, you can update the backend or local storage here
+    } catch (error) {
+      console.error("Error updating favorite status:", error);
+    }
+  };
+
+  const isFavorite = (venueId) => {
+    return HeartImg.some((fav) => fav.restaurant_id === venueId);
+  };
+
+  const handleSaveChangesdynamic = async (id) => {
+    // seterror_show("");
+    const form_data = new FormData();
+
+    form_data.append("venue_id", id);
+    form_data.append("customer_id", "1");
+    form_data.append("flag", "0");
+    await server_post_data(save_favourite, form_data)
+      .then((Response) => {
+        if (Response.data.error) {
+          handleError(Response.data.message);
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
   return (
     <div>
       <Header />
@@ -241,7 +283,7 @@ function Home() {
                               src={imageApi + venue.restaurant_image}
                               alt="venueImg"
                             />
-                            <Heart
+                            {/* <Heart
                               className="heart_icon"
                               isActive={likedVenues[index] || false}
                               onClick={() => toggleLike(index)}
@@ -249,7 +291,21 @@ function Home() {
                               inactiveColor="red"
                               animationTrigger="hover"
                               animationScale={1.1}
-                            />
+                            /> */}
+
+                            <button
+                              onClick={() => handleHeartClick(venue.primary_id)}
+                            >
+                              <img
+                                src={
+                                  isFavorite(venue.primary_id)
+                                    ? HeartRed
+                                    : Heart
+                                }
+                                alt="Heart"
+                                className="HeartHomeIcon"
+                              />
+                            </button>
                           </div>
                           <Link
                             onClick={() =>
@@ -345,7 +401,7 @@ function Home() {
                               src={imageApi + venue.restaurant_image}
                               alt="venueImg"
                             />
-                            <Heart
+                            {/* <Heart
                               className="heart_icon"
                               isActive={likedVenues[index] || false}
                               onClick={() => toggleLike(index)}
@@ -353,7 +409,20 @@ function Home() {
                               inactiveColor="red"
                               animationTrigger="hover"
                               animationScale={1.1}
-                            />
+                            /> */}
+                            <button
+                              onClick={() => handleHeartClick(venue.primary_id)}
+                            >
+                              <img
+                                src={
+                                  isFavorite(venue.primary_id)
+                                    ? HeartRed
+                                    : Heart
+                                }
+                                alt="Heart"
+                                className="HeartHomeIcon"
+                              />
+                            </button>
                           </div>
                           <Link
                             onClick={() =>

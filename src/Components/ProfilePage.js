@@ -786,7 +786,7 @@ const ProfilePage = () => {
                                     <div className="timesBtns">
                                       <p>17:30</p>
                                       <div className="childtime">
-                                        {item.discount_upto}%
+                                        -{item.discount_upto}%
                                       </div>
                                     </div>
                                   </div>
