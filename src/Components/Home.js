@@ -233,7 +233,7 @@ function Home() {
                                         <p>{category}</p>
                                       </React.Fragment>
                                     ))} */}
-                                  <p>{venue.cuisine}</p>
+                                  <p>{venue.cuisine}&nbsp;</p>
                                 </span>
                                 <div className="rating_greenDiv">
                                   <p>{venue.rating}</p>
@@ -335,7 +335,7 @@ function Home() {
                                         <p>{category}</p>
                                       </React.Fragment>
                                     ))} */}
-                                  <p>{venue.cuisine}</p>
+                                  <p>{venue.cuisine}&nbsp;</p>
                                 </span>
                                 <div className="rating_greenDiv">
                                   <p>{venue.rating}</p>
