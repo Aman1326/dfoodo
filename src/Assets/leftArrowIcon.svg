@@ -1,19 +1,8 @@
-<svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-<g filter="url(#filter0_d_202_796)">
-<rect width="22.3055" height="22.3055" rx="11.1528" transform="matrix(-1 0 0 1 27.4639 4.0481)" fill="white" shape-rendering="crispEdges"/>
-<rect x="-0.265542" y="0.265542" width="21.7744" height="21.7744" rx="10.8872" transform="matrix(-1 0 0 1 26.9328 4.0481)" stroke="#D8D9DB" stroke-width="0.531084" shape-rendering="crispEdges"/>
-<path d="M16.8378 12.2015L14.2089 14.8304C14.1592 14.8802 14.1312 14.9477 14.1312 15.0181C14.1312 15.0885 14.1592 15.1561 14.2089 15.2059L16.8378 17.8347C16.8876 17.8845 16.9551 17.9125 17.0255 17.9125C17.096 17.9125 17.1635 17.8845 17.2133 17.8347L17.5888 17.4593C17.6385 17.4095 17.6665 17.3419 17.6665 17.2715C17.6665 17.2011 17.6385 17.1336 17.5888 17.0838L15.5228 15.0179L17.5888 12.953C17.6385 12.9032 17.6665 12.8357 17.6665 12.7653C17.6665 12.6949 17.6385 12.6273 17.5888 12.5775L17.2133 12.2015C17.1635 12.1517 17.096 12.1238 17.0255 12.1238C16.9551 12.1238 16.8876 12.1517 16.8378 12.2015Z" fill="#2D333F"/>
-</g>
-<defs>
-<filter id="filter0_d_202_796" x="0.909534" y="0.861593" width="30.803" height="30.8028" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-<feFlood flood-opacity="0" result="BackgroundImageFix"/>
-<feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
-<feOffset dy="1.06217"/>
-<feGaussianBlur stdDeviation="2.12433"/>
-<feComposite in2="hardAlpha" operator="out"/>
-<feColorMatrix type="matrix" values="0 0 0 0 0.6 0 0 0 0 0.6 0 0 0 0 0.6 0 0 0 0.4 0"/>
-<feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_202_796"/>
-<feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_202_796" result="shape"/>
-</filter>
-</defs>
+<svg width="38" height="38" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect x="-0.490283" y="0.490283" width="36.281" height="36.281" rx="18.1405" transform="matrix(-1 0 0 1 36.2812 0)" fill="white"/>
+<rect x="-0.490283" y="0.490283" width="36.281" height="36.281" rx="18.1405" transform="matrix(-1 0 0 1 36.2812 0)" stroke="#EFECE7" stroke-width="0.980566"/>
+<mask id="path-2-inside-1_2079_1631" fill="white">
+<path d="M27.5254 18.6301L20.5928 11.6975L13.6602 18.6301L20.5928 25.5627L27.5254 18.6301Z"/>
+</mask>
+<path d="M13.6602 18.6301L12.2734 20.0169L10.8867 18.6301L12.2734 17.2434L13.6602 18.6301ZM21.9795 13.0842L15.0469 20.0169L12.2734 17.2434L19.206 10.3108L21.9795 13.0842ZM15.0469 17.2434L21.9795 24.176L19.206 26.9495L12.2734 20.0169L15.0469 17.2434Z" fill="black" mask="url(#path-2-inside-1_2079_1631)"/>
 </svg>

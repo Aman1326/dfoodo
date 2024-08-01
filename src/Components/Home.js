@@ -142,7 +142,7 @@ function Home() {
                   <h1>Secure your table for every special moment.</h1>
                 </div>
                 <div className="serachBxx">
-                  <div className="searchBarInHeroSection w-100 px-sm-7 px-4">
+                  <div className="searchBarInHeroSection w-100 px-sm-12x">
                     <SearchBar />
                   </div>
                 </div>

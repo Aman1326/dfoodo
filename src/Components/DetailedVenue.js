@@ -191,7 +191,7 @@ const DetailedVenue = () => {
     fd.append("restuarant_id", customer_id);
     await server_post_data(get_restropage_webapp, fd)
       .then((Response) => {
-        console.log(Response.data.message);
+        console.log(Response.data.message.restro[0]);
         if (Response.data.error) {
           // handleError(Response.data.message);
         } else {
