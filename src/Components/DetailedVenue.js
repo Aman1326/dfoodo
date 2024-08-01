@@ -191,6 +191,7 @@ const DetailedVenue = () => {
     fd.append("restuarant_id", customer_id);
     await server_post_data(get_restropage_webapp, fd)
       .then((Response) => {
+        console.log(Response.data.message.images);
         if (Response.data.error) {
           // handleError(Response.data.message);
         } else {
@@ -398,7 +399,7 @@ const DetailedVenue = () => {
                         }
                       >
                         {detail.images &&
-                          detail.images > 0 &&
+                          detail.images.length > 0 &&
                           detail.images.map((image, index) => (
                             <div key={index}>
                               <img
