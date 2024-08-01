@@ -134,9 +134,11 @@ const SearchBar = () => {
             />
           </div>
         </div>
-        <div className="seachVenue_section_searchbar ">
-          <img src={searchIcon} alt="search icon" />
-          <input placeholder="Location, Restaurant, or Cuisine" />
+        <div className="padding04">
+          <div className="seachVenue_section_searchbar ">
+            <img src={searchIcon} alt="search icon" />
+            <input placeholder="Location, Restaurant, or Cuisine" />
+          </div>
         </div>
 
         <div className="letsgo_button">

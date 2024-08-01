@@ -54,6 +54,7 @@
     border-radius: 3px;
     flex-direction: row;
     width: 100%;
+    height: 100%;
 }
 
 .searchBar_wrapper {
@@ -183,6 +184,11 @@
         padding: 0.2rem 1rem;
     }
 
+    .padding04 {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+
     .verticle_line {
         display: none;
     }
@@ -197,6 +203,7 @@
 
     .seachVenue_section_searchbar {
         width: 100%;
+        height: 100%;
         margin: auto;
         padding: 0.4rem 0.5rem;
         border-radius: 5px;
