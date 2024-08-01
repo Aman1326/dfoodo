@@ -28,7 +28,10 @@ import {
   get_landingpage_webapp,
   imageApi,
 } from "../ServiceConnection/serviceconnection.js";
-import { handleLinkClick } from "../CommonJquery/CommonJquery.js";
+import {
+  handleLinkClick,
+  inputdateformateChange,
+} from "../CommonJquery/CommonJquery.js";
 function Home() {
   const [likedVenues, setLikedVenues] = useState({});
   const [SEOloop, setSEOloop] = useState([]);
@@ -90,7 +93,28 @@ function Home() {
     return data_seo_link_final;
   };
 
-  // pagination of popular venues
+  const match_and_return_seo_blog_link = (v_id) => {
+    let data_seo_link_final = "/blog/blog_detail/" + v_id;
+    let data_seo_link = data_seo_link_final;
+    if (SEOloop) {
+      const matchedItem = SEOloop.find((data) => {
+        return data_seo_link === data.call_function_name;
+      });
+
+      if (matchedItem) {
+        data_seo_link_final = matchedItem.pretty_function_name;
+      }
+    }
+    return data_seo_link_final;
+  };
+
+  const text_short = (text, maxLength) => {
+    if (text.length <= maxLength) {
+      return text;
+    }
+    return text.substring(0, maxLength) + "...";
+  };
+  // pagination of popular venues country
   const [currentPaginationPage, setCurrentPaginationPage] = useState(1);
   const itemsPerPage = 4;
 
@@ -113,6 +137,30 @@ function Home() {
   const currentPaginationItems =
     restaurantByCountry &&
     restaurantByCountry.slice(indexOfFirstItem, indexOfLastItem);
+
+  // pagination of popular venues city
+  const [currentPaginationPageCity, setCurrentPaginationPageCity] = useState(1);
+  const itemsPerPageCity = 4;
+
+  const totalPaginationPagesCity = Math.ceil(
+    restaurantByCity && restaurantByCity.length / itemsPerPageCity
+  );
+
+  const handleNextPageCity = () => {
+    setCurrentPaginationPageCity((prevPage) =>
+      Math.min(prevPage + 1, totalPaginationPagesCity)
+    );
+  };
+
+  const handlePreviousPageCity = () => {
+    setCurrentPaginationPageCity((prevPage) => Math.max(prevPage - 1, 1));
+  };
+
+  const indexOfLastItemCity = currentPaginationPageCity * itemsPerPageCity;
+  const indexOfFirstItemCity = indexOfLastItemCity - itemsPerPageCity;
+  const currentPaginationItemsCity =
+    restaurantByCity &&
+    restaurantByCity.slice(indexOfFirstItemCity, indexOfLastItemCity);
 
   useEffect(() => {
     master_data_get();
@@ -269,14 +317,16 @@ function Home() {
                   </Link>
                   <div className="pagination_controls">
                     <button
-                      onClick={handlePreviousPage}
-                      disabled={currentPaginationPage === 1}
+                      onClick={handlePreviousPageCity}
+                      disabled={currentPaginationPageCity === 1}
                     >
                       <img src={leftArrow} alt="leftArrow" />
                     </button>
                     <button
-                      onClick={handleNextPage}
-                      disabled={currentPaginationPage === totalPaginationPages}
+                      onClick={handleNextPageCity}
+                      disabled={
+                        currentPaginationPageCity === totalPaginationPagesCity
+                      }
                     >
                       <img src={rigthArrow} alt="rightArrow" />
                     </button>
@@ -285,9 +335,9 @@ function Home() {
               </div>
               <div className="popularVenues">
                 <div className="venue_cards_container row mt-1">
-                  {restaurantByCity &&
-                    restaurantByCity.length > 0 &&
-                    restaurantByCity.map((venue, index) => (
+                  {currentPaginationItemsCity &&
+                    currentPaginationItemsCity.length > 0 &&
+                    currentPaginationItemsCity.map((venue, index) => (
                       <div className="col-lg-3 col-md-4 col-sm-6" key={index}>
                         <div className="popularVenues_venue_container">
                           <div className="venue_image_holder">
@@ -338,7 +388,10 @@ function Home() {
                                   {venue.restaurant_temorary_adrress}
                                 </desc>
                                 <span className="venue_capacity_wrapper">
-                                  <p>€{venue.restaurant_price} average price</p>
+                                  <p>
+                                    {country == "India" ? "₹" : "$"}{" "}
+                                    {venue.restaurant_price} average price
+                                  </p>
                                 </span>
                                 <span className="venue_discount_wrapper">
                                   <p>-{venue.discount_upto}%</p>
@@ -406,6 +459,85 @@ function Home() {
           </div>
         </section>
 
+        {/* discover more great venues */}
+        <section>
+          <div className="discover_more_venues_section">
+            <div className="container">
+              <div className="row">
+                <div className="popularVenues_heading_container">
+                  <h2>Discover more great Venues</h2>
+                  <span className="seAll_span">
+                    <Link to="/blogs">
+                      <p>Explore All</p>
+                    </Link>
+                  </span>
+                </div>
+                {blogs.slice(0, 2).map((blog, index) => (
+                  <div className="col-lg-4 col-md-6 mb-3" key={index}>
+                    <div className="discoverMore_container">
+                      <Link
+                        onClick={() =>
+                          handleLinkClick(
+                            match_and_return_seo_blog_link(blog.primary_id)
+                          )
+                        }
+                        style={{
+                          textDecoration: "none",
+                          color: "var(--text-black)",
+                        }}
+                      >
+                        <img src={blog.image_name} alt="discoverImg" />
+                        <div className="discoverMore_containerText">
+                          <h6>{text_short(blog.title_name, 34)}</h6>
+                          <p>{text_short(blog.tag_line, 50)}</p>
+                          <p
+                            style={{
+                              color: "var(--primary-color)",
+                              paddingBottom: "0.5rem",
+                              margin: "0",
+                            }}
+                          >
+                            {inputdateformateChange(blog.entry_date)}
+                          </p>
+                        </div>
+                      </Link>
+                    </div>
+                  </div>
+                ))}
+                <div className="col-lg-4 d-none d-lg-block mb-3">
+                  <div className="verticle_container_discoverMore">
+                    {blogs.slice(0, 4).map((blog, index) => (
+                      <Link
+                        onClick={() =>
+                          handleLinkClick(
+                            match_and_return_seo_blog_link(blog.primary_id)
+                          )
+                        }
+                        key={index}
+                        style={{
+                          textDecoration: "none",
+                          color: "var(--text-black)",
+                        }}
+                      >
+                        <div
+                          className="smaller_container_discoverMore"
+                          key={index}
+                        >
+                          <img src={blog.image_name} alt="discoverbg1" />
+                          <div className="heading_discoverMore">
+                            <h6>{blog.title_name}</h6>
+                            <p>{inputdateformateChange(blog.entry_date)}</p>
+                            <hr width="100%" />
+                          </div>
+                        </div>
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
         <section>
           <DownloadApp />
         </section>

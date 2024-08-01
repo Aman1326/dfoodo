@@ -35,6 +35,7 @@ import {
   combiled_form_data,
   handleAphabetsChange,
   handleError,
+  handleLinkClick,
 
   ////handleSuccess,
 } from "../CommonJquery/CommonJquery.js";
@@ -383,6 +384,7 @@ const ProfilePage = () => {
 
   const venue_text = [
     {
+      primary_id: 1,
       venue_image: bar1,
       venue_name: "venue name",
     },
@@ -407,6 +409,22 @@ const ProfilePage = () => {
     } catch (error) {
       console.log(error);
     }
+  };
+
+  const [SEOloop, setSEOloop] = useState([]);
+  const match_and_return_seo_link = (v_id) => {
+    let data_seo_link_final = "/restro/restro_detail/" + v_id;
+    let data_seo_link = data_seo_link_final;
+    if (SEOloop) {
+      const matchedItem = SEOloop.find((data) => {
+        return data_seo_link === data.call_function_name;
+      });
+
+      if (matchedItem) {
+        data_seo_link_final = matchedItem.pretty_function_name;
+      }
+    }
+    return data_seo_link_final;
   };
   return (
     <>
@@ -584,7 +602,99 @@ const ProfilePage = () => {
                             </div>
                           </div>
                         )}
-                        {activeTab === "past&cancel" && <p>Past & Cancel</p>}
+                        {activeTab === "past&cancel" && (
+                          <div>
+                            <div className="container_venues_profile_page">
+                              <h6 className="profile_page_upcomming_section_heading">
+                                Upcoming reservations
+                              </h6>
+                              <div className="row">
+                                {currentPaginationItems.map((venue, index) => (
+                                  <div
+                                    key={index}
+                                    className="col-12 margin24px"
+                                  >
+                                    <div className="row m-0 px-2 container_profile_section_venue">
+                                      <div className="col-sm-4 px-0">
+                                        <Link
+                                          to="/detailedVenue"
+                                          style={{ textDecoration: "none" }}
+                                        >
+                                          <div className="venuePage_image_container ProfilePage_image_container">
+                                            <img
+                                              src={venue.venue_image}
+                                              alt="venueImg"
+                                            />
+                                          </div>
+                                        </Link>
+                                      </div>
+                                      <div className="col-sm-8 p-0">
+                                        <div className="venuePage_text_section ProfilePage_text_section">
+                                          <div className="venueContainer_rowtext">
+                                            <div className="venueContainer_nameAndAddress ">
+                                              <h6>{venue.Name}</h6>
+                                            </div>
+                                          </div>
+                                          <span className="reservation_text">
+                                            <img
+                                              src={OnBoardingTick}
+                                              alt="OnBoardingTick"
+                                            />
+                                            <p>{text[0]}</p>
+                                          </span>
+
+                                          <div className="venue_details_profile_page">
+                                            <span className="people_span">
+                                              <img
+                                                src={contactus}
+                                                alt="contactus"
+                                              />
+                                              <strong>2</strong>
+                                            </span>
+                                            <span className="people_span">
+                                              <img
+                                                src={calendar}
+                                                alt="calendar"
+                                              />
+                                              <strong>
+                                                Mon, Jun 10 at 6:30PM
+                                              </strong>
+                                            </span>
+                                          </div>
+                                          <div className="venue_details_profile_page">
+                                            <span
+                                              className="people_span"
+                                              onClick={() => {
+                                                setModalType("modify");
+                                                handleOpenCancelModal();
+                                              }}
+                                            >
+                                              <strong>
+                                                <h6>Modify</h6>
+                                              </strong>
+                                            </span>
+                                            |
+                                            <span
+                                              className="people_span"
+                                              onClick={() => {
+                                                setModalType("cancel");
+                                                handleOpenCancelModal();
+                                              }}
+                                            >
+                                              <strong>
+                                                <h6>Cancel</h6>
+                                              </strong>
+                                            </span>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                ))}
+                              </div>
+                            </div>
+                          </div>
+                        )}
                       </div>
                     </div>
                   </div>
@@ -1026,7 +1136,14 @@ const ProfilePage = () => {
                       <div className="col-sm-6 modify_modal_image">
                         <img src={bar1} alt="bar1" />
                       </div>
-                      <div className="col-sm-6">
+                      <div
+                        className="col-sm-6"
+                        onClick={() =>
+                          handleLinkClick(
+                            match_and_return_seo_link(venue_text.primary_id)
+                          )
+                        }
+                      >
                         <div className="venuePage_text_section ProfilePage_text_section">
                           <div className="venueContainer_rowtext">
                             <div className="venueContainer_nameAndAddress ">
@@ -1048,32 +1165,8 @@ const ProfilePage = () => {
                               <strong>Mon, Jun 10 at 6:30PM</strong>
                             </span>
                           </div>
-                          <div className="venue_details_profile_page">
-                            <span
-                              className="people_span"
-                              onClick={() => {
-                                setModalType("modify");
-                                handleOpenCancelModal();
-                              }}
-                            >
-                              <strong>
-                                <h6>Modify</h6>
-                              </strong>
-                            </span>
-                            |
-                            <span
-                              className="people_span"
-                              onClick={() => {
-                                setModalType("cancel");
-                                handleOpenCancelModal();
-                              }}
-                            >
-                              <strong>
-                                <h6>Cancel</h6>
-                              </strong>
-                            </span>
-                          </div>
                         </div>
+                        <hr />
                       </div>
                     </div>
                   </div>

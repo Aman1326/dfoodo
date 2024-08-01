@@ -288,7 +288,10 @@ function Header() {
         <Modal.Header closeButton></Modal.Header>
         <Modal.Body>
           <div className="phoneApp_modal_register_my_venue ">
-            <h3>Find the best restaurants around you using Dfoodo App!</h3>
+            <h3>
+              Find the best restaurants around you using{" "}
+              <span style={{ color: "var(--primary-color)" }}>Dfoodo App!</span>
+            </h3>
             <p>Download Dfoodo app by scanning the QR code</p>
             <img src={qr} alt="altqr" />
           </div>

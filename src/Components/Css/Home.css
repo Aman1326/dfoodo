@@ -239,10 +239,11 @@
 .venue_discount_wrapper p {
   margin-top: 1.4rem;
   margin-bottom: 0;
+  font-weight: 600;
   width: fit-content;
   color: var(--white);
   border-radius: 5px;
-  padding: 0.1rem 0.3rem;
+  padding: 0.2rem 0.7rem;
   font-size: 12px;
   background: var(--Secondary-Color-Black, rgba(42, 45, 50, 1));
 }
