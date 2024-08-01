@@ -146,16 +146,17 @@
 }
 
 .letsgo_button button {
-    height: fit-content;
+    height: 100%;
+    font-weight: 600;
     background-color: var(--primary-color);
     font-family: "Roboto";
     font-size: 14px;
-    font-weight: 400;
     width: 100% !important;
+    white-space: nowrap;
     border: none;
-    border-radius: 8px;
+    border-radius: 5px;
     color: var(--white);
-    padding: 0.2rem 1rem;
+    padding: 0.2rem 1.5rem;
 }
 
 .searchBar_wrapper {
