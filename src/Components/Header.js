@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./Css/Header.css";
 import { Link } from "react-router-dom";
 import "react-international-phone/style.css";
@@ -10,7 +10,9 @@ import { PhoneInput } from "react-international-phone";
 import "react-international-phone/style.css";
 import qr from "../Assets/QR.png";
 import { useLocation } from "react-router-dom";
+import SearchBar from "./SearchBar";
 function Header() {
+  const [searchShow, setsearchShow] = useState(false);
   const [showLoginModal, setShowLoginModal] = useState(false);
   const [showEmailLoginModal, setShowEmailLoginModal] = useState(false);
   const [isPhoneLogin, setIsPhoneLogin] = useState(true); // State to toggle between phone and email
@@ -61,6 +63,19 @@ function Header() {
   const loginProfileClick = () => {
     setProfileBTn(true);
   };
+
+  const handleSearchShow = () => {
+    if (locationn.pathname.includes("restro")) {
+      setsearchShow(true);
+    } else {
+      setsearchShow(false);
+    }
+  };
+
+  useEffect(() => {
+    handleSearchShow();
+  }, []);
+
   return (
     <>
       <div className="upper_header_wrapper">
@@ -104,6 +119,13 @@ function Header() {
               </li>
               <li class="nav-item"></li>
             </ul>
+            {searchShow && (
+              <div className="row m-auto">
+                <div className="col-md-12">
+                  <SearchBar />
+                </div>
+              </div>
+            )}
             <form class="d-flex mobile_wrapper_header" role="search">
               <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll">
                 <li class="nav-item dropdown">
