@@ -966,6 +966,7 @@ const ProfilePage = () => {
                         </p>
                       </span>
                     </div>
+                    <button className="loginButton mt-3">Logout</button>
                   </div>
                 </div>
               </TabPanel>

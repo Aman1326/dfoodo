@@ -57,7 +57,10 @@ function Header() {
 
   //fetch location of the app:
   const locationn = useLocation();
-
+  const [profileBtn, setProfileBTn] = useState(false);
+  const loginProfileClick = () => {
+    setProfileBTn(true);
+  };
   return (
     <>
       <div className="upper_header_wrapper">
@@ -117,17 +120,36 @@ function Header() {
                 </li>
                 <li class="nav-item"></li>
               </ul>
-              <Link
-                className="loginButton"
-                style={{
-                  textDecoration: "none",
-                  alignItems: "center",
-                  width: "fitContent",
-                }}
-                onClick={handleOpenLoginModal}
-              >
-                Log in
-              </Link>
+              {profileBtn ? (
+                false && (
+                  <Link
+                    className="loginButton"
+                    style={{
+                      textDecoration: "none",
+                      alignItems: "center",
+                      width: "fitContent",
+                    }}
+                    onClick={handleOpenLoginModal}
+                  >
+                    Log in
+                  </Link>
+                )
+              ) : (
+                <Link
+                  className="loginButton"
+                  style={{
+                    textDecoration: "none",
+                    alignItems: "center",
+                    width: "fitContent",
+                    borderRadius: "50%",
+                    aspectRatio: "1",
+                    padding: "0.5rem 0.7rem",
+                  }}
+                  to="/profile"
+                >
+                  RS
+                </Link>
+              )}
             </form>
           </div>
         </div>
@@ -141,42 +163,23 @@ function Header() {
         <Modal.Header closeButton></Modal.Header>
         <Modal.Body className="phoneLoginModal_body">
           {!otpSent ? (
-            isPhoneLogin ? (
-              <>
-                <h6>Enter your Phone Number</h6>
-                <p>You will receive a text message to verify your account.</p>
-                <PhoneInput
-                  id="phone"
-                  name="phone"
-                  placeholder="Phone Number"
-                  className="mt-2"
-                  defaultCountry="in"
-                  value={userNumber}
-                  onChange={(phone) => setUserNumber(phone)}
-                />
-              </>
-            ) : (
-              <>
-                <h6>Enter your Email Address</h6>
-                <p>You will receive an email to verify your account.</p>
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  placeholder="Email Address"
-                  className="mt-2 form-control"
-                  value={userEmail}
-                  onChange={(e) => setUserEmail(e.target.value)}
-                />
-              </>
-            )
+            <>
+              <h6>Enter your Phone Number</h6>
+              <p>You will receive a text message to verify your account.</p>
+              <PhoneInput
+                id="phone"
+                name="phone"
+                placeholder="Phone Number"
+                className="mt-2"
+                defaultCountry="in"
+                value={userNumber}
+                onChange={(phone) => setUserNumber(phone)}
+              />
+            </>
           ) : (
             <>
               <h6>Enter the OTP</h6>
-              <p>
-                Please enter the OTP sent to your{" "}
-                {isPhoneLogin ? "phone" : "email"}.
-              </p>
+              <p>Please enter the OTP sent to your phone.</p>
               <input
                 type="text"
                 id="otp"
@@ -193,26 +196,11 @@ function Header() {
               className="PhoneloginButton"
               onClick={handleLoginSubmit}
               style={{
-                backgroundColor:
-                  (isPhoneLogin && !isPhoneNumberValid) ||
-                  (!isPhoneLogin && !isEmailValid)
-                    ? "grey"
-                    : "",
-                borderColor:
-                  (isPhoneLogin && !isPhoneNumberValid) ||
-                  (!isPhoneLogin && !isEmailValid)
-                    ? "grey"
-                    : "",
-                cursor:
-                  (isPhoneLogin && !isPhoneNumberValid) ||
-                  (!isPhoneLogin && !isEmailValid)
-                    ? "not-allowed"
-                    : "pointer",
+                backgroundColor: !isPhoneNumberValid ? "grey" : "",
+                borderColor: !isPhoneNumberValid ? "grey" : "",
+                cursor: !isPhoneNumberValid ? "not-allowed" : "pointer",
               }}
-              disabled={
-                (isPhoneLogin && !isPhoneNumberValid) ||
-                (!isPhoneLogin && !isEmailValid)
-              }
+              disabled={!isPhoneNumberValid}
             >
               Continue
             </Button>
@@ -233,18 +221,9 @@ function Header() {
               Confirm OTP
             </Button>
           )}
-          {!otpSent && (
-            <div className="footer_phoneLoginModal">
-              <Button
-                variant="link"
-                onClick={() => setIsPhoneLogin(!isPhoneLogin)}
-              >
-                {isPhoneLogin ? "Use Email Instead" : "Use Phone Instead"}
-              </Button>
-            </div>
-          )}
         </Modal.Body>
       </Modal>
+
       <Modal
         className="modal-md"
         centered
@@ -290,7 +269,12 @@ function Header() {
                 Policy
               </p>
             </div>
-            <button className="userResgistrationContinuebtn">Continue</button>
+            <button
+              className="userResgistrationContinuebtn"
+              onClick={loginProfileClick}
+            >
+              Continue
+            </button>
           </form>
         </Modal.Body>
       </Modal>

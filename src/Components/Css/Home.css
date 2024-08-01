@@ -41,7 +41,12 @@
 }
 
 .slick-next {
-  right: -16px !important;
+  right: 16px !important;
+}
+
+.slick-prev {
+  z-index: 90;
+  left: -16px !important;
 }
 
 /* popular venues section css */

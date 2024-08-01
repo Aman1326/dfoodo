@@ -334,19 +334,17 @@ const Venue = () => {
                     <div className="row mt-1">
                       {currentPaginationItems.map((venue, index) => (
                         <div key={index} className="col-xl-6 col-12 margin24px">
-                          <div className="VenuePage_venue_container">
-                            <div className="row m-0">
-                              <div className="col-sm-5 px-0">
-                                <Link
-                                  onClick={() => {
-                                    handleLinkClick(
-                                      match_and_return_seo_link(
-                                        venue.primary_id
-                                      )
-                                    );
-                                  }}
-                                  style={{ textDecoration: "none" }}
-                                >
+                          <Link
+                            onClick={() => {
+                              handleLinkClick(
+                                match_and_return_seo_link(venue.primary_id)
+                              );
+                            }}
+                            style={{ textDecoration: "none" }}
+                          >
+                            <div className="VenuePage_venue_container">
+                              <div className="row m-0">
+                                <div className="col-sm-5 px-0">
                                   <div className="venuePage_image_container">
                                     <img
                                       src={`${APL_LINK}/assets/${
@@ -361,77 +359,78 @@ const Venue = () => {
                                       <img src={star} alt="star" />
                                     </div>
                                   </div>
-                                </Link>
-                              </div>
-                              <div className="col-sm-7">
-                                <div className="venuePage_text_section">
-                                  <div className="venueContainer_rowtext">
-                                    <div className="venueContainer_nameAndAddress">
-                                      <h6>
-                                        {venue.restaurant_name || "No Name"}
-                                      </h6>
-                                    </div>
-                                    <div className="heart_section">
-                                      <button
-                                        onClick={() =>
-                                          handleHeartClick(venue.primary_id)
-                                        }
-                                      >
-                                        <img
-                                          src={
-                                            isFavorite(venue.primary_id)
-                                              ? HeartRed
-                                              : Heart
+                                </div>
+                                <div className="col-sm-7">
+                                  <div className="venuePage_text_section">
+                                    <div className="venueContainer_rowtext">
+                                      <div className="venueContainer_nameAndAddress">
+                                        <h6>
+                                          {venue.restaurant_name || "No Name"}
+                                        </h6>
+                                      </div>
+                                      <div className="heart_section">
+                                        <button
+                                          onClick={() =>
+                                            handleHeartClick(venue.primary_id)
                                           }
-                                          alt="Heart"
-                                          className="heart_icon favHeartIcon"
-                                        />
-                                      </button>
-                                    </div>
-                                  </div>
-                                  <p>
-                                    {venue.restaurant_full_adrress || "No  add"}
-                                  </p>
-
-                                  <h6 className="avrgPrice">
-                                    <img
-                                      src={contactus}
-                                      alt="contactus"
-                                      width={15}
-                                    />
-                                    Average Price {venue.restaurant_price} ₹
-                                  </h6>
-                                  <span className="venuePage_venue_category_titles marginNone">
-                                    {venue.amenities?.map(
-                                      (amenity, amenityIndex) => (
-                                        <div
-                                          key={amenityIndex}
-                                          className="amenityItem"
                                         >
                                           <img
-                                            src={`${APL_LINK}/assets/${amenity.image}`}
-                                            alt={amenity.amenities_name}
+                                            src={
+                                              isFavorite(venue.primary_id)
+                                                ? HeartRed
+                                                : Heart
+                                            }
+                                            alt="Heart"
+                                            className="heart_icon favHeartIcon"
                                           />
-                                          <label>
-                                            {amenity.amenities_name}
-                                          </label>
-                                        </div>
-                                      )
-                                    )}
-                                  </span>
+                                        </button>
+                                      </div>
+                                    </div>
+                                    <p>
+                                      {venue.restaurant_full_adrress ||
+                                        "No  add"}
+                                    </p>
 
-                                  <div className="TimingButtons2">
-                                    <div className="timesBtns">
-                                      <p>17:30</p>
-                                      <div className="childtime">
-                                        {venue.discount_upto}%
+                                    <h6 className="avrgPrice">
+                                      <img
+                                        src={contactus}
+                                        alt="contactus"
+                                        width={15}
+                                      />
+                                      Average Price {venue.restaurant_price} ₹
+                                    </h6>
+                                    <span className="venuePage_venue_category_titles marginNone">
+                                      {venue.amenities?.map(
+                                        (amenity, amenityIndex) => (
+                                          <div
+                                            key={amenityIndex}
+                                            className="amenityItem"
+                                          >
+                                            <img
+                                              src={`${APL_LINK}/assets/${amenity.image}`}
+                                              alt={amenity.amenities_name}
+                                            />
+                                            <label>
+                                              {amenity.amenities_name}
+                                            </label>
+                                          </div>
+                                        )
+                                      )}
+                                    </span>
+
+                                    <div className="TimingButtons2">
+                                      <div className="timesBtns">
+                                        <p>17:30</p>
+                                        <div className="childtime">
+                                          {venue.discount_upto}%
+                                        </div>
                                       </div>
                                     </div>
                                   </div>
                                 </div>
                               </div>
                             </div>
-                          </div>
+                          </Link>
                         </div>
                       ))}
                     </div>
