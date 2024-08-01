@@ -209,118 +209,116 @@ const Reviews = ({ review, totalReview }) => {
   return (
     <>
       <section className="reviews_section">
-        <div className="container">
-          <div className="review_wrapper row">
-            <h3>Reviews</h3>
-            <div className="col-4 mt-5 left_section_circularProgressBar">
-              <div className="circular_review_wrapper">
-                <div className="Circualr_progressBar_section">
-                  <CircularProgressbar
-                    value={normalizedValue}
-                    maxValue={1}
-                    text={`${totalReviews.rating}/5`}
-                    width={"120px"}
-                  />
-                  <span className="no_reviews">
-                    <h6>Fabulous</h6>
-                    <p>{totalReviews.total_reviews} reviews</p>
-                  </span>
-                </div>
-                <div className="text_rating_sectin">
-                  <span>
-                    <p>{totalReviews.total_location_rating_sum}/5</p>
-                    <p>Location</p>
-                  </span>
-                  <div
-                    className="vr"
-                    style={{
-                      width: "1px",
-                      background: "transparent",
-                      border: "1px solid black",
-                      padding: "0rem",
-                      marginRight: "0.2rem",
-                    }}
-                  ></div>
-                  <span>
-                    <p>{totalReviews.total_service_rating_sum}/5</p>
-                    <p>Service</p>
-                  </span>
-                  <div
-                    className="vr"
-                    style={{
-                      width: "1px",
-                      background: "transparent",
-                      border: "1px solid black",
-                      padding: "0rem",
-                      marginRight: "0.2rem",
-                    }}
-                  ></div>
-                  <span>
-                    <p>{totalReviews.total_ambience_rating_sum}/5</p>
-                    <p>Ambience</p>
-                  </span>
-                </div>
+        <h3>Reviews</h3>
+        <div className="review_wrapper row columnAfter576">
+          <div className="col-sm-6 mt-5 left_section_circularProgressBar">
+            <div className="circular_review_wrapper">
+              <div className="Circualr_progressBar_section">
+                <CircularProgressbar
+                  value={normalizedValue}
+                  maxValue={1}
+                  text={`${totalReviews.rating}/5`}
+                  width={"120px"}
+                />
+                <span className="no_reviews">
+                  <h6>Fabulous</h6>
+                  <p>{totalReviews.total_reviews} reviews</p>
+                </span>
+              </div>
+              <div className="text_rating_sectin">
+                <span>
+                  <p>{totalReviews.total_location_rating_sum}/5</p>
+                  <p>Location</p>
+                </span>
+                <div
+                  className="vr"
+                  style={{
+                    width: "1px",
+                    background: "transparent",
+                    border: "1px solid black",
+                    padding: "0rem",
+                    marginRight: "0.2rem",
+                  }}
+                ></div>
+                <span>
+                  <p>{totalReviews.total_service_rating_sum}/5</p>
+                  <p>Service</p>
+                </span>
+                <div
+                  className="vr"
+                  style={{
+                    width: "1px",
+                    background: "transparent",
+                    border: "1px solid black",
+                    padding: "0rem",
+                    marginRight: "0.2rem",
+                  }}
+                ></div>
+                <span>
+                  <p>{totalReviews.total_ambience_rating_sum}/5</p>
+                  <p>Ambience</p>
+                </span>
               </div>
             </div>
-            <div
-              className="vr"
-              style={{
-                width: "1px",
-                background: "transparent",
-                border: "1px solid black",
-                padding: "0rem",
-                marginRight: "0.2rem",
-              }}
-            ></div>
-            <div className=" col-4 d-flex" style={{ width: "50%" }}>
-              <div className="linear_progressBar_section">
-                <div className=" progressbar_text_wrapper">
-                  <div className="progress_container">
-                    <div
-                      className="progress_bar"
-                      style={{ width: `${getProgressPercentage(progress1)}%` }}
-                    ></div>
-                  </div>
-                  <div className="progress_text">5</div>
+          </div>
+          <div
+            className="vr d-none d-sm-block"
+            style={{
+              width: "1px",
+              background: "transparent",
+              border: "1px solid black",
+              padding: "0rem",
+              marginRight: "0.2rem",
+            }}
+          ></div>
+          <div className="col-sm-5 d-flex marginTop576">
+            <div className="linear_progressBar_section">
+              <div className=" progressbar_text_wrapper">
+                <div className="progress_text">5</div>
+                <div className="progress_container">
+                  <div
+                    className="progress_bar"
+                    style={{ width: `${getProgressPercentage(progress1)}%` }}
+                  ></div>
                 </div>
-                <div className="progressbar_text_wrapper">
-                  <div className="progress_container">
-                    <div
-                      className="progress_bar"
-                      style={{ width: `${getProgressPercentage(progress2)}%` }}
-                    ></div>
-                  </div>
-                  <div className="progress_text">4</div>
+              </div>
+              <div className="progressbar_text_wrapper">
+                <div className="progress_text">4</div>
+                <div className="progress_container">
+                  <div
+                    className="progress_bar"
+                    style={{ width: `${getProgressPercentage(progress2)}%` }}
+                  ></div>
                 </div>
+              </div>
 
-                <div className="progressbar_text_wrapper">
-                  <div className="progress_container">
-                    <div
-                      className="progress_bar"
-                      style={{ width: `${getProgressPercentage(progress3)}%` }}
-                    ></div>
-                  </div>
-                  <div className="progress_text">3</div>
+              <div className="progressbar_text_wrapper">
+                <div className="progress_text">3</div>
+                <div className="progress_container">
+                  <div
+                    className="progress_bar"
+                    style={{ width: `${getProgressPercentage(progress3)}%` }}
+                  ></div>
                 </div>
+              </div>
 
-                <div className="progressbar_text_wrapper">
-                  <div className="progress_container">
-                    <div
-                      className="progress_bar"
-                      style={{ width: `${getProgressPercentage(progress4)}%` }}
-                    ></div>
-                  </div>
-                  <div className="progress_text">2</div>
+              <div className="progressbar_text_wrapper">
+                <div className="progress_text">2</div>
+                <div className="progress_container">
+                  <div
+                    className="progress_bar"
+                    style={{ width: `${getProgressPercentage(progress4)}%` }}
+                  ></div>
                 </div>
+              </div>
 
-                <div className="progressbar_text_wrapper">
-                  <div className="progress_container">
-                    <div
-                      className="progress_bar"
-                      style={{ width: `${getProgressPercentage(progress5)}%` }}
-                    ></div>
-                  </div>
-                  <div className="progress_text">1</div>
+              <div className="progressbar_text_wrapper">
+                <div className="progress_text">1</div>
+                <div className="progress_container">
+                  <div
+                    className="progress_bar"
+                    style={{ width: `${getProgressPercentage(progress5)}%` }}
+                  ></div>
                 </div>
               </div>
             </div>

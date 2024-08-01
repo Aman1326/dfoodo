@@ -340,7 +340,7 @@ const DetailedVenue = () => {
             <div className="row m-0">
               <div className="col-lg-8 m-0 p-0">
                 <section className="image_gallery_section">
-                  <div className="row d-none d-lg-flex">
+                  <div className="row">
                     <div className="wrapper_carousel">
                       <Carousel
                         className="fade-img"
@@ -464,97 +464,90 @@ const DetailedVenue = () => {
                   </div>
                 </section>
                 <section className="venue_about_section">
-                  <div className="container">
-                    <div className="tabs row">
-                      <div className="tab-buttons col-lg-3">
-                        <button
-                          className={activeTab === "about" ? "active" : ""}
-                          onClick={() => setActiveTab("about")}
-                        >
-                          About
-                        </button>
-                        <button
-                          className={activeTab === "menu" ? "active" : ""}
-                          onClick={() => setActiveTab("menu")}
-                        >
-                          Menu
-                        </button>
-                        <button
-                          className={activeTab === "reviews" ? "active" : ""}
-                          onClick={() => setActiveTab("reviews")}
-                        >
-                          Reviews
-                        </button>
-                      </div>
-                      <div className="row">
-                        <div className="tab-content">
-                          {activeTab === "about" && (
-                            <div className="about_venue_tabContent">
-                              <h2>{detail.restaurant_name}</h2>
-                              <p>{detail.restaurant_full_adrress}</p>
-                              <h6>About this venue</h6>
-                              <ReadMore />
-                              <div className="venue_features_section row">
-                                {detail.amenities &&
-                                  detail.amenities.length > 0 &&
-                                  detail.amenities.map((features, idx) => (
-                                    <div
-                                      className="col-lg-3 venue_features_wrapper"
+                  <div className="tabs row">
+                    <div className="tab-buttons col-lg-3">
+                      <button
+                        className={activeTab === "about" ? "active" : ""}
+                        onClick={() => setActiveTab("about")}
+                      >
+                        About
+                      </button>
+                      <button
+                        className={activeTab === "menu" ? "active" : ""}
+                        onClick={() => setActiveTab("menu")}
+                      >
+                        Menu
+                      </button>
+                      <button
+                        className={activeTab === "reviews" ? "active" : ""}
+                        onClick={() => setActiveTab("reviews")}
+                      >
+                        Reviews
+                      </button>
+                    </div>
+                    <div className="tab-content">
+                      {activeTab === "about" && (
+                        <div className="about_venue_tabContent">
+                          <h2>{detail.restaurant_name}</h2>
+                          <p>{detail.restaurant_full_adrress}</p>
+                          <h6>About this venue</h6>
+                          <ReadMore />
+                          <div className="venue_features_section row">
+                            {detail.amenities &&
+                              detail.amenities.length > 0 &&
+                              detail.amenities.map((features, idx) => (
+                                <div
+                                  className="col-lg-3 venue_features_wrapper"
+                                  key={idx}
+                                >
+                                  <img
+                                    src={imageApi + features.image}
+                                    alt="{features.venue_feature_name}"
+                                  />
+                                  <p className="venue_feature_name">
+                                    {features.amenities_name}
+                                  </p>
+                                </div>
+                              ))}
+                          </div>
+                          <section className="Reviews_section">
+                            <div className="menu_wrapper">
+                              <div className="menu_wrapper_heading mt-2 mb-2">
+                                <h3>Restaurant Menu</h3>
+                              </div>
+                              <div className="menu_image_wrapper ">
+                                {detail.menuimages &&
+                                  detail.menuimages.length > 0 &&
+                                  detail.menuimages.map((menu_img, idx) => (
+                                    <img
                                       key={idx}
-                                    >
-                                      <img
-                                        src={imageApi + features.image}
-                                        alt="{features.venue_feature_name}"
-                                      />
-                                      <p className="venue_feature_name">
-                                        {features.amenities_name}
-                                      </p>
-                                    </div>
+                                      src={imageApi + menu_img.image_name}
+                                      alt="menu_img"
+                                    />
                                   ))}
                               </div>
-                              <section className="Reviews_section">
-                                <div className="menu_wrapper">
-                                  <div className="menu_wrapper_heading mt-2 mb-2">
-                                    <h3>Restaurant Menu</h3>
-                                  </div>
-                                  <div className="menu_image_wrapper ">
-                                    {detail.menuimages &&
-                                      detail.menuimages.length > 0 &&
-                                      detail.menuimages.map((menu_img, idx) => (
-                                        <img
-                                          key={idx}
-                                          src={imageApi + menu_img.image_name}
-                                          alt="menu_img"
-                                        />
-                                      ))}
-                                  </div>
-                                </div>
-                                <Reviews
-                                  review={reviews}
-                                  totalReview={detail}
-                                />
-                                <div className="see_more_reviews">
-                                  <Link onClick={() => setActiveTab("reviews")}>
-                                    See more reviews (
-                                    {detail.review && detail.review.length})
-                                    <img src={right} alt="right" />
-                                  </Link>
-                                </div>
-                              </section>
                             </div>
-                          )}
-                          {activeTab === "menu" && (
-                            <div>
-                              <Menu />
+                            <Reviews review={reviews} totalReview={detail} />
+                            <div className="see_more_reviews">
+                              <Link onClick={() => setActiveTab("reviews")}>
+                                See more reviews (
+                                {detail.review && detail.review.length})
+                                <img src={right} alt="right" />
+                              </Link>
                             </div>
-                          )}
-                          {activeTab === "reviews" && (
-                            <div>
-                              <Reviews review={reviews} totalReview={detail} />
-                            </div>
-                          )}
+                          </section>
                         </div>
-                      </div>
+                      )}
+                      {activeTab === "menu" && (
+                        <div>
+                          <Menu />
+                        </div>
+                      )}
+                      {activeTab === "reviews" && (
+                        <div>
+                          <Reviews review={reviews} totalReview={detail} />
+                        </div>
+                      )}
                     </div>
                   </div>
                 </section>
