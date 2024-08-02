@@ -294,3 +294,45 @@
     top: 0;
     z-index: 999;
 }
+
+.seachVenue_section_searchbar_headerlocation {
+    border: 1px solid lightgray;
+    width: 100%;
+    padding: 0.5rem 1rem !important;
+    font-family: "Roboto";
+    margin-bottom: 1rem;
+    border-radius: 5px;
+}
+
+.location_wrapper_headerModal {
+    color: var();
+    font-family: "Roboto";
+    background-color: var(--white);
+    color: var(--primary-color);
+    display: flex;
+    gap: 0.5rem;
+    margin: auto;
+    border-radius: 5px;
+    cursor: pointer;
+    padding: 0.3rem 1rem;
+    margin-bottom: 0.5rem;
+    align-items: center;
+
+    img {
+        background-color: var(--primary-color);
+        padding: 0.2rem 0.5rem;
+        border-radius: 50%;
+        aspect-ratio: 1;
+    }
+
+    h6 {
+        font-weight: 400;
+        margin-bottom: 0;
+    }
+}
+
+.popular_cities_header {
+    text-align: center;
+    font-family: "Roboto";
+    color: var(--secondary-black);
+}

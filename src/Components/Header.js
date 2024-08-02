@@ -11,6 +11,8 @@ import "react-international-phone/style.css";
 import qr from "../Assets/QR.png";
 import { useLocation } from "react-router-dom";
 import SearchBar from "./SearchBar";
+import searchIcon from "../Assets/searchIcon.svg.svg";
+import locationIcon from "../Assets/locationIconHeader.svg";
 function Header() {
   const [searchShow, setsearchShow] = useState(false);
   const [showLoginModal, setShowLoginModal] = useState(false);
@@ -76,6 +78,11 @@ function Header() {
     handleSearchShow();
   }, []);
 
+  // location modal
+  const [showLocationModal, setShowLocationModal] = useState(false);
+
+  const handleCloseLocationModal = () => setShowLocationModal(false);
+  const handleShowLocationModal = () => setShowLocationModal(true);
   return (
     <>
       <div className="upper_header_wrapper">
@@ -110,7 +117,7 @@ function Header() {
             <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll">
               <li class="nav-item">
                 {locationn.pathname !== "/onBoarding" && (
-                  <span className="dropdown1">
+                  <span className="dropdown1" onClick={handleShowLocationModal}>
                     <label>
                       <img src={location} alt="location" /> Bhopal
                     </label>
@@ -318,6 +325,31 @@ function Header() {
             <img src={qr} alt="altqr" />
           </div>
         </Modal.Body>
+      </Modal>
+
+      <Modal
+        show={showLocationModal}
+        onHide={handleCloseLocationModal}
+        className="modal-lg"
+      >
+        <Modal.Header>
+          <Modal.Title>
+            <div className="row section_modal_heading">
+              <div className="seachVenue_section_searchbar seachVenue_section_searchbar_headerlocation col-md-12">
+                <img src={searchIcon} alt="search icon" />
+                <input placeholder="Search for your city" />
+              </div>
+              <div className="d-flex col-lg-12 location_wrapper_headerModal">
+                <img src={locationIcon} alt="locationIcon" />
+                <h6>Detect my Location</h6>
+              </div>
+              <div className="popular_cities_header">
+                <h6>Popular Cities</h6>
+              </div>
+            </div>
+          </Modal.Title>
+        </Modal.Header>
+        <Modal.Body></Modal.Body>
       </Modal>
     </>
   );
