@@ -669,3 +669,19 @@
   top: 78px;
   align-self: flex-start;
 }
+
+
+.block_table {
+  background-color: #eee !important;
+  color: #666666 !important;
+}
+
+.block_table span {
+  color: #666666 !important;
+}
+
+.block_table:hover {
+  background-color: #eee !important;
+  color: #666666 !important;
+  cursor: not-allowed;
+}
