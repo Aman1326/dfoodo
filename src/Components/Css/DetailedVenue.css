@@ -414,9 +414,10 @@
 .time_discount_container_detailedVenue {
   display: flex !important;
   flex-wrap: wrap !important;
-  gap: 0.5rem !important;
+  gap: 0.6rem !important;
   cursor: pointer;
   justify-content: center;
+  padding: 0.1rem 0.2rem;
   overflow: auto;
   height: 338px;
 
@@ -424,6 +425,19 @@
     background-color: var(--secondary-black);
     color: var(--white);
   }
+}
+
+.time_discount_container_detailedVenue::-webkit-scrollbar {
+  width: 10px;
+}
+
+.time_discount_container_detailedVenue::-webkit-scrollbar-track {
+  background-color: var(--light-grey);
+}
+
+.time_discount_container_detailedVenue::-webkit-scrollbar-thumb {
+  background-color: var(--light-black);
+  border-radius: 10px;
 }
 
 .calendar_modal_heading {
