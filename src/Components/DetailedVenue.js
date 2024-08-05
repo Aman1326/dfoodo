@@ -138,7 +138,7 @@ const DetailedVenue = () => {
       let full_date = year + "-" + month + "-" + day;
 
       setSelectedDate(full_date);
-
+      
       handleFetchData(full_date);
     } else if (step_click === 2) {
       let make_data = data_for_update.split("~@~");
