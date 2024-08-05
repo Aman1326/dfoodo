@@ -2,35 +2,16 @@ import React, { useState, useEffect, useRef } from "react";
 import "./Css/DetailedVenue.css";
 import Header from "./Header";
 import { Link, useLocation } from "react-router-dom";
-import img1 from "../Assets/imageGallery3.png";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
-import featureImg1 from "../Assets/featureImg1.svg";
-import featureImg2 from "../Assets/featureImg2.svg";
-import featureImg3 from "../Assets/featureImg3.svg";
-import featureImg4 from "../Assets/featureImg.svg";
-import featureImg5 from "../Assets/featureImg5.svg";
-import featureImg6 from "../Assets/featureImg6.svg";
-import featureImg7 from "../Assets/featureImg7.svg";
-import featureImg8 from "../Assets/featureImg8.svg";
 import right from "../Assets/right_arrow.svg";
-import Weeding from "../Assets/wedding.png";
-import Event from "../Assets/event.png";
-import Engagement from "../Assets/engagment.png";
-import Birthday from "../Assets/birthday.png";
-import Yoga from "../Assets/yoga.png";
-import Photoshoot from "../Assets/photoshoot.png";
-import Successs from "../Assets/check.png";
+import $ from "jquery";
 import Reviews from "./Reviews";
-// import BrowseCity from "./BrowseCity";
-// import ListYourVenue from "./ListYourVenue";
 import Footer from "./Footer";
-import { Dropdown } from "primereact/dropdown";
 import { DateCalendar } from "@mui/x-date-pickers/DateCalendar";
 import dayjs from "dayjs";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-import { PhoneInput } from "react-international-phone";
 import leftArrowIcon from "../Assets/leftArrowIcon.svg";
 import rightArrowIcon from "../Assets/rightArrowIcon.svg";
 
@@ -51,34 +32,39 @@ import {
   server_post_data,
   get_restropage_webapp,
   get_all_timing_date_wise,
+  create_table_reservation_website,
   imageApi,
 } from "../ServiceConnection/serviceconnection.js";
-import { formatTimeintotwodigit } from "../CommonJquery/CommonJquery.js";
-
-let login_flag_res = "0";
+import {
+  formatTimeintotwodigit,
+  handleIaphabetnumberChange,
+  handleSuccess,
+  handleError,
+  formatDateStringdot,
+} from "../CommonJquery/CommonJquery.js";
 let customer_id = "1";
-let customer_name = "0";
-let customer_mobile_no = "0";
-let customer_email = "0";
+let customer_name = "shubham jain";
+let customer_mobile_no = "8120473991";
+let customer_email = "shubhamj@gmail.com";
 const DetailedVenue = () => {
   const location = useLocation();
-  const footerRef = useRef(null);
+  const [showLoader, setShowLoader] = useState(false);
   const currentUrl = location.pathname.substring(1);
   const [detail, setDetail] = useState([]);
   const [reviews, setreviews] = useState([]);
   const [breadcrumbs, setBreadcrumbs] = useState([]);
   // react tabs:
   const [activeTab, setActiveTab] = useState("about");
-
-  const [showLoader, setShowLoader] = useState(false);
   const [data, setData] = useState([]);
   const [selectedDate, setSelectedDate] = useState(null);
   const [selectedTime, setSelectedTime] = useState(null);
-  const [selectedGuest, setSelectedGuest] = useState(null);
+  const [selectedDiscount, setSelectedDiscount] = useState(0);
+  const [selectedGuest, setSelectedGuest] = useState(1);
   const [selectedChild, setselectedChild] = useState(0);
   const [selectedpet, setselectedpet] = useState(0);
   const [showModalKitchen, setShowModalKitchen] = useState(false);
   const [showModalKitchenMsg, setShowModalKitchenMsg] = useState("");
+  const [showmsgforbook, setshowmsgforbook] = useState("");
   const [TimeData, setTimeData] = useState([]);
   const [errorform, seterrorform] = useState({ error: false });
   const [errormsg, seterrormsg] = useState([]);
@@ -158,6 +144,7 @@ const DetailedVenue = () => {
       let make_data = data_for_update.split("~@~");
       setSelectedrtsd_idd(make_data[0]);
       setSelectedTime(make_data[1]);
+      setSelectedDiscount(make_data[2]);
       setSelectedGuest(null); // Set the selected guest count
       let click_by_popup = 0;
       TimeData.map((item) => {
@@ -228,78 +215,7 @@ const DetailedVenue = () => {
       </div>
     );
   }
-  //  array for venue features:
-
-  const time_discounts = [
-    {
-      time: [
-        "17:30",
-        "18:00",
-        "18:30",
-        "19:00",
-        "19:00",
-        "19:00",
-        "19:00",
-        "19:00",
-        ,
-        "19:00",
-        ,
-        "19:00",
-        ,
-        "19:00",
-        ,
-        "19:00",
-        ,
-        "19:00",
-        ,
-        "19:00",
-        "19:00",
-        "19:00",
-      ],
-      time_discount: [
-        "20%",
-        "15%",
-        "23%",
-        "8%",
-        "8%",
-        "8%",
-        "8%",
-        "8%",
-        "8%",
-        "8%",
-        ,
-        "8%",
-        ,
-        "8%",
-        ,
-        "8%",
-        ,
-        "8%",
-        "8%",
-      ],
-    },
-  ];
-  // Map the arrays into a single array of objects
-  const mappedTimeDiscounts = time_discounts[0].time.map((time, index) => {
-    return {
-      time: time || "N/A",
-      discount: time_discounts[0].time_discount[index] || "N/A",
-    };
-  });
-  const [eventSelected, setEventSelected] = useState(null);
-
-  const handleSelection = (selectedValue) => {
-    setEventSelected(selectedValue);
-  };
-
-  const [value, setValue] = useState(dayjs()); // Initialize with today's date or any initial value
-  const handleDateSelection = (newValue) => {
-    setValue(newValue); // Update state with selected date
-  };
-
-  // states for calendar model:
-
-  const [step, setStep] = useState(0);
+  const value_date = dayjs();
 
   const master_data_get = async () => {
     // setshowLoaderAdmin(true);
@@ -346,13 +262,12 @@ const DetailedVenue = () => {
   let child_length = 4;
   let pet_length = 4;
   let guest_length = 4;
-  const [selectedchild, setselectedchild] = useState(0);
   const [addCustomChild, setAddCustomChild] = useState(false);
   const [addCustomPet, setAddCustomPet] = useState(false);
   const [addCustomGuest, setAddCustomGuest] = useState(false);
   const SelectedChangeChild = (child_name, click_type) => {
     if (click_type === "1") {
-      setselectedchild(child_name);
+      setselectedChild(child_name);
       setAddCustomChild(false);
     } else {
       child_name.target.value = child_name.target.value.replace(/[^0-9]/g, "");
@@ -361,12 +276,12 @@ const DetailedVenue = () => {
       } else if (Number(child_name.target.value) < 1) {
         child_name.target.value = 1;
       }
-      setselectedchild(child_name.target.value);
+      setselectedChild(child_name.target.value);
     }
   };
   const addCustomChildInput = () => {
     setAddCustomChild(true);
-    setselectedchild("");
+    setselectedChild("");
   };
 
   const SelectedChangePet = (pet_name, click_type) => {
@@ -405,29 +320,65 @@ const DetailedVenue = () => {
     setAddCustomGuest(true);
     setSelectedGuest("");
   };
-  const [isFooterVisible, setIsFooterVisible] = useState(false);
-  const [isMobile, setIsMobile] = useState(window.innerWidth < 992);
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        setIsFooterVisible(entry.isIntersecting);
-      },
-      {
-        root: null,
-        threshold: 0.6, // 10% of the footer must be visible to trigger the callback
-      }
-    );
 
-    if (footerRef.current) {
-      observer.observe(footerRef.current);
+  const function_save = () => {
+    if ($("#checkSurfaceEnvironment-1").prop("checked") === true) {
+      //do something
+      sava_booking_data();
+    } else {
+      alert(
+        "Please read and agree to the terms and conditions before proceeding."
+      );
     }
+  };
+  const sava_booking_data = async () => {
+    setShowLoader(true);
 
-    return () => {
-      if (footerRef.current) {
-        observer.unobserve(footerRef.current);
-      }
-    };
-  }, []);
+    var fd_from = new FormData();
+
+    fd_from.append("reservation_id", "0");
+    fd_from.append("guest_mobile_no", customer_mobile_no);
+    fd_from.append("book_date", selectedDate);
+    fd_from.append("operational_time_detail_id", selectedrtsd_idd);
+    fd_from.append("operational_booking_time", selectedTime);
+    fd_from.append("booking_type", "2");
+    fd_from.append("realtime", "0");
+    if (selectedChild === "") {
+      fd_from.append("no_of_child", 0);
+    } else {
+      fd_from.append("no_of_child", selectedChild);
+    }
+    if (selectedpet === "") {
+      fd_from.append("no_of_pets", 0);
+    } else {
+      fd_from.append("no_of_pets", selectedpet);
+    }
+    fd_from.append("no_of_guest", selectedGuest);
+
+    fd_from.append("total_tablebooking", "0");
+    fd_from.append("dining_area_id", "0");
+    fd_from.append("reservation_comment", $("#order_comment").val());
+    fd_from.append("guest_name", customer_name);
+    fd_from.append("guest_email", customer_email);
+    fd_from.append("default_restaurant_id", detail.primary_id);
+
+    await server_post_data(create_table_reservation_website, fd_from)
+      .then((Response) => {
+        setShowLoader(false);
+        if (Response.data.error) {
+          handleError(Response.data.message);
+        } else {
+          handleclickbackstep(0, "");
+          setshowmsgforbook(Response.data.message);
+          currentStep(5);
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+        setShowLoader(false);
+      });
+  };
+
   const greyBackgroundClass = currentStep === 4 ? "greyBackground" : "";
   return (
     <>
@@ -766,7 +717,7 @@ const DetailedVenue = () => {
                         <div className="calenderDiv">
                           <LocalizationProvider dateAdapter={AdapterDayjs}>
                             <DateCalendar
-                              value={value}
+                              value={value_date}
                               onChange={(newValue) => {
                                 handleclickstep(1, newValue);
                               }}
@@ -798,7 +749,9 @@ const DetailedVenue = () => {
                                                 2,
                                                 item.primary_id +
                                                   "~@~" +
-                                                  item.start_time
+                                                  item.start_time +
+                                                  "~@~" +
+                                                  item.per_discount
                                               )
                                             }
                                           >
@@ -809,11 +762,9 @@ const DetailedVenue = () => {
                                                 )}
                                               </p>
                                             </div>
-                                            {item.per_discount_main > 0 ? (
+                                            {item.per_discount > 0 ? (
                                               <div className="discount_section">
-                                                <p>
-                                                  -{item.per_discount_main}%
-                                                </p>
+                                                <p>-{item.per_discount}%</p>
                                               </div>
                                             ) : (
                                               <div className="discount_section">
@@ -835,11 +786,9 @@ const DetailedVenue = () => {
                                                 )}
                                               </p>
                                             </div>
-                                            {item.per_discount_main > 0 ? (
+                                            {item.per_discount > 0 ? (
                                               <div className="discount_section">
-                                                <p>
-                                                  -{item.per_discount_main}%
-                                                </p>
+                                                <p>-{item.per_discount}%</p>
                                               </div>
                                             ) : (
                                               <div className="discount_section">
@@ -861,17 +810,6 @@ const DetailedVenue = () => {
                           <h6 className="calendar_modal_heading">
                             Number of Guests
                           </h6>
-                          {/* <div className="guests_calendar_modal">
-                          <p>2</p>
-                          <p>4</p>
-                          <p>6</p>
-                          <p>8</p>
-                          <p>10</p>
-                        </div>
-                        <input
-                          type="phone"
-                          placeholder="Enter no of guests.."
-                        /> */}
                           <div className="resrvDateSelect">
                             <ul>
                               {Array.from(
@@ -937,7 +875,7 @@ const DetailedVenue = () => {
                                 <li key={index}>
                                   <div
                                     className={`dateBox ${
-                                      selectedchild === index
+                                      selectedChild === index
                                         ? "selectedFormItems"
                                         : ""
                                     }`}
@@ -958,7 +896,7 @@ const DetailedVenue = () => {
                                   <input
                                     type="text"
                                     maxLength={3}
-                                    defaultValue={selectedchild}
+                                    defaultValue={selectedChild}
                                     name="custom_child_count"
                                     onBlur={(e) => SelectedChangeChild(e, "2")}
                                     placeholder="No. of Child"
@@ -1029,7 +967,11 @@ const DetailedVenue = () => {
                           </div>
 
                           <span>
-                            <Link onClick={() => setStep(3)}>Next</Link>
+                            <Link
+                              onClick={() => handleclickstep(3, selectedGuest)}
+                            >
+                              Next
+                            </Link>
                           </span>
                         </div>
                       )}
@@ -1041,28 +983,35 @@ const DetailedVenue = () => {
                           <div className="details_step_calendar_modal">
                             <span className="row">
                               <h6 className="col-4">Date: </h6>
-                              <p className="col-8">17.Nov.2024 | 17:50</p>
+                              <p className="col-8">
+                                {formatDateStringdot(selectedDate)} |{" "}
+                                {selectedTime}
+                              </p>
                             </span>
                             <span className="row">
                               <h6 className="col-4">Person: </h6>
-                              <p className="col-8">02</p>
+                              <p className="col-8">{selectedGuest}</p>
                             </span>
                             <span className="row">
                               <h6 className="col-4">Children: </h6>
-                              <p className="col-8">00</p>
+                              <p className="col-8">{selectedChild}</p>
                             </span>
                             <span className="row">
                               <h6 className="col-4">Pets: </h6>
-                              <p className="col-8">00</p>
+                              <p className="col-8">{selectedpet}</p>
                             </span>
                             <span className="row">
                               <h6 className="col-4">Discount: </h6>
-                              <p className="col-8">20%</p>
+                              <p className="col-8">{selectedDiscount}%</p>
                             </span>
 
                             <input
                               type="text"
                               placeholder="Add Instruction/Comment"
+                              name="order_comment"
+                              maxLength={300}
+                              id="order_comment"
+                              onInput={handleIaphabetnumberChange}
                             />
 
                             <span>
@@ -1070,13 +1019,15 @@ const DetailedVenue = () => {
                               <input
                                 type="checkbox"
                                 className="checkBoxUnique"
+                                name="checkSurfaceEnvironment-1"
+                                id="checkSurfaceEnvironment-1"
                               />
                               <label>
                                 I agree to the Terms & Conditions & Privacy
                                 Policy
                               </label>
                             </span>
-                            <Link onClick={() => setStep(4)}>Book Now</Link>
+                            <Link onClick={function_save}>Book Now</Link>
                           </div>
                         </div>
                       )}
@@ -1084,15 +1035,15 @@ const DetailedVenue = () => {
                         <div className="final_step_wrapper">
                           <h6>Reservation </h6>
                           <span>
-                            <p>17 No, 2024 • 7 Person • 9.00 PM</p>
+                            <p>
+                              {formatDateStringdot(selectedDate)} •{" "}
+                              {selectedGuest} Person • {selectedTime}
+                            </p>
                           </span>
 
                           <div className="confirmed_booking_span">
                             <h6>Booking Confirmed! </h6>
-                            <desc>
-                              Your reservation is now secured. Thank you for
-                              choosing us!
-                            </desc>
+                            <desc>{showmsgforbook}</desc>
                           </div>
                         </div>
                       )}
