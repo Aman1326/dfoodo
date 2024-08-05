@@ -111,7 +111,7 @@ const DetailedVenue = () => {
           seterrorform({ error: false });
         }
         setSelectedTime(null);
-        setSelectedGuest(null); // Set the selected guest count
+        setSelectedGuest(1); // Set the selected guest count
         setCurrentStep(2);
       })
       .catch((error) => {
@@ -122,7 +122,7 @@ const DetailedVenue = () => {
     if (step_click === 0) {
       setSelectedDate(null);
       setSelectedTime(null);
-      setSelectedGuest(null); // Set the selected guest count
+      setSelectedGuest(1); // Set the selected guest count
       setCurrentStep(1);
     } else if (step_click === 1) {
       let month = data_for_update.$M + 1;
@@ -145,7 +145,7 @@ const DetailedVenue = () => {
       setSelectedrtsd_idd(make_data[0]);
       setSelectedTime(make_data[1]);
       setSelectedDiscount(make_data[2]);
-      setSelectedGuest(null); // Set the selected guest count
+      setSelectedGuest(1); // Set the selected guest count
       let click_by_popup = 0;
       TimeData.map((item) => {
         if (make_data[1] >= item.last_arrival_time) {
@@ -167,11 +167,11 @@ const DetailedVenue = () => {
     if (step_click === 0) {
       setSelectedDate(null);
       setSelectedTime(null);
-      setSelectedGuest(null); // Set the selected guest count
+      setSelectedGuest(1); // Set the selected guest count
       setCurrentStep(1);
     } else if (step_click === 1) {
       setSelectedTime(data_for_update);
-      setSelectedGuest(null); // Set the selected guest count
+      setSelectedGuest(1); // Set the selected guest count
       setCurrentStep(2);
     } else if (step_click === 2) {
       setSelectedGuest(data_for_update); // Set the selected guest count
@@ -370,7 +370,7 @@ const DetailedVenue = () => {
         } else {
           handleclickbackstep(0, "");
           setshowmsgforbook(Response.data.message);
-          currentStep(5);
+          setCurrentStep(5);
         }
       })
       .catch((error) => {
