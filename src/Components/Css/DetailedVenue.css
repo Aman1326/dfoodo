@@ -417,6 +417,8 @@
   gap: 0.5rem !important;
   cursor: pointer;
   justify-content: center;
+  overflow: auto;
+  height: 338px;
 
   .discount_section p:hover {
     background-color: var(--secondary-black);
