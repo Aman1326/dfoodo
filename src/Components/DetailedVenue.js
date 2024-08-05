@@ -46,13 +46,14 @@ import quesMark from "../Assets/questionMark.svg";
 import avgpriceIcon from "../Assets/averagePriceDetailedVenue.svg";
 import Menu from "./Menu";
 import rightArrowWhite from "../Assets/rightArrow_white.svg";
-import view_photos from "../Assets/view_photos.svg";
 import AddBtn from "../Assets/addNewInput.svg";
 import {
   server_post_data,
   get_restropage_webapp,
+  get_all_timing_date_wise,
   imageApi,
 } from "../ServiceConnection/serviceconnection.js";
+import { formatTimeintotwodigit } from "../CommonJquery/CommonJquery.js";
 
 let login_flag_res = "0";
 let customer_id = "1";
@@ -63,21 +64,137 @@ const DetailedVenue = () => {
   const location = useLocation();
   const footerRef = useRef(null);
   const currentUrl = location.pathname.substring(1);
-  const [showLoginModal, setShowLoginModal] = useState(false);
-  const [showEmailLoginModal, setShowEmailLoginModal] = useState(false);
-  const [isPhoneLogin, setIsPhoneLogin] = useState(true); // State to toggle between phone and email
-  const [userNumber, setUserNumber] = useState("");
-  const [userEmail, setUserEmail] = useState("");
-  const [userName, setUserName] = useState("");
-  const [searchShow, setsearchShow] = useState(false);
   const [detail, setDetail] = useState([]);
   const [reviews, setreviews] = useState([]);
-  const [thankYouOpen, setthankYouOpen] = useState(false);
-  const [otpSent, setOtpSent] = useState(false); // State to manage OTP view
-  const [otp, setOtp] = useState(""); // State to manage the entered OTP
   const [breadcrumbs, setBreadcrumbs] = useState([]);
   // react tabs:
   const [activeTab, setActiveTab] = useState("about");
+
+  const [showLoader, setShowLoader] = useState(false);
+  const [data, setData] = useState([]);
+  const [selectedDate, setSelectedDate] = useState(null);
+  const [selectedTime, setSelectedTime] = useState(null);
+  const [selectedGuest, setSelectedGuest] = useState(null);
+  const [selectedChild, setselectedChild] = useState(0);
+  const [selectedpet, setselectedpet] = useState(0);
+  const [showModalKitchen, setShowModalKitchen] = useState(false);
+  const [showModalKitchenMsg, setShowModalKitchenMsg] = useState("");
+  const [TimeData, setTimeData] = useState([]);
+  const [errorform, seterrorform] = useState({ error: false });
+  const [errormsg, seterrormsg] = useState([]);
+  const [currentStep, setCurrentStep] = useState(1);
+  const [totalbookingtoday, settotalbookingtoday] = useState(0);
+  const [selectedrtsd_idd, setSelectedrtsd_idd] = useState(null);
+  const handleFetchData = async (date_for_book) => {
+    setShowLoader(true);
+    setData(null);
+    var form_data = new FormData();
+
+    form_data.append("special_date", date_for_book);
+    form_data.append("reservation_id", "0");
+    await server_post_data(get_all_timing_date_wise, form_data)
+      .then((Response) => {
+        setTimeData(Response.data.message.data_timedata);
+        setShowModalKitchenMsg(Response.data.message.kichan_lose_msg);
+        setShowLoader(false);
+        let online_booking_status = 0;
+        let start_stop_status = 0;
+        if (Response.data.message.get_date_off_date.length > 0) {
+          online_booking_status =
+            Response.data.message.get_date_off_date[0].online_booking_status;
+          start_stop_status =
+            Response.data.message.get_date_off_date[0].start_stop_status;
+        } else {
+          if (Response.data.message.get_date_off_on_day.length > 0) {
+            online_booking_status =
+              Response.data.message.get_date_off_on_day[0]
+                .online_booking_status;
+            start_stop_status =
+              Response.data.message.get_date_off_on_day[0].start_stop_status;
+          }
+        }
+        if (
+          Response.data.message.data_timedatadetails.length > 0 &&
+          online_booking_status === 0 &&
+          start_stop_status === 0
+        ) {
+          setData(Response.data.message.data_timedatadetails);
+          seterrorform({ error: true });
+        } else {
+          seterrormsg(Response.data.message.msg_for_no_show);
+          seterrorform({ error: false });
+        }
+        setSelectedTime(null);
+        setSelectedGuest(null); // Set the selected guest count
+        setCurrentStep(2);
+      })
+      .catch((error) => {
+        setShowLoader(false);
+      });
+  };
+  const handleclickstep = (step_click, data_for_update) => {
+    if (step_click === 0) {
+      setSelectedDate(null);
+      setSelectedTime(null);
+      setSelectedGuest(null); // Set the selected guest count
+      setCurrentStep(1);
+    } else if (step_click === 1) {
+      let month = data_for_update.$M + 1;
+      let day = data_for_update.$D;
+      let year = data_for_update.$y;
+
+      if (month < 10) {
+        month = "0" + month;
+      }
+      if (day < 10) {
+        day = "0" + day;
+      }
+      let full_date = year + "-" + month + "-" + day;
+
+      setSelectedDate(full_date);
+
+      handleFetchData(full_date);
+    } else if (step_click === 2) {
+      let make_data = data_for_update.split("~@~");
+      setSelectedrtsd_idd(make_data[0]);
+      setSelectedTime(make_data[1]);
+      setSelectedGuest(null); // Set the selected guest count
+      let click_by_popup = 0;
+      TimeData.map((item) => {
+        if (make_data[1] >= item.last_arrival_time) {
+          click_by_popup = 1;
+          setShowModalKitchen(true);
+        }
+      });
+      if (click_by_popup === 0) {
+        setCurrentStep(3);
+      }
+    } else if (step_click === 3) {
+      setSelectedGuest(data_for_update); // Set the selected guest count
+      setCurrentStep(4);
+    } else if (step_click === 4) {
+    }
+  };
+
+  const handleclickbackstep = (step_click, data_for_update) => {
+    if (step_click === 0) {
+      setSelectedDate(null);
+      setSelectedTime(null);
+      setSelectedGuest(null); // Set the selected guest count
+      setCurrentStep(1);
+    } else if (step_click === 1) {
+      setSelectedTime(data_for_update);
+      setSelectedGuest(null); // Set the selected guest count
+      setCurrentStep(2);
+    } else if (step_click === 2) {
+      setSelectedGuest(data_for_update); // Set the selected guest count
+      setCurrentStep(3);
+    } else if (step_click === 3) {
+      setSelectedGuest(data_for_update); // Set the selected guest count
+      setCurrentStep(4);
+    } else if (step_click === 4) {
+    }
+  };
 
   //readmore section:
   function ReadMore() {
@@ -231,9 +348,7 @@ const DetailedVenue = () => {
   let guest_length = 4;
   const [selectedchild, setselectedchild] = useState(0);
   const [addCustomChild, setAddCustomChild] = useState(false);
-  const [selectedpet, setselectedpet] = useState(0);
   const [addCustomPet, setAddCustomPet] = useState(false);
-  const [selectedGuest, setselectedGuest] = useState(0);
   const [addCustomGuest, setAddCustomGuest] = useState(false);
   const SelectedChangeChild = (child_name, click_type) => {
     if (click_type === "1") {
@@ -274,7 +389,7 @@ const DetailedVenue = () => {
   };
   const SelectedChangeGuest = (pet_name, click_type) => {
     if (click_type === "1") {
-      setselectedGuest(pet_name);
+      setSelectedGuest(pet_name);
       setAddCustomGuest(false);
     } else {
       pet_name.target.value = pet_name.target.value.replace(/[^0-9]/g, "");
@@ -283,12 +398,12 @@ const DetailedVenue = () => {
       } else if (Number(pet_name.target.value) < 1) {
         pet_name.target.value = 1;
       }
-      setselectedGuest(pet_name.target.value);
+      setSelectedGuest(pet_name.target.value);
     }
   };
   const addCustomGuestInput = () => {
     setAddCustomGuest(true);
-    setselectedGuest("");
+    setSelectedGuest("");
   };
   const [isFooterVisible, setIsFooterVisible] = useState(false);
   const [isMobile, setIsMobile] = useState(window.innerWidth < 992);
@@ -313,7 +428,7 @@ const DetailedVenue = () => {
       }
     };
   }, []);
-  const greyBackgroundClass = step === 4 ? "greyBackground" : "";
+  const greyBackgroundClass = currentStep === 4 ? "greyBackground" : "";
   return (
     <>
       <div className="detailed_venue_wrapper">
@@ -560,14 +675,16 @@ const DetailedVenue = () => {
                         <h4>Find a table</h4>
                         <p>Book for free</p>
                       </div>
-                      {step !== 4 && (
+                      {currentStep !== 5 && totalbookingtoday > 0 ? (
                         <span className="todays_booking">
-                          🔥 Already 8 bookings today
+                          🔥 Already {totalbookingtoday} bookings today
                         </span>
+                      ) : (
+                        <span>&nbsp;</span>
                       )}
                     </div>
                     <div className="calenday_modelSubHead">
-                      {step === 0 && (
+                      {currentStep === 1 && (
                         <div className="d-flex backgrwh">
                           <span className="steps firstStep">
                             <span className="d-flex">
@@ -578,7 +695,7 @@ const DetailedVenue = () => {
                           <div class="rhombus"></div>
                         </div>
                       )}
-                      {step === 1 && (
+                      {currentStep === 2 && (
                         <div className="d-flex">
                           <span className="steps">
                             <img src={calendarfrom} alt="calendarfrom" />
@@ -593,7 +710,7 @@ const DetailedVenue = () => {
                           <div class="rhombus"></div>
                         </div>
                       )}
-                      {step === 2 && (
+                      {currentStep === 3 && (
                         <div className="d-flex">
                           <span className="steps">
                             <img src={calendarfrom} alt="calendarfrom" />
@@ -614,7 +731,7 @@ const DetailedVenue = () => {
                           <div class="rhombus"></div>
                         </div>
                       )}
-                      {step === 3 && (
+                      {currentStep === 5 && (
                         <div className="d-flex">
                           <span className="steps">
                             <img src={calendarfrom} alt="calendarfrom" />
@@ -645,51 +762,101 @@ const DetailedVenue = () => {
                     <div
                       className={`calenday_modelScreen ${greyBackgroundClass}`}
                     >
-                      {step === 0 && (
+                      {currentStep === 1 && (
                         <div className="calenderDiv">
                           <LocalizationProvider dateAdapter={AdapterDayjs}>
                             <DateCalendar
                               value={value}
-                              onChange={() => {
-                                handleDateSelection();
-                                setStep(1);
+                              onChange={(newValue) => {
+                                handleclickstep(1, newValue);
                               }}
                               minDate={dayjs()} // Optional: Set minimum selectable date
                             />
                           </LocalizationProvider>
                         </div>
                       )}
-                      {step === 1 && (
+                      {currentStep === 2 && (
                         <div>
                           <h6 className="calendar_modal_heading">
                             Booking Time
                           </h6>
                           <div className="">
                             <span className="venuePage_venue_capacity_wrapper">
-                              {mappedTimeDiscounts &&
-                                mappedTimeDiscounts.length > 0 && (
-                                  <div className="time_discount_container_detailedVenue">
-                                    {mappedTimeDiscounts.map((item, idx) => (
-                                      <div
-                                        key={idx}
-                                        className="time_discount_section"
-                                        onClick={() => setStep(2)}
-                                      >
-                                        <div className="time_section">
-                                          <p>{item.time}</p>
-                                        </div>
-                                        <div className="discount_section">
-                                          <p>-{item.discount}</p>
-                                        </div>
-                                      </div>
-                                    ))}
-                                  </div>
-                                )}
+                              <div className="time_discount_container_detailedVenue">
+                                {data !== null &&
+                                  data.map((item, index) => {
+                                    if (item.start_stop_time_status === 0) {
+                                      if (
+                                        item.online_booking_time_status === 0
+                                      ) {
+                                        return (
+                                          <div
+                                            key={index}
+                                            className="time_discount_section"
+                                            onClick={() =>
+                                              handleclickstep(
+                                                2,
+                                                item.primary_id +
+                                                  "~@~" +
+                                                  item.start_time
+                                              )
+                                            }
+                                          >
+                                            <div className="time_section">
+                                              <p>
+                                                {formatTimeintotwodigit(
+                                                  item.start_time
+                                                )}
+                                              </p>
+                                            </div>
+                                            {item.per_discount_main > 0 ? (
+                                              <div className="discount_section">
+                                                <p>
+                                                  -{item.per_discount_main}%
+                                                </p>
+                                              </div>
+                                            ) : (
+                                              <div className="discount_section">
+                                                <p>N/A</p>
+                                              </div>
+                                            )}
+                                          </div>
+                                        );
+                                      } else {
+                                        return (
+                                          <div
+                                            key={index}
+                                            className="time_discount_section block_table"
+                                          >
+                                            <div className="time_section">
+                                              <p>
+                                                {formatTimeintotwodigit(
+                                                  item.start_time
+                                                )}
+                                              </p>
+                                            </div>
+                                            {item.per_discount_main > 0 ? (
+                                              <div className="discount_section">
+                                                <p>
+                                                  -{item.per_discount_main}%
+                                                </p>
+                                              </div>
+                                            ) : (
+                                              <div className="discount_section">
+                                                <p>N/A</p>
+                                              </div>
+                                            )}
+                                          </div>
+                                        );
+                                      }
+                                    }
+                                  })}
+                              </div>
                             </span>
                           </div>
                         </div>
                       )}
-                      {step === 2 && (
+                      {currentStep === 3 && (
                         <div className="wrapper_calendar_modal">
                           <h6 className="calendar_modal_heading">
                             Number of Guests
@@ -866,7 +1033,7 @@ const DetailedVenue = () => {
                           </span>
                         </div>
                       )}
-                      {step === 3 && (
+                      {currentStep === 4 && (
                         <div className="wrapper_calendar_modal">
                           <h6 className="calendar_modal_heading">
                             Review Details
@@ -913,7 +1080,7 @@ const DetailedVenue = () => {
                           </div>
                         </div>
                       )}
-                      {step === 4 && (
+                      {currentStep === 5 && (
                         <div className="final_step_wrapper">
                           <h6>Reservation </h6>
                           <span>

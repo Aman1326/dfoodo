@@ -1,10 +1,10 @@
 import axios from "axios";
 import { retrieveData } from "../LocalConnection/LocalConnection.js";
 const appauth_key = "logoacedamy@2029";
-let APL_LINK = "http://192.168.1.29:8000/";
-let Website_URL = "https://www.logoacademy.co/";
+let APL_LINK = "http://192.168.1.13:8000/";
+let Website_URL = "https://www.dfoodo.com/";
 let local_server_link_react = APL_LINK + "api/web_link/";
-
+let local_server_link_back = APL_LINK + "api/admin_link/";
 const retrievedAdminId = retrieveData("admin_id");
 const get_blog_data_website =
   local_server_link_react + "get_blog_data_website/";
@@ -28,6 +28,11 @@ const get_landingpage_webapp =
 
 const imageApi = APL_LINK + "assets/";
 
+const get_all_timing_date_wise =
+  local_server_link_back + "get_all_timing_date_wise";
+
+const create_table_reservation_website =
+  local_server_link_react + "create_table_reservation_website";
 const server_post_data = async (url_for, form_data) => {
   // const headers = {
   //   "Content-Type": "application/json",
@@ -61,4 +66,6 @@ export {
   save_favourite,
   get_filter_data,
   get_reservation_webapp,
+  get_all_timing_date_wise,
+  create_table_reservation_website,
 };
