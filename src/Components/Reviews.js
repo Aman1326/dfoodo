@@ -9,6 +9,8 @@ import { Link } from "react-router-dom";
 import { Modal, Button, Form } from "react-bootstrap";
 import { Rating } from "react-simple-star-rating";
 import { formatDateStringdot } from "../CommonJquery/CommonJquery.js";
+import redTick from "../Assets/red_tick_detailedVenue.svg";
+
 const Reviews = ({ review, totalReview }) => {
   const value = 6.6;
   const normalizedValue = value / 10;
@@ -312,6 +314,15 @@ const Reviews = ({ review, totalReview }) => {
               <p>{totalReviews.total_ambience_rating_sum}/5</p>
               <p>Ambience</p>
             </span>
+          </div>
+          <div className="red_tick_section">
+            <img src={redTick} alt="redTick" />
+            <div>
+              <p>
+                Real experiences from real diners <br /> Ratings and reviews can
+                only be left by guests who have booked with <br /> The Dfoodo
+              </p>
+            </div>
           </div>
           {reviews &&
             reviews.slice(0, reviewsToShow).map((review, index) => (

@@ -388,6 +388,7 @@ const DetailedVenue = () => {
   const greyBackgroundClass = currentStep === 4 ? "greyBackground" : "";
 
   const toggleModal = () => {
+    console.log("ssr");
     setIsModalVisible(!isModalVisible);
   };
   const closeModal = () => {
@@ -430,7 +431,7 @@ const DetailedVenue = () => {
   return (
     <>
       <div className="detailed_venue_wrapper">
-        <Header />
+        {!isMobile && <Header />}
         <section>
           <div className="container-lg mt-3 mb-1">
             <div className="venuePage_venueCategory_heading">

@@ -379,7 +379,8 @@
 
 .menu_image_wrapper {
   display: flex;
-  flex-wrap: wrap;
+  overflow: auto;
+  width: 100%;
   gap: 0.5rem;
 }
 
@@ -736,13 +737,13 @@
   margin-bottom: 3px;
 }
 
+.calenday_modelContainermobile {
+  position: absolute;
+}
+
 @media (max-width: 991px) {
   .EquiryButtonMobile {
     display: flex;
-  }
-
-  .calenday_modelContainer {
-    display: none;
   }
 
   .want_more_section {
