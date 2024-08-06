@@ -28,7 +28,7 @@ import avgpriceIcon from "../Assets/averagePriceDetailedVenue.svg";
 import Menu from "./Menu";
 import rightArrowWhite from "../Assets/rightArrow_white.svg";
 import AddBtn from "../Assets/addNewInput.svg";
-// import crossIcon from "../Assets/crossIcon.svg";
+import crossIcon from "../Assets/crossIcon.svg";
 import {
   server_post_data,
   get_restropage_webapp,
@@ -404,6 +404,29 @@ const DetailedVenue = () => {
     };
   }, []);
   const [isMobile, setIsMobile] = useState(window.innerWidth < 992);
+  const [isFooterVisible, setIsFooterVisible] = useState(false);
+  const footerRef = useRef(null);
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsFooterVisible(entry.isIntersecting);
+      },
+      {
+        root: null,
+        threshold: 0.6, // 10% of the footer must be visible to trigger the callback
+      }
+    );
+
+    if (footerRef.current) {
+      observer.observe(footerRef.current);
+    }
+
+    return () => {
+      if (footerRef.current) {
+        observer.unobserve(footerRef.current);
+      }
+    };
+  }, []);
   return (
     <>
       <div className="detailed_venue_wrapper">
@@ -498,6 +521,7 @@ const DetailedVenue = () => {
                               />
                             </div>
                           ))}
+                        <div></div>
                       </Carousel>
                       <div className="black_section_carousel">
                         <span className="first_row_black_section_carousel">
@@ -531,7 +555,7 @@ const DetailedVenue = () => {
                           </div>
                         </span>
                         <hr />
-                        <span className="first_row_black_section_carousel mb-4">
+                        <span className="last_line_black_section mb-4">
                           <div className="first_row_black_section_carousel">
                             <img src={timerClock} alt="timerClock" />
                             {detail.timing && detail.timing.length > 0 && (
@@ -605,16 +629,18 @@ const DetailedVenue = () => {
                               <div className="menu_wrapper_heading mt-2 mb-2">
                                 <h3>Restaurant Menu</h3>
                               </div>
-                              <div className="menu_image_wrapper ">
-                                {detail.menuimages &&
-                                  detail.menuimages.length > 0 &&
-                                  detail.menuimages.map((menu_img, idx) => (
-                                    <img
-                                      key={idx}
-                                      src={imageApi + menu_img.image_name}
-                                      alt="menu_img"
-                                    />
-                                  ))}
+                              <div className="row">
+                                <div className="menu_image_wrapper col-xs-3">
+                                  {detail.menuimages &&
+                                    detail.menuimages.length > 0 &&
+                                    detail.menuimages.map((menu_img, idx) => (
+                                      <img
+                                        key={idx}
+                                        src={imageApi + menu_img.image_name}
+                                        alt="menu_img"
+                                      />
+                                    ))}
+                                </div>
                               </div>
                             </div>
                             <Reviews review={reviews} totalReview={detail} />
@@ -642,6 +668,13 @@ const DetailedVenue = () => {
                   </div>
                 </section>
               </div>
+              <div
+                id="enquiryButtonMobile"
+                className="EquiryButtonMobile"
+                style={{ display: isFooterVisible ? "none" : " " }}
+              >
+                <button onClick={toggleModal}>Enquiry</button>
+              </div>
               <div className="col-lg-4">
                 <div className="sticky-container">
                   <div
@@ -658,7 +691,7 @@ const DetailedVenue = () => {
                     <div className="MobileCrossButton">
                       {" "}
                       <button onClick={closeModal} style={{ border: "none " }}>
-                        {/* <img src={crossIcon} alt="crossicon"></img>{" "} */}
+                        <img src={crossIcon} alt="crossicon"></img>{" "}
                       </button>
                     </div>
 
