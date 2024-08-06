@@ -23,17 +23,18 @@ function App() {
         <ScrollToTop />
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/restro/:catagory/:id" element={<Venue />} />
           <Route path="getHelp" element={<GetHelp />} />
           <Route path="aboutUs" element={<AboutUs />} />
           <Route path="registerMyVenue" element={<RegisterMyVenue />} />
-          <Route path="restro/restro_detail/:id" element={<DetailedVenue />} />
           <Route path="blogs" element={<Blog />} />
-          <Route path="blog/blog_detail/:id" element={<Blog2 />} />
           <Route path="profile" element={<ProfilePage />} />
           <Route path="onBoarding" element={<OnBoarding />} />
           <Route path="termsOfUse" element={<TermsOfuse />} />
           <Route path="privacyPolicy" element={<PrivacyPolicy />} />
+
+          <Route path="restro/:catagory/:id" element={<Venue />} />
+          <Route path="restro/restro_detail/:id" element={<DetailedVenue />} />
+          <Route path="blog/blog_detail/:id" element={<Blog2 />} />
         </Routes>
       </BrowserRouter>
     </div>
