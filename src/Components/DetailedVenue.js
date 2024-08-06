@@ -120,47 +120,52 @@ const DetailedVenue = () => {
       });
   };
   const handleclickstep = (step_click, data_for_update) => {
-    if (step_click === 0) {
-      setSelectedDate(null);
-      setSelectedTime(null);
-      setSelectedGuest(1); // Set the selected guest count
-      setCurrentStep(1);
-    } else if (step_click === 1) {
-      let month = data_for_update.$M + 1;
-      let day = data_for_update.$D;
-      let year = data_for_update.$y;
+    if (customer_id !== "0") {
+      if (step_click === 0) {
+        setSelectedDate(null);
+        setSelectedTime(null);
+        setSelectedGuest(1); // Set the selected guest count
+        setCurrentStep(1);
+      } else if (step_click === 1) {
+        let month = data_for_update.$M + 1;
+        let day = data_for_update.$D;
+        let year = data_for_update.$y;
 
-      if (month < 10) {
-        month = "0" + month;
-      }
-      if (day < 10) {
-        day = "0" + day;
-      }
-      let full_date = year + "-" + month + "-" + day;
-
-      setSelectedDate(full_date);
-
-      handleFetchData(full_date);
-    } else if (step_click === 2) {
-      let make_data = data_for_update.split("~@~");
-      setSelectedrtsd_idd(make_data[0]);
-      setSelectedTime(make_data[1]);
-      setSelectedDiscount(make_data[2]);
-      setSelectedGuest(1); // Set the selected guest count
-      let click_by_popup = 0;
-      TimeData.map((item) => {
-        if (make_data[1] >= item.last_arrival_time) {
-          click_by_popup = 1;
-          setShowModalKitchen(true);
+        if (month < 10) {
+          month = "0" + month;
         }
-      });
-      if (click_by_popup === 0) {
-        setCurrentStep(3);
+        if (day < 10) {
+          day = "0" + day;
+        }
+        let full_date = year + "-" + month + "-" + day;
+
+        setSelectedDate(full_date);
+
+        handleFetchData(full_date);
+      } else if (step_click === 2) {
+        let make_data = data_for_update.split("~@~");
+        setSelectedrtsd_idd(make_data[0]);
+        setSelectedTime(make_data[1]);
+        setSelectedDiscount(make_data[2]);
+        setSelectedGuest(1); // Set the selected guest count
+        let click_by_popup = 0;
+        TimeData.map((item) => {
+          if (make_data[1] >= item.last_arrival_time) {
+            click_by_popup = 1;
+            setShowModalKitchen(true);
+          }
+        });
+        if (click_by_popup === 0) {
+          setCurrentStep(3);
+        }
+      } else if (step_click === 3) {
+        setSelectedGuest(data_for_update); // Set the selected guest count
+        setCurrentStep(4);
+      } else if (step_click === 4) {
       }
-    } else if (step_click === 3) {
-      setSelectedGuest(data_for_update); // Set the selected guest count
-      setCurrentStep(4);
-    } else if (step_click === 4) {
+    } else {
+      var event = new CustomEvent("customEvent");
+      document.getElementById("login_check_jquery").dispatchEvent(event);
     }
   };
 
@@ -222,7 +227,7 @@ const DetailedVenue = () => {
     // setshowLoaderAdmin(true);
     const fd = new FormData();
     fd.append("current_url", "/" + currentUrl);
-    fd.append("restuarant_id", customer_id);
+    fd.append("customer_id", customer_id);
     await server_post_data(get_restropage_webapp, fd)
       .then((Response) => {
         console.log(Response.data.message.images);

@@ -1,4 +1,4 @@
-const send_null_value = "";
+const send_null_value = "0";
 
 // Storing data
 const storeData = (key, value) => {
@@ -20,25 +20,9 @@ const retrieveData = (key) => {
       }
       return value;
     }
-    return null;
+    return send_null_value;
   } catch (error) {
-    return null;
-  }
-};
-const storeData2 = (key, data) => {
-  try {
-    localStorage.setItem(key, JSON.stringify(data));
-  } catch (error) {
-    console.error("Error storing data in local storage:", error);
-  }
-};
-const retrieveData2 = (key) => {
-  try {
-    const storedData = localStorage.getItem(key);
-    return storedData ? JSON.parse(storedData) : null;
-  } catch (error) {
-    console.error("Error retrieving data from local storage:", error);
-    return null;
+    return send_null_value;
   }
 };
 
@@ -51,4 +35,4 @@ const removeData = (key) => {
   }
 };
 
-export { storeData, retrieveData, removeData, retrieveData2, storeData2 };
+export { storeData, retrieveData, removeData };

@@ -55,7 +55,7 @@
 }
 
 .phoneLoginModal_body {
-    height: 300px;
+    min-height: 300px;
     display: flex;
     padding: 2.5rem 2.5rem;
     flex-direction: column;
@@ -336,3 +336,16 @@
     font-family: "Roboto";
     color: var(--secondary-black);
 }
+
+.otp_update,
+.otp_section,
+.last_section {
+  display: none;
+}
+
+.width100per {
+  width: 100%;
+}
+.wifth_chckbox {
+    width: 20px !important;
+  }
