@@ -141,8 +141,7 @@ function Header() {
                 Response.data.message.data_guest[0].guest_lname;
               customer_mobile_no =
                 Response.data.message.data_guest[0].guest_mobile_no;
-              customer_email =
-                Response.data.message.data_guest[0].guest_email;
+              customer_email = Response.data.message.data_guest[0].guest_email;
 
               if (login_flag_res === "0") {
                 $(".hide_ssection_profile").hide();
@@ -214,12 +213,25 @@ function Header() {
   const handleOpenModal = () => {
     setShowModal(true);
   };
+
+  //mobile condition
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 992);
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 992);
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
   return (
     <>
       <div className="upper_header_wrapper">
         <div className="container-lg">
-          {location.pathname !== "/onBoarding" && (
-            <div className="upper_header_container">
+          {location.pathname !== "/onBoarding" && !isMobile && (
+            <div className="upper_header_container_mobile">
               {" "}
               <Link to="/registerMyVenue">List My Restaurant</Link>
               <Link to="/getHelp">Get help</Link>
@@ -277,6 +289,16 @@ function Header() {
                       </a>
                     )}
                   </div>
+                </li>
+                <li>
+                  {location.pathname !== "/onBoarding" && isMobile && (
+                    <div className="upper_header_container">
+                      {" "}
+                      <Link to="/registerMyVenue">List My Restaurant</Link>
+                      <Link to="/getHelp">Get help</Link>
+                      {/* <p>EN</p> */}
+                    </div>
+                  )}
                 </li>
                 <li class="nav-item"></li>
               </ul>
@@ -433,8 +455,8 @@ function Header() {
                   className="wifth_chckbox"
                 />
                 <p>
-                  I agree to Dfoodo Terms of Service Privacy Policy and
-                  Content Policy
+                  I agree to Dfoodo Terms of Service Privacy Policy and Content
+                  Policy
                 </p>
               </div>
               <Button

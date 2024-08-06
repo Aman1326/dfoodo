@@ -139,7 +139,6 @@
 }
 
 .venue_category_div {
-  margin-top: 1rem;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -237,7 +236,7 @@
 }
 
 .venue_discount_wrapper p {
-  margin-top: 1.4rem;
+  margin-top: 1rem;
   margin-bottom: 0;
   font-weight: 600;
   width: fit-content;
@@ -460,6 +459,7 @@
   border: none;
   background-color: transparent;
 }
+
 @media (max-width: 420px) {
   .how_it_works_content {
     padding: 1rem 0rem;
@@ -467,4 +467,20 @@
     text-align: center;
     justify-content: center;
   }
+}
+
+
+/* stykleendjnejkdnajkdnjan */
+.horizontal-scroll-container {
+  display: flex;
+  overflow-x: auto;
+  white-space: nowrap;
+  padding: 10px 0;
+  -webkit-overflow-scrolling: touch;
+  gap: 1rem;
+  padding-left: 0.5rem;
+}
+
+.horizontal-scroll-container::-webkit-scrollbar {
+  display: none;
 }

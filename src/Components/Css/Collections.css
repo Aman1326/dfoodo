@@ -91,3 +91,18 @@
         gap: 0.2rem;
     }
 }
+
+.scroll-container {
+    display: flex;
+    overflow-x: auto;
+    white-space: nowrap;
+    -webkit-overflow-scrolling: touch;
+    padding: 10px 0;
+}
+
+
+
+.city-item {
+    display: inline-block;
+    width: calc(45% - 10px);
+}

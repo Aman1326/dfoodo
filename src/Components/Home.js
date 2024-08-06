@@ -136,6 +136,9 @@ function Home() {
   const currentPaginationItems =
     restaurantByCountry &&
     restaurantByCountry.slice(indexOfFirstItem, indexOfLastItem);
+  const currentPaginationItemsMobile =
+    restaurantByCountry &&
+    restaurantByCountry.slice(indexOfFirstItem, indexOfLastItem);
 
   // pagination of popular venues city
   const [currentPaginationPageCity, setCurrentPaginationPageCity] = useState(1);
@@ -158,6 +161,9 @@ function Home() {
   const indexOfLastItemCity = currentPaginationPageCity * itemsPerPageCity;
   const indexOfFirstItemCity = indexOfLastItemCity - itemsPerPageCity;
   const currentPaginationItemsCity =
+    restaurantByCity &&
+    restaurantByCity.slice(indexOfFirstItemCity, indexOfLastItemCity);
+  const currentPaginationItemsCityMobile =
     restaurantByCity &&
     restaurantByCity.slice(indexOfFirstItemCity, indexOfLastItemCity);
 
@@ -207,6 +213,19 @@ function Home() {
         console.log(error);
       });
   };
+
+  //mobile condition
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 992);
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 992);
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
   return (
     <div>
       <Header />
@@ -255,25 +274,35 @@ function Home() {
                       <strong>See All</strong>
                     </p>
                   </Link>
-                  <div className="pagination_controls">
-                    <button
-                      onClick={handlePreviousPage}
-                      disabled={currentPaginationPage === 1}
-                    >
-                      <img src={leftArrow} alt="leftArrow" />
-                    </button>
-                    <button
-                      onClick={handleNextPage}
-                      disabled={currentPaginationPage === totalPaginationPages}
-                    >
-                      <img src={rigthArrow} alt="rightArrow" />
-                    </button>
-                  </div>
+                  {!isMobile && (
+                    <div className="pagination_controls">
+                      <button
+                        onClick={handlePreviousPage}
+                        disabled={currentPaginationPage === 1}
+                      >
+                        <img src={leftArrow} alt="leftArrow" />
+                      </button>
+                      <button
+                        onClick={handleNextPage}
+                        disabled={
+                          currentPaginationPage === totalPaginationPages
+                        }
+                      >
+                        <img src={rigthArrow} alt="rightArrow" />
+                      </button>
+                    </div>
+                  )}
+                  {isMobile && (
+                    <div className="pagination_controls">
+                      <Link>View More</Link>
+                    </div>
+                  )}
                 </span>
               </div>
               <div className="popularVenues">
                 <div className="venue_cards_container row mt-1">
-                  {currentPaginationItems &&
+                  {!isMobile &&
+                    currentPaginationItems &&
                     currentPaginationItems.length > 0 &&
                     currentPaginationItems.map((venue, index) => (
                       <div className="col-lg-3 col-md-4 col-sm-6" key={index}>
@@ -355,6 +384,76 @@ function Home() {
                         </div>
                       </div>
                     ))}
+                  <div className="horizontal-scroll-container">
+                    {isMobile &&
+                      currentPaginationItemsMobile &&
+                      currentPaginationItemsMobile.length > 0 &&
+                      currentPaginationItemsMobile.map((venue, index) => (
+                        <div className="col-lg-3 col-md-4 col-sm-6" key={index}>
+                          <div className="popularVenues_venue_container">
+                            <div className="venue_image_holder">
+                              <img
+                                src={imageApi + venue.restaurant_image}
+                                alt="venueImg"
+                              />
+                              <button
+                                className="heartBttnn"
+                                onClick={() =>
+                                  handleHeartClick(venue.primary_id)
+                                }
+                              >
+                                <img
+                                  src={
+                                    isFavorite(venue.primary_id)
+                                      ? HeartRed
+                                      : Heart
+                                  }
+                                  alt="Heart"
+                                  className="HeartHomeIcon"
+                                />
+                              </button>
+                            </div>
+                            <Link
+                              onClick={() =>
+                                handleLinkClick(
+                                  match_and_return_seo_link(venue.primary_id)
+                                )
+                              }
+                              style={{ textDecoration: "none" }}
+                            >
+                              <div className="venueDetailCOntainer">
+                                <div className="venue_category_div">
+                                  <span className="venue_category_titles">
+                                    <p>{venue.cuisine}&nbsp;</p>
+                                  </span>
+                                  <div className="rating_greenDiv">
+                                    <p>{venue.rating}</p>
+                                    <img src={star} alt="star" />
+                                  </div>
+                                </div>
+                                <div className="venue_address_wrapper">
+                                  <h6 className="venue_address_heading">
+                                    {venue.restaurant_name}
+                                  </h6>
+                                  <desc className="ellipsis">
+                                    {venue.restaurant_temorary_adrress}
+                                  </desc>
+                                  <span className="venue_capacity_wrapper">
+                                    <p>
+                                      {country == "India" ? "₹" : "$"}
+                                      {venue.restaurant_price} average price
+                                    </p>
+                                  </span>
+                                  <span className="venue_discount_wrapper">
+                                    <p>-{venue.discount_upto}%</p>
+                                  </span>
+                                </div>
+                              </div>
+                            </Link>
+                          </div>
+                        </div>
+                      ))}
+                  </div>
                 </div>
               </div>
             </div>
@@ -372,27 +471,30 @@ function Home() {
                       <strong>See All</strong>
                     </p>
                   </Link>
-                  <div className="pagination_controls">
-                    <button
-                      onClick={handlePreviousPageCity}
-                      disabled={currentPaginationPageCity === 1}
-                    >
-                      <img src={leftArrow} alt="leftArrow" />
-                    </button>
-                    <button
-                      onClick={handleNextPageCity}
-                      disabled={
-                        currentPaginationPageCity === totalPaginationPagesCity
-                      }
-                    >
-                      <img src={rigthArrow} alt="rightArrow" />
-                    </button>
-                  </div>
+                  {!isMobile && (
+                    <div className="pagination_controls">
+                      <button
+                        onClick={handlePreviousPage}
+                        disabled={currentPaginationPage === 1}
+                      >
+                        <img src={leftArrow} alt="leftArrow" />
+                      </button>
+                      <button
+                        onClick={handleNextPage}
+                        disabled={
+                          currentPaginationPage === totalPaginationPages
+                        }
+                      >
+                        <img src={rigthArrow} alt="rightArrow" />
+                      </button>
+                    </div>
+                  )}
                 </span>
               </div>
               <div className="popularVenues">
                 <div className="venue_cards_container row mt-1">
-                  {currentPaginationItemsCity &&
+                  {!isMobile &&
+                    currentPaginationItemsCity &&
                     currentPaginationItemsCity.length > 0 &&
                     currentPaginationItemsCity.map((venue, index) => (
                       <div className="col-lg-3 col-md-4 col-sm-6" key={index}>
@@ -412,6 +514,7 @@ function Home() {
                               animationScale={1.1}
                             /> */}
                             <button
+                              style={{ display: "none" }}
                               onClick={() => handleHeartClick(venue.primary_id)}
                             >
                               <img
@@ -472,6 +575,76 @@ function Home() {
                         </div>
                       </div>
                     ))}
+                  <div className="horizontal-scroll-container">
+                    {isMobile &&
+                      currentPaginationItemsCityMobile &&
+                      currentPaginationItemsCityMobile.length > 0 &&
+                      currentPaginationItemsCityMobile.map((venue, index) => (
+                        <div className="col-lg-3 col-md-4 col-sm-6" key={index}>
+                          <div className="popularVenues_venue_container">
+                            <div className="venue_image_holder">
+                              <img
+                                src={imageApi + venue.restaurant_image}
+                                alt="venueImg"
+                              />
+                              <button
+                                className="heartBttnn"
+                                onClick={() =>
+                                  handleHeartClick(venue.primary_id)
+                                }
+                              >
+                                <img
+                                  src={
+                                    isFavorite(venue.primary_id)
+                                      ? HeartRed
+                                      : Heart
+                                  }
+                                  alt="Heart"
+                                  className="HeartHomeIcon"
+                                />
+                              </button>
+                            </div>
+                            <Link
+                              onClick={() =>
+                                handleLinkClick(
+                                  match_and_return_seo_link(venue.primary_id)
+                                )
+                              }
+                              style={{ textDecoration: "none" }}
+                            >
+                              <div className="venueDetailCOntainer">
+                                <div className="venue_category_div">
+                                  <span className="venue_category_titles">
+                                    <p>{venue.cuisine}&nbsp;</p>
+                                  </span>
+                                  <div className="rating_greenDiv">
+                                    <p>{venue.rating}</p>
+                                    <img src={star} alt="star" />
+                                  </div>
+                                </div>
+                                <div className="venue_address_wrapper">
+                                  <h6 className="venue_address_heading">
+                                    {venue.restaurant_name}
+                                  </h6>
+                                  <desc className="ellipsis">
+                                    {venue.restaurant_temorary_adrress}
+                                  </desc>
+                                  <span className="venue_capacity_wrapper">
+                                    <p>
+                                      {country == "India" ? "₹" : "$"}
+                                      {venue.restaurant_price} average price
+                                    </p>
+                                  </span>
+                                  <span className="venue_discount_wrapper">
+                                    <p>-{venue.discount_upto}%</p>
+                                  </span>
+                                </div>
+                              </div>
+                            </Link>
+                          </div>
+                        </div>
+                      ))}
+                  </div>
                 </div>
               </div>
             </div>
