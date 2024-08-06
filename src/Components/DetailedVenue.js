@@ -28,7 +28,7 @@ import avgpriceIcon from "../Assets/averagePriceDetailedVenue.svg";
 import Menu from "./Menu";
 import rightArrowWhite from "../Assets/rightArrow_white.svg";
 import AddBtn from "../Assets/addNewInput.svg";
-import crossIcon from "../Assets/crossIcon.svg";
+// import crossIcon from "../Assets/crossIcon.svg";
 import {
   server_post_data,
   get_restropage_webapp,
@@ -658,7 +658,7 @@ const DetailedVenue = () => {
                     <div className="MobileCrossButton">
                       {" "}
                       <button onClick={closeModal} style={{ border: "none " }}>
-                        <img src={crossIcon} alt="crossicon"></img>{" "}
+                        {/* <img src={crossIcon} alt="crossicon"></img>{" "} */}
                       </button>
                     </div>
 
