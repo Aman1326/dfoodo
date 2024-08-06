@@ -1,73 +1,197 @@
 import React, { useState, useEffect } from "react";
 import "./Css/Header.css";
-import { Link } from "react-router-dom";
 import "react-international-phone/style.css";
 import phone from "../Assets/mobilePhone.svg";
-import location from "../Assets/locationIcon.svg";
+import locationsssss from "../Assets/locationIcon.svg";
 import mainLogo from "../Assets/mainLogo.png";
+import qr from "../Assets/QR.png";
 import { Modal, Button } from "react-bootstrap";
 import { PhoneInput } from "react-international-phone";
 import "react-international-phone/style.css";
-import qr from "../Assets/QR.png";
-import { useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import SearchBar from "./SearchBar";
 import searchIcon from "../Assets/searchIcon.svg.svg";
 import locationIcon from "../Assets/locationIconHeader.svg";
+import $ from "jquery";
+import {
+  handleAphabetsChange,
+  handleEmailChange,
+  handleError,
+  handleNumbersChange,
+  make_image_from_letter,
+  validateEmail,
+  validateMobile,
+} from "../CommonJquery/CommonJquery.js";
+import {
+  server_post_data,
+  customer_login,
+} from "../ServiceConnection/serviceconnection.js";
+import {
+  removeData,
+  retrieveData,
+  storeData,
+} from "../LocalConnection/LocalConnection.js";
+let login_flag_res = "0";
+let customer_id = "0";
+let customer_name = "0";
+let customer_mobile_no = "0";
+let customer_email = "0";
+let complete_status_one = "0";
 function Header() {
-  const [searchShow, setsearchShow] = useState(false);
+  customer_id = retrieveData("customer_id");
+  customer_name = retrieveData("customer_name");
+  const profileShow = customer_id !== "0";
+  const location = useLocation();
+  const navigate = useNavigate();
+  const [showLoaderAdmin, setshowLoaderAdmin] = useState(false);
   const [showLoginModal, setShowLoginModal] = useState(false);
-  const [showEmailLoginModal, setShowEmailLoginModal] = useState(false);
-  const [isPhoneLogin, setIsPhoneLogin] = useState(true); // State to toggle between phone and email
   const [userNumber, setUserNumber] = useState("");
-  const [userEmail, setUserEmail] = useState("");
-  const [otpSent, setOtpSent] = useState(false); // State to manage OTP view
+  const [searchShow, setsearchShow] = useState(false);
   const [otp, setOtp] = useState(""); // State to manage the entered OTP
+  const [presentotp, setpresentotp] = useState("");
+  const [isPhoneNumberValid, setisPhoneNumberValid] = useState(false);
+  const [isOTPValid, setisisOTPValid] = useState(false);
+
+  const login_section_res = async () => {
+    let vaild = "0";
+    let login_otp = $("#opt_user").val();
+    let user_email = $("#user_email").val();
+    let user_name = $("#user_name").val();
+    let user_last = $("#user_last").val();
+
+    if (login_flag_res === "0") {
+      if (!validateMobile(userNumber)) {
+        vaild = "1";
+      }
+    }
+
+    if (login_flag_res === "1") {
+      if (parseInt(login_otp) === "") {
+        vaild = "1";
+      } else if (parseInt(login_otp) !== parseInt(presentotp)) {
+        vaild = "1";
+      } else {
+        if (complete_status_one === "0") {
+          $(".otp_section").hide();
+          $(".last_section").show();
+          login_flag_res = "2";
+          return;
+        } else {
+          storeData("customer_id", customer_id);
+          storeData("customer_name", customer_name);
+          storeData("customer_mobile_no", customer_mobile_no);
+          storeData("customer_email", customer_email);
+          window.location.reload();
+        }
+      }
+    }
+    if (login_flag_res === "2") {
+      if ($.trim(user_name) === "" || $.trim(user_last) === "") {
+        vaild = "1";
+      }
+      if (user_email != "") {
+        if (!validateEmail(user_email)) {
+          vaild = "1";
+          handleError("Enter Vaild Email Id");
+          return;
+        }
+      }
+
+      if (!$("#user_checkbox").prop("checked")) {
+        vaild = "1";
+        handleError(
+          "Please agree to the terms and conditions before proceeding."
+        );
+        return;
+      }
+    }
+
+    if (vaild === "0") {
+      setshowLoaderAdmin(true);
+      const fd = new FormData();
+      fd.append("owner_moblie_no_without_zip", userNumber);
+      if (parseInt(login_flag_res) > 0) {
+        fd.append("click_type", "1");
+      } else {
+        fd.append("click_type", login_flag_res);
+      }
+      fd.append("email_id", user_email);
+      fd.append("owner_name", user_name);
+      fd.append("owner_lname", user_last);
+      await server_post_data(customer_login, fd)
+        .then((Response) => {
+          setshowLoaderAdmin(false);
+          if (Response.data.error) {
+            handleError(Response.data.message);
+          } else {
+            if (Response.data.message.data_guest.length > 0) {
+              setpresentotp(Response.data.message.guest_otp);
+              if (
+                Response.data.message.data_guest[0].guest_fname === "" ||
+                Response.data.message.data_guest[0].guest_fname === null
+              ) {
+                complete_status_one = "0";
+              } else {
+                complete_status_one = "1";
+              }
+              customer_id = Response.data.message.data_guest[0].primary_id;
+              customer_name =
+                Response.data.message.data_guest[0].guest_fname +
+                " " +
+                Response.data.message.data_guest[0].guest_lname;
+              customer_mobile_no =
+                Response.data.message.data_guest[0].guest_mobile_no;
+              customer_email =
+                Response.data.message.data_guest[0].guest_email;
+
+              if (login_flag_res === "0") {
+                $(".hide_ssection_profile").hide();
+                $(".otp_section").show();
+                login_flag_res = "1";
+              } else {
+                storeData("customer_id", customer_id);
+                storeData("customer_name", customer_name);
+                storeData("customer_mobile_no", customer_mobile_no);
+                storeData("customer_email", customer_email);
+                window.location.reload();
+              }
+            }
+          }
+        })
+        .catch((error) => {
+          setshowLoaderAdmin(false);
+        });
+    } else {
+      if (login_flag_res === "0") {
+        handleError("Enter Vaild Mobile No");
+      } else if (login_flag_res === "1") {
+        handleError("Enter Vaild OTP");
+      } else {
+        handleError("Enter Vaild Full name");
+      }
+    }
+  };
+
+  $("#login_check_jquery").on("customEvent", function () {
+    handleOpenLoginModal();
+  });
+
+  const confirmVIP = () => {
+    removeData();
+    navigate("/");
+  };
 
   const handleCloseLoginModal = () => setShowLoginModal(false);
   const handleOpenLoginModal = () => {
+    login_flag_res = "0";
+    $(".hide_ssection_profile").show();
+    $(".otp_section").hide();
+    $(".last_section").hide();
     setShowLoginModal(true);
-  };
-  const handleLoginSubmit = () => {
-    // Assume sending OTP is successful
-    if (
-      (isPhoneLogin && userNumber.length >= 10) ||
-      (!isPhoneLogin && userEmail.includes("@"))
-    ) {
-      setOtpSent(true);
-    }
-  };
-  const handleOtpSubmit = () => {
-    // Handle the OTP confirmation logic here
-    // For example, verify the OTP
-    handleCloseLoginModal();
-  };
-  const isPhoneNumberValid = userNumber.length >= 10;
-  const isEmailValid = userEmail.includes("@");
-
-  // user registration modal after logging in after phone otp
-  const [showRegistrationModal, setShowRegistrationModal] = useState(false);
-  const handleCloseRegistrationModal = () => setShowRegistrationModal(false);
-  const handleShowRegistrationModal = () => setShowRegistrationModal(true);
-
-  const [selectedOption, setSelectedOption] = useState("");
-  const [isOpen, setIsOpen] = useState(false);
-
-  //download app qr modal
-  const [showModal, setShowModal] = useState(false);
-
-  const handleOpenModal = () => {
-    setShowModal(true);
-  };
-
-  //fetch location of the app:
-  const locationn = useLocation();
-  const [profileBtn, setProfileBTn] = useState(false);
-  const loginProfileClick = () => {
-    setProfileBTn(true);
   };
 
   const handleSearchShow = () => {
-    if (locationn.pathname.includes("restro")) {
+    if (location.pathname.includes("restro")) {
       setsearchShow(true);
     } else {
       setsearchShow(false);
@@ -83,11 +207,18 @@ function Header() {
 
   const handleCloseLocationModal = () => setShowLocationModal(false);
   const handleShowLocationModal = () => setShowLocationModal(true);
+
+  //download app qr modal
+  const [showModal, setShowModal] = useState(false);
+
+  const handleOpenModal = () => {
+    setShowModal(true);
+  };
   return (
     <>
       <div className="upper_header_wrapper">
         <div className="container-lg">
-          {locationn.pathname !== "/onBoarding" && (
+          {location.pathname !== "/onBoarding" && (
             <div className="upper_header_container">
               {" "}
               <Link to="/registerMyVenue">List My Restaurant</Link>
@@ -116,10 +247,10 @@ function Header() {
           <div class="collapse navbar-collapse" id="navbarScroll">
             <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll">
               <li class="nav-item">
-                {locationn.pathname !== "/onBoarding" && (
+                {location.pathname !== "/onBoarding" && (
                   <span className="dropdown1" onClick={handleShowLocationModal}>
                     <label>
-                      <img src={location} alt="location" /> Bhopal
+                      <img src={locationsssss} alt="location" /> Bhopal
                     </label>
                   </span>
                 )}
@@ -137,7 +268,7 @@ function Header() {
               <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll">
                 <li class="nav-item dropdown">
                   <div className="mobile_phone_container">
-                    {locationn.pathname !== "/onBoarding" && (
+                    {location.pathname !== "/onBoarding" && (
                       <a
                         class="nav-link dropdown-toggle"
                         onClick={handleOpenModal}
@@ -149,21 +280,20 @@ function Header() {
                 </li>
                 <li class="nav-item"></li>
               </ul>
-              {profileBtn ? (
-                false && (
-                  <Link
-                    className="loginButton"
-                    style={{
-                      textDecoration: "none",
-                      alignItems: "center",
-                      width: "fitContent",
-                    }}
-                    onClick={handleOpenLoginModal}
-                  >
-                    Log in
-                  </Link>
-                )
-              ) : (
+              {!profileShow && (
+                <Link
+                  className="loginButton"
+                  style={{
+                    textDecoration: "none",
+                    alignItems: "center",
+                    width: "fitContent",
+                  }}
+                  onClick={handleOpenLoginModal}
+                >
+                  <p>Login</p>
+                </Link>
+              )}
+              {profileShow && (
                 <Link
                   className="loginButton"
                   style={{
@@ -176,7 +306,13 @@ function Header() {
                   }}
                   to="/profile"
                 >
-                  RS
+                  <img
+                    src={make_image_from_letter(customer_name)}
+                    onError={(e) => {
+                      e.target.src = mainLogo; // Provide the path to your fallback image
+                    }}
+                    alt={customer_name}
+                  />
                 </Link>
               )}
             </form>
@@ -191,39 +327,26 @@ function Header() {
       >
         <Modal.Header closeButton></Modal.Header>
         <Modal.Body className="phoneLoginModal_body">
-          {!otpSent ? (
-            <>
-              <h6>Enter your Phone Number</h6>
-              <p>You will receive a text message to verify your account.</p>
-              <PhoneInput
-                id="phone"
-                name="phone"
-                placeholder="Phone Number"
-                className="mt-2"
-                defaultCountry="in"
-                value={userNumber}
-                onChange={(phone) => setUserNumber(phone)}
-              />
-            </>
-          ) : (
-            <>
-              <h6>Enter the OTP</h6>
-              <p>Please enter the OTP sent to your phone.</p>
-              <input
-                type="text"
-                id="otp"
-                name="otp"
-                placeholder="OTP"
-                className="mt-2 form-control"
-                value={otp}
-                onChange={(e) => setOtp(e.target.value)}
-              />
-            </>
-          )}
-          {!otpSent ? (
+          <div className="hide_ssection_profile">
+            <h6>Enter your Phone Number</h6>
+            <p>You will receive a text message to verify your account.</p>
+            <PhoneInput
+              id="phone"
+              name="phone"
+              placeholder="Phone Number"
+              className="mt-2"
+              defaultCountry="in"
+              value={userNumber}
+              onChange={(phone) => {
+                setUserNumber(phone);
+                setisPhoneNumberValid(phone.length >= 10);
+              }}
+              regions={["asia"]}
+              onlyCountries={["in"]}
+            />
             <Button
-              className="PhoneloginButton"
-              onClick={handleLoginSubmit}
+              className="PhoneloginButton mt-5 width100per"
+              onClick={() => login_section_res()}
               style={{
                 backgroundColor: !isPhoneNumberValid ? "grey" : "",
                 borderColor: !isPhoneNumberValid ? "grey" : "",
@@ -233,80 +356,101 @@ function Header() {
             >
               Continue
             </Button>
-          ) : (
+          </div>
+          <div className="otp_section">
+            <h6>Enter the OTP</h6>
+            <p>Please enter the OTP sent to your phone.</p>
+            <input
+              type="text"
+              id="opt_user"
+              name="opt_user"
+              placeholder="Enter verification code"
+              className="mt-2 form-control border0"
+              onInput={handleNumbersChange}
+              maxLength={6}
+              value={otp}
+              onChange={(e) => {
+                setOtp(e.target.value);
+                setisisOTPValid(
+                  parseInt(e.target.value) === parseInt(presentotp)
+                );
+              }}
+            />
             <Button
-              className="PhoneloginButton"
-              onClick={() => {
-                handleOtpSubmit();
-                handleShowRegistrationModal();
-              }}
+              className="PhoneloginButton mt-5 width100per"
+              onClick={() => login_section_res()}
               style={{
-                backgroundColor: otp.length < 4 ? "grey" : "",
-                borderColor: otp.length < 4 ? "grey" : "",
-                cursor: otp.length < 4 ? "not-allowed" : "pointer",
+                backgroundColor: !isOTPValid ? "grey" : "",
+                borderColor: !isOTPValid ? "grey" : "",
+                cursor: !isOTPValid ? "not-allowed" : "pointer",
               }}
-              disabled={otp.length < 4}
-            >
-              Confirm OTP
-            </Button>
-          )}
-        </Modal.Body>
-      </Modal>
-
-      <Modal
-        className="modal-md"
-        centered
-        show={showRegistrationModal}
-        onHide={handleCloseRegistrationModal}
-      >
-        <Modal.Header closeButton></Modal.Header>
-        <Modal.Body className="useRegistration_body">
-          <h6>Welcome to Dfoodo </h6>
-          <p>Create your account and quickly make a reservation </p>
-          <form className="userRegistration_form">
-            <div className="mb-3">
-              <input
-                type="text"
-                className="form-control"
-                placeholder=" First Name"
-              />
-            </div>
-            <div className="mb-3">
-              <input
-                type="text"
-                placeholder="  Last Name"
-                className="form-control"
-              />
-            </div>
-            <div className="mb-3 userRegistration_phoneNumber">
-              <PhoneInput
-                id="phoneNumberUserRegistration"
-                placeholder="Phone Number"
-                className="form-control"
-                defaultCountry="in"
-                value={userNumber}
-                onChange={(phone) => setUserNumber(phone)}
-                //
-
-                name="phone"
-              />
-            </div>
-            <div className="mb-3 dfoodoterms_agreement">
-              <input type="checkbox" />
-              <p>
-                I agree to Dfoodo Terms of Service Privacy Policy and Content
-                Policy
-              </p>
-            </div>
-            <button
-              className="userResgistrationContinuebtn"
-              onClick={loginProfileClick}
+              disabled={!isOTPValid}
             >
               Continue
-            </button>
-          </form>
+            </Button>
+          </div>
+          <div className="last_section">
+            <h6>Welcome to Dfoodo </h6>
+            <p>Create your account and quickly make a reservation </p>
+            <form className="userRegistration_form">
+              <div className="mb-3">
+                <input
+                  type="text"
+                  className="form-control"
+                  id="user_name"
+                  name="user_name"
+                  placeholder="First Name"
+                  maxLength={50}
+                  onInput={handleAphabetsChange}
+                />
+              </div>
+              <div className="mb-3">
+                <input
+                  type="text"
+                  id="user_last"
+                  name="user_last"
+                  className="form-control"
+                  placeholder="  Last Name"
+                  maxLength={50}
+                  onInput={handleAphabetsChange}
+                />
+              </div>
+              <input
+                type="text"
+                id="user_email"
+                name="user_email"
+                className="form-control"
+                placeholder="Email ID"
+                maxLength={100}
+                onInput={handleEmailChange}
+              />
+              <div className="mb-3 dfoodoterms_agreement ">
+                <input
+                  type="checkbox"
+                  id="user_checkbox"
+                  name="user_checkbox"
+                  value="0"
+                  className="wifth_chckbox"
+                />
+                <p>
+                  I agree to Dfoodo Terms of Service Privacy Policy and
+                  Content Policy
+                </p>
+              </div>
+              <Button
+                className="PhoneloginButton mt-5 width100per"
+                onClick={() => login_section_res()}
+                style={{
+                  cursor: "pointer",
+                }}
+              >
+                Complete Profile
+              </Button>
+            </form>
+          </div>
         </Modal.Body>
       </Modal>
+      <div id="login_check_jquery"></div>
 
       <Modal
         show={showModal}

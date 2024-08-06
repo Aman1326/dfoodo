@@ -1,7 +1,6 @@
 import React from "react";
 import "./Css/AboutUs.css";
 import Header from "./Header";
-import bg from "../Assets/getHelpBg.png";
 import image from "../Assets/aboutus.png";
 import Footer from "./Footer";
 import DownloadApp from "./DownloadApp";

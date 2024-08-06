@@ -33,6 +33,7 @@ const get_all_timing_date_wise =
 
 const create_table_reservation_website =
   local_server_link_react + "create_table_reservation_website";
+const customer_login = local_server_link_react + "guest_login/";
 const server_post_data = async (url_for, form_data) => {
   // const headers = {
   //   "Content-Type": "application/json",
@@ -68,4 +69,5 @@ export {
   get_reservation_webapp,
   get_all_timing_date_wise,
   create_table_reservation_website,
+  customer_login,
 };

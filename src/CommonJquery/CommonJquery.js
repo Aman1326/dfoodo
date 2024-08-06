@@ -745,25 +745,36 @@ const generateWeekdays = () => {
   return nextWeekdays;
 };
 
-
 const handleDateChange = (e) => {
   e.target.value = e.target.value.replace(/[^0-9-]/g, ""); // Assuming you want to allow only digits and hyphen for date
 };
 
 const inputdateformateChange = (input_data) => {
   const inputDate = new Date(input_data);
+
   const daysOfWeek = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
   const dayOfWeek = daysOfWeek[inputDate.getDay()];
 
-  const options = { year: "numeric", month: "short", day: "2-digit" };
+  const day = inputDate.getDate();
+  const month = inputDate.toLocaleString("en-US", { month: "long" });
+  const year = inputDate.getFullYear();
 
-  const formattedDate = `${dayOfWeek}, ${inputDate.toLocaleDateString(
-    "en-US",
-    options
-  )}`;
+  const getOrdinalSuffix = (day) => {
+    if (day > 3 && day < 21) return "th";
+    switch (day % 10) {
+      case 1: return "st";
+      case 2: return "nd";
+      case 3: return "rd";
+      default: return "th";
+    }
+  };
+
+  const dayWithSuffix = `${day}${getOrdinalSuffix(day)}`;
+  const formattedDate = `${dayWithSuffix} ${month}, ${year}`;
 
   return formattedDate;
 };
+
 const inputdateformateChangeyear = (input_data = "") => {
   let inputDate = new Date();
   if (input_data !== "") {
@@ -827,20 +838,17 @@ const DateormateBlogChange = (originalDateString) => {
   return formattedDateString;
 };
 
-
-
 const handleSuccess = (message_show, show_msg_data = 0) => {
-  
-    toast.success(message_show, {
-      position: "top-right",
-      autoClose: 3000, // Duration in milliseconds
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      className: "custom-toast-success",
-    });
-  
+  toast.success(message_show, {
+    position: "top-right",
+    autoClose: 3000, // Duration in milliseconds
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    className: "custom-toast-success",
+  });
+
   if (show_msg_data === 1) {
     handleSuccessSession("", "");
   }
@@ -937,14 +945,14 @@ const formatTimeFormatcustom = (custom_input) => {
 const make_image_from_letter = (name) => {
   if (name == null) return;
   name = getInitials(name);
-  const size = 25;
-  const color = "#666666";
+  const size = 45;
+  const color = "#f58634";
   const canvas = document.createElement("canvas");
   const context = canvas.getContext("2d");
   canvas.width = canvas.height = size;
 
   context.fillStyle = "#ffffff";
-  context.fillStyle = `${color}50`;
+  context.fillStyle = `${color} 50`;
   context.beginPath();
   context.arc(size / 2, size / 2, size / 2, 0, Math.PI * 2);
   context.closePath();
@@ -983,7 +991,6 @@ const handleCallClick = (call_click) => {
 const cencelChanges = () => {
   window.location.reload();
 };
-
 
 export {
   handlecoordinatory_no,
@@ -1038,5 +1045,6 @@ export {
   calculateMaxDate,
   calculateMinJoinDate,
   calculateMaxJoinDate,
-  handleError2
+  handleError2,
+  validateEmail,
 };
