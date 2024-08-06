@@ -28,6 +28,7 @@ import avgpriceIcon from "../Assets/averagePriceDetailedVenue.svg";
 import Menu from "./Menu";
 import rightArrowWhite from "../Assets/rightArrow_white.svg";
 import AddBtn from "../Assets/addNewInput.svg";
+import crossIcon from "../Assets/crossIcon.svg";
 import {
   server_post_data,
   get_restropage_webapp,
@@ -378,8 +379,26 @@ const DetailedVenue = () => {
         setShowLoader(false);
       });
   };
-
+  const [isModalVisible, setIsModalVisible] = useState(false);
   const greyBackgroundClass = currentStep === 4 ? "greyBackground" : "";
+
+  const toggleModal = () => {
+    setIsModalVisible(!isModalVisible);
+  };
+  const closeModal = () => {
+    setIsModalVisible(false);
+  };
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 992);
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 992);
   return (
     <>
       <div className="detailed_venue_wrapper">
@@ -620,433 +639,458 @@ const DetailedVenue = () => {
               </div>
               <div className="col-lg-4">
                 <div className="sticky-container">
-                  <div className="calenday_modelContainer ">
-                    <div className="calenday_model-section">
-                      <div className="calendy_modelHead">
-                        <h4>Find a table</h4>
-                        <p>Book for free</p>
-                      </div>
-                      {currentStep !== 5 && totalbookingtoday > 0 ? (
-                        <span className="todays_booking">
-                          🔥 Already {totalbookingtoday} bookings today
-                        </span>
-                      ) : (
-                        <span>&nbsp;</span>
-                      )}
+                  <div
+                    className={
+                      isMobile
+                        ? `calenday_modelContainermobile ${
+                            isModalVisible ? "show" : ""
+                          }`
+                        : `calenday_modelContainer ${
+                            isModalVisible ? "show" : ""
+                          }`
+                    }
+                  >
+                    <div className="MobileCrossButton">
+                      {" "}
+                      <button onClick={closeModal} style={{ border: "none " }}>
+                        <img src={crossIcon} alt="crossicon"></img>{" "}
+                      </button>
                     </div>
-                    <div className="calenday_modelSubHead">
-                      {currentStep === 1 && (
-                        <div className="d-flex backgrwh">
-                          <span className="steps firstStep">
-                            <span className="d-flex">
+
+                    <div className="calenday_modelContainer ">
+                      <div className="calenday_model-section">
+                        <div className="calendy_modelHead">
+                          <h4>Find a table</h4>
+                          <p>Book for free</p>
+                        </div>
+                        {currentStep !== 5 && totalbookingtoday > 0 ? (
+                          <span className="todays_booking">
+                            🔥 Already {totalbookingtoday} bookings today
+                          </span>
+                        ) : (
+                          <span>&nbsp;</span>
+                        )}
+                      </div>
+                      <div className="calenday_modelSubHead">
+                        {currentStep === 1 && (
+                          <div className="d-flex backgrwh">
+                            <span className="steps firstStep">
+                              <span className="d-flex">
+                                <img src={calendarfrom} alt="calendarfrom" />
+                                <p>Date</p>
+                              </span>
+                            </span>
+                            <div class="rhombus"></div>
+                          </div>
+                        )}
+                        {currentStep === 2 && (
+                          <div className="d-flex">
+                            <span className="steps">
                               <img src={calendarfrom} alt="calendarfrom" />
                               <p>Date</p>
+                              <img
+                                src={rightArrowWhite}
+                                alt="rightArrowWhite"
+                                className="rightArrowWhite"
+                              />
+                              <img src={timerClock} alt="timerClock" />
                             </span>
-                          </span>
-                          <div class="rhombus"></div>
-                        </div>
-                      )}
-                      {currentStep === 2 && (
-                        <div className="d-flex">
-                          <span className="steps">
-                            <img src={calendarfrom} alt="calendarfrom" />
-                            <p>Date</p>
-                            <img
-                              src={rightArrowWhite}
-                              alt="rightArrowWhite"
-                              className="rightArrowWhite"
-                            />
-                            <img src={timerClock} alt="timerClock" />
-                          </span>
-                          <div class="rhombus"></div>
-                        </div>
-                      )}
-                      {currentStep === 3 && (
-                        <div className="d-flex">
-                          <span className="steps">
-                            <img src={calendarfrom} alt="calendarfrom" />
-                            <p>Date</p>
-                            <img
-                              src={rightArrowWhite}
-                              alt="rightArrowWhite"
-                              className="rightArrowWhite"
-                            />
-                            <img src={timerClock} alt="timerClock" />
-                            <img
-                              src={rightArrowWhite}
-                              alt="rightArrowWhite"
-                              className="rightArrowWhite"
-                            />
-                            <img src={personCalendar} alt="personCalendar" />
-                          </span>
-                          <div class="rhombus"></div>
-                        </div>
-                      )}
-                      {currentStep === 5 && (
-                        <div className="d-flex">
-                          <span className="steps">
-                            <img src={calendarfrom} alt="calendarfrom" />
-                            <p>Date</p>
-                            <img
-                              src={rightArrowWhite}
-                              alt="rightArrowWhite"
-                              className="rightArrowWhite"
-                            />
-                            <img src={timerClock} alt="timerClock" />
-                            <img
-                              src={rightArrowWhite}
-                              alt="rightArrowWhite"
-                              className="rightArrowWhite"
-                            />
-                            <img src={personCalendar} alt="personCalendar" />
-                            <img
-                              src={rightArrowWhite}
-                              alt="rightArrowWhite"
-                              className="rightArrowWhite"
-                            />
-                            <img src={preview} alt="preview" />
-                          </span>
-                          <div class="square"></div>
-                        </div>
-                      )}
-                    </div>
-                    <div
-                      className={`calenday_modelScreen ${greyBackgroundClass}`}
-                    >
-                      {currentStep === 1 && (
-                        <div className="calenderDiv">
-                          <LocalizationProvider dateAdapter={AdapterDayjs}>
-                            <DateCalendar
-                              value={value_date}
-                              onChange={(newValue) => {
-                                handleclickstep(1, newValue);
-                              }}
-                              minDate={dayjs()} // Optional: Set minimum selectable date
-                            />
-                          </LocalizationProvider>
-                        </div>
-                      )}
-                      {currentStep === 2 && (
-                        <div>
-                          <h6 className="calendar_modal_heading">
-                            Booking Time
-                          </h6>
-                          <div className="">
-                            <span className="venuePage_venue_capacity_wrapper">
-                              <div className="time_discount_container_detailedVenue">
-                                {data !== null &&
-                                  data.map((item, index) => {
-                                    if (item.start_stop_time_status === 0) {
-                                      if (
-                                        item.online_booking_time_status === 0
-                                      ) {
-                                        return (
-                                          <div
-                                            key={index}
-                                            className="time_discount_section"
-                                            onClick={() =>
-                                              handleclickstep(
-                                                2,
-                                                item.primary_id +
-                                                  "~@~" +
-                                                  item.start_time +
-                                                  "~@~" +
-                                                  item.per_discount
-                                              )
-                                            }
-                                          >
-                                            <div className="time_section">
-                                              <p>
-                                                {formatTimeintotwodigit(
-                                                  item.start_time
-                                                )}
-                                              </p>
-                                            </div>
-                                            {item.per_discount > 0 ? (
-                                              <div className="discount_section">
-                                                <p>-{item.per_discount}%</p>
-                                              </div>
-                                            ) : (
-                                              <div className="discount_section">
-                                                <p>N/A</p>
-                                              </div>
-                                            )}
-                                          </div>
-                                        );
-                                      } else {
-                                        return (
-                                          <div
-                                            key={index}
-                                            className="time_discount_section block_table"
-                                          >
-                                            <div className="time_section">
-                                              <p>
-                                                {formatTimeintotwodigit(
-                                                  item.start_time
-                                                )}
-                                              </p>
-                                            </div>
-                                            {item.per_discount > 0 ? (
-                                              <div className="discount_section">
-                                                <p>-{item.per_discount}%</p>
-                                              </div>
-                                            ) : (
-                                              <div className="discount_section">
-                                                <p>N/A</p>
-                                              </div>
-                                            )}
-                                          </div>
-                                        );
-                                      }
-                                    }
-                                  })}
-                              </div>
-                            </span>
+                            <div class="rhombus"></div>
                           </div>
-                        </div>
-                      )}
-                      {currentStep === 3 && (
-                        <div className="wrapper_calendar_modal">
-                          <h6 className="calendar_modal_heading">
-                            Number of Guests
-                          </h6>
-                          <div className="resrvDateSelect">
-                            <ul>
-                              {Array.from(
-                                { length: guest_length },
-                                (_, index) => index + 1
-                              ).map((digit, index) => (
-                                <li key={index}>
-                                  <div
-                                    className={`dateBox ${
-                                      selectedGuest === index
-                                        ? "selectedFormItems"
-                                        : ""
-                                    }`}
-                                    onClick={() =>
-                                      SelectedChangeGuest(index, "1")
-                                    }
-                                  >
-                                    <p>{index}</p>
-                                  </div>
-                                </li>
-                              ))}
-                              <li
-                                className={`${
-                                  addCustomGuest ? " " : "hideInput"
-                                }`}
-                              >
-                                <div className="customRsrvInput">
-                                  <input
-                                    type="text"
-                                    maxLength={3}
-                                    defaultValue={selectedGuest}
-                                    name="custom_pet_count"
-                                    onChange={(e) =>
-                                      SelectedChangeGuest(e, "2")
-                                    }
-                                  />
+                        )}
+                        {currentStep === 3 && (
+                          <div className="d-flex">
+                            <span className="steps">
+                              <img src={calendarfrom} alt="calendarfrom" />
+                              <p>Date</p>
+                              <img
+                                src={rightArrowWhite}
+                                alt="rightArrowWhite"
+                                className="rightArrowWhite"
+                              />
+                              <img src={timerClock} alt="timerClock" />
+                              <img
+                                src={rightArrowWhite}
+                                alt="rightArrowWhite"
+                                className="rightArrowWhite"
+                              />
+                              <img src={personCalendar} alt="personCalendar" />
+                            </span>
+                            <div class="rhombus"></div>
+                          </div>
+                        )}
+                        {currentStep === 5 && (
+                          <div className="d-flex">
+                            <span className="steps">
+                              <img src={calendarfrom} alt="calendarfrom" />
+                              <p>Date</p>
+                              <img
+                                src={rightArrowWhite}
+                                alt="rightArrowWhite"
+                                className="rightArrowWhite"
+                              />
+                              <img src={timerClock} alt="timerClock" />
+                              <img
+                                src={rightArrowWhite}
+                                alt="rightArrowWhite"
+                                className="rightArrowWhite"
+                              />
+                              <img src={personCalendar} alt="personCalendar" />
+                              <img
+                                src={rightArrowWhite}
+                                alt="rightArrowWhite"
+                                className="rightArrowWhite"
+                              />
+                              <img src={preview} alt="preview" />
+                            </span>
+                            <div class="square"></div>
+                          </div>
+                        )}
+                      </div>
+                      <div
+                        className={`calenday_modelScreen ${greyBackgroundClass}`}
+                      >
+                        {currentStep === 1 && (
+                          <div className="calenderDiv">
+                            <LocalizationProvider dateAdapter={AdapterDayjs}>
+                              <DateCalendar
+                                value={value_date}
+                                onChange={(newValue) => {
+                                  handleclickstep(1, newValue);
+                                }}
+                                minDate={dayjs()} // Optional: Set minimum selectable date
+                              />
+                            </LocalizationProvider>
+                          </div>
+                        )}
+                        {currentStep === 2 && (
+                          <div>
+                            <h6 className="calendar_modal_heading">
+                              Booking Time
+                            </h6>
+                            <div className="">
+                              <span className="venuePage_venue_capacity_wrapper">
+                                <div className="time_discount_container_detailedVenue">
+                                  {data !== null &&
+                                    data.map((item, index) => {
+                                      if (item.start_stop_time_status === 0) {
+                                        if (
+                                          item.online_booking_time_status === 0
+                                        ) {
+                                          return (
+                                            <div
+                                              key={index}
+                                              className="time_discount_section"
+                                              onClick={() =>
+                                                handleclickstep(
+                                                  2,
+                                                  item.primary_id +
+                                                    "~@~" +
+                                                    item.start_time +
+                                                    "~@~" +
+                                                    item.per_discount
+                                                )
+                                              }
+                                            >
+                                              <div className="time_section">
+                                                <p>
+                                                  {formatTimeintotwodigit(
+                                                    item.start_time
+                                                  )}
+                                                </p>
+                                              </div>
+                                              {item.per_discount > 0 ? (
+                                                <div className="discount_section">
+                                                  <p>-{item.per_discount}%</p>
+                                                </div>
+                                              ) : (
+                                                <div className="discount_section">
+                                                  <p>N/A</p>
+                                                </div>
+                                              )}
+                                            </div>
+                                          );
+                                        } else {
+                                          return (
+                                            <div
+                                              key={index}
+                                              className="time_discount_section block_table"
+                                            >
+                                              <div className="time_section">
+                                                <p>
+                                                  {formatTimeintotwodigit(
+                                                    item.start_time
+                                                  )}
+                                                </p>
+                                              </div>
+                                              {item.per_discount > 0 ? (
+                                                <div className="discount_section">
+                                                  <p>-{item.per_discount}%</p>
+                                                </div>
+                                              ) : (
+                                                <div className="discount_section">
+                                                  <p>N/A</p>
+                                                </div>
+                                              )}
+                                            </div>
+                                          );
+                                        }
+                                      }
+                                    })}
                                 </div>
-                              </li>
-                            </ul>
-                            <div
-                              className={`addInputBtn ${
-                                addCustomPet ? "hideInput" : ""
-                              }`}
-                              onClick={addCustomGuestInput}
-                            >
-                              <img src={AddBtn} alt="add btn" />
+                              </span>
                             </div>
                           </div>
-                          {/* ===== */}
-                          <h6 className="calendar_modal_heading">
-                            Number of Children
-                          </h6>
-                          {/* <input
+                        )}
+                        {currentStep === 3 && (
+                          <div className="wrapper_calendar_modal">
+                            <h6 className="calendar_modal_heading">
+                              Number of Guests
+                            </h6>
+                            <div className="resrvDateSelect">
+                              <ul>
+                                {Array.from(
+                                  { length: guest_length },
+                                  (_, index) => index + 1
+                                ).map((digit, index) => (
+                                  <li key={index}>
+                                    <div
+                                      className={`dateBox ${
+                                        selectedGuest === index
+                                          ? "selectedFormItems"
+                                          : ""
+                                      }`}
+                                      onClick={() =>
+                                        SelectedChangeGuest(index, "1")
+                                      }
+                                    >
+                                      <p>{index}</p>
+                                    </div>
+                                  </li>
+                                ))}
+                                <li
+                                  className={`${
+                                    addCustomGuest ? " " : "hideInput"
+                                  }`}
+                                >
+                                  <div className="customRsrvInput">
+                                    <input
+                                      type="text"
+                                      maxLength={3}
+                                      defaultValue={selectedGuest}
+                                      name="custom_pet_count"
+                                      onChange={(e) =>
+                                        SelectedChangeGuest(e, "2")
+                                      }
+                                    />
+                                  </div>
+                                </li>
+                              </ul>
+                              <div
+                                className={`addInputBtn ${
+                                  addCustomPet ? "hideInput" : ""
+                                }`}
+                                onClick={addCustomGuestInput}
+                              >
+                                <img src={AddBtn} alt="add btn" />
+                              </div>
+                            </div>
+                            {/* ===== */}
+                            <h6 className="calendar_modal_heading">
+                              Number of Children
+                            </h6>
+                            {/* <input
                           type="phone"
                           placeholder="Enter no of children.."
                         /> */}
-                          <div className="resrvDateSelect">
-                            <ul>
-                              {Array.from(
-                                { length: child_length },
-                                (_, index) => index + 1
-                              ).map((digit, index) => (
-                                <li key={index}>
-                                  <div
-                                    className={`dateBox ${
-                                      selectedChild === index
-                                        ? "selectedFormItems"
-                                        : ""
-                                    }`}
-                                    onClick={() =>
-                                      SelectedChangeChild(index, "1")
-                                    }
-                                  >
-                                    <p>{index}</p>
+                            <div className="resrvDateSelect">
+                              <ul>
+                                {Array.from(
+                                  { length: child_length },
+                                  (_, index) => index + 1
+                                ).map((digit, index) => (
+                                  <li key={index}>
+                                    <div
+                                      className={`dateBox ${
+                                        selectedChild === index
+                                          ? "selectedFormItems"
+                                          : ""
+                                      }`}
+                                      onClick={() =>
+                                        SelectedChangeChild(index, "1")
+                                      }
+                                    >
+                                      <p>{index}</p>
+                                    </div>
+                                  </li>
+                                ))}
+                                <li
+                                  className={`${
+                                    addCustomChild ? " " : "hideInput"
+                                  }`}
+                                >
+                                  <div className="customRsrvInput">
+                                    <input
+                                      type="text"
+                                      maxLength={3}
+                                      defaultValue={selectedChild}
+                                      name="custom_child_count"
+                                      onBlur={(e) =>
+                                        SelectedChangeChild(e, "2")
+                                      }
+                                      placeholder="No. of Child"
+                                    />
                                   </div>
                                 </li>
-                              ))}
-                              <li
-                                className={`${
-                                  addCustomChild ? " " : "hideInput"
+                              </ul>
+                              <div
+                                className={`addInputBtn ${
+                                  addCustomChild ? "hideInput" : ""
                                 }`}
+                                onClick={addCustomChildInput}
                               >
-                                <div className="customRsrvInput">
-                                  <input
-                                    type="text"
-                                    maxLength={3}
-                                    defaultValue={selectedChild}
-                                    name="custom_child_count"
-                                    onBlur={(e) => SelectedChangeChild(e, "2")}
-                                    placeholder="No. of Child"
-                                  />
-                                </div>
-                              </li>
-                            </ul>
-                            <div
-                              className={`addInputBtn ${
-                                addCustomChild ? "hideInput" : ""
-                              }`}
-                              onClick={addCustomChildInput}
-                            >
-                              <img src={AddBtn} alt="addbtn" />
+                                <img src={AddBtn} alt="addbtn" />
+                              </div>
                             </div>
-                          </div>
 
-                          <h6 className="calendar_modal_heading">
-                            Number of Pets
-                          </h6>
-                          {/* <input type="phone" placeholder="Enter no of pets.." /> */}
-                          <div className="resrvDateSelect">
-                            <ul>
-                              {Array.from(
-                                { length: pet_length },
-                                (_, index) => index + 1
-                              ).map((digit, index) => (
-                                <li key={index}>
-                                  <div
-                                    className={`dateBox ${
-                                      selectedpet === index
-                                        ? "selectedFormItems"
-                                        : ""
-                                    }`}
-                                    onClick={() =>
-                                      SelectedChangePet(index, "1")
-                                    }
-                                  >
-                                    <p>{index}</p>
+                            <h6 className="calendar_modal_heading">
+                              Number of Pets
+                            </h6>
+                            {/* <input type="phone" placeholder="Enter no of pets.." /> */}
+                            <div className="resrvDateSelect">
+                              <ul>
+                                {Array.from(
+                                  { length: pet_length },
+                                  (_, index) => index + 1
+                                ).map((digit, index) => (
+                                  <li key={index}>
+                                    <div
+                                      className={`dateBox ${
+                                        selectedpet === index
+                                          ? "selectedFormItems"
+                                          : ""
+                                      }`}
+                                      onClick={() =>
+                                        SelectedChangePet(index, "1")
+                                      }
+                                    >
+                                      <p>{index}</p>
+                                    </div>
+                                  </li>
+                                ))}
+                                <li
+                                  className={`${
+                                    addCustomPet ? " " : "hideInput"
+                                  }`}
+                                >
+                                  <div className="customRsrvInput">
+                                    <input
+                                      type="text"
+                                      maxLength={3}
+                                      defaultValue={selectedpet}
+                                      name="custom_pet_count"
+                                      onChange={(e) =>
+                                        SelectedChangePet(e, "2")
+                                      }
+                                      placeholder="No. of Pets"
+                                    />
                                   </div>
                                 </li>
-                              ))}
-                              <li
-                                className={`${
-                                  addCustomPet ? " " : "hideInput"
+                              </ul>
+                              <div
+                                className={`addInputBtn ${
+                                  addCustomPet ? "hideInput" : ""
                                 }`}
+                                onClick={addCustomPetInput}
                               >
-                                <div className="customRsrvInput">
-                                  <input
-                                    type="text"
-                                    maxLength={3}
-                                    defaultValue={selectedpet}
-                                    name="custom_pet_count"
-                                    onChange={(e) => SelectedChangePet(e, "2")}
-                                    placeholder="No. of Pets"
-                                  />
-                                </div>
-                              </li>
-                            </ul>
-                            <div
-                              className={`addInputBtn ${
-                                addCustomPet ? "hideInput" : ""
-                              }`}
-                              onClick={addCustomPetInput}
-                            >
-                              <img src={AddBtn} alt="Barley's Dashboard" />
+                                <img src={AddBtn} alt="Barley's Dashboard" />
+                              </div>
                             </div>
-                          </div>
-
-                          <span>
-                            <Link
-                              onClick={() => handleclickstep(3, selectedGuest)}
-                            >
-                              Next
-                            </Link>
-                          </span>
-                        </div>
-                      )}
-                      {currentStep === 4 && (
-                        <div className="wrapper_calendar_modal">
-                          <h6 className="calendar_modal_heading">
-                            Review Details
-                          </h6>
-                          <div className="details_step_calendar_modal">
-                            <span className="row">
-                              <h6 className="col-4">Date: </h6>
-                              <p className="col-8">
-                                {formatDateStringdot(selectedDate)} |{" "}
-                                {selectedTime}
-                              </p>
-                            </span>
-                            <span className="row">
-                              <h6 className="col-4">Person: </h6>
-                              <p className="col-8">{selectedGuest}</p>
-                            </span>
-                            <span className="row">
-                              <h6 className="col-4">Children: </h6>
-                              <p className="col-8">{selectedChild}</p>
-                            </span>
-                            <span className="row">
-                              <h6 className="col-4">Pets: </h6>
-                              <p className="col-8">{selectedpet}</p>
-                            </span>
-                            <span className="row">
-                              <h6 className="col-4">Discount: </h6>
-                              <p className="col-8">{selectedDiscount}%</p>
-                            </span>
-
-                            <input
-                              type="text"
-                              placeholder="Add Instruction/Comment"
-                              name="order_comment"
-                              maxLength={300}
-                              id="order_comment"
-                              onInput={handleIaphabetnumberChange}
-                            />
 
                             <span>
-                              {" "}
-                              <input
-                                type="checkbox"
-                                className="checkBoxUnique"
-                                name="checkSurfaceEnvironment-1"
-                                id="checkSurfaceEnvironment-1"
-                              />
-                              <label>
-                                I agree to the Terms & Conditions & Privacy
-                                Policy
-                              </label>
+                              <Link
+                                onClick={() =>
+                                  handleclickstep(3, selectedGuest)
+                                }
+                              >
+                                Next
+                              </Link>
                             </span>
-                            <Link onClick={function_save}>Book Now</Link>
                           </div>
-                        </div>
-                      )}
-                      {currentStep === 5 && (
-                        <div className="final_step_wrapper">
-                          <h6>Reservation </h6>
-                          <span>
-                            <p>
-                              {formatDateStringdot(selectedDate)} •{" "}
-                              {selectedGuest} Person • {selectedTime}
-                            </p>
-                          </span>
+                        )}
+                        {currentStep === 4 && (
+                          <div className="wrapper_calendar_modal">
+                            <h6 className="calendar_modal_heading">
+                              Review Details
+                            </h6>
+                            <div className="details_step_calendar_modal">
+                              <span className="row">
+                                <h6 className="col-4">Date: </h6>
+                                <p className="col-8">
+                                  {formatDateStringdot(selectedDate)} |{" "}
+                                  {selectedTime}
+                                </p>
+                              </span>
+                              <span className="row">
+                                <h6 className="col-4">Person: </h6>
+                                <p className="col-8">{selectedGuest}</p>
+                              </span>
+                              <span className="row">
+                                <h6 className="col-4">Children: </h6>
+                                <p className="col-8">{selectedChild}</p>
+                              </span>
+                              <span className="row">
+                                <h6 className="col-4">Pets: </h6>
+                                <p className="col-8">{selectedpet}</p>
+                              </span>
+                              <span className="row">
+                                <h6 className="col-4">Discount: </h6>
+                                <p className="col-8">{selectedDiscount}%</p>
+                              </span>
 
-                          <div className="confirmed_booking_span">
-                            <h6>Booking Confirmed! </h6>
-                            <desc>{showmsgforbook}</desc>
+                              <input
+                                type="text"
+                                placeholder="Add Instruction/Comment"
+                                name="order_comment"
+                                maxLength={300}
+                                id="order_comment"
+                                onInput={handleIaphabetnumberChange}
+                              />
+
+                              <span>
+                                {" "}
+                                <input
+                                  type="checkbox"
+                                  className="checkBoxUnique"
+                                  name="checkSurfaceEnvironment-1"
+                                  id="checkSurfaceEnvironment-1"
+                                />
+                                <label>
+                                  I agree to the Terms & Conditions & Privacy
+                                  Policy
+                                </label>
+                              </span>
+                              <Link onClick={function_save}>Book Now</Link>
+                            </div>
                           </div>
-                        </div>
-                      )}
+                        )}
+                        {currentStep === 5 && (
+                          <div className="final_step_wrapper">
+                            <h6>Reservation </h6>
+                            <span>
+                              <p>
+                                {formatDateStringdot(selectedDate)} •{" "}
+                                {selectedGuest} Person • {selectedTime}
+                              </p>
+                            </span>
+
+                            <div className="confirmed_booking_span">
+                              <h6>Booking Confirmed! </h6>
+                              <desc>{showmsgforbook}</desc>
+                            </div>
+                          </div>
+                        )}
+                      </div>
                     </div>
                   </div>
                   <div className="want_more_section">

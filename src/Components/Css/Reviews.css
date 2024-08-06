@@ -60,15 +60,10 @@
   flex-direction: row;
 }
 
-.review_wrapper {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-}
-
 .text_rating_sectin {
   display: flex;
   gap: 1rem;
+  justify-content: space-evenly;
   flex-direction: row;
   margin-top: 3rem;
 }
@@ -89,7 +84,7 @@
 
 .no_reviews p {
   font-size: 14px;
-  color: var(--text-grey);
+  color: var(--light-black);
   font-family: "Roboto";
 }
 
@@ -222,6 +217,7 @@
 
 @media screen and (max-width: 576px) {
   .columnAfter576 {
+    display: flex;
     flex-direction: column;
   }
 

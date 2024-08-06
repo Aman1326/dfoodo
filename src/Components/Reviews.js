@@ -210,10 +210,10 @@ const Reviews = ({ review, totalReview }) => {
     <>
       <section className="reviews_section">
         <h3>Reviews</h3>
-        <div className="review_wrapper row columnAfter576">
-          <div className="col-sm-6 mt-5 left_section_circularProgressBar">
+        <div className="review_wrapper row ">
+          <div className="col-6 mt-5 left_section_circularProgressBar">
             <div className="circular_review_wrapper">
-              <div className="Circualr_progressBar_section">
+              <div className="Circualr_progressBar_section columnAfter576">
                 <CircularProgressbar
                   value={normalizedValue}
                   maxValue={1}
@@ -225,53 +225,9 @@ const Reviews = ({ review, totalReview }) => {
                   <p>{totalReviews.total_reviews} reviews</p>
                 </span>
               </div>
-              <div className="text_rating_sectin">
-                <span>
-                  <p>{totalReviews.total_location_rating_sum}/5</p>
-                  <p>Location</p>
-                </span>
-                <div
-                  className="vr"
-                  style={{
-                    width: "1px",
-                    background: "transparent",
-                    border: "1px solid black",
-                    padding: "0rem",
-                    marginRight: "0.2rem",
-                  }}
-                ></div>
-                <span>
-                  <p>{totalReviews.total_service_rating_sum}/5</p>
-                  <p>Service</p>
-                </span>
-                <div
-                  className="vr"
-                  style={{
-                    width: "1px",
-                    background: "transparent",
-                    border: "1px solid black",
-                    padding: "0rem",
-                    marginRight: "0.2rem",
-                  }}
-                ></div>
-                <span>
-                  <p>{totalReviews.total_ambience_rating_sum}/5</p>
-                  <p>Ambience</p>
-                </span>
-              </div>
             </div>
           </div>
-          <div
-            className="vr d-none d-sm-block"
-            style={{
-              width: "1px",
-              background: "transparent",
-              border: "1px solid black",
-              padding: "0rem",
-              marginRight: "0.2rem",
-            }}
-          ></div>
-          <div className="col-sm-5 d-flex marginTop576">
+          <div className="col-6 d-flex">
             <div className="linear_progressBar_section">
               <div className=" progressbar_text_wrapper">
                 <div className="progress_text">5</div>
@@ -322,6 +278,40 @@ const Reviews = ({ review, totalReview }) => {
                 </div>
               </div>
             </div>
+          </div>
+          <div className="text_rating_sectin">
+            <span>
+              <p>{totalReviews.total_location_rating_sum}/5</p>
+              <p>Location</p>
+            </span>
+            <div
+              className="vr"
+              style={{
+                width: "1px",
+                background: "transparent",
+                border: "1px solid black",
+                padding: "0rem",
+                marginRight: "0.2rem",
+              }}
+            ></div>
+            <span>
+              <p>{totalReviews.total_service_rating_sum}/5</p>
+              <p>Service</p>
+            </span>
+            <div
+              className="vr"
+              style={{
+                width: "1px",
+                background: "transparent",
+                border: "1px solid black",
+                padding: "0rem",
+                marginRight: "0.2rem",
+              }}
+            ></div>
+            <span>
+              <p>{totalReviews.total_ambience_rating_sum}/5</p>
+              <p>Ambience</p>
+            </span>
           </div>
           {reviews &&
             reviews.slice(0, reviewsToShow).map((review, index) => (
