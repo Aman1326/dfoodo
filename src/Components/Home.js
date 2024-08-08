@@ -8,7 +8,6 @@ import Collections from "./Collections";
 import star from "../Assets/star.svg";
 import rigthArrow from "../Assets/right_svg_button.svg";
 import leftArrow from "../Assets/left_svg_button.svg";
-import venueImg1 from "../Assets/venue1.png";
 import str2 from "../Assets/5stars.svg";
 import str1 from "../Assets/singleStar.svg";
 import tick from "../Assets/tick.svg";
@@ -17,53 +16,43 @@ import Heart from "../Assets/heart.svg";
 import HeartRed from "../Assets/HeartRed.svg";
 import DownloadApp from "./DownloadApp";
 import AreYouAVenueOwner from "./AreYouAVenueOwner";
-// import Heart from "react-heart";
 import Footer from "./Footer";
 import {
   server_post_data,
   get_landingpage_webapp,
   imageApi,
   save_favourite,
+  APL_LINK,
 } from "../ServiceConnection/serviceconnection.js";
 import {
   handleLinkClick,
   inputdateformateChange,
   handleError,
 } from "../CommonJquery/CommonJquery.js";
+import { retrieveData } from "../LocalConnection/LocalConnection.js";
+let customer_id = "0";
 function Home() {
-  const [likedVenues, setLikedVenues] = useState({});
+  customer_id = retrieveData("customer_id");
   const [SEOloop, setSEOloop] = useState([]);
-  const [GetVenueData, SetVenueData] = useState([]);
-  const [testimonials, Settestimonials] = useState([]);
   const [blogs, Setblogs] = useState([]);
-  const [currentIndex, setCurrentIndex] = useState(0);
   const [country, setCountry] = useState("");
   const [city, setCity] = useState("");
   const [restaurantByCountry, setRestaurantByCountry] = useState([]);
   const [restaurantByCity, setRestaurantByCity] = useState([]);
-
+  const [ImageLink, setImageLink] = useState("");
   const [HeartImg, setHeartImages] = useState([]);
   const [collection, setCollection] = useState([]);
+  const [rupees_icon_left, setrupees_icon_left] = useState("");
+  const [rupees_icon_right, setrupees_icon_right] = useState([]);
   // Toggle the like state for a specific venue
-  const toggleLike = (index) => {
-    setLikedVenues((prev) => ({
-      ...prev,
-      [index]: !prev[index],
-    }));
-  };
 
   //get data
   const master_data_get = async () => {
-    const fd = new FormData();
-    fd.append("country", "India");
-    fd.append("city", "Bhopal");
-    await server_post_data(get_landingpage_webapp, fd)
+    await server_post_data(get_landingpage_webapp, null)
       .then((Response) => {
         if (Response.data.error) {
-          // handleError(Response.data.message.title_name);
+          handleError(Response.data.message);
         } else {
-          SetVenueData(Response.data.message.venue_active_data);
-          Settestimonials(Response.data.message.testimonial_active_data);
           Setblogs(Response.data.message.blog_active_data);
           setSEOloop(Response.data.message.seo_loop);
           setCollection(Response.data.message.category_countsss);
@@ -71,10 +60,15 @@ function Home() {
           setCity(Response.data.message.cities_name);
           setRestaurantByCountry(Response.data.message.restro_country);
           setRestaurantByCity(Response.data.message.restro_city);
-          console.log(Response.data.message);
+          setImageLink(Response.data.message.image_link);
+          setHeartImages(Response.data.message.data_favourite_data);
+          setrupees_icon_left(Response.data.message.rupees_icon_left);
+          setrupees_icon_right(Response.data.message.rupees_icon_right);
         }
       })
-      .catch((error) => {});
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   const match_and_return_seo_link = (v_id) => {
@@ -144,20 +138,6 @@ function Home() {
   const [currentPaginationPageCity, setCurrentPaginationPageCity] = useState(1);
   const itemsPerPageCity = 4;
 
-  const totalPaginationPagesCity = Math.ceil(
-    restaurantByCity && restaurantByCity.length / itemsPerPageCity
-  );
-
-  const handleNextPageCity = () => {
-    setCurrentPaginationPageCity((prevPage) =>
-      Math.min(prevPage + 1, totalPaginationPagesCity)
-    );
-  };
-
-  const handlePreviousPageCity = () => {
-    setCurrentPaginationPageCity((prevPage) => Math.max(prevPage - 1, 1));
-  };
-
   const indexOfLastItemCity = currentPaginationPageCity * itemsPerPageCity;
   const indexOfFirstItemCity = indexOfLastItemCity - itemsPerPageCity;
   const currentPaginationItemsCity =
@@ -171,24 +151,12 @@ function Home() {
     master_data_get();
   }, []);
 
-  const handleHeartClick = async (venueId) => {
-    try {
-      // Assuming you have a function to handle save changes dynamically
-      await handleSaveChangesdynamic(venueId);
-
-      // Toggle favorite status
-      const updatedFavorites = HeartImg.some(
-        (fav) => fav.restaurant_id === venueId
-      )
-        ? HeartImg.filter((fav) => fav.restaurant_id !== venueId) // Remove from favorites
-        : [...HeartImg, { restaurant_id: venueId }];
-
-      // Update state with the new list of favorites
-      setHeartImages(updatedFavorites);
-
-      // Optionally, you can update the backend or local storage here
-    } catch (error) {
-      console.error("Error updating favorite status:", error);
+  const handleHeartClick = (venueId) => {
+    if (customer_id !== "0") {
+      handleSaveChangesdynamic(venueId);
+    } else {
+      var event = new CustomEvent("customEvent");
+      document.getElementById("login_check_jquery").dispatchEvent(event);
     }
   };
 
@@ -196,17 +164,26 @@ function Home() {
     return HeartImg.some((fav) => fav.restaurant_id === venueId);
   };
 
-  const handleSaveChangesdynamic = async (id) => {
-    // seterror_show("");
+  const handleSaveChangesdynamic = async (venueId) => {
     const form_data = new FormData();
-
-    form_data.append("venue_id", id);
-    form_data.append("customer_id", "1");
-    form_data.append("flag", "0");
+    form_data.append("venue_id", venueId);
     await server_post_data(save_favourite, form_data)
       .then((Response) => {
         if (Response.data.error) {
           handleError(Response.data.message);
+        } else {
+          try {
+            const updatedFavorites = HeartImg.some(
+              (fav) => fav.restaurant_id === venueId
+            )
+              ? HeartImg.filter((fav) => fav.restaurant_id !== venueId) // Remove from favorites
+              : [...HeartImg, { restaurant_id: venueId }];
+
+            // Update state with the new list of favorites
+            setHeartImages(updatedFavorites);
+          } catch (error) {
+            console.error("Error updating favorite status:", error);
+          }
         }
       })
       .catch((error) => {
@@ -259,7 +236,11 @@ function Home() {
             </div>
           </div>
           <div>
-            <Collections data={collection} SEOloop={SEOloop} />
+            <Collections
+              data={collection}
+              SEOloop={SEOloop}
+              ImageLink={ImageLink}
+            />
           </div>
         </section>
         {/* Popular Venues */}
@@ -309,18 +290,11 @@ function Home() {
                         <div className="popularVenues_venue_container">
                           <div className="venue_image_holder">
                             <img
-                              src={imageApi + venue.restaurant_image}
+                              src={
+                                APL_LINK + ImageLink + venue.restaurant_image
+                              }
                               alt="venueImg"
                             />
-                            {/* <Heart
-                              className="heart_icon"
-                              isActive={likedVenues[index] || false}
-                              onClick={() => toggleLike(index)}
-                              activeColor="red"
-                              inactiveColor="red"
-                              animationTrigger="hover"
-                              animationScale={1.1}
-                            /> */}
 
                             <button
                               className="heartBttnn"
@@ -348,13 +322,6 @@ function Home() {
                             <div className="venueDetailCOntainer">
                               <div className="venue_category_div">
                                 <span className="venue_category_titles">
-                                  {/* {venue.Venue &&
-                                    venue.Venue.length > 0 &&
-                                    venue.Venue.map((category, idx) => (
-                                      <React.Fragment key={idx}>
-                                        <p>{category}</p>
-                                      </React.Fragment>
-                                    ))} */}
                                   <p>{venue.cuisine}&nbsp;</p>
                                 </span>
                                 <div className="rating_greenDiv">
@@ -366,12 +333,13 @@ function Home() {
                                 <h6 className="venue_address_heading">
                                   {venue.restaurant_name}
                                 </h6>
-                                <desc className="ellipsis">
+                                <span className="ellipsis">
                                   {venue.restaurant_temorary_adrress}
-                                </desc>
+                                </span>
                                 <span className="venue_capacity_wrapper">
                                   <p>
-                                    {country == "India" ? "₹" : "$"}
+                                    {rupees_icon_left} {venue.restaurant_price}{" "}
+                                    {rupees_icon_right} average price
                                     {venue.restaurant_price} average price
                                   </p>
                                 </span>
@@ -435,13 +403,14 @@ function Home() {
                                   <h6 className="venue_address_heading">
                                     {venue.restaurant_name}
                                   </h6>
-                                  <desc className="ellipsis">
+                                  <span className="ellipsis">
                                     {venue.restaurant_temorary_adrress}
-                                  </desc>
+                                  </span>
                                   <span className="venue_capacity_wrapper">
                                     <p>
-                                      {country == "India" ? "₹" : "$"}
-                                      {venue.restaurant_price} average price
+                                      {rupees_icon_left}{" "}
+                                      {venue.restaurant_price}{" "}
+                                      {rupees_icon_right} average price
                                     </p>
                                   </span>
                                   <span className="venue_discount_wrapper">
@@ -504,15 +473,6 @@ function Home() {
                               src={imageApi + venue.restaurant_image}
                               alt="venueImg"
                             />
-                            {/* <Heart
-                              className="heart_icon"
-                              isActive={likedVenues[index] || false}
-                              onClick={() => toggleLike(index)}
-                              activeColor="red"
-                              inactiveColor="red"
-                              animationTrigger="hover"
-                              animationScale={1.1}
-                            /> */}
                             <button
                               style={{ display: "none" }}
                               onClick={() => handleHeartClick(venue.primary_id)}
@@ -539,13 +499,6 @@ function Home() {
                             <div className="venueDetailCOntainer">
                               <div className="venue_category_div">
                                 <span className="venue_category_titles">
-                                  {/* {venue.Venue &&
-                                    venue.Venue.length > 0 &&
-                                    venue.Venue.map((category, idx) => (
-                                      <React.Fragment key={idx}>
-                                        <p>{category}</p>
-                                      </React.Fragment>
-                                    ))} */}
                                   <p>{venue.cuisine}&nbsp;</p>
                                 </span>
                                 <div className="rating_greenDiv">
@@ -557,13 +510,13 @@ function Home() {
                                 <h6 className="venue_address_heading">
                                   {venue.restaurant_name}
                                 </h6>
-                                <desc className="ellipsis">
+                                <span className="ellipsis">
                                   {venue.restaurant_temorary_adrress}
-                                </desc>
+                                </span>
                                 <span className="venue_capacity_wrapper">
                                   <p>
-                                    {country == "India" ? "₹" : "$"}{" "}
-                                    {venue.restaurant_price} average price
+                                    {rupees_icon_left} {venue.restaurant_price}{" "}
+                                    {rupees_icon_right} average price
                                   </p>
                                 </span>
                                 <span className="venue_discount_wrapper">
@@ -626,13 +579,14 @@ function Home() {
                                   <h6 className="venue_address_heading">
                                     {venue.restaurant_name}
                                   </h6>
-                                  <desc className="ellipsis">
+                                  <span className="ellipsis">
                                     {venue.restaurant_temorary_adrress}
-                                  </desc>
+                                  </span>
                                   <span className="venue_capacity_wrapper">
                                     <p>
-                                      {country == "India" ? "₹" : "$"}
-                                      {venue.restaurant_price} average price
+                                      {rupees_icon_left}{" "}
+                                      {venue.restaurant_price}{" "}
+                                      {rupees_icon_right} average price
                                     </p>
                                   </span>
                                   <span className="venue_discount_wrapper">

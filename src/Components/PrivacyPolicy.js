@@ -6,6 +6,7 @@ const TermsOfuse = () => {
   return (
     <div className="howitworks_wrapper">
       <Header />
+      
       <div className="container-lg">
         <div className="terms_imageContainer">
           <div className="center_text_wrapper headingMargin">

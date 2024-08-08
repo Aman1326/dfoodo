@@ -10,7 +10,7 @@ import rightArrowSvg from "../Assets/rightArrowIcon.svg";
 import { APL_LINK } from "../ServiceConnection/serviceconnection";
 import { handleLinkClick } from "../CommonJquery/CommonJquery";
 import { Link } from "react-router-dom";
-const Collections = ({ data, SEOloop }) => {
+const Collections = ({ data, SEOloop, ImageLink }) => {
   //browse cities section
 
   // Custom Next Arrow
@@ -79,7 +79,7 @@ const Collections = ({ data, SEOloop }) => {
   };
 
   const match_and_return_seo_link = (v_id, catagory) => {
-    let data_seo_link_final = "/restro/" + catagory + "/" + v_id;
+    let data_seo_link_final = "/restro/catagory_detail/" + v_id;
     let data_seo_link = data_seo_link_final;
     if (SEOloop) {
       const matchedItem = SEOloop.find((data) => {
@@ -120,16 +120,15 @@ const Collections = ({ data, SEOloop }) => {
                         <Link
                           onClick={() =>
                             handleLinkClick(
-                              match_and_return_seo_link(
-                                venue.primary_id,
-                                venue.category_master_name
-                              )
+                              match_and_return_seo_link(venue.primary_id)
                             )
                           }
                         >
                           <img
                             className="city-image"
-                            src={`${APL_LINK}/assets/${venue.category_master_image}`}
+                            src={`${
+                              APL_LINK + ImageLink + venue.category_master_image
+                            }`}
                             alt={`Venue ${index + 1}`}
                           />
                           <div className="city_description">
@@ -163,7 +162,9 @@ const Collections = ({ data, SEOloop }) => {
                         >
                           <img
                             className="city-image"
-                            src={`${APL_LINK}/assets/${venue.category_master_image}`}
+                            src={`${
+                              APL_LINK + ImageLink + venue.category_master_image
+                            }`}
                             alt={`Venue ${index + 1}`}
                           />
                           <div className="city_description">
