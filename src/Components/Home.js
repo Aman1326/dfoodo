@@ -230,8 +230,8 @@ function Home() {
     <div>
       <Header />
       <div>
-        <section className="heroSection">
-          <div className="row container-lg m-auto">
+        <section className="heroSection ">
+          <div className={`row ${isMobile ? "" : "container-lg m-auto"}`}>
             <div className="heroSection_wrapper p-0 col-lg-12 col-12">
               <img src={homebg} alt="home bg" id="homeBG" />
               <div className="searchBar_container_homeScreen">
@@ -292,11 +292,11 @@ function Home() {
                       </button>
                     </div>
                   )}
-                  {isMobile && (
+                  {/* {isMobile && (
                     <div className="pagination_controls">
                       <Link>View More</Link>
                     </div>
-                  )}
+                  )} */}
                 </span>
               </div>
               <div className="popularVenues">

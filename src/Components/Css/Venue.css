@@ -16,11 +16,27 @@
 
 .filters_wrapper {
   background: rgba(245, 245, 245, 1);
-  padding: 1rem 0.5rem;
+  padding: 0.3rem 0.2rem;
   align-items: center;
   border-radius: 5px;
   box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.18);
   overflow: auto;
+}
+
+.filters_wrapper::-webkit-scrollbar {
+  width: 5px !important;
+  height: 5px;
+
+}
+
+.filters_wrapper::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  height: 5px;
+}
+
+.filters_wrapper::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 25px;
 }
 
 .filters_wrapper ul {
@@ -28,7 +44,7 @@
   margin: 0;
   flex-direction: row;
   gap: 0.3rem;
-  padding: 0rem 0rem 0.7rem 0rem;
+  padding: 0rem 0rem;
   list-style-type: none;
 }
 
@@ -100,7 +116,7 @@
   height: 100%;
   object-fit: cover;
   border-radius: 10px;
-  aspect-ratio: 1;
+  aspect-ratio: 1.5;
 }
 
 .venuePage_image_container {
@@ -307,11 +323,9 @@
 
 .vertical-tab-list .react-tabs__tab--selected {
   /* background-color: lightgrey; */
-  background-image: linear-gradient(
-    to left,
-    rgba(0, 0, 0, 0) 97%,
-    var(--primary-color) 20%
-  );
+  background-image: linear-gradient(to left,
+      rgba(0, 0, 0, 0) 97%,
+      var(--primary-color) 20%);
 }
 
 .modal-footer {
@@ -425,12 +439,15 @@
   align-items: center;
   /* Center items vertically */
 }
+
 .marginNone {
   margin: 0 !important;
+
   p {
     margin: 0 !important;
   }
 }
+
 .TimingButtons2 {
   padding-top: 0.4rem;
   padding-bottom: 1rem;
@@ -445,20 +462,24 @@
     border: none;
   }
 }
+
 .favHeartIcon {
   background-color: transparent;
   top: 15px;
   right: 14px;
   transition: transform 0.3s ease, opacity 0.3s ease;
 }
+
 .heart_section button:hover .favHeartIcon {
   transform: scale(1.2);
   opacity: 0.8;
 }
+
 .amenityItem {
   display: flex;
   align-items: center;
   padding: 2px;
+
   img {
     margin-right: 2px;
   }

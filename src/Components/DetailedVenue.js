@@ -431,7 +431,7 @@ const DetailedVenue = () => {
   return (
     <>
       <div className="detailed_venue_wrapper">
-        {!isMobile && <Header />}
+        <Header />
         <section>
           <div className="container-lg mt-3 mb-1">
             <div className="venuePage_venueCategory_heading">
@@ -538,7 +538,9 @@ const DetailedVenue = () => {
                         <span className="first_row_black_section_carousel align-items-center">
                           <div className="french_text">
                             <h6>
-                              {detail.cuisie && detail.cuisie[0].cuisine_name}
+                              {detail.cuisie &&
+                                detail.cuisie.length > 0 &&
+                                detail.cuisie[0].cuisine_name}
                             </h6>
                           </div>
                           <div className="first_row_black_section_carousel align-items-center">

@@ -762,10 +762,14 @@ const inputdateformateChange = (input_data) => {
   const getOrdinalSuffix = (day) => {
     if (day > 3 && day < 21) return "th";
     switch (day % 10) {
-      case 1: return "st";
-      case 2: return "nd";
-      case 3: return "rd";
-      default: return "th";
+      case 1:
+        return "st";
+      case 2:
+        return "nd";
+      case 3:
+        return "rd";
+      default:
+        return "th";
     }
   };
 
@@ -946,7 +950,7 @@ const make_image_from_letter = (name) => {
   if (name == null) return;
   name = getInitials(name);
   const size = 45;
-  const color = "#f58634";
+  const color = "rgba(227, 55, 69, 1)";
   const canvas = document.createElement("canvas");
   const context = canvas.getContext("2d");
   canvas.width = canvas.height = size;

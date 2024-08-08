@@ -231,7 +231,7 @@ function Header() {
       <div className="upper_header_wrapper">
         <div className="container-lg">
           {location.pathname !== "/onBoarding" && !isMobile && (
-            <div className="upper_header_container_mobile">
+            <div className="upper_header_container ">
               {" "}
               <Link to="/registerMyVenue">List My Restaurant</Link>
               <Link to="/getHelp">Get help</Link>
@@ -292,7 +292,7 @@ function Header() {
                 </li>
                 <li>
                   {location.pathname !== "/onBoarding" && isMobile && (
-                    <div className="upper_header_container">
+                    <div className="upper_header_container_mobile">
                       {" "}
                       <Link to="/registerMyVenue">List My Restaurant</Link>
                       <Link to="/getHelp">Get help</Link>
@@ -316,18 +316,7 @@ function Header() {
                 </Link>
               )}
               {profileShow && (
-                <Link
-                  className="loginButton"
-                  style={{
-                    textDecoration: "none",
-                    alignItems: "center",
-                    width: "fitContent",
-                    borderRadius: "50%",
-                    aspectRatio: "1",
-                    padding: "0.5rem 0.7rem",
-                  }}
-                  to="/profile"
-                >
+                <Link to="/profile" id="image_from_letter">
                   <img
                     src={make_image_from_letter(customer_name)}
                     onError={(e) => {
