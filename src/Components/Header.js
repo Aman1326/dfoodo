@@ -358,6 +358,7 @@ function Header() {
             <Button
               className="PhoneloginButton mt-5 width100per"
               onClick={() => login_section_res()}
+              type="button"
               style={{
                 backgroundColor: !isPhoneNumberValid ? "grey" : "",
                 borderColor: !isPhoneNumberValid ? "grey" : "",
@@ -390,6 +391,7 @@ function Header() {
             <Button
               className="PhoneloginButton mt-5 width100per"
               onClick={() => login_section_res()}
+              type="button"
               style={{
                 backgroundColor: !isOTPValid ? "grey" : "",
                 borderColor: !isOTPValid ? "grey" : "",
@@ -451,6 +453,7 @@ function Header() {
               <Button
                 className="PhoneloginButton mt-5 width100per"
                 onClick={() => login_section_res()}
+                type="button"
                 style={{
                   cursor: "pointer",
                 }}
