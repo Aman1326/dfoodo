@@ -533,10 +533,10 @@ const DetailedVenue = () => {
                             <h6>{detail.restaurant_name}</h6>
                             <p>{detail.restaurant_full_adrress}</p>
                           </div>
-                          {/* <div className="first_row_black_section_carousel">
+                          <div className="first_row_black_section_carousel hidden">
                             <p>1.16 km</p>
                             <img src={locationsvg} alt="location" />
-                          </div> */}
+                          </div>
                         </span>
                         <span className="first_row_black_section_carousel align-items-center">
                           <div className="french_text">
