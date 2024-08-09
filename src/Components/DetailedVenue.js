@@ -14,18 +14,15 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import leftArrowIcon from "../Assets/leftArrowIcon.svg";
 import rightArrowIcon from "../Assets/rightArrowIcon.svg";
-
 import personCalendar from "../Assets/personSvg_detailedVenue.svg";
 import calendarfrom from "../Assets/calendar_detailedVenue.svg";
 import preview from "../Assets/preview.svg";
 import rightArrow from "../Assets/rightArrow.svg";
-
 import locationsvg from "../Assets/locationSvg.svg";
 import redStar from "../Assets/StarRating.svg";
 import timerClock from "../Assets/timerClock.svg";
 import quesMark from "../Assets/questionMark.svg";
 import avgpriceIcon from "../Assets/averagePriceDetailedVenue.svg";
-import Menu from "./Menu";
 import rightArrowWhite from "../Assets/rightArrow_white.svg";
 import AddBtn from "../Assets/addNewInput.svg";
 import crossIcon from "../Assets/crossIcon.svg";
@@ -34,7 +31,7 @@ import {
   get_restropage_webapp,
   get_all_timing_date_wise,
   create_table_reservation_website,
-  imageApi,
+  APL_LINK,
 } from "../ServiceConnection/serviceconnection.js";
 import {
   formatTimeintotwodigit,
@@ -58,16 +55,19 @@ const DetailedVenue = () => {
   const [showLoaderAdmin, setshowLoaderAdmin] = useState(false);
   const currentUrl = location.pathname.substring(1);
   const [detail, setDetail] = useState([]);
-  const [reviews, setreviews] = useState([]);
   const [breadcrumbs, setBreadcrumbs] = useState([]);
+  const [like_data, setlike_data] = useState([]);
   const [activeTab, setActiveTab] = useState("about");
   const [data, setData] = useState([]);
+  const [rupees_icon_left, setrupees_icon_left] = useState("");
+  const [rupees_icon_right, setrupees_icon_right] = useState("");
   const [selectedDate, setSelectedDate] = useState(null);
   const [selectedTime, setSelectedTime] = useState(null);
   const [selectedDiscount, setSelectedDiscount] = useState(0);
   const [selectedGuest, setSelectedGuest] = useState(1);
   const [selectedChild, setselectedChild] = useState(0);
   const [selectedpet, setselectedpet] = useState(0);
+  const [ImageLink, setImageLink] = useState("");
   const [showModalKitchen, setShowModalKitchen] = useState(false);
   const [showModalKitchenMsg, setShowModalKitchenMsg] = useState("");
   const [showmsgforbook, setshowmsgforbook] = useState("");
@@ -238,25 +238,26 @@ const DetailedVenue = () => {
         if (Response.data.error) {
           // handleError(Response.data.message);
         } else {
-          setDetail(Response.data.message.restro[0]);
-          setreviews(Response.data.message.restro[0].review);
-          const restroData = Response.data.message.restro || [];
-          const venueData = restroData[0] || {};
-          const catagoryData = restroData[0].category[0] || {};
-
-          // Extract categories
-          const newBreadcrumbs = [
-            { name: "Home", path: "/" },
-            {
-              name: venueData.restaurant_country || "",
-            },
-            { name: venueData.restaurant_city || "" },
-            {
-              name: catagoryData.category_master_name || "",
-              path: "",
-            },
-          ];
-          setBreadcrumbs(newBreadcrumbs);
+          if (Response.data.message.restro.length > 0) {
+            setDetail(Response.data.message.restro[0]);
+            setlike_data(Response.data.message.like_data);
+            setrupees_icon_left(Response.data.message.rupees_icon_left);
+            setrupees_icon_right(Response.data.message.rupees_icon_right);
+            setImageLink(Response.data.message.image_link);
+            // Extract categories
+            const newBreadcrumbs = [
+              { name: "Home", path: "/" },
+              {
+                name: Response.data.message.restro[0].restaurant_country || "",
+              },
+              { name: Response.data.message.restro[0].restaurant_city || "" },
+              {
+                name: Response.data.message.restro[0].restaurant_name || "",
+                path: "",
+              },
+            ];
+            setBreadcrumbs(newBreadcrumbs);
+          }
         }
         setshowLoaderAdmin(false);
       })
@@ -519,7 +520,7 @@ const DetailedVenue = () => {
                           detail.images.map((image, index) => (
                             <div key={index}>
                               <img
-                                src={imageApi + image.image_name}
+                                src={APL_LINK + ImageLink + image.image_name}
                                 alt={`img${index}`}
                               />
                             </div>
@@ -532,10 +533,10 @@ const DetailedVenue = () => {
                             <h6>{detail.restaurant_name}</h6>
                             <p>{detail.restaurant_full_adrress}</p>
                           </div>
-                          {/* <div className="first_row_black_section_carousel">
+                          <div className="first_row_black_section_carousel hidden">
                             <p>1.16 km</p>
                             <img src={locationsvg} alt="location" />
-                          </div> */}
+                          </div>
                         </span>
                         <span className="first_row_black_section_carousel align-items-center">
                           <div className="french_text">
@@ -563,17 +564,20 @@ const DetailedVenue = () => {
                         <span className="last_line_black_section mb-4">
                           <div className="first_row_black_section_carousel">
                             <img src={timerClock} alt="timerClock" />
-                            {detail.timing && detail.timing.length > 0 && (
-                              <p style={{ marginBottom: "0" }}>
-                                Open from {detail.timing[0].start_time} -{" "}
-                                {detail.timing[0].end_time}
-                              </p>
-                            )}
+                            <p style={{ marginBottom: "0" }}>
+                              Open from{" "}
+                              {formatTimeintotwodigit(
+                                detail.breakfast_starttime
+                              )}{" "}
+                              -{" "}
+                              {formatTimeintotwodigit(detail.breakfast_endtime)}
+                            </p>
                           </div>
                           <div className="first_row_black_section_carousel">
                             <img src={avgpriceIcon} alt="avgpriceIcon" />
                             <p style={{ marginBottom: "0" }}>
-                              Average price €27
+                              Average price {rupees_icon_left}{" "}
+                              {detail.restaurant_price} {rupees_icon_right}
                             </p>
                             <img src={quesMark} alt="quesMark" />
                           </div>
@@ -620,7 +624,7 @@ const DetailedVenue = () => {
                                   key={idx}
                                 >
                                   <img
-                                    src={imageApi + features.image}
+                                    src={APL_LINK + ImageLink + features.image}
                                     alt="{features.venue_feature_name}"
                                   />
                                   <p className="venue_feature_name">
@@ -641,14 +645,25 @@ const DetailedVenue = () => {
                                     detail.menuimages.map((menu_img, idx) => (
                                       <img
                                         key={idx}
-                                        src={imageApi + menu_img.image_name}
+                                        src={
+                                          APL_LINK +
+                                          ImageLink +
+                                          menu_img.image_name
+                                        }
                                         alt="menu_img"
                                       />
                                     ))}
                                 </div>
                               </div>
                             </div>
-                            <Reviews review={reviews} totalReview={detail} />
+                            {detail.review && detail.review.length > 0 && (
+                              <Reviews
+                                tabOpen={activeTab}
+                                review={detail.review}
+                                venuedata={detail}
+                                like_data={like_data}
+                              />
+                            )}
                             <div className="see_more_reviews">
                               <Link onClick={() => setActiveTab("reviews")}>
                                 See more reviews (
@@ -660,13 +675,37 @@ const DetailedVenue = () => {
                         </div>
                       )}
                       {activeTab === "menu" && (
-                        <div>
-                          <Menu />
+                        <div className="menu_wrapper">
+                          <div className="menu_wrapper_heading mt-2 mb-2">
+                            <h3>Restaurant Menu</h3>
+                          </div>
+                          <div className="row">
+                            <div className="menu_image_wrapper col-xs-3">
+                              {detail.menuimages &&
+                                detail.menuimages.length > 0 &&
+                                detail.menuimages.map((menu_img, idx) => (
+                                  <img
+                                    key={idx}
+                                    src={
+                                      APL_LINK + ImageLink + menu_img.image_name
+                                    }
+                                    alt="menu_img"
+                                  />
+                                ))}
+                            </div>
+                          </div>
                         </div>
                       )}
                       {activeTab === "reviews" && (
                         <div>
-                          <Reviews review={reviews} totalReview={detail} />
+                          {detail.review && detail.review.length > 0 && (
+                            <Reviews
+                              tabOpen={activeTab}
+                              review={detail.review}
+                              like_data={like_data}
+                              venuedata={detail}
+                            />
+                          )}
                         </div>
                       )}
                     </div>

@@ -20,7 +20,6 @@ import Footer from "./Footer";
 import {
   server_post_data,
   get_landingpage_webapp,
-  imageApi,
   save_favourite,
   APL_LINK,
 } from "../ServiceConnection/serviceconnection.js";
@@ -361,7 +360,9 @@ function Home() {
                           <div className="popularVenues_venue_container">
                             <div className="venue_image_holder">
                               <img
-                                src={imageApi + venue.restaurant_image}
+                                src={
+                                  APL_LINK + ImageLink + venue.restaurant_image
+                                }
                                 alt="venueImg"
                               />
                               <button
@@ -470,7 +471,9 @@ function Home() {
                         <div className="popularVenues_venue_container">
                           <div className="venue_image_holder">
                             <img
-                              src={imageApi + venue.restaurant_image}
+                              src={
+                                APL_LINK + ImageLink + venue.restaurant_image
+                              }
                               alt="venueImg"
                             />
                             <button
@@ -537,7 +540,9 @@ function Home() {
                           <div className="popularVenues_venue_container">
                             <div className="venue_image_holder">
                               <img
-                                src={imageApi + venue.restaurant_image}
+                                src={
+                                  APL_LINK + ImageLink + venue.restaurant_image
+                                }
                                 alt="venueImg"
                               />
                               <button

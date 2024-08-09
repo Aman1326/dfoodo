@@ -26,7 +26,6 @@ const get_restropage_webapp =
 const get_landingpage_webapp =
   local_server_link_react + "get_landingpage_webapp/";
 
-const imageApi = APL_LINK + "assets/";
 
 const get_all_timing_date_wise =
   local_server_link_back + "get_all_timing_date_wise";
@@ -34,6 +33,8 @@ const get_all_timing_date_wise =
 const create_table_reservation_website =
   local_server_link_react + "create_table_reservation_website";
 const customer_login = local_server_link_react + "guest_login/";
+const save_like = local_server_link_react + "save_like/";
+const save_review = local_server_link_react + "save_review/";
 const customer_id = retrieveData("customer_id");
 const country_name = "India";
 const city_name = "Bhopal";
@@ -63,7 +64,6 @@ export {
   save_restaurantOwnerdetails,
   update_profile,
   get_landingpage_webapp,
-  imageApi,
   get_restropage_webapp,
   get_categorypage_webapp,
   get_profile,
@@ -74,4 +74,6 @@ export {
   get_all_timing_date_wise,
   create_table_reservation_website,
   customer_login,
+  save_review,
+  save_like,
 };
