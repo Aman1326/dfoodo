@@ -32,7 +32,7 @@ import contactus from "../Assets/averagePrice.svg";
 import {
   server_post_data,
   save_favourite,
-  get_restropage_webapp,
+  get_categorypage_webapp,
   get_filter_data,
   APL_LINK,
 } from "../ServiceConnection/serviceconnection";
@@ -61,7 +61,7 @@ const Venue = () => {
     setshowLoaderAdmin(true);
     const fd = new FormData();
     fd.append("current_url", "/" + currentUrl);
-    await server_post_data(get_restropage_webapp, fd)
+    await server_post_data(get_categorypage_webapp, fd)
       .then((Response) => {
         console.log("catagory dta", Response.data.message.restro);
 

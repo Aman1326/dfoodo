@@ -43,18 +43,23 @@ import {
   handleError,
   formatDateStringdot,
 } from "../CommonJquery/CommonJquery.js";
-let customer_id = "1";
-let customer_name = "shubham jain";
-let customer_mobile_no = "8120473991";
-let customer_email = "shubhamj@gmail.com";
+import { retrieveData } from "../LocalConnection/LocalConnection.js";
+let customer_id = "0";
+let customer_name = "";
+let customer_mobile_no = "";
+let customer_email = "";
 const DetailedVenue = () => {
+  customer_id = retrieveData("customer_id");
+  customer_name = retrieveData("customer_name");
+  customer_mobile_no = retrieveData("customer_mobile_no");
+  customer_email = retrieveData("customer_email");
   const location = useLocation();
   const [showLoader, setShowLoader] = useState(false);
+  const [showLoaderAdmin, setshowLoaderAdmin] = useState(false);
   const currentUrl = location.pathname.substring(1);
   const [detail, setDetail] = useState([]);
   const [reviews, setreviews] = useState([]);
   const [breadcrumbs, setBreadcrumbs] = useState([]);
-  // react tabs:
   const [activeTab, setActiveTab] = useState("about");
   const [data, setData] = useState([]);
   const [selectedDate, setSelectedDate] = useState(null);
@@ -76,7 +81,6 @@ const DetailedVenue = () => {
     setShowLoader(true);
     setData(null);
     var form_data = new FormData();
-
     form_data.append("special_date", date_for_book);
     form_data.append("reservation_id", "0");
     await server_post_data(get_all_timing_date_wise, form_data)
@@ -224,7 +228,7 @@ const DetailedVenue = () => {
   const value_date = dayjs();
 
   const master_data_get = async () => {
-    // setshowLoaderAdmin(true);
+    setshowLoaderAdmin(true);
     const fd = new FormData();
     fd.append("current_url", "/" + currentUrl);
     fd.append("customer_id", customer_id);
@@ -254,10 +258,10 @@ const DetailedVenue = () => {
           ];
           setBreadcrumbs(newBreadcrumbs);
         }
-        // setshowLoaderAdmin(false);
+        setshowLoaderAdmin(false);
       })
       .catch((error) => {
-        // setshowLoaderAdmin(false);
+        setshowLoaderAdmin(false);
       });
   };
 
@@ -374,7 +378,6 @@ const DetailedVenue = () => {
         if (Response.data.error) {
           handleError(Response.data.message);
         } else {
-          handleclickbackstep(0, "");
           setshowmsgforbook(Response.data.message);
           setCurrentStep(5);
         }
@@ -388,7 +391,6 @@ const DetailedVenue = () => {
   const greyBackgroundClass = currentStep === 4 ? "greyBackground" : "";
 
   const toggleModal = () => {
-    console.log("ssr");
     setIsModalVisible(!isModalVisible);
   };
   const closeModal = () => {
@@ -530,10 +532,10 @@ const DetailedVenue = () => {
                             <h6>{detail.restaurant_name}</h6>
                             <p>{detail.restaurant_full_adrress}</p>
                           </div>
-                          <div className="first_row_black_section_carousel">
+                          {/* <div className="first_row_black_section_carousel">
                             <p>1.16 km</p>
                             <img src={locationsvg} alt="location" />
-                          </div>
+                          </div> */}
                         </span>
                         <span className="first_row_black_section_carousel align-items-center">
                           <div className="french_text">
@@ -716,7 +718,7 @@ const DetailedVenue = () => {
                         {currentStep === 1 && (
                           <div className="d-flex backgrwh">
                             <span className="steps firstStep">
-                              <span className="d-flex">
+                              <span className="display_contents">
                                 <img src={calendarfrom} alt="calendarfrom" />
                                 <p>Date</p>
                               </span>
@@ -727,14 +729,21 @@ const DetailedVenue = () => {
                         {currentStep === 2 && (
                           <div className="d-flex">
                             <span className="steps">
-                              <img src={calendarfrom} alt="calendarfrom" />
-                              <p>Date</p>
-                              <img
-                                src={rightArrowWhite}
-                                alt="rightArrowWhite"
-                                className="rightArrowWhite"
-                              />
-                              <img src={timerClock} alt="timerClock" />
+                              <span
+                                className="display_contents"
+                                onClick={() => handleclickbackstep(0, "")}
+                              >
+                                <img src={calendarfrom} alt="calendarfrom" />
+                                <p>Date</p>
+                              </span>
+                              <span className="display_contents">
+                                <img
+                                  src={rightArrowWhite}
+                                  alt="rightArrowWhite"
+                                  className="rightArrowWhite"
+                                />
+                                <img src={timerClock} alt="timerClock" />
+                              </span>
                             </span>
                             <div class="rhombus"></div>
                           </div>
@@ -742,46 +751,77 @@ const DetailedVenue = () => {
                         {currentStep === 3 && (
                           <div className="d-flex">
                             <span className="steps">
-                              <img src={calendarfrom} alt="calendarfrom" />
-                              <p>Date</p>
-                              <img
-                                src={rightArrowWhite}
-                                alt="rightArrowWhite"
-                                className="rightArrowWhite"
-                              />
-                              <img src={timerClock} alt="timerClock" />
-                              <img
-                                src={rightArrowWhite}
-                                alt="rightArrowWhite"
-                                className="rightArrowWhite"
-                              />
+                              <span
+                                className="display_contents"
+                                onClick={() => handleclickbackstep(0, "")}
+                              >
+                                <img src={calendarfrom} alt="calendarfrom" />
+                                <p>Date</p>
+                                <img
+                                  src={rightArrowWhite}
+                                  alt="rightArrowWhite"
+                                  className="rightArrowWhite"
+                                />
+                              </span>
+                              <span
+                                className="display_contents"
+                                onClick={() => handleclickbackstep(1, "")}
+                              >
+                                <img src={timerClock} alt="timerClock" />
+                                <img
+                                  src={rightArrowWhite}
+                                  alt="rightArrowWhite"
+                                  className="rightArrowWhite"
+                                />
+                              </span>
                               <img src={personCalendar} alt="personCalendar" />
                             </span>
                             <div class="rhombus"></div>
                           </div>
                         )}
-                        {currentStep === 5 && (
+                        {currentStep === 4 && (
                           <div className="d-flex">
                             <span className="steps">
-                              <img src={calendarfrom} alt="calendarfrom" />
-                              <p>Date</p>
-                              <img
-                                src={rightArrowWhite}
-                                alt="rightArrowWhite"
-                                className="rightArrowWhite"
-                              />
-                              <img src={timerClock} alt="timerClock" />
-                              <img
-                                src={rightArrowWhite}
-                                alt="rightArrowWhite"
-                                className="rightArrowWhite"
-                              />
-                              <img src={personCalendar} alt="personCalendar" />
-                              <img
-                                src={rightArrowWhite}
-                                alt="rightArrowWhite"
-                                className="rightArrowWhite"
-                              />
+                              <span className="display_contents">
+                                <img
+                                  src={calendarfrom}
+                                  alt="calendarfrom"
+                                  onClick={() => handleclickbackstep(0, "")}
+                                />
+                                <p>Date</p>
+                                <img
+                                  src={rightArrowWhite}
+                                  alt="rightArrowWhite"
+                                  className="rightArrowWhite"
+                                />
+                              </span>
+                              <span
+                                className="display_contents"
+                                onClick={() => handleclickbackstep(1, "")}
+                              >
+                                <img src={timerClock} alt="timerClock" />
+                                <img
+                                  src={rightArrowWhite}
+                                  alt="rightArrowWhite"
+                                  className="rightArrowWhite"
+                                />
+                              </span>
+                              <span
+                                className="display_contents"
+                                onClick={() =>
+                                  handleclickbackstep(2, selectedGuest)
+                                }
+                              >
+                                <img
+                                  src={personCalendar}
+                                  alt="personCalendar"
+                                />
+                                <img
+                                  src={rightArrowWhite}
+                                  alt="rightArrowWhite"
+                                  className="rightArrowWhite"
+                                />
+                              </span>
                               <img src={preview} alt="preview" />
                             </span>
                             <div class="square"></div>
@@ -811,8 +851,8 @@ const DetailedVenue = () => {
                             </h6>
                             <div className="">
                               <span className="venuePage_venue_capacity_wrapper">
-                                <div className="time_discount_container_detailedVenue">
-                                  {data !== null &&
+                                <div className="time_discount_container_detailedVenue center-allign">
+                                  {errorform.error == true && data !== null ? (
                                     data.map((item, index) => {
                                       if (item.start_stop_time_status === 0) {
                                         if (
@@ -877,7 +917,12 @@ const DetailedVenue = () => {
                                           );
                                         }
                                       }
-                                    })}
+                                    })
+                                  ) : (
+                                    <div className="time_discount_section padding_no_show_msg">
+                                      {errormsg}
+                                    </div>
+                                  )}
                                 </div>
                               </span>
                             </div>
@@ -940,10 +985,7 @@ const DetailedVenue = () => {
                             <h6 className="calendar_modal_heading">
                               Number of Children
                             </h6>
-                            {/* <input
-                          type="phone"
-                          placeholder="Enter no of children.."
-                        /> */}
+
                             <div className="resrvDateSelect">
                               <ul>
                                 {Array.from(
