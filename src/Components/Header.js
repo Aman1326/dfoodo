@@ -238,6 +238,7 @@ function Header() {
   const [city, setCity] = useState("");
   const [error, setError] = useState(null);
   const [state, setState] = useState("");
+  const [cities, setCities] = useState([]);
   const detectLocation = () => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
@@ -278,6 +279,7 @@ function Header() {
 
       if (state) {
         setState(state);
+        fetchCitiesInState(state);
       } else {
         setError("State not found");
       }
@@ -286,6 +288,129 @@ function Header() {
     }
   };
 
+  const fetchCitiesInState = async (stateName) => {
+    try {
+      const response = await axios.get(
+        `https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/place/textsearch/json?query=city+in+${stateName}&key=YOUR_GOOGLE_MAPS_API_KEY`
+      );
+
+      const cities = response.data.results.map(
+        (result) => result.formatted_address.split(",")[0]
+      );
+      setCities(cities);
+    } catch (error) {
+      console.error(error);
+      setError("Failed to retrieve cities");
+    }
+  };
+
+  const citiesInMadhyaPradesh = [
+    "Bhopal",
+    "Indore",
+    "Gwalior",
+    "Jabalpur",
+    "Ujjain",
+    "Sagar",
+    "Satna",
+    "Ratlam",
+    "Rewa",
+    "Dewas",
+    "Murwara (Katni)",
+    "Khandwa",
+    "Chhindwara",
+    "Guna",
+    "Vidisha",
+    "Shivpuri",
+    "Chhatarpur",
+    "Seoni",
+    "Dhar",
+    "Hoshangabad",
+    "Itarsi",
+    "Mandsaur",
+    "Damoh",
+    "Khargone",
+    "Neemuch",
+    "Pithampur",
+    "Singrauli",
+    "Burhanpur",
+    "Chhatarpur",
+    "Sehore",
+    "Bhind",
+    "Datia",
+    "Mandla",
+    "Narsinghpur",
+    "Betul",
+    "Shahdol",
+    "Harda",
+    "Dindori",
+    "Shajapur",
+    "Tikamgarh",
+    "Rajgarh",
+    "Umaria",
+    "Anuppur",
+    "Sheopur",
+    "Barwani",
+    "Raisen",
+    "Morena",
+    "Sidhi",
+    "Balaghat",
+    "Ashok Nagar",
+    "Agar Malwa",
+    "Alirajpur",
+    "Singrauli",
+    "Bina-Etawa",
+    "Nagda",
+  ];
+
+  const [buttonClick, setButtonClick] = useState(false);
+
+  const handleButtonClicked = () => {
+    if (buttonClick === false) {
+      setButtonClick(true);
+    } else {
+      setButtonClick(false);
+    }
+  };
+
+  //goole cities, states mapped
+  useEffect(() => {
+    try {
+      const input = document.getElementById("searchInput");
+      const autocomplete = new window.google.maps.places.Autocomplete(input, {
+        types: ["(cities)"], // Restrict results to cities
+      });
+
+      autocomplete.addListener("place_changed", function () {
+        const place = autocomplete.getPlace();
+        let full_address = place.address_components;
+        let length_data = place.address_components.length;
+        let citys = "";
+        let state = "";
+        let country = "";
+        let tehsil = "";
+
+        for (let i = 0; i < length_data; i++) {
+          if (full_address[i].types[0] === "administrative_area_level_1") {
+            state = full_address[i].long_name;
+          } else if (full_address[i].types[0] === "country") {
+            country = full_address[i].long_name;
+          } else if (
+            full_address[i].types[0] === "administrative_area_level_2"
+          ) {
+            citys = full_address[i].long_name;
+          } else if (full_address[i].types[0] === "locality") {
+            tehsil = full_address[i].long_name;
+          }
+        }
+        if (tehsil !== "") {
+          citys = tehsil;
+        }
+        document.getElementById("admin_city").value = citys;
+        document.getElementById("admin_state").value = state;
+        document.getElementById("admin_country").value = country;
+      });
+    } catch (error) {}
+  }, []);
   return (
     <>
       <div className="upper_header_wrapper">
@@ -327,8 +452,8 @@ function Header() {
                     onClick={() => handleShowLocationModal()}
                   >
                     <label>
-                      <img src={locationsssss} alt="location" />{" "}
-                      {city ? city : <img src={dropDown} alt="dropDown" />}
+                      <img src={locationsssss} alt="location" /> {city && city}{" "}
+                      <img src={dropDown} alt="dropDown" />
                     </label>
                   </span>
                 )}
@@ -568,7 +693,58 @@ function Header() {
             <div className="row section_modal_heading">
               <div className="seachVenue_section_searchbar seachVenue_section_searchbar_headerlocation col-md-12">
                 <img src={searchIcon} alt="search icon" />
-                <input placeholder="Search for your city" />
+                <input
+                  className="form-control trio_mandatory "
+                  name="searchInput"
+                  id="searchInput"
+                  maxLength={30}
+                  onInput={handleAphabetsChange}
+                  placeholder="Search for your city"
+                />
+              </div>
+              <div className="form-row hidden" style={{ display: "none" }}>
+                <div className="col-md-12 mb-3">
+                  <label htmlFor="validationCustom01"> City</label>
+                  <input
+                    type="text"
+                    className="form-control  searchInput_google"
+                    name="admin_city"
+                    id="admin_city"
+                    maxLength={200}
+                    onInput={handleAphabetsChange}
+                    placeholder="Enter City"
+                    // defaultValue={editBlogData.city || ""}
+                  />
+                  <span className="condition_error"></span>
+                </div>
+                <div className="col-md-3 mb-3">
+                  <label htmlFor="validationCustom01"> State</label>
+                  <input
+                    type="text"
+                    className="form-control  "
+                    name="admin_state"
+                    id="admin_state"
+                    maxLength={45}
+                    onInput={handleAphabetsChange}
+                    placeholder="Enter State"
+                    // defaultValue={editBlogData.state || ""}
+                  />
+                  <span className="condition_error"></span>
+                </div>
+                <div className="col-md-3 mb-3">
+                  <label htmlFor="validationCustom01">Country</label>
+                  <input
+                    type="text"
+                    className="form-control  "
+                    name="admin_country"
+                    id="admin_country"
+                    maxLength={45}
+                    onInput={handleAphabetsChange}
+                    placeholder="Enter Country"
+                    // defaultValue={editBlogData.country || ""}
+                  />
+                  <span className="condition_error"></span>
+                </div>
               </div>
               <div
                 className="d-flex col-lg-12 location_wrapper_headerModal"
@@ -578,8 +754,6 @@ function Header() {
                 <h6>Detect my Location</h6>
               </div>
               <div className="popular_cities_header">
-                <h6>Popular Cities</h6>
-
                 {error && <p>Error: {error}</p>}
                 {detectLocations.latitude && detectLocations.longitude && (
                   <p>
@@ -593,7 +767,22 @@ function Header() {
             </div>
           </Modal.Title>
         </Modal.Header>
-        <Modal.Body></Modal.Body>
+        <Modal.Body>
+          <button onClick={handleButtonClicked} className="loginButton">
+            {buttonClick ? "Hide Cities " : "Show Cities"}
+          </button>
+          {citiesInMadhyaPradesh.length > 0 && buttonClick && (
+            <div className="mapped_cities_wrapper">
+              <ul className="cities_mapped">
+                {citiesInMadhyaPradesh.map((cityName, index) => (
+                  <li key={index}>
+                    {cityName} {"|"}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+        </Modal.Body>
       </Modal>
     </>
   );

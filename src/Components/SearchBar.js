@@ -11,7 +11,7 @@ import "react-date-picker/dist/DatePicker.css";
 import "react-calendar/dist/Calendar.css";
 import DatePicker from "react-date-picker";
 import line from "../Assets/line.svg";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import {
   handleError,
   handleIaphabetnumberChange,
@@ -29,7 +29,6 @@ const SearchBar = () => {
     // Add more locations as needed
   ];
   const [selectedLocation, setSelectedLocation] = useState(null);
-
   const customStyles = {
     control: (provided) => ({
       ...provided,
@@ -99,6 +98,9 @@ const SearchBar = () => {
   };
   const [isSearchActive, setisSearchActive] = useState(false);
   const [newproducts, setnewproducts] = useState([]);
+
+  const location_for_display_none = useLocation();
+
   return (
     <>
       <div className="searchBar_wrapper">

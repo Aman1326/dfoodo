@@ -320,7 +320,7 @@
 .seachVenue_section_searchbar_headerlocation {
     border: 1px solid lightgray;
     width: 100%;
-    padding: 0.5rem 1rem !important;
+    padding: 0.3rem 1rem !important;
     font-family: "Roboto";
     margin-bottom: 1rem;
     border-radius: 5px;
@@ -339,6 +339,7 @@
     padding: 0.3rem 1rem;
     margin-bottom: 0.5rem;
     align-items: center;
+    background-color: var(--light-pink);
 
     img {
         background-color: var(--primary-color);
@@ -351,6 +352,13 @@
         font-weight: 400;
         margin-bottom: 0;
     }
+}
+
+.location_wrapper_headerModal:hover {
+    background-color: var(--primary-color);
+    color: var(--white);
+    transition: 0.3s ease-in-out;
+    opacity: 0.9;
 }
 
 .popular_cities_header {
@@ -371,4 +379,29 @@
 
 .wifth_chckbox {
     width: 20px !important;
+}
+
+.mapped_cities_wrapper {
+    font-family: "Roboto";
+    margin-top: 2rem;
+}
+
+.cities_mapped {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.3rem;
+    list-style-type: none;
+    font-size: 14px;
+    font-family: "Roboto";
+
+    li:hover {
+        text-decoration: underline;
+        cursor: pointer;
+
+    }
+
+    li {
+        color: var(--text-grey);
+    }
+
 }
