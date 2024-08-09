@@ -13,6 +13,8 @@ import SearchBar from "./SearchBar";
 import searchIcon from "../Assets/searchIcon.svg.svg";
 import locationIcon from "../Assets/locationIconHeader.svg";
 import $ from "jquery";
+import dropDown from "../Assets/downArrowBlack.svg";
+import axios from "axios";
 import {
   handleAphabetsChange,
   handleEmailChange,
@@ -226,6 +228,63 @@ function Header() {
       window.removeEventListener("resize", handleResize);
     };
   }, []);
+
+  //detect my location
+  const [detectLocations, setdetectLocations] = useState({
+    latitude: null,
+    longitude: null,
+  });
+  const [city, setCity] = useState("");
+  const [error, setError] = useState(null);
+  const [state, setState] = useState("");
+  const detectLocation = () => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const latitude = position.coords.latitude;
+          const longitude = position.coords.longitude;
+          setdetectLocations({ latitude, longitude });
+
+          // Reverse Geocoding to find city and state
+          getCityAndStateFromCoordinates(latitude, longitude);
+        },
+        (err) => {
+          setError(err.message);
+        }
+      );
+    } else {
+      setError("Geolocation is not supported by this browser.");
+    }
+  };
+
+  const getCityAndStateFromCoordinates = async (latitude, longitude) => {
+    try {
+      const response = await axios.get(
+        `https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}`
+      );
+
+      const city =
+        response.data.address.city ||
+        response.data.address.town ||
+        response.data.address.village;
+      const state = response.data.address.state;
+
+      if (city) {
+        setCity(city);
+      } else {
+        setError("City not found");
+      }
+
+      if (state) {
+        setState(state);
+      } else {
+        setError("State not found");
+      }
+    } catch (error) {
+      setError("Failed to retrieve location details");
+    }
+  };
+
   return (
     <>
       <div className="upper_header_wrapper">
@@ -262,7 +321,8 @@ function Header() {
                 {location.pathname !== "/onBoarding" && (
                   <span className="dropdown1" onClick={handleShowLocationModal}>
                     <label>
-                      <img src={locationsssss} alt="location" /> Bhopal
+                      <img src={locationsssss} alt="location" />{" "}
+                      {city ? city : <img src={dropDown} alt="dropDown" />}
                     </label>
                   </span>
                 )}
@@ -497,12 +557,25 @@ function Header() {
                 <img src={searchIcon} alt="search icon" />
                 <input placeholder="Search for your city" />
               </div>
-              <div className="d-flex col-lg-12 location_wrapper_headerModal">
+              <div
+                className="d-flex col-lg-12 location_wrapper_headerModal"
+                onClick={detectLocation}
+              >
                 <img src={locationIcon} alt="locationIcon" />
                 <h6>Detect my Location</h6>
               </div>
               <div className="popular_cities_header">
                 <h6>Popular Cities</h6>
+
+                {error && <p>Error: {error}</p>}
+                {detectLocations.latitude && detectLocations.longitude && (
+                  <p>
+                    Latitude: {detectLocations.latitude}, Longitude:{" "}
+                    {detectLocations.longitude}
+                  </p>
+                )}
+                {city && <p>City: {city}</p>}
+                {state && <p>State: {state}</p>}
               </div>
             </div>
           </Modal.Title>
