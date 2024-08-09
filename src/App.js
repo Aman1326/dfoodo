@@ -41,11 +41,8 @@ function App() {
   );
 }
 /**
- * DetailedVenue.js
- * Menu.js
  * OnBoarding.js
  * ProfilePage.js
- * Reviews.js
  * SearchBar.js
  * Venue.js
  */
