@@ -19,6 +19,7 @@ import {
   handleAphabetsChange,
   handleEmailChange,
   handleError,
+  handleLinkClick,
   handleNumbersChange,
   make_image_from_letter,
   validateEmail,
@@ -292,20 +293,22 @@ function Header() {
           {location.pathname !== "/onBoarding" && !isMobile && (
             <div className="upper_header_container ">
               {" "}
-              <Link to="/registerMyVenue">List My Restaurant</Link>
-              <Link to="/getHelp">Get help</Link>
+              <Link onClick={() => handleLinkClick("/registerMyVenue")}>
+                List My Restaurant
+              </Link>
+              <Link onClick={() => handleLinkClick("/getHelp")}>Get help</Link>
               {/* <p>EN</p> */}
             </div>
           )}
         </div>
       </div>
-      <nav class="navbar stickyHeader navbar-expand-lg bg-body-tertiary">
-        <div class="container-lg">
-          <Link class="navbar-brand" to="/">
+      <nav className="navbar stickyHeader navbar-expand-lg bg-body-tertiary">
+        <div className="container-lg">
+          <Link className="navbar-brand" onClick={() => handleLinkClick("/")}>
             <img src={mainLogo} alt="mainLogo" width={150} />
           </Link>
           <button
-            class="navbar-toggler"
+            className="navbar-toggler"
             type="button"
             data-bs-toggle="collapse"
             data-bs-target="#navbarScroll"
@@ -313,13 +316,16 @@ function Header() {
             aria-expanded="false"
             aria-label="Toggle navigation"
           >
-            <span class="navbar-toggler-icon"></span>
+            <span className="navbar-toggler-icon"></span>
           </button>
-          <div class="collapse navbar-collapse" id="navbarScroll">
-            <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll">
-              <li class="nav-item">
+          <div className="collapse navbar-collapse" id="navbarScroll">
+            <ul className="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll">
+              <li className="nav-item">
                 {location.pathname !== "/onBoarding" && (
-                  <span className="dropdown1" onClick={handleShowLocationModal}>
+                  <span
+                    className="dropdown1"
+                    onClick={() => handleShowLocationModal()}
+                  >
                     <label>
                       <img src={locationsssss} alt="location" />{" "}
                       {city ? city : <img src={dropDown} alt="dropDown" />}
@@ -327,7 +333,7 @@ function Header() {
                   </span>
                 )}
               </li>
-              <li class="nav-item"></li>
+              <li className="nav-item"></li>
             </ul>
             {searchShow && (
               <div className="row m-auto">
@@ -336,14 +342,14 @@ function Header() {
                 </div>
               </div>
             )}
-            <form class="d-flex mobile_wrapper_header" role="search">
-              <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll">
-                <li class="nav-item dropdown">
+            <form className="d-flex mobile_wrapper_header" role="search">
+              <ul className="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll">
+                <li className="nav-item dropdown">
                   <div className="mobile_phone_container">
                     {location.pathname !== "/onBoarding" && (
                       <a
-                        class="nav-link dropdown-toggle"
-                        onClick={handleOpenModal}
+                        className="nav-link dropdown-toggle"
+                        onClick={() => handleOpenModal()}
                       >
                         <img src={phone} alt=" phone" /> MOBILE
                       </a>
@@ -354,13 +360,17 @@ function Header() {
                   {location.pathname !== "/onBoarding" && isMobile && (
                     <div className="upper_header_container_mobile">
                       {" "}
-                      <Link to="/registerMyVenue">List My Restaurant</Link>
-                      <Link to="/getHelp">Get help</Link>
+                      <Link onClick={() => handleLinkClick("/registerMyVenue")}>
+                        List My Restaurant
+                      </Link>
+                      <Link onClick={() => handleLinkClick("/getHelp")}>
+                        Get help
+                      </Link>
                       {/* <p>EN</p> */}
                     </div>
                   )}
                 </li>
-                <li class="nav-item"></li>
+                <li className="nav-item"></li>
               </ul>
               {!profileShow && (
                 <Link
@@ -370,13 +380,16 @@ function Header() {
                     alignItems: "center",
                     width: "fitContent",
                   }}
-                  onClick={handleOpenLoginModal}
+                  onClick={() => handleOpenLoginModal()}
                 >
                   <p>Login</p>
                 </Link>
               )}
               {profileShow && (
-                <Link to="/profile" id="image_from_letter">
+                <Link
+                  onClick={() => handleLinkClick("/profile")}
+                  id="image_from_letter"
+                >
                   <img
                     src={make_image_from_letter(customer_name)}
                     onError={(e) => {

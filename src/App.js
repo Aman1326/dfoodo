@@ -32,7 +32,7 @@ function App() {
           <Route path="termsOfUse" element={<TermsOfuse />} />
           <Route path="privacyPolicy" element={<PrivacyPolicy />} />
 
-          <Route path="restro/:catagory/:id" element={<Venue />} />
+          <Route path="restro/catagory_detail/:id" element={<Venue />} />
           <Route path="restro/restro_detail/:id" element={<DetailedVenue />} />
           <Route path="blog/blog_detail/:id" element={<Blog2 />} />
         </Routes>
@@ -40,5 +40,13 @@ function App() {
     </div>
   );
 }
-
+/**
+ * DetailedVenue.js
+ * Menu.js
+ * OnBoarding.js
+ * ProfilePage.js
+ * Reviews.js
+ * SearchBar.js
+ * Venue.js
+ */
 export default App;

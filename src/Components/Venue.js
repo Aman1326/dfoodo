@@ -32,38 +32,36 @@ import contactus from "../Assets/averagePrice.svg";
 import {
   server_post_data,
   save_favourite,
-  get_restropage_webapp,
+  get_categorypage_webapp,
   get_filter_data,
   APL_LINK,
 } from "../ServiceConnection/serviceconnection";
-import { handleError, handleLinkClick } from "../CommonJquery/CommonJquery.js";
-
-let login_flag_res = "0";
-let customer_id = "1";
-let customer_name = "0";
-let customer_mobile_no = "0";
-let customer_email = "0";
+import {
+  formatTimeintotwodigit,
+  handleError,
+  handleLinkClick,
+} from "../CommonJquery/CommonJquery.js";
+import { retrieveData } from "../LocalConnection/LocalConnection.js";
+let customer_id = "0";
 const Venue = () => {
+  customer_id = retrieveData("customer_id");
   const location = useLocation();
   const currentUrl = location.pathname.substring(1);
-
   const [GetVenueData, SetVenueData] = useState([]);
-
   const [showLoaderAdmin, setshowLoaderAdmin] = useState([]);
   const [numberOfVenuesFound, setNumberOfVenuesFound] = useState(0);
-
+  const [ImageLink, setImageLink] = useState("");
   const [HeartImg, setHeartImages] = useState([]);
-
+  const [rupees_icon_left, setrupees_icon_left] = useState("");
+  const [rupees_icon_right, setrupees_icon_right] = useState([]);
   const [breadcrumbs, setBreadcrumbs] = useState([]);
   const [getfiltersData, setfiltersData] = useState([]);
-
-  const master_data_get = async (category_id) => {
+  const [SEOloop, setSEOloop] = useState([]);
+  const master_data_get = async () => {
     setshowLoaderAdmin(true);
     const fd = new FormData();
     fd.append("current_url", "/" + currentUrl);
-    fd.append("category_id", "category_id");
-    fd.append("call_id", "1");
-    await server_post_data(get_restropage_webapp, fd)
+    await server_post_data(get_categorypage_webapp, fd)
       .then((Response) => {
         console.log("catagory dta", Response.data.message.restro);
 
@@ -72,15 +70,15 @@ const Venue = () => {
         } else {
           const venues = Response.data.message.restro || [];
           SetVenueData(venues);
-
           setHeartImages(Response.data.message.favourite || []);
-
+          setImageLink(Response.data.message.image_link);
           setNumberOfVenuesFound(venues.length);
+          setrupees_icon_left(Response.data.message.rupees_icon_left);
+          setrupees_icon_right(Response.data.message.rupees_icon_right);
+          setSEOloop(Response.data.message.data_seo);
           const restroData = Response.data.message.restro || [];
           const venueData = restroData[0] || {};
           const catagoryData = restroData[0].category[0] || {};
-          console.log("tarun", catagoryData);
-
           // Extract categories
           const newBreadcrumbs = [
             { name: "Home", path: "/" },
@@ -106,8 +104,6 @@ const Venue = () => {
     setshowLoaderAdmin(true);
     const fd = new FormData();
     fd.append("current_url", "/" + currentUrl);
-    fd.append("category_id", "category_id");
-    fd.append("call_id", "1");
     await server_post_data(get_filter_data, fd)
       .then((Response) => {
         console.log(Response.data.message);
@@ -122,10 +118,8 @@ const Venue = () => {
         setshowLoaderAdmin(false);
       });
   };
-  // console.log(get_filter_data);
   useEffect(() => {
     master_data_get();
-    master_filter_data_get();
   }, []);
 
   const filters = [
@@ -206,24 +200,12 @@ const Venue = () => {
   const [selectedTab, setSelectedTab] = useState(0);
 
   // Toggle the like state for a specific venue
-  const handleHeartClick = async (venueId) => {
-    try {
-      // Assuming you have a function to handle save changes dynamically
-      await handleSaveChangesdynamic(venueId);
-
-      // Toggle favorite status
-      const updatedFavorites = HeartImg.some(
-        (fav) => fav.restaurant_id === venueId
-      )
-        ? HeartImg.filter((fav) => fav.restaurant_id !== venueId) // Remove from favorites
-        : [...HeartImg, { restaurant_id: venueId }];
-
-      // Update state with the new list of favorites
-      setHeartImages(updatedFavorites);
-
-      // Optionally, you can update the backend or local storage here
-    } catch (error) {
-      console.error("Error updating favorite status:", error);
+  const handleHeartClick = (venueId) => {
+    if (customer_id !== "0") {
+      handleSaveChangesdynamic(venueId);
+    } else {
+      var event = new CustomEvent("customEvent");
+      document.getElementById("login_check_jquery").dispatchEvent(event);
     }
   };
 
@@ -231,24 +213,33 @@ const Venue = () => {
     return HeartImg.some((fav) => fav.restaurant_id === venueId);
   };
 
-  const handleSaveChangesdynamic = async (id) => {
-    // seterror_show("");
+  const handleSaveChangesdynamic = async (venueId) => {
     const form_data = new FormData();
-
-    form_data.append("venue_id", id);
-    form_data.append("customer_id", "1");
-    form_data.append("flag", "0");
+    form_data.append("venue_id", venueId);
     await server_post_data(save_favourite, form_data)
       .then((Response) => {
         if (Response.data.error) {
           handleError(Response.data.message);
+        } else {
+          try {
+            const updatedFavorites = HeartImg.some(
+              (fav) => fav.restaurant_id === venueId
+            )
+              ? HeartImg.filter((fav) => fav.restaurant_id !== venueId) // Remove from favorites
+              : [...HeartImg, { restaurant_id: venueId }];
+
+            // Update state with the new list of favorites
+            setHeartImages(updatedFavorites);
+          } catch (error) {
+            console.error("Error updating favorite status:", error);
+          }
         }
       })
       .catch((error) => {
         console.log(error);
       });
   };
-  const [SEOloop, setSEOloop] = useState([]);
+
   const match_and_return_seo_link = (v_id) => {
     let data_seo_link_final = "/restro/restro_detail/" + v_id;
     let data_seo_link = data_seo_link_final;
@@ -266,7 +257,7 @@ const Venue = () => {
 
   return (
     <>
-      <div venue_wrapper>
+      <div>
         <Header />
         {/* venue categories section */}
         <section>
@@ -290,7 +281,10 @@ const Venue = () => {
             <div className="container-lg">
               <div className="filters_wrapper">
                 <ul>
-                  <li onClick={handleShowFilterModal} id="filter_filter_row">
+                  <li
+                    onClick={() => handleShowFilterModal()}
+                    id="filter_filter_row"
+                  >
                     <img src={filter} alt="filter" /> Filter
                   </li>
                   {filters.map((text, index) => (
@@ -334,7 +328,7 @@ const Venue = () => {
                   <div className="popularVenues">
                     <div className="row mt-1">
                       {currentPaginationItems.map((venue, index) => (
-                        <div key={index} className="col-xl-6 col-12 margin24px">
+                        <div key={index} className="col-xl-12 col-12 margin24px" style={{overflow:"hidden"}}>
                           <Link
                             onClick={() => {
                               handleLinkClick(
@@ -348,12 +342,12 @@ const Venue = () => {
                                 <div className="col-sm-5 px-0">
                                   <div className="venuePage_image_container">
                                     <img
-                                      src={`${APL_LINK}/assets/${
-                                        venue.restaurant_image || "default.png"
-                                      }`}
-                                      alt={
-                                        venue.restaurant_name || "Venue Image"
+                                      src={
+                                        APL_LINK +
+                                        ImageLink +
+                                        venue.restaurant_image
                                       }
+                                      alt={venue.restaurant_name}
                                     />
                                     <div className="venuePage_ratingSection">
                                       <p>{venue.rating || "N/A"}</p>
@@ -398,7 +392,9 @@ const Venue = () => {
                                         alt="contactus"
                                         width={15}
                                       />
-                                      Average Price {venue.restaurant_price} ₹
+                                      Average Price {rupees_icon_left}{" "}
+                                      {venue.restaurant_price}{" "}
+                                      {rupees_icon_right}
                                     </h6>
                                     <span className="venuePage_venue_category_titles marginNone">
                                       {venue.amenities?.map(
@@ -420,12 +416,28 @@ const Venue = () => {
                                     </span>
 
                                     <div className="TimingButtons2">
-                                      <div className="timesBtns">
-                                        <p>17:30</p>
-                                        <div className="childtime">
-                                          {venue.discount_upto}%
-                                        </div>
-                                      </div>
+                                      {venue.timing?.map(
+                                        (timeshow, amenityIndex) => (
+                                          <div
+                                            className="timesBtns"
+                                            key={amenityIndex}
+                                          >
+                                            <p>
+                                              {" "}
+                                              {formatTimeintotwodigit(
+                                                timeshow.start_time
+                                              )}
+                                            </p>
+                                            <div className="childtime">
+                                              {timeshow.per_discount > 0 ? (
+                                                <p>-{timeshow.per_discount}%</p>
+                                              ) : (
+                                                <p>N/A</p>
+                                              )}
+                                            </div>
+                                          </div>
+                                        )
+                                      )}
                                     </div>
                                   </div>
                                 </div>

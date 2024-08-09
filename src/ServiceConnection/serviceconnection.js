@@ -1,11 +1,11 @@
 import axios from "axios";
 import { retrieveData } from "../LocalConnection/LocalConnection.js";
-const appauth_key = "logoacedamy@2029";
-let APL_LINK = "http://192.168.1.12:8000/";
+const appauth_key = "dfoodo@2029";
+let APL_LINK = "http://192.168.1.29:8000/";
 let Website_URL = "https://www.dfoodo.com/";
 let local_server_link_react = APL_LINK + "api/web_link/";
 let local_server_link_back = APL_LINK + "api/admin_link/";
-const retrievedAdminId = retrieveData("admin_id");
+
 const get_blog_data_website =
   local_server_link_react + "get_blog_data_website/";
 const blog_details_website = local_server_link_react + "blog_details_website/";
@@ -34,6 +34,10 @@ const get_all_timing_date_wise =
 const create_table_reservation_website =
   local_server_link_react + "create_table_reservation_website";
 const customer_login = local_server_link_react + "guest_login/";
+const customer_id = retrieveData("customer_id");
+const country_name = "India";
+const city_name = "Bhopal";
+
 const server_post_data = async (url_for, form_data) => {
   // const headers = {
   //   "Content-Type": "application/json",
@@ -41,10 +45,10 @@ const server_post_data = async (url_for, form_data) => {
   if (form_data === null) {
     form_data = new FormData();
   }
+  form_data.append("country", country_name);
+  form_data.append("city", city_name);
   form_data.append("appauth_key", appauth_key);
-  if (form_data.get("data_call") !== null) {
-    form_data.append("call_id", retrievedAdminId);
-  }
+  form_data.append("customer_id", customer_id);
   return axios.post(url_for, form_data);
 };
 

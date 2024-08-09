@@ -8,6 +8,7 @@ const AboutUs = () => {
   return (
     <>
       <Header />
+      
       <section className="section_wrapper_aboutus">
         <div className="about-us-background">
           <div className="about-us-overlay">

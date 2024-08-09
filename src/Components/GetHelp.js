@@ -14,8 +14,8 @@ import { Link } from "react-router-dom";
 import {
   server_post_data,
   get_all_faq_website,
-  handleError,
 } from "../ServiceConnection/serviceconnection.js";
+import { handleError } from "../CommonJquery/CommonJquery.js";
 
 const GetHelp = () => {
   const [activeIndex, setActiveIndex] = useState(null);
@@ -32,7 +32,7 @@ const GetHelp = () => {
     await server_post_data(get_all_faq_website, fd)
       .then((Response) => {
         if (Response.data.error) {
-          console.log(Response.data.message);
+          handleError(Response.data.message);
         } else {
           SetFaq(Response.data.message.data);
           if (Response.data.message.data_faq_webite.length > 0) {
@@ -40,7 +40,9 @@ const GetHelp = () => {
           }
         }
       })
-      .catch((error) => {});
+      .catch((error) => {
+        console.log(error);
+      });
   };
   useEffect(() => {
     master_data_get();

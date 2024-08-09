@@ -16,7 +16,6 @@ const TermsOfuse = () => {
       </div>
       <div className="container-lg privacy_policy_headingContainer">
         <h5>
-          {" "}
           Welcome to ShopUp App! These terms and conditions ("Terms") govern
           your use of our ecommerce mobile application (the "App") and the
           services provided therein. By accessing or using the App, you agree to

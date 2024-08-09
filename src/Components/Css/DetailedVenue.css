@@ -143,9 +143,7 @@
 .calenday_modelSubHead {
   margin-top: 0.5rem !important;
   background: rgba(228, 228, 228, 1);
-  width: 90%;
   margin: auto;
-  border-radius: 9px;
   text-align: center;
 }
 
@@ -291,8 +289,7 @@
   padding: 0.2rem 1rem;
   flex-direction: row;
   cursor: pointer;
-  border-top-left-radius: 5px;
-  border-bottom-left-radius: 5px;
+
 
   img {
     width: 20px;
@@ -798,4 +795,18 @@
       margin-top: 0.5rem;
     }
   }
+}
+
+.center-allign {
+  align-content: center;
+}
+
+.padding_no_show_msg {
+  padding: 15px;
+  background-color: #eee !important;
+  color: #666666 !important;
+}
+
+.display_contents {
+  display: contents;
 }
