@@ -62,6 +62,8 @@ const DetailedVenue = () => {
   const [breadcrumbs, setBreadcrumbs] = useState([]);
   const [activeTab, setActiveTab] = useState("about");
   const [data, setData] = useState([]);
+  const [rupees_icon_left, setrupees_icon_left] = useState("");
+  const [rupees_icon_right, setrupees_icon_right] = useState("");
   const [selectedDate, setSelectedDate] = useState(null);
   const [selectedTime, setSelectedTime] = useState(null);
   const [selectedDiscount, setSelectedDiscount] = useState(0);
@@ -238,25 +240,25 @@ const DetailedVenue = () => {
         if (Response.data.error) {
           // handleError(Response.data.message);
         } else {
-          setDetail(Response.data.message.restro[0]);
-          setreviews(Response.data.message.restro[0].review);
-          const restroData = Response.data.message.restro || [];
-          const venueData = restroData[0] || {};
-          const catagoryData = restroData[0].category[0] || {};
-
-          // Extract categories
-          const newBreadcrumbs = [
-            { name: "Home", path: "/" },
-            {
-              name: venueData.restaurant_country || "",
-            },
-            { name: venueData.restaurant_city || "" },
-            {
-              name: catagoryData.category_master_name || "",
-              path: "",
-            },
-          ];
-          setBreadcrumbs(newBreadcrumbs);
+          if (Response.data.message.restro.length > 0) {
+            setDetail(Response.data.message.restro[0]);
+            setreviews(Response.data.message.restro[0].review);
+            setrupees_icon_left(Response.data.message.rupees_icon_left);
+            setrupees_icon_right(Response.data.message.rupees_icon_right);
+            // Extract categories
+            const newBreadcrumbs = [
+              { name: "Home", path: "/" },
+              {
+                name: Response.data.message.restro[0].restaurant_country || "",
+              },
+              { name: Response.data.message.restro[0].restaurant_city || "" },
+              {
+                name: Response.data.message.restro[0].restaurant_name || "",
+                path: "",
+              },
+            ];
+            setBreadcrumbs(newBreadcrumbs);
+          }
         }
         setshowLoaderAdmin(false);
       })
@@ -563,17 +565,20 @@ const DetailedVenue = () => {
                         <span className="last_line_black_section mb-4">
                           <div className="first_row_black_section_carousel">
                             <img src={timerClock} alt="timerClock" />
-                            {detail.timing && detail.timing.length > 0 && (
-                              <p style={{ marginBottom: "0" }}>
-                                Open from {detail.timing[0].start_time} -{" "}
-                                {detail.timing[0].end_time}
-                              </p>
-                            )}
+                            <p style={{ marginBottom: "0" }}>
+                              Open from{" "}
+                              {formatTimeintotwodigit(
+                                detail.breakfast_starttime
+                              )}{" "}
+                              -{" "}
+                              {formatTimeintotwodigit(detail.breakfast_endtime)}
+                            </p>
                           </div>
                           <div className="first_row_black_section_carousel">
                             <img src={avgpriceIcon} alt="avgpriceIcon" />
                             <p style={{ marginBottom: "0" }}>
-                              Average price €27
+                              Average price {rupees_icon_left}{" "}
+                              {detail.restaurant_price} {rupees_icon_right}
                             </p>
                             <img src={quesMark} alt="quesMark" />
                           </div>

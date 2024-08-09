@@ -53,7 +53,7 @@ const Venue = () => {
   const [ImageLink, setImageLink] = useState("");
   const [HeartImg, setHeartImages] = useState([]);
   const [rupees_icon_left, setrupees_icon_left] = useState("");
-  const [rupees_icon_right, setrupees_icon_right] = useState([]);
+  const [rupees_icon_right, setrupees_icon_right] = useState("");
   const [breadcrumbs, setBreadcrumbs] = useState([]);
   const [getfiltersData, setfiltersData] = useState([]);
   const [SEOloop, setSEOloop] = useState([]);
