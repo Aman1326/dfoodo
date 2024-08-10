@@ -10,6 +10,8 @@
   --secondary-black: rgba(42, 45, 50, 1);
   --orange-Color: rgba(243, 120, 53, 1);
   --light-black: #535969;
+  --scrollr-gray: #c1c1c1;
+
 }
 
 .App {
@@ -59,4 +61,13 @@
 
 .hidden {
   display: none !important;
+}
+::-webkit-scrollbar {
+  width: 7px;
+  height: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--scrollr-gray) !important;
+  border-radius: 6px !important;
 }
