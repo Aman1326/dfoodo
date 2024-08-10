@@ -11,7 +11,6 @@
   --orange-Color: rgba(243, 120, 53, 1);
   --light-black: #535969;
   --scrollr-gray: #c1c1c1;
-
 }
 
 .App {
@@ -44,8 +43,6 @@
   text-overflow: ellipsis;
   color: var(--black);
 }
-
-
 
 .ellipsis2 {
   display: -webkit-box;
