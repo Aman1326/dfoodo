@@ -32,7 +32,9 @@ const create_table_reservation_website =
 const customer_login = local_server_link_react + "guest_login/";
 const save_like = local_server_link_react + "save_like/";
 const save_review = local_server_link_react + "save_review/";
+const update_notifiction_sms_status = local_server_link_react + "update_notifiction_sms_status/";
 const cancel_booking = local_server_link_react + "cancel_booking/";
+const get_seo_data_website = local_server_link_react + "get_seo_data_website/";
 const customer_id = retrieveData("customer_id");
 const country_name = "India";
 const city_name = "Bhopal";
@@ -73,4 +75,6 @@ export {
   save_review,
   save_like,
   cancel_booking,
+  update_notifiction_sms_status,
+  get_seo_data_website,
 };

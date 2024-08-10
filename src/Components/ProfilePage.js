@@ -22,6 +22,7 @@ import {
   server_post_data,
   save_favourite,
   cancel_booking,
+  update_notifiction_sms_status,
   APL_LINK,
 } from "../ServiceConnection/serviceconnection.js";
 import {
@@ -247,23 +248,28 @@ const ProfilePage = () => {
   const handleCloseCancelModal = () => {
     setShowCancelModal(false);
   };
-  const handleRemoveFavrate = async (index, venue_id) => {
+  const update_notifiction_sms_status_api = async (isChecked, flag_click) => {
+    const click_yes_no = isChecked ? 1 : 0;
     const form_data = new FormData();
-    form_data.append("venue_id", venue_id);
+    form_data.append("flag_click", flag_click);
+    form_data.append("click_yes_no", click_yes_no);
     setshowLoaderAdmin(true);
-    await server_post_data(save_favourite, form_data)
+    await server_post_data(update_notifiction_sms_status, form_data)
       .then((Response) => {
         console.log(Response.data.message);
         if (Response.data.error) {
           handleError(Response.data.message);
-        } else {
-          handleLinkClick("");
         }
         setshowLoaderAdmin(false);
       })
       .catch((error) => {
         setshowLoaderAdmin(false);
       });
+  };
+
+  const handleCheckboxChange = (event, click_type) => {
+    const isChecked = event.target.checked;
+    update_notifiction_sms_status_api(isChecked, click_type);
   };
   const cancelbooking = async (booking_id) => {
     const form_data = new FormData();
@@ -1056,7 +1062,17 @@ const ProfilePage = () => {
                     <div className="toggle_switches_settings">
                       <span>
                         <label class="switch">
-                          <input type="checkbox" />
+                          <input
+                            type="checkbox"
+                            onChange={(event) =>
+                              handleCheckboxChange(event, "1")
+                            }
+                            defaultChecked={
+                              editProfileData.sms_come_dfoodo === 1
+                                ? true
+                                : false
+                            }
+                          />
                           <span class="slider round"></span>
                         </label>
                         <p>
@@ -1066,7 +1082,17 @@ const ProfilePage = () => {
                       </span>
                       <span>
                         <label class="switch">
-                          <input type="checkbox" />
+                          <input
+                            type="checkbox"
+                            onChange={(event) =>
+                              handleCheckboxChange(event, "2")
+                            }
+                            defaultChecked={
+                              editProfileData.email_come_dfoodo === 1
+                                ? true
+                                : false
+                            }
+                          />
                           <span class="slider round"></span>
                         </label>
                         <p>
@@ -1076,7 +1102,12 @@ const ProfilePage = () => {
                         </p>
                       </span>
                     </div>
-                    <button className="loginButton mt-3">Logout</button>
+                    <button
+                      className="loginButton mt-3"
+                      onClick={() => confirmVIP()}
+                    >
+                      Logout
+                    </button>
                   </div>
                 </div>
               </TabPanel>
