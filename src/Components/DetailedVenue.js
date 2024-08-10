@@ -25,7 +25,7 @@ import quesMark from "../Assets/questionMark.svg";
 import avgpriceIcon from "../Assets/averagePriceDetailedVenue.svg";
 import rightArrowWhite from "../Assets/rightArrow_white.svg";
 import AddBtn from "../Assets/addNewInput.svg";
-import crossIcon from "../Assets/crossicon.svg";
+import crossIcon from "../Assets/crossIcon.svg";
 import {
   server_post_data,
   get_restropage_webapp,
