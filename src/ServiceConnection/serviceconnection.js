@@ -18,9 +18,6 @@ const save_favourite = local_server_link_react + "save_favourite/";
 const update_profile = local_server_link_react + "update_profile/";
 const get_profile = local_server_link_react + "get_profile/";
 const get_filter_data = local_server_link_react + "get_filter_data/";
-const get_reservation_webapp =
-  local_server_link_react + "get_reservation_webapp/";
-const get_favourite = local_server_link_react + "get_favourite/";
 const get_restropage_webapp =
   local_server_link_react + "get_restropage_webapp/";
 const get_landingpage_webapp =
@@ -35,6 +32,7 @@ const create_table_reservation_website =
 const customer_login = local_server_link_react + "guest_login/";
 const save_like = local_server_link_react + "save_like/";
 const save_review = local_server_link_react + "save_review/";
+const cancel_booking = local_server_link_react + "cancel_booking/";
 const customer_id = retrieveData("customer_id");
 const country_name = "India";
 const city_name = "Bhopal";
@@ -67,13 +65,12 @@ export {
   get_restropage_webapp,
   get_categorypage_webapp,
   get_profile,
-  get_favourite,
   save_favourite,
   get_filter_data,
-  get_reservation_webapp,
   get_all_timing_date_wise,
   create_table_reservation_website,
   customer_login,
   save_review,
   save_like,
+  cancel_booking,
 };

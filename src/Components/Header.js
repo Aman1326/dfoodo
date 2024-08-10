@@ -45,7 +45,6 @@ function Header() {
   customer_name = retrieveData("customer_name");
   const profileShow = customer_id !== "0";
   const location = useLocation();
-  const navigate = useNavigate();
   const [showLoaderAdmin, setshowLoaderAdmin] = useState(false);
   const [showLoginModal, setShowLoginModal] = useState(false);
   const [userNumber, setUserNumber] = useState("");
@@ -178,10 +177,6 @@ function Header() {
     handleOpenLoginModal();
   });
 
-  const confirmVIP = () => {
-    removeData();
-    navigate("/");
-  };
 
   const handleCloseLoginModal = () => setShowLoginModal(false);
   const handleOpenLoginModal = () => {
