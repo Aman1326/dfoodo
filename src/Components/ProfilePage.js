@@ -9,7 +9,7 @@ import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
 import HeartRed from "../Assets/HeartRed.svg";
 import contactus from "../Assets/averagePrice.svg";
-import qustionTOoltip from "../Assets/qustionTOoltip.svg";
+import star from "../Assets/star.svg";
 import calendar from "../Assets/calendarSearchBar.svg";
 import Successs from "../Assets/check.png";
 import { PhoneInput } from "react-international-phone";
@@ -85,7 +85,7 @@ const ProfilePage = () => {
           if (Response.data.message.guest_data.length > 0) {
             seteditProfileData(Response.data.message.guest_data[0]);
             setUserNumber(Response.data.message.guest_data[0].guest_mobile_no);
-            setFavrate(Response.data.message.like_lt);
+            setFavrate(Response.data.message.restro_data);
             setSEOloop(Response.data.message.data_seo);
             setImageLink(Response.data.message.image_link);
             setrupees_icon_left(Response.data.message.rupees_icon_left);
@@ -238,7 +238,6 @@ const ProfilePage = () => {
 
   //download app qr modal
   const [showCancelModal, setShowCancelModal] = useState(false);
-  const [ModalType, setModalType] = useState("");
   const [SelectedData, setSelectedData] = useState([]);
 
   const handleOpenCancelModal = (data) => {
@@ -258,7 +257,7 @@ const ProfilePage = () => {
         if (Response.data.error) {
           handleError(Response.data.message);
         } else {
-          master_data_get();
+          handleLinkClick("");
         }
         setshowLoaderAdmin(false);
       })
@@ -276,7 +275,7 @@ const ProfilePage = () => {
           handleError(Response.data.message);
         } else {
           handleCloseCancelModal();
-          master_data_get();
+          handleLinkClick("");
         }
         setshowLoaderAdmin(false);
       })
@@ -298,6 +297,31 @@ const ProfilePage = () => {
       }
     }
     return data_seo_link_final;
+  };
+
+  const handleHeartClick = (venueId) => {
+    if (customer_id !== "0") {
+      handleSaveChangesdynamicheart(venueId);
+    } else {
+      var event = new CustomEvent("customEvent");
+      document.getElementById("login_check_jquery").dispatchEvent(event);
+    }
+  };
+
+  const handleSaveChangesdynamicheart = async (venueId) => {
+    const form_data = new FormData();
+    form_data.append("venue_id", venueId);
+    await server_post_data(save_favourite, form_data)
+      .then((Response) => {
+        if (Response.data.error) {
+          handleError(Response.data.message);
+        } else {
+          handleLinkClick("");
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
   return (
     <>
@@ -649,58 +673,79 @@ const ProfilePage = () => {
                       getFavrate.length > 0 &&
                       getFavrate.map((venue, index) => (
                         <div className="fevorateContanrr" key={index}>
-                          <div className="leftCont">
-                            {venue.data.map((item, itemIndex) => (
-                              <div className="favImgs" key={itemIndex}>
-                                <img
-                                  src={`${APL_LINK}/assets/${
-                                    item.restaurant_image || ""
-                                  }`}
-                                  alt="venueImg"
-                                />
-                              </div>
-                            ))}
-                          </div>
-                          <div className="rightContainer">
-                            <div className="ContnnrFavcratCard">
-                              <div className="FaVCardcontent">
-                                {venue.data.map((item, itemIndex) => (
-                                  <div key={itemIndex}>
-                                    <h5>{item.restaurant_name || ""}</h5>
-                                    <div className="heart_section">
-                                      <button
-                                        onClick={() =>
-                                          handleRemoveFavrate(
-                                            index,
-                                            venue.primary_id
-                                          )
+                          <div
+                            key={index}
+                            className="col-xl-12 col-12 margin24px"
+                            style={{ overflow: "hidden" }}
+                          >
+                            <div className="VenuePage_venue_container">
+                              <div className="row m-0">
+                                <div className="col-sm-5 px-0">
+                                  <Link
+                                    onClick={() => {
+                                      handleLinkClick(
+                                        match_and_return_seo_link(
+                                          venue.primary_id
+                                        )
+                                      );
+                                    }}
+                                    style={{ textDecoration: "none" }}
+                                  >
+                                    <div className="venuePage_image_container">
+                                      <img
+                                        src={
+                                          APL_LINK +
+                                          ImageLink +
+                                          venue.restaurant_image
                                         }
-                                      >
-                                        <img
-                                          src={HeartRed}
-                                          alt="Heart"
-                                          className="heart_icon favHeartIcon"
-                                        />
-                                      </button>
+                                        alt={venue.restaurant_name}
+                                      />
+                                      <div className="venuePage_ratingSection">
+                                        <p>{venue.rating || "N/A"}</p>
+                                        <img src={star} alt="star" />
+                                      </div>
                                     </div>
-                                    <p>{item.restaurant_full_address || ""}</p>
-                                    <div className="AVrageSection">
+                                  </Link>
+                                </div>
+                                <div className="col-sm-7">
+                                  <div className="venuePage_text_section">
+                                    <div className="venueContainer_rowtext">
+                                      <div className="venueContainer_nameAndAddress">
+                                        <h6>
+                                          {venue.restaurant_name || "No Name"}
+                                        </h6>
+                                      </div>
+                                      <div className="heart_section">
+                                        <button
+                                          onClick={() =>
+                                            handleHeartClick(venue.primary_id)
+                                          }
+                                        >
+                                          <img
+                                            src={HeartRed}
+                                            alt="Heart"
+                                            className="heart_icon favHeartIcon"
+                                          />
+                                        </button>
+                                      </div>
+                                    </div>
+                                    <p>
+                                      {venue.restaurant_full_adrress ||
+                                        "No  add"}
+                                    </p>
+
+                                    <h6 className="avrgPrice">
                                       <img
-                                        className="ContctSvgIon"
                                         src={contactus}
-                                        alt="cont"
+                                        alt="contactus"
+                                        width={15}
                                       />
-                                      <label>
-                                        ₹{item.restaurant_price} Average Price
-                                      </label>
-                                      <img
-                                        className="QuestionTOol"
-                                        src={qustionTOoltip}
-                                        alt="tooltip"
-                                      />
-                                    </div>
-                                    <div className="drinksSec">
-                                      {item.amenities?.map(
+                                      Average Price {rupees_icon_left}{" "}
+                                      {venue.restaurant_price}{" "}
+                                      {rupees_icon_right}
+                                    </h6>
+                                    <span className="venuePage_venue_category_titles marginNone">
+                                      {venue.amenities?.map(
                                         (amenity, amenityIndex) => (
                                           <div
                                             key={amenityIndex}
@@ -716,17 +761,34 @@ const ProfilePage = () => {
                                           </div>
                                         )
                                       )}
-                                    </div>
-                                    <div className="TimingButtons">
-                                      <div className="timesBtns">
-                                        <p>17:30</p>
-                                        <div className="childtime">
-                                          -{item.discount_upto}%
-                                        </div>
-                                      </div>
+                                    </span>
+
+                                    <div className="TimingButtons2">
+                                      {venue.timing?.map(
+                                        (timeshow, amenityIndex) => (
+                                          <div
+                                            className="timesBtns"
+                                            key={amenityIndex}
+                                          >
+                                            <p>
+                                              {" "}
+                                              {formatTimeintotwodigit(
+                                                timeshow.start_time
+                                              )}
+                                            </p>
+                                            <div className="childtime">
+                                              {timeshow.per_discount > 0 ? (
+                                                <p>-{timeshow.per_discount}%</p>
+                                              ) : (
+                                                <p>N/A</p>
+                                              )}
+                                            </div>
+                                          </div>
+                                        )
+                                      )}
                                     </div>
                                   </div>
-                                ))}
+                                </div>
                               </div>
                             </div>
                           </div>
