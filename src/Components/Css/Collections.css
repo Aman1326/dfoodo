@@ -1,108 +1,104 @@
 /* browse cities */
 .browse_otherCities_section {
-    margin-top: 1rem;
+  margin-top: 1rem;
 }
 
 .browse_otherCities_heading h3 {
-    font-family: "Roboto";
-    font-weight: 600;
-    color: rgba(42, 45, 50, 1);
+  font-family: "Roboto";
+  font-weight: 600;
+  color: rgba(42, 45, 50, 1);
 }
 
 .city-list {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 20px;
-    margin-top: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 20px;
 }
 
 .city-card {
-    padding: 10px;
-    max-width: 200px;
-    text-align: center;
+  padding: 10px;
+  max-width: 200px;
+  text-align: center;
 }
 
 .city-description {
-    margin-top: 10px;
-    text-align: center;
-    font-family: "Roboto";
-    font-weight: 500;
-    color: var(--text-black);
-    font-size: 16px;
+  margin-top: 10px;
+  text-align: center;
+  font-family: "Roboto";
+  font-weight: 500;
+  color: var(--text-black);
+  font-size: 16px;
 }
 
 .slick-prev:before,
 .slick-next:before {
-    right: -9px !important;
-    color: var(--primary-color) !important;
-    font-size: 30px !important;
-    background: transparent !important;
+  right: -9px !important;
+  color: var(--primary-color) !important;
+  font-size: 30px !important;
+  background: transparent !important;
 }
 
 .slick-next {
-    right: 2px !important;
+  right: 2px !important;
 }
-
 
 .slick-prev,
 .slick-next {
-    top: 45% !important;
-    width: 30px !important;
-    height: 30px !important;
-    aspect-ratio: 1;
+  top: 45% !important;
+  width: 30px !important;
+  height: 30px !important;
+  aspect-ratio: 1;
 }
 
 .cities_mapped {
-    margin: auto;
+  margin: auto;
 }
 
 .city-item {
-    position: relative;
-    width: fit-content;
-    height: fit-content;
+  position: relative;
+  width: fit-content;
+  height: fit-content;
 }
 
 .city-image {
-    cursor: pointer;
-    width: 95%;
-    height: 95%;
-    aspect-ratio: 1;
-    border-radius: 5px;
+  cursor: pointer;
+  width: 200px;
+  height: 200px;
+  aspect-ratio: 1;
+  border-radius: 5px;
 }
 
 .city_description {
-    position: absolute;
-    bottom: 10px;
-    left: 20px;
-    cursor: pointer;
+  position: absolute;
+  bottom: 10px;
+  left: 20px;
+  cursor: pointer;
 
-    h6 {
-        margin: 0;
-        color: var(--white);
-    }
+  h6 {
+    margin: 0;
+    color: var(--white);
+  }
 
-    p {
-        margin: 0;
-        color: var(--primary-color);
-    }
+  p {
+    margin: 0;
+    color: var(--primary-color);
+  }
 
-    span {
-        gap: 0.2rem;
-    }
+  span {
+    gap: 0.2rem;
+  }
 }
 
 .scroll-container {
-    display: flex;
-    overflow-x: auto;
-    white-space: nowrap;
-    -webkit-overflow-scrolling: touch;
-    padding: 10px 0;
-}
+  gap: 10px;
+  width: 100%;
+  height: 100%;
 
+  display: flex;
+  overflow-x: auto;
+  white-space: nowrap;
 
-
-.city-item {
-    display: inline-block;
-    width: calc(45% - 10px);
+  padding: 10px 0;
 }
