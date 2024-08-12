@@ -490,7 +490,10 @@
 }
 
 .wrapper_calendar_modal {
+  height: 100%;
+
   width: 100%;
+  overflow: auto;
   text-align: left;
   display: flex;
   flex-direction: column;
@@ -760,18 +763,16 @@
   position: fixed;
   bottom: -30rem;
   transition: bottom 0.3s ease;
+
   width: 100%;
-  max-height: 100vh;
-  overflow: auto;
+
+  overflow: hidden;
 }
 
 .calenday_modelContainermobile.show {
-  bottom: 0;
+  bottom: 4.3rem;
 }
-.calenday_modelContainermobile hr {
-  margin: 0;
-  border: none;
-}
+
 @media (max-width: 991px) {
   .EquiryButtonMobile {
     display: flex;
