@@ -271,7 +271,7 @@ const Reviews = ({ tabOpen, review, venuedata, like_data }) => {
                   marginRight: "0.2rem",
                 }}
               ></div>
-              <span>
+              {/* <span>
                 <p>{venuedata && venuedata.total_ambience_rating_sum}/5.0</p>
                 <p>Ambience</p>
               </span>
@@ -284,7 +284,7 @@ const Reviews = ({ tabOpen, review, venuedata, like_data }) => {
                   padding: "0rem",
                   marginRight: "0.2rem",
                 }}
-              ></div>
+              ></div> */}
               <span>
                 <p>{venuedata && venuedata.total_ambience_rating_sum}/5.0</p>
                 <p>Food</p>
