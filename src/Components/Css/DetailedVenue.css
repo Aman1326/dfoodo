@@ -29,14 +29,12 @@
 .wrapper_carousel img {
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
-  height: 300px;
 }
 
 @media screen and (max-width:576px) {
   .wrapper_carousel img {
     height: 300px;
   }
-  
 }
 
 /* styling react tabs  */
