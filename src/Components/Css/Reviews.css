@@ -39,6 +39,10 @@
   margin-bottom: 1rem;
 }
 
+.progress_text img {
+  width: 0.9rem;
+}
+
 .button-container {
   display: flex;
   justify-content: space-between;
@@ -54,9 +58,9 @@
 /* circular bar  */
 .Circualr_progressBar_section {
   display: flex;
-  gap: 2rem;
+  gap: 1rem;
   align-items: center;
-  justify-content: space-between;
+  justify-content: space-around;
   flex-direction: row;
 }
 
@@ -228,7 +232,19 @@
 }
 
 .CircularProgressbar {
-  max-width: 250px;
+  max-width: 200px;
+}
+
+@media screen and (max-width: 1200px) {
+  .CircularProgressbar {
+    max-width: 170px !important;
+  }
+}
+
+@media screen and (max-width: 991px) {
+  .CircularProgressbar {
+    max-width: 150px !important;
+  }
 }
 
 .red_tick_section {
@@ -249,4 +265,27 @@
 .LikeImgg {
   height: 14px !important;
   width: 14px !important;
+}
+
+@media screen and (max-width: 576px) {
+  .circular_review_wrapper {
+    height: 100%;
+  }
+
+  .no_reviews p {
+    margin: 0;
+  }
+
+  .CircularProgressbar {
+    width: 100px;
+    height: 100px;
+  }
+
+  .Circualr_progressBar_section {
+    flex-direction: column;
+    gap: 0.7rem;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+  }
 }

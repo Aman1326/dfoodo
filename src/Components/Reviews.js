@@ -151,7 +151,7 @@ const Reviews = ({ tabOpen, review, venuedata, like_data }) => {
           <h3>Reviews</h3>
           <div className="review_wrapper mt-5 row">
             <div
-              className="col-md-6 left_section_circularProgressBar"
+              className="col-md-6 col-5 left_section_circularProgressBar"
               style={{
                 borderRight: "1px solid black",
                 padding: "0rem",
@@ -170,130 +170,125 @@ const Reviews = ({ tabOpen, review, venuedata, like_data }) => {
                     <p>{venuedata && venuedata.total_reviews} reviews</p>
                   </span>
                 </div>
-                <div className="text_rating_sectin">
-                  <span>
-                    <p>
-                      {venuedata && venuedata.total_location_rating_sum}/5.0
-                    </p>
-                    <p>Location</p>
-                  </span>
-                  <div
-                    className="vr"
-                    style={{
-                      width: "1px",
-                      background: "transparent",
-                      border: "1px solid black",
-                      padding: "0rem",
-                      marginRight: "0.2rem",
-                    }}
-                  ></div>
-                  <span>
-                    <p>{venuedata && venuedata.total_service_rating_sum}/5.0</p>
-                    <p>Service</p>
-                  </span>
-                  <div
-                    className="vr"
-                    style={{
-                      width: "1px",
-                      background: "transparent",
-                      border: "1px solid black",
-                      padding: "0rem",
-                      marginRight: "0.2rem",
-                    }}
-                  ></div>
-                  <span>
-                    <p>
-                      {venuedata && venuedata.total_ambience_rating_sum}/5.0
-                    </p>
-                    <p>Ambience</p>
-                  </span>
-                  <div
-                    className="vr"
-                    style={{
-                      width: "1px",
-                      background: "transparent",
-                      border: "1px solid black",
-                      padding: "0rem",
-                      marginRight: "0.2rem",
-                    }}
-                  ></div>
-                  <span>
-                    <p>
-                      {venuedata && venuedata.total_ambience_rating_sum}/5.0
-                    </p>
-                    <p>Food</p>
-                  </span>
-                </div>
               </div>
             </div>
 
-            <div className="col-md-6 d-flex">
+            <div className="col-md-6 col-7 mx-auto d-flex">
               <div className="linear_progressBar_section">
                 <div className="progressbar_text_wrapper">
+                  <div className="progress_text">
+                    <span>{progress1}</span>
+                    <img src={star} alt="Star" />
+                  </div>
                   <div className="progress_container">
                     <div
                       className="progress_bar"
                       style={{ width: `${getProgressPercentage(progress1)}%` }}
                     ></div>
                   </div>
-                  <div className="progress_text">
-                    <span>{progress1}</span>
-                    <img src={star} alt="Star" />
-                  </div>
                 </div>
 
                 <div className="progressbar_text_wrapper">
+                  <div className="progress_text">
+                    <span>{progress2}</span>
+                    <img src={star} alt="Star" />
+                  </div>
                   <div className="progress_container">
                     <div
                       className="progress_bar"
                       style={{ width: `${getProgressPercentage(progress2)}%` }}
                     ></div>
                   </div>
-                  <div className="progress_text">
-                    <span>{progress2}</span>
-                    <img src={star} alt="Star" />
-                  </div>
                 </div>
 
                 <div className="progressbar_text_wrapper">
+                  <div className="progress_text">
+                    <span>{progress3}</span>
+                    <img src={star} alt="Star" />
+                  </div>
                   <div className="progress_container">
                     <div
                       className="progress_bar"
                       style={{ width: `${getProgressPercentage(progress3)}%` }}
                     ></div>
                   </div>
-                  <div className="progress_text">
-                    <span>{progress3}</span>
-                    <img src={star} alt="Star" />
-                  </div>
                 </div>
 
                 <div className="progressbar_text_wrapper">
+                  <div className="progress_text">
+                    <span>{progress4}</span>
+                    <img src={star} alt="Star" />
+                  </div>
                   <div className="progress_container">
                     <div
                       className="progress_bar"
                       style={{ width: `${getProgressPercentage(progress4)}%` }}
                     ></div>
                   </div>
-                  <div className="progress_text">
-                    <span>{progress4}</span>
-                    <img src={star} alt="Star" />
-                  </div>
                 </div>
 
                 <div className="progressbar_text_wrapper">
+                  <div className="progress_text">
+                    <span>{progress5}</span>
+                    <img src={star} alt="Star" />
+                  </div>
                   <div className="progress_container">
                     <div
                       className="progress_bar"
                       style={{ width: `${getProgressPercentage(progress5)}%` }}
                     ></div>
                   </div>
-                  <div className="progress_text">
-                    <span>{progress5}</span>
-                    <img src={star} alt="Star" />
-                  </div>
                 </div>
               </div>
+            </div>
+
+            <div className="text_rating_sectin">
+              <span>
+                <p>{venuedata && venuedata.total_location_rating_sum}/5.0</p>
+                <p>Location</p>
+              </span>
+              <div
+                className="vr"
+                style={{
+                  width: "1px",
+                  background: "transparent",
+                  border: "1px solid black",
+                  padding: "0rem",
+                  marginRight: "0.2rem",
+                }}
+              ></div>
+              <span>
+                <p>{venuedata && venuedata.total_service_rating_sum}/5.0</p>
+                <p>Service</p>
+              </span>
+              <div
+                className="vr"
+                style={{
+                  width: "1px",
+                  background: "transparent",
+                  border: "1px solid black",
+                  padding: "0rem",
+                  marginRight: "0.2rem",
+                }}
+              ></div>
+              <span>
+                <p>{venuedata && venuedata.total_ambience_rating_sum}/5.0</p>
+                <p>Ambience</p>
+              </span>
+              <div
+                className="vr"
+                style={{
+                  width: "1px",
+                  background: "transparent",
+                  border: "1px solid black",
+                  padding: "0rem",
+                  marginRight: "0.2rem",
+                }}
+              ></div>
+              <span>
+                <p>{venuedata && venuedata.total_ambience_rating_sum}/5.0</p>
+                <p>Food</p>
+              </span>
             </div>
           </div>
           {reviews &&
