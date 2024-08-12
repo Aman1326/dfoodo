@@ -87,8 +87,8 @@ const SearchBar = () => {
     { value: 6, label: "6 People" },
     { value: 8, label: "8 People " },
     { value: 10, label: "10 People " },
-    { value: 15, label: "15People " },
-    { value: 20, label: "20People " },
+    { value: 15, label: "15 People " },
+    { value: 20, label: "20 People " },
     { value: "larger Party", label: "larger Party " },
     // Add more options as needed
   ];

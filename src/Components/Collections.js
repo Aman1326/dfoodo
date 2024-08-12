@@ -93,17 +93,17 @@ const Collections = ({ data, SEOloop, ImageLink }) => {
     return data_seo_link_final;
   };
   //mobile condition
-  // const [isMobile, setIsMobile] = useState(window.innerWidth < 992);
-  // useEffect(() => {
-  //   const handleResize = () => {
-  //     setIsMobile(window.innerWidth < 992);
-  //   };
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 992);
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 992);
+    };
 
-  //   window.addEventListener("resize", handleResize);
-  //   return () => {
-  //     window.removeEventListener("resize", handleResize);
-  //   };
-  // }, []);
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
   return (
     <div>
       {/* browse other cities */}
@@ -111,40 +111,39 @@ const Collections = ({ data, SEOloop, ImageLink }) => {
         <div className="browse_otherCities_section">
           <div className="container-lg">
             <div className="cities_mapped ">
-              {/* {!isMobile && (
-                <Slider {...settings}>
-                  {data &&
-                    data.length > 0 &&
-                    data.map((venue, index) => (
-                      <div key={index} className="city-item">
-                        <Link
-                          onClick={() =>
-                            handleLinkClick(
-                              match_and_return_seo_link(venue.primary_id)
-                            )
-                          }
-                        >
-                          <img
-                            className="city-image"
-                            src={`${
-                              APL_LINK + ImageLink + venue.category_master_image
-                            }`}
-                            alt={`Venue ${index + 1}`}
-                          />
-                          <div className="city_description">
-                            <h6>{venue.category_master_name}</h6>
-                            <span className="d-flex flex-row">
-                              <p>{venue.category_count} Places</p>
-                              <img src={right} alt="right" />
-                            </span>
-                          </div>
-                        </Link>
-                      </div>
-                    ))}
-                </Slider>
-              )} */}
+              {/* <Slider {...settings}>
+                {!isMobile &&
+                  data &&
+                  data.length > 0 &&
+                  data.map((venue, index) => (
+                    <div key={index} className="city-item">
+                      <Link
+                        onClick={() =>
+                          handleLinkClick(
+                            match_and_return_seo_link(venue.primary_id)
+                          )
+                        }
+                      >
+                        <img
+                          className="city-image"
+                          src={`${
+                            APL_LINK + ImageLink + venue.category_master_image
+                          }`}
+                          alt={`Venue ${index + 1}`}
+                        />
+                        <div className="city_description">
+                          <h6>{venue.category_master_name}</h6>
+                          <span className="d-flex flex-row">
+                            <p>{venue.category_count} Places</p>
+                            <img src={right} alt="right" />
+                          </span>
+                        </div>
+                      </Link>
+                    </div>
+                  ))}
+              </Slider> */}
+
               <div className="scroll-container">
-              
                 {data &&
                   data.length > 0 &&
                   data.map((venue, index) => (
@@ -176,7 +175,6 @@ const Collections = ({ data, SEOloop, ImageLink }) => {
                       </Link>
                     </div>
                   ))}
-            
               </div>
             </div>
           </div>
