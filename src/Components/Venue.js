@@ -99,7 +99,6 @@ const Venue = () => {
         setshowLoaderAdmin(false);
       });
   };
-
   const master_filter_data_get = async () => {
     setshowLoaderAdmin(true);
     const fd = new FormData();
@@ -328,7 +327,11 @@ const Venue = () => {
                   <div className="popularVenues">
                     <div className="row mt-1">
                       {currentPaginationItems.map((venue, index) => (
-                        <div key={index} className="col-xl-12 col-12 margin24px" style={{overflow:"hidden"}}>
+                        <div
+                          key={index}
+                          className="col-xl-12 col-12 margin24px"
+                          style={{ overflow: "hidden" }}
+                        >
                           <Link
                             onClick={() => {
                               handleLinkClick(
@@ -339,7 +342,7 @@ const Venue = () => {
                           >
                             <div className="VenuePage_venue_container">
                               <div className="row m-0">
-                                <div className="col-sm-5 px-0">
+                                <div className="col-sm-5">
                                   <div className="venuePage_image_container">
                                     <img
                                       src={
