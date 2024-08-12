@@ -329,7 +329,7 @@ const Venue = () => {
                       {currentPaginationItems.map((venue, index) => (
                         <div
                           key={index}
-                          className="col-xl-6 col-sm-12 col-6 margin24px"
+                          className="col-xl-6 col-sm-12 margin24px"
                           style={{ overflow: "hidden" }}
                         >
                           <div className="VenuePage_venue_container">
