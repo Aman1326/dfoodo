@@ -177,8 +177,8 @@ const RegisterMyVenue = () => {
                         type="text"
                         id="Contact"
                         name="Contact"
-                        minLength={3}
-                        maxLength={12}
+                        minLength={10}
+                        maxLength={10}
                         onInput={handleNumbersChange}
                         className="form-control trio_mandatory"
                         placeholder="Enter phone no."

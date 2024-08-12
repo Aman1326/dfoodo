@@ -177,7 +177,11 @@ const Collections = ({ data, SEOloop, ImageLink }) => {
                                 <h6>{venue.category_master_name}</h6>
                                 <span className="d-flex flex-row">
                                   <p>{venue.category_count} Places</p>
-                                  <img src={right} alt="right" />
+                                  <img
+                                    src={right}
+                                    alt="right"
+                                    id="right_arrow_small"
+                                  />
                                 </span>
                               </div>
                             </Link>

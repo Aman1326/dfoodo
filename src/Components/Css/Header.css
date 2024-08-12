@@ -413,3 +413,27 @@
     text-align: center;
     color: var();
 }
+
+.cities_mapped_locationModal {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    justify-content: center;
+    font-family: "Roboto";
+    font-size: 14px;
+    text-align: center;
+
+    a {
+        text-decoration: none !important;
+        color: var(--text-grey);
+    }
+
+    img {
+        width: 70px;
+    }
+
+}
+
+.cities_mapped_locationModal a:hover {
+    text-decoration: underline;
+}

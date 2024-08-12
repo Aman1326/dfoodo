@@ -1,7 +1,7 @@
 import axios from "axios";
 import { retrieveData } from "../LocalConnection/LocalConnection.js";
 const appauth_key = "dfoodo@2029";
-let APL_LINK = "http://192.168.1.15:8000/";
+let APL_LINK = "http://192.168.1.24:8000/";
 APL_LINK = "https://dfoodobackend.triosoft.ai/";
 let Website_URL = "https://www.dfoodo.com/";
 let local_server_link_react = APL_LINK + "api/web_link/";
@@ -26,6 +26,8 @@ const get_landingpage_webapp =
 
 const get_all_timing_date_wise =
   local_server_link_back + "get_all_timing_date_wise";
+
+const city_list = local_server_link_react + "city_list/";
 
 const create_table_reservation_website =
   local_server_link_react + "create_table_reservation_website";
@@ -78,4 +80,5 @@ export {
   cancel_booking,
   update_notifiction_sms_status,
   get_seo_data_website,
+  city_list,
 };

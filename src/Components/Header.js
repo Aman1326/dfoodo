@@ -28,6 +28,8 @@ import {
 import {
   server_post_data,
   customer_login,
+  city_list,
+  APL_LINK,
 } from "../ServiceConnection/serviceconnection.js";
 import {
   removeData,
@@ -405,6 +407,31 @@ function Header() {
       });
     } catch (error) {}
   }, []);
+
+  // setting the images from backend
+  const [cityImage, setCityImages] = useState([]);
+  const [ImageLink, setImageLink] = useState("");
+  const master_data_get = async () => {
+    // console.log(city_list);
+    await server_post_data(city_list, null)
+      .then((Response) => {
+        console.log(Response.data.message);
+        if (Response.data.error) {
+          handleError(Response.data.message);
+        } else {
+          setCityImages(Response.data.message.cities);
+          setImageLink(Response.data.message.image_link);
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  useEffect(() => {
+    master_data_get();
+  }, []);
+
   return (
     <>
       <div className="upper_header_wrapper">
@@ -755,11 +782,31 @@ function Header() {
                     {detectLocations.longitude}
                   </p>
                 )} */}
-                {city && <p className="location_modal_text">City: {city}</p>}
+                {city && (
+                  <p className="location_modal_text">Selected City: {city}</p>
+                )}
                 {state && <p className="location_modal_text">State: {state}</p>}
               </div>
 
-              <div></div>
+              <div className="cities_mapped_locationModal">
+                {cityImage &&
+                  cityImage.map((value, idx) => (
+                    <Link
+                      className="city_container"
+                      key={idx}
+                      onClick={() => {
+                        setCity(value.city);
+                        handleCloseLocationModal();
+                      }}
+                    >
+                      <img
+                        src={`${APL_LINK + ImageLink + value.image_name}`}
+                        alt={value.city}
+                      />
+                      <p>{value.city}</p>
+                    </Link>
+                  ))}
+              </div>
             </div>
           </Modal.Title>
         </Modal.Header>
