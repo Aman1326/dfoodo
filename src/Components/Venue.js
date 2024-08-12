@@ -329,8 +329,11 @@ const Venue = () => {
                       {currentPaginationItems.map((venue, index) => (
                         <div
                           key={index}
-                          className="col-xl-6 col-sm-12 col-6 margin24px"
-                          style={{ overflow: "hidden" }}
+                          className="col-xl-6 col-sm-12 margin24px"
+                          style={{
+                            overflow: "hidden",
+                            paddingBottom: "0.5rem",
+                          }}
                         >
                           <div className="VenuePage_venue_container">
                             <div className="LikedHeart">
@@ -358,7 +361,7 @@ const Venue = () => {
                               style={{ textDecoration: "none" }}
                             >
                               <div className="row m-0">
-                                <div className="col-sm-3">
+                                <div className="col-md-6 col-sm-3 p-0">
                                   <div className="venuePage_image_container">
                                     <img
                                       src={
@@ -375,7 +378,7 @@ const Venue = () => {
                                   </div>
                                 </div>
 
-                                <div className="col-sm-3">
+                                <div className="col-md-6 col-sm-3">
                                   <div className="venuePage_text_section">
                                     <div className="venueContainer_rowtext">
                                       <div className="venueContainer_nameAndAddress">
