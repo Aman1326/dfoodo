@@ -631,7 +631,20 @@ function Home() {
                   </div>
                   <div className="col-md-3">
                     <div className="multi_star_section">
-                      <img src={str2} alt="star" id="multiStars" />
+                      <div
+                        style={{
+                          height: "65px",
+                          display: "flex",
+                          alignItems: "center",
+                        }}
+                      >
+                        <img
+                          style={{ marginBottom: "0" }}
+                          src={str2}
+                          alt="star"
+                          id="multiStars"
+                        />
+                      </div>
                       <h6>User reviews</h6>
                       <p>
                         Recommendations and reviews from a powerful community.
