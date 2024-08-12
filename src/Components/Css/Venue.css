@@ -86,6 +86,7 @@
   flex-direction: row;
   border-radius: 10px;
   justify-content: left;
+  overflow: hidden;
   margin-top: 0.5rem;
   box-shadow: 0px 2px 2px 0px #0000002e;
 }
@@ -103,10 +104,6 @@
 
   .venuePage_image_container img {
     width: 100%;
-  }
-
-  .TimingButtons2 {
-    width: 100% !important;
   }
 }
 
@@ -460,7 +457,7 @@
   position: relative;
   display: flex;
   gap: 0.4rem;
-  /* width: 35%; */
+  width: 100%;
   overflow: auto;
 }
 
