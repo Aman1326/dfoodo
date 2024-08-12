@@ -453,10 +453,135 @@ const DetailedVenue = () => {
         </section>
         {/* images gallery section */}
         <section>
+          <section className="image_gallery_section d-sm-none">
+            <div className="row">
+              <div className="wrapper_carousel">
+                <Carousel
+                  className="fade-img"
+                  showIndicators={false}
+                  showStatus={false}
+                  showThumbs={false}
+                  renderArrowPrev={(clickHandler, hasPrev) =>
+                    hasPrev && (
+                      <button
+                        type="button"
+                        onClick={clickHandler}
+                        style={{
+                          position: "absolute",
+                          top: "50%",
+                          left: "15px",
+                          transform: "translateY(-50%)",
+                          zIndex: 2,
+                          background: "none",
+                          border: "none",
+                          cursor: "pointer",
+                          outline: "none",
+                        }}
+                      >
+                        <img
+                          src={leftArrowIcon}
+                          alt="Previous"
+                          style={{ width: "42px", height: "42px" }}
+                        />
+                      </button>
+                    )
+                  }
+                  renderArrowNext={(clickHandler, hasNext) =>
+                    hasNext && (
+                      <button
+                        type="button"
+                        onClick={clickHandler}
+                        style={{
+                          position: "absolute",
+                          top: "50%",
+                          right: "15px",
+                          transform: "translateY(-50%)",
+                          zIndex: 2,
+                          background: "none",
+                          border: "none",
+                          cursor: "pointer",
+                          outline: "none",
+                        }}
+                      >
+                        <img
+                          src={rightArrowIcon}
+                          alt="Next"
+                          style={{ width: "42px", height: "42px" }}
+                        />
+                      </button>
+                    )
+                  }
+                >
+                  {detail.images &&
+                    detail.images.length > 0 &&
+                    detail.images.map((image, index) => (
+                      <div key={index}>
+                        <img
+                          src={APL_LINK + ImageLink + image.image_name}
+                          alt={`img${index}`}
+                        />
+                      </div>
+                    ))}
+                  <div></div>
+                </Carousel>
+                <div className="black_section_carousel">
+                  <span className="first_row_black_section_carousel">
+                    <div>
+                      <h6>{detail.restaurant_name}</h6>
+                      <p>{detail.restaurant_full_adrress}</p>
+                    </div>
+                    <div className="first_row_black_section_carousel hidden">
+                      <p>1.16 km</p>
+                      <img src={locationsvg} alt="location" />
+                    </div>
+                  </span>
+                  <span className="first_row_black_section_carousel align-items-center">
+                    <div className="french_text">
+                      <h6>
+                        {detail.cuisie &&
+                          detail.cuisie.length > 0 &&
+                          detail.cuisie[0].cuisine_name}
+                      </h6>
+                    </div>
+                    <div className="first_row_black_section_carousel align-items-center">
+                      <span className="d-flex reviews_black_section">
+                        <img src={redStar} alt="redStar" />
+                        <p className="m-0">{detail.total_service_rating_sum}</p>
+                      </span>
+                      <span>
+                        <p className="m-0">
+                          {detail.review && detail.total_reviews} reviews
+                        </p>
+                      </span>
+                    </div>
+                  </span>
+                  <hr />
+                  <span className="last_line_black_section mb-4">
+                    <div className="first_row_black_section_carousel">
+                      <img src={timerClock} alt="timerClock" />
+                      <p style={{ marginBottom: "0" }}>
+                        Open from{" "}
+                        {formatTimeintotwodigit(detail.breakfast_starttime)} -{" "}
+                        {formatTimeintotwodigit(detail.breakfast_endtime)}
+                      </p>
+                    </div>
+                    <div className="first_row_black_section_carousel">
+                      <img src={avgpriceIcon} alt="avgpriceIcon" />
+                      <p style={{ marginBottom: "0" }}>
+                        Average price {rupees_icon_left}{" "}
+                        {detail.restaurant_price} {rupees_icon_right}
+                      </p>
+                      <img src={quesMark} alt="quesMark" />
+                    </div>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </section>
           <div className="container-lg">
             <div className="row m-0">
-              <div className="col-lg-8 m-0 p-0">
-                <section className="image_gallery_section">
+              <div className="col-lg-8 m-0 p-0 ">
+                <section className="image_gallery_section d-sm-block d-none">
                   <div className="row">
                     <div className="wrapper_carousel">
                       <Carousel
@@ -615,23 +740,27 @@ const DetailedVenue = () => {
                           <p>{detail.restaurant_full_adrress}</p>
                           <h6>About this venue</h6>
                           <ReadMore />
-                          <div className="venue_features_section row">
-                            {detail.amenities &&
-                              detail.amenities.length > 0 &&
-                              detail.amenities.map((features, idx) => (
-                                <div
-                                  className="col-lg-3 venue_features_wrapper"
-                                  key={idx}
-                                >
-                                  <img
-                                    src={APL_LINK + ImageLink + features.image}
-                                    alt="{features.venue_feature_name}"
-                                  />
-                                  <p className="venue_feature_name">
-                                    {features.amenities_name}
-                                  </p>
-                                </div>
-                              ))}
+                          <div className="venue_features_section">
+                            <div className="row">
+                              {detail.amenities &&
+                                detail.amenities.length > 0 &&
+                                detail.amenities.map((features, idx) => (
+                                  <div
+                                    className="col-sm-3 col-4 venue_features_wrapper"
+                                    key={idx}
+                                  >
+                                    <img
+                                      src={
+                                        APL_LINK + ImageLink + features.image
+                                      }
+                                      alt="{features.venue_feature_name}"
+                                    />
+                                    <p className="venue_feature_name">
+                                      {features.amenities_name}
+                                    </p>
+                                  </div>
+                                ))}
+                            </div>
                           </div>
                           <section className="Reviews_section">
                             <div className="menu_wrapper">
@@ -717,7 +846,7 @@ const DetailedVenue = () => {
                 className="EquiryButtonMobile"
                 style={{ display: isFooterVisible ? "none" : " " }}
               >
-                <button onClick={toggleModal}>Enquiry</button>
+                <button onClick={toggleModal}>Book Now</button>
               </div>
               <div className="col-lg-4">
                 <div className="sticky-container">
