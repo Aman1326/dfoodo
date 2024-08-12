@@ -349,35 +349,33 @@ const Venue = () => {
                                 />
                               </button>
                             </div>
-                            <div className="row m-0">
-                              <div className="col-sm-5">
-                                <div className="venuePage_image_container">
-                                  <img
-                                    src={
-                                      APL_LINK +
-                                      ImageLink +
-                                      venue.restaurant_image
-                                    }
-                                    alt={venue.restaurant_name}
-                                  />
-                                  <div className="venuePage_ratingSection">
-                                    <p>{venue.rating || "N/A"}</p>
-                                    <img src={star} alt="star" />
+                            <Link
+                              onClick={() => {
+                                handleLinkClick(
+                                  match_and_return_seo_link(venue.primary_id)
+                                );
+                              }}
+                              style={{ textDecoration: "none" }}
+                            >
+                              <div className="row m-0">
+                                <div className="col-sm-5">
+                                  <div className="venuePage_image_container">
+                                    <img
+                                      src={
+                                        APL_LINK +
+                                        ImageLink +
+                                        venue.restaurant_image
+                                      }
+                                      alt={venue.restaurant_name}
+                                    />
+                                    <div className="venuePage_ratingSection">
+                                      <p>{venue.rating || "N/A"}</p>
+                                      <img src={star} alt="star" />
+                                    </div>
                                   </div>
                                 </div>
-                              </div>
 
-                              <div className="col-sm-7">
-                                <Link
-                                  onClick={() => {
-                                    handleLinkClick(
-                                      match_and_return_seo_link(
-                                        venue.primary_id
-                                      )
-                                    );
-                                  }}
-                                  style={{ textDecoration: "none" }}
-                                >
+                                <div className="col-sm-7">
                                   <div className="venuePage_text_section">
                                     <div className="venueContainer_rowtext">
                                       <div className="venueContainer_nameAndAddress">
@@ -445,9 +443,9 @@ const Venue = () => {
                                       )}
                                     </div>
                                   </div>
-                                </Link>
+                                </div>
                               </div>
-                            </div>
+                            </Link>
                           </div>
                         </div>
                       ))}
