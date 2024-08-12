@@ -32,11 +32,10 @@
   height: 300px;
 }
 
-@media screen and (max-width:576px) {
+@media screen and (max-width: 576px) {
   .wrapper_carousel img {
     height: 300px;
   }
-  
 }
 
 /* styling react tabs  */
@@ -92,7 +91,7 @@
   margin-top: 2rem;
 }
 
-@media screen and (max-width:576px) {
+@media screen and (max-width: 576px) {
   .venue_features_section {
     margin-top: 0;
   }
@@ -756,9 +755,24 @@
 }
 
 .calenday_modelContainermobile {
-  position: absolute;
+  z-index: 80;
+  left: 0;
+  background-color: white;
+  position: fixed;
+  bottom: -30rem;
+  transition: bottom 0.3s ease;
+  width: 100%;
+  max-height: 100vh;
+  overflow-y: auto;
 }
 
+.calenday_modelContainermobile.show {
+  bottom: 0;
+}
+.calenday_modelContainermobile hr {
+  margin: 0;
+  border: none;
+}
 @media (max-width: 991px) {
   .EquiryButtonMobile {
     display: flex;
@@ -768,18 +782,9 @@
     display: none;
   }
 
-  .calenday_modelContainermobile {
-    display: block;
-  }
-
   .venuePage_venueCategory_heading {
     display: none;
   }
-}
-
-.calenday_modelContainermobile.show {
-  max-height: 100%;
-  bottom: 0;
 }
 
 .MobileCrossButton {
@@ -792,10 +797,6 @@
 
 .MobileCrossButton button {
   background-color: transparent;
-}
-
-.calenday_modelContainermobile.show .MobileCrossButton {
-  display: block;
 }
 
 .last_line_black_section {
