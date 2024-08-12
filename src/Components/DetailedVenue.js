@@ -953,7 +953,7 @@ const DetailedVenue = () => {
                         )}
                         {currentStep === 4 && (
                           <div className="d-flex">
-                            <span className="steps">
+                            <span className="steps width100per">
                               <span className="display_contents">
                                 <img
                                   src={calendarfrom}

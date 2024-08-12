@@ -38,6 +38,7 @@ const update_notifiction_sms_status =
   local_server_link_react + "update_notifiction_sms_status/";
 const cancel_booking = local_server_link_react + "cancel_booking/";
 const get_seo_data_website = local_server_link_react + "get_seo_data_website/";
+const get_search_bar = local_server_link_react + "get_search_bar/";
 const customer_id = retrieveData("customer_id");
 let country_name_take = retrieveData("country_main");
 const country_name = country_name_take === "0" ? "India" : country_name_take;
@@ -83,4 +84,5 @@ export {
   update_notifiction_sms_status,
   get_seo_data_website,
   city_list,
+  get_search_bar,
 };

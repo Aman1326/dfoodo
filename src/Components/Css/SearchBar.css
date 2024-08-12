@@ -108,6 +108,7 @@
     width: 100%;
     position: absolute;
     background-color: var(--white);
+    left: 0px;
 }
 
 .drop_down_searchBar {
@@ -320,4 +321,7 @@
     overflow: hidden;
     overflow-y: auto;
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+.width100per{
+    width: 100%;
 }

@@ -154,6 +154,5 @@ function App() {
  * OnBoarding.js
  * SearchBar.js
  * Venue.js
- * popup cities
  */
 export default App;
