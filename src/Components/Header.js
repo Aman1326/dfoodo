@@ -797,6 +797,7 @@ function Header() {
                       onClick={() => {
                         setCity(value.city);
                         handleCloseLocationModal();
+                        localStorage.setItem("city_main ", value.city);
                       }}
                     >
                       <img
