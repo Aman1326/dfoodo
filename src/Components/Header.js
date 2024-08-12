@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect,useRef  } from "react";
 import "./Css/Header.css";
 import "react-international-phone/style.css";
 import phone from "../Assets/mobilePhone.svg";
@@ -43,6 +43,7 @@ let customer_mobile_no = "0";
 let customer_email = "0";
 let complete_status_one = "0";
 function Header() {
+  const inputRef = useRef(null);
   customer_id = retrieveData("customer_id");
   customer_name = retrieveData("customer_name");
   const profileShow = customer_id !== "0";
@@ -371,6 +372,7 @@ function Header() {
   //goole cities, states mapped
   useEffect(() => {
     try {
+      if (inputRef.current) {
       const input = document.getElementById("searchInput");
       const autocomplete = new window.google.maps.places.Autocomplete(input, {
         types: ["(cities)"], // Restrict results to cities
@@ -405,7 +407,10 @@ function Header() {
         document.getElementById("admin_state").value = state;
         document.getElementById("admin_country").value = country;
       });
-    } catch (error) {}
+    }
+    } catch (error) {
+      console.log(error)
+    }
   }, []);
 
   // setting the images from backend
@@ -757,6 +762,7 @@ function Header() {
                   <label htmlFor="validationCustom01">Country</label>
                   <input
                     type="text"
+                    ref={inputRef} 
                     className="form-control  "
                     name="admin_country"
                     id="admin_country"
