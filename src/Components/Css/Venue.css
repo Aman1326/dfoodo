@@ -88,6 +88,7 @@
   justify-content: left;
   overflow: hidden;
   margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
   box-shadow: 0px 2px 2px 0px #0000002e;
 }
 
@@ -324,11 +325,9 @@
 
 .vertical-tab-list .react-tabs__tab--selected {
   /* background-color: lightgrey; */
-  background-image: linear-gradient(
-    to left,
-    rgba(0, 0, 0, 0) 97%,
-    var(--primary-color) 20%
-  );
+  background-image: linear-gradient(to left,
+      rgba(0, 0, 0, 0) 97%,
+      var(--primary-color) 20%);
 }
 
 .modal-footer {
@@ -465,6 +464,7 @@
   top: 10px;
   right: 15px;
   position: absolute;
+
   button {
     background-color: transparent;
     transition: transform 0.3s ease, opacity 0.3s ease;

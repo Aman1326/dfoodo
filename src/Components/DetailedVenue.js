@@ -390,12 +390,14 @@ const DetailedVenue = () => {
   };
   const [isModalVisible, setIsModalVisible] = useState(false);
   const greyBackgroundClass = currentStep === 4 ? "greyBackground" : "";
-
+  const [isModalOpen, setISModalOpen] = useState(false);
   const toggleModal = () => {
     setIsModalVisible(!isModalVisible);
+    setISModalOpen(true);
   };
   const closeModal = () => {
     setIsModalVisible(false);
+    setISModalOpen(false);
   };
   useEffect(() => {
     const handleResize = () => {
@@ -846,7 +848,9 @@ const DetailedVenue = () => {
                 className="EquiryButtonMobile"
                 style={{ display: isFooterVisible ? "none" : " " }}
               >
-                <button onClick={toggleModal}>Book Now</button>
+                <button onClick={toggleModal}>
+                  {!isModalVisible ? "Book here" : "Close"}
+                </button>
               </div>
               <div className="col-lg-4">
                 <div className="sticky-container">
