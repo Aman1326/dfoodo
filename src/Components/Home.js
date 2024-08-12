@@ -235,11 +235,13 @@ function Home() {
             </div>
           </div>
           <div>
-            <Collections
-              data={collection}
-              SEOloop={SEOloop}
-              ImageLink={ImageLink}
-            />
+            {collection && collection.length > 0 && (
+              <Collections
+                data={collection}
+                SEOloop={SEOloop}
+                ImageLink={ImageLink}
+              />
+            )}
           </div>
         </section>
         {/* Popular Venues */}
