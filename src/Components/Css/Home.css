@@ -184,12 +184,21 @@
   font-size: 14px;
 }
 
+.venue_address_wrapper p {
+  font-size: 14px !important;
+  color: var(--text-grey);
+}
+
 .venue_address_wrapper desc {
   margin-bottom: 0.2rem;
   color: var(--text-black);
   font-family: "Roboto";
   font-size: 14px;
   font-weight: 400;
+}
+
+.address_restaurant_home {
+  font-size: 14px;
 }
 
 .venue_address_wrapper h6 {
