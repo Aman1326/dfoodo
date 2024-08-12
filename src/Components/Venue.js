@@ -358,7 +358,7 @@ const Venue = () => {
                               style={{ textDecoration: "none" }}
                             >
                               <div className="row m-0">
-                                <div className="col-sm-5 p-0">
+                                <div className="col-sm-5">
                                   <div className="venuePage_image_container">
                                     <img
                                       src={
