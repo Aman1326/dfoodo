@@ -231,7 +231,7 @@ function Header() {
     latitude: null,
     longitude: null,
   });
-  const [city, setCity] = useState("");
+  const [city, setCity] = useState(retrieveData("city_main"));
   const [error, setError] = useState(null);
   const [state, setState] = useState("");
   const [cities, setCities] = useState([]);
@@ -473,7 +473,8 @@ function Header() {
                     onClick={() => handleShowLocationModal()}
                   >
                     <label>
-                      <img src={locationsssss} alt="location" /> {city && city}{" "}
+                      <img src={locationsssss} alt="location" />{" "}
+                      {city && city !== "0" ? city : "Bhopal"}{" "}
                       <img src={dropDown} alt="dropDown" />
                     </label>
                   </span>
@@ -797,7 +798,8 @@ function Header() {
                       onClick={() => {
                         setCity(value.city);
                         handleCloseLocationModal();
-                        localStorage.setItem("city_main ", value.city);
+                        storeData("city_main", value.city);
+                        storeData("country_main", value.country);
                       }}
                     >
                       <img
