@@ -177,7 +177,6 @@ function Header() {
     handleOpenLoginModal();
   });
 
-
   const handleCloseLoginModal = () => setShowLoginModal(false);
   const handleOpenLoginModal = () => {
     login_flag_res = "0";
@@ -749,21 +748,33 @@ function Header() {
                 <h6>Detect my Location</h6>
               </div>
               <div className="popular_cities_header">
-                {error && <p>Error: {error}</p>}
-                {detectLocations.latitude && detectLocations.longitude && (
+                {/* {error && <p>Error: {error}</p>} */}
+                {/* {detectLocations.latitude && detectLocations.longitude && (
                   <p>
                     Latitude: {detectLocations.latitude}, Longitude:{" "}
                     {detectLocations.longitude}
                   </p>
-                )}
-                {city && <p>City: {city}</p>}
-                {state && <p>State: {state}</p>}
+                )} */}
+                {city && <p className="location_modal_text">City: {city}</p>}
+                {state && <p className="location_modal_text">State: {state}</p>}
               </div>
+
+              <div></div>
             </div>
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <button onClick={handleButtonClicked} className="loginButton">
+          <button
+            onClick={handleButtonClicked}
+            style={{
+              border: "none",
+              background: "transparent",
+              fontFamily: "Roboto",
+              textDecoration: "underline",
+              fontSize: "14px",
+              color: "var(--text-grey)",
+            }}
+          >
             {buttonClick ? "Hide Cities " : "Show Cities"}
           </button>
           {citiesInMadhyaPradesh.length > 0 && buttonClick && (
