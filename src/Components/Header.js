@@ -86,7 +86,7 @@ function Header() {
           storeData("customer_name", customer_name);
           storeData("customer_mobile_no", customer_mobile_no);
           storeData("customer_email", customer_email);
-          window.location.reload();
+          // window.location.reload();
         }
       }
     }
@@ -157,7 +157,7 @@ function Header() {
                 storeData("customer_name", customer_name);
                 storeData("customer_mobile_no", customer_mobile_no);
                 storeData("customer_email", customer_email);
-                window.location.reload();
+                // window.location.reload();
               }
             }
           }
