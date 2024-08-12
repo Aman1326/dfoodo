@@ -88,7 +88,7 @@ function Header() {
           storeData("customer_email", customer_email);
           setTimeout(() => {
             window.location.reload();
-          }, 2000);
+          }, 1000);
         }
       }
     }
@@ -162,7 +162,7 @@ function Header() {
 
                 setTimeout(() => {
                   window.location.reload();
-                }, 2000);
+                }, 1000);
               }
             }
           }
