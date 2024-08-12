@@ -1,4 +1,4 @@
-import React, { useState, useEffect,useRef  } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import "./Css/Header.css";
 import "react-international-phone/style.css";
 import phone from "../Assets/mobilePhone.svg";
@@ -86,7 +86,9 @@ function Header() {
           storeData("customer_name", customer_name);
           storeData("customer_mobile_no", customer_mobile_no);
           storeData("customer_email", customer_email);
-          // window.location.reload();
+          setTimeout(() => {
+            window.location.reload();
+          }, 2000);
         }
       }
     }
@@ -157,7 +159,10 @@ function Header() {
                 storeData("customer_name", customer_name);
                 storeData("customer_mobile_no", customer_mobile_no);
                 storeData("customer_email", customer_email);
-                // window.location.reload();
+
+                setTimeout(() => {
+                  window.location.reload();
+                }, 2000);
               }
             }
           }
@@ -373,43 +378,43 @@ function Header() {
   useEffect(() => {
     try {
       if (inputRef.current) {
-      const input = document.getElementById("searchInput");
-      const autocomplete = new window.google.maps.places.Autocomplete(input, {
-        types: ["(cities)"], // Restrict results to cities
-      });
+        const input = document.getElementById("searchInput");
+        const autocomplete = new window.google.maps.places.Autocomplete(input, {
+          types: ["(cities)"], // Restrict results to cities
+        });
 
-      autocomplete.addListener("place_changed", function () {
-        const place = autocomplete.getPlace();
-        let full_address = place.address_components;
-        let length_data = place.address_components.length;
-        let citys = "";
-        let state = "";
-        let country = "";
-        let tehsil = "";
+        autocomplete.addListener("place_changed", function () {
+          const place = autocomplete.getPlace();
+          let full_address = place.address_components;
+          let length_data = place.address_components.length;
+          let citys = "";
+          let state = "";
+          let country = "";
+          let tehsil = "";
 
-        for (let i = 0; i < length_data; i++) {
-          if (full_address[i].types[0] === "administrative_area_level_1") {
-            state = full_address[i].long_name;
-          } else if (full_address[i].types[0] === "country") {
-            country = full_address[i].long_name;
-          } else if (
-            full_address[i].types[0] === "administrative_area_level_2"
-          ) {
-            citys = full_address[i].long_name;
-          } else if (full_address[i].types[0] === "locality") {
-            tehsil = full_address[i].long_name;
+          for (let i = 0; i < length_data; i++) {
+            if (full_address[i].types[0] === "administrative_area_level_1") {
+              state = full_address[i].long_name;
+            } else if (full_address[i].types[0] === "country") {
+              country = full_address[i].long_name;
+            } else if (
+              full_address[i].types[0] === "administrative_area_level_2"
+            ) {
+              citys = full_address[i].long_name;
+            } else if (full_address[i].types[0] === "locality") {
+              tehsil = full_address[i].long_name;
+            }
           }
-        }
-        if (tehsil !== "") {
-          citys = tehsil;
-        }
-        document.getElementById("admin_city").value = citys;
-        document.getElementById("admin_state").value = state;
-        document.getElementById("admin_country").value = country;
-      });
-    }
+          if (tehsil !== "") {
+            citys = tehsil;
+          }
+          document.getElementById("admin_city").value = citys;
+          document.getElementById("admin_state").value = state;
+          document.getElementById("admin_country").value = country;
+        });
+      }
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
   }, []);
 
@@ -762,7 +767,7 @@ function Header() {
                   <label htmlFor="validationCustom01">Country</label>
                   <input
                     type="text"
-                    ref={inputRef} 
+                    ref={inputRef}
                     className="form-control  "
                     name="admin_country"
                     id="admin_country"
