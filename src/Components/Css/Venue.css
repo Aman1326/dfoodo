@@ -26,7 +26,6 @@
 .filters_wrapper::-webkit-scrollbar {
   width: 5px !important;
   height: 5px;
-
 }
 
 .filters_wrapper::-webkit-scrollbar-track {
@@ -328,9 +327,11 @@
 
 .vertical-tab-list .react-tabs__tab--selected {
   /* background-color: lightgrey; */
-  background-image: linear-gradient(to left,
-      rgba(0, 0, 0, 0) 97%,
-      var(--primary-color) 20%);
+  background-image: linear-gradient(
+    to left,
+    rgba(0, 0, 0, 0) 97%,
+    var(--primary-color) 20%
+  );
 }
 
 .modal-footer {
@@ -463,22 +464,18 @@
   overflow: auto;
 }
 
-.heart_section {
+.LikedHeart {
+  top: 10px;
+  right: 15px;
+  position: absolute;
   button {
-    outline: none;
     background-color: transparent;
+    transition: transform 0.3s ease, opacity 0.3s ease;
     border: none;
   }
 }
 
-.favHeartIcon {
-  background-color: transparent;
-  top: 15px;
-  right: 14px;
-  transition: transform 0.3s ease, opacity 0.3s ease;
-}
-
-.heart_section button:hover .favHeartIcon {
+.LikedHeart button:hover {
   transform: scale(1.2);
   opacity: 0.8;
 }

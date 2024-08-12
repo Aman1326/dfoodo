@@ -210,7 +210,7 @@ const Footer = () => {
               </div>
             </div>
           </div>
-          <hr />
+          {/* <hr /> */}
           <div className="col-lg-10 post_footer_text mx-0">
             <p>
               Promotional offers are subject to conditions displayed on the

@@ -332,56 +332,58 @@ const Venue = () => {
                           className="col-xl-12 col-12 margin24px"
                           style={{ overflow: "hidden" }}
                         >
-                          <Link
-                            onClick={() => {
-                              handleLinkClick(
-                                match_and_return_seo_link(venue.primary_id)
-                              );
-                            }}
-                            style={{ textDecoration: "none" }}
-                          >
-                            <div className="VenuePage_venue_container">
-                              <div className="row m-0">
-                                <div className="col-sm-5">
-                                  <div className="venuePage_image_container">
-                                    <img
-                                      src={
-                                        APL_LINK +
-                                        ImageLink +
-                                        venue.restaurant_image
-                                      }
-                                      alt={venue.restaurant_name}
-                                    />
-                                    <div className="venuePage_ratingSection">
-                                      <p>{venue.rating || "N/A"}</p>
-                                      <img src={star} alt="star" />
-                                    </div>
+                          <div className="VenuePage_venue_container">
+                            <div className="LikedHeart">
+                              <button
+                                onClick={() =>
+                                  handleHeartClick(venue.primary_id)
+                                }
+                              >
+                                <img
+                                  src={
+                                    isFavorite(venue.primary_id)
+                                      ? HeartRed
+                                      : Heart
+                                  }
+                                  alt="Heart"
+                                />
+                              </button>
+                            </div>
+                            <div className="row m-0">
+                              <div className="col-sm-5">
+                                <div className="venuePage_image_container">
+                                  <img
+                                    src={
+                                      APL_LINK +
+                                      ImageLink +
+                                      venue.restaurant_image
+                                    }
+                                    alt={venue.restaurant_name}
+                                  />
+                                  <div className="venuePage_ratingSection">
+                                    <p>{venue.rating || "N/A"}</p>
+                                    <img src={star} alt="star" />
                                   </div>
                                 </div>
-                                <div className="col-sm-7">
+                              </div>
+
+                              <div className="col-sm-7">
+                                <Link
+                                  onClick={() => {
+                                    handleLinkClick(
+                                      match_and_return_seo_link(
+                                        venue.primary_id
+                                      )
+                                    );
+                                  }}
+                                  style={{ textDecoration: "none" }}
+                                >
                                   <div className="venuePage_text_section">
                                     <div className="venueContainer_rowtext">
                                       <div className="venueContainer_nameAndAddress">
                                         <h6>
                                           {venue.restaurant_name || "No Name"}
                                         </h6>
-                                      </div>
-                                      <div className="heart_section">
-                                        <button
-                                          onClick={() =>
-                                            handleHeartClick(venue.primary_id)
-                                          }
-                                        >
-                                          <img
-                                            src={
-                                              isFavorite(venue.primary_id)
-                                                ? HeartRed
-                                                : Heart
-                                            }
-                                            alt="Heart"
-                                            className="heart_icon favHeartIcon"
-                                          />
-                                        </button>
                                       </div>
                                     </div>
                                     <p>
@@ -443,10 +445,10 @@ const Venue = () => {
                                       )}
                                     </div>
                                   </div>
-                                </div>
+                                </Link>
                               </div>
                             </div>
-                          </Link>
+                          </div>
                         </div>
                       ))}
                     </div>
