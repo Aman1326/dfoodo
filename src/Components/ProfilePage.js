@@ -79,7 +79,8 @@ const ProfilePage = () => {
     const fd = new FormData();
     fd.append("call_id", customer_id);
     await server_post_data(get_profile, fd)
-      .then((Response) => {
+    .then((Response) => {
+        console.log(Response.data.message)
         if (Response.data.error) {
           // handleError(Response.data.message);
         } else {
@@ -473,10 +474,10 @@ const ProfilePage = () => {
                                                     alt="OnBoardingTick"
                                                   />
                                                   <p>
-                                                    {venue.booking_status === 0
+                                                    {venue.booking_status === 1
                                                       ? "Waiting for Confirmation"
                                                       : venue.booking_status ===
-                                                        1
+                                                        2
                                                       ? "Reservation Confirmed"
                                                       : venue.booking_status ===
                                                         3
@@ -603,10 +604,10 @@ const ProfilePage = () => {
                                                     alt="OnBoardingTick"
                                                   />
                                                   <p>
-                                                    {venue.booking_status === 0
+                                                    {venue.booking_status === 1
                                                       ? "Waiting for Confirmation"
                                                       : venue.booking_status ===
-                                                        1
+                                                        2
                                                       ? "Reservation Confirmed"
                                                       : venue.booking_status ===
                                                         3
