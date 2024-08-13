@@ -178,44 +178,68 @@ const SearchBar = () => {
         handleError("Something Went Wrong");
       });
   };
+  //mobile condition
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 992);
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 992);
+    };
 
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+  const locationn = useLocation();
   return (
     <>
       <div className="searchBar_wrapper">
-        <div className="searchBar_container">
-          <div className="CalendarSection_searchbar">
-            <img src={calendar} alt="calendar" />
-            <DatePicker
-              onChange={setDate}
-              value={date}
-              className="datepicker"
-            />
-            <img src={line} alt="line" className="verticle_line" />
+        {!locationn.pathname.includes("restro_detail") && (
+          <div className="searchBar_container">
+            <div className="CalendarSection_searchbar">
+              <img src={calendar} alt="calendar" />
+              <DatePicker
+                onChange={setDate}
+                value={date}
+                className="datepicker"
+              />
+              <img src={line} alt="line" className="verticle_line" />
+            </div>
+            <div className="locationSection_searchbar">
+              <img src={clock} alt="clock" />
+              <Select
+                id="selectLocation"
+                options={locations}
+                onChange={handleLocationChange}
+                placeholder="Time"
+                styles={customStyles}
+              />
+              <img src={line} alt="line" className="verticle_line" />
+            </div>
+            <div className="locationSection_searchbar">
+              <img src={person} alt="clock" />
+              <Select
+                id="selectPersons"
+                options={personOptions}
+                onChange={handlePersonChange}
+                placeholder="People"
+                styles={customStyles}
+              />
+            </div>
           </div>
-          <div className="locationSection_searchbar">
-            <img src={clock} alt="clock" />
-            <Select
-              id="selectLocation"
-              options={locations}
-              onChange={handleLocationChange}
-              placeholder="Time"
-              styles={customStyles}
-            />
-            <img src={line} alt="line" className="verticle_line" />
-          </div>
-          <div className="locationSection_searchbar">
-            <img src={person} alt="clock" />
-            <Select
-              id="selectPersons"
-              options={personOptions}
-              onChange={handlePersonChange}
-              placeholder="People"
-              styles={customStyles}
-            />
-          </div>
-        </div>
+        )}
         <div className="padding04 row">
-          <div className="seachVenue_section_searchbar ">
+          <div
+            className="seachVenue_section_searchbar"
+            style={
+              locationn.pathname.includes("restro_detail")
+                ? {
+                    border: "1px solid grey",
+                    marginRight: "15rem",
+                  }
+                : {}
+            }
+          >
             <img src={searchIcon} alt="search icon" />
             <input
               className="form-control"
@@ -263,8 +287,16 @@ const SearchBar = () => {
             )}
           </div>
         </div>
-
-        <div className="letsgo_button">
+        <div
+          className="letsgo_button"
+          style={
+            locationn.pathname.includes("restro_detail") && !isMobile
+              ? {
+                  marginRight: "4rem",
+                }
+              : {}
+          }
+        >
           <button>Let's go</button>
         </div>
       </div>

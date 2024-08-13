@@ -344,10 +344,6 @@ const ProfilePage = () => {
                   }}
                   alt={customer_name}
                 />
-                <div className="camera_icon_background">
-                  {" "}
-                  <img src={camera} alt="camera" />
-                </div>
               </div>{" "}
               <div className="profile_name_text_section">
                 <h3>Hi, {customer_name}</h3>
@@ -398,7 +394,7 @@ const ProfilePage = () => {
                         className={activeTab === "about" ? "active" : ""}
                         onClick={() => setActiveTab("upcomming")}
                       >
-                        <h6>Upcomming</h6>
+                        <h6>Upcoming</h6>
                       </button>
                       <button
                         className={activeTab === "menu" ? "active" : ""}

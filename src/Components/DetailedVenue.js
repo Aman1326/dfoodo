@@ -26,6 +26,8 @@ import avgpriceIcon from "../Assets/averagePriceDetailedVenue.svg";
 import rightArrowWhite from "../Assets/rightArrow_white.svg";
 import AddBtn from "../Assets/addNewInput.svg";
 import crossIcon from "../Assets/crossicon.svg";
+import { Modal } from "react-bootstrap";
+import Successs from "../Assets/check.png";
 import {
   server_post_data,
   get_restropage_webapp,
@@ -77,6 +79,8 @@ const DetailedVenue = () => {
   const [currentStep, setCurrentStep] = useState(1);
   const [totalbookingtoday, settotalbookingtoday] = useState(0);
   const [selectedrtsd_idd, setSelectedrtsd_idd] = useState(null);
+  //success modal
+  const [showModal, setShowModal] = useState(false);
   const handleFetchData = async (date_for_book) => {
     setShowLoader(true);
     setData(null);
@@ -331,11 +335,14 @@ const DetailedVenue = () => {
     setAddCustomGuest(true);
     setSelectedGuest("");
   };
-
   const function_save = () => {
     if ($("#checkSurfaceEnvironment-1").prop("checked") === true) {
       //do something
       sava_booking_data();
+      setShowModal(true);
+      setTimeout(() => {
+        setShowModal(false);
+      }, 3000); // 3000ms = 3 seconds
     } else {
       alert(
         "Please read and agree to the terms and conditions before proceeding."
@@ -1018,14 +1025,14 @@ const DetailedVenue = () => {
                         )}
                         {currentStep === 2 && (
                           <div>
-                            <h6 className="calendar_modal_heading">
-                              Booking Time
-                            </h6>
                             <div className="">
+                              <h6 className="calendar_modal_heading">
+                                Booking Time
+                              </h6>
                               <span className="venuePage_venue_capacity_wrapper">
-                                <div className="time_discount_container_detailedVenue center-allign">
+                                <div className="time_discount_container_detailedVenue">
                                   {errorform.error == true && data !== null ? (
-                                    data.map((item, index) => {
+                                    data.slice(0, -1).map((item, index) => {
                                       if (item.start_stop_time_status === 0) {
                                         if (
                                           item.online_booking_time_status === 0
@@ -1364,6 +1371,20 @@ const DetailedVenue = () => {
         <section className="mt-5"></section>
         <Footer />
       </div>
+
+      <Modal
+        show={showModal}
+        onHide={() => setShowModal(false)}
+        centered
+        className="success_modal_reg "
+      >
+        <Modal.Body>
+          <div className="success_modal_register_my_venue ">
+            <img src={Successs} alt="success" />
+            <h3>Your request have been submitted successfully !</h3>
+          </div>
+        </Modal.Body>
+      </Modal>
     </>
   );
 };

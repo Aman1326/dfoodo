@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import "./Css/RegisterMyVenue.css";
 import Footer from "./Footer";
 import Header from "./Header";
@@ -7,7 +7,7 @@ import picture2 from "../Assets/add_shopping_cart.svg";
 import picture3 from "../Assets/eye_tracking.svg";
 import { Link } from "react-router-dom";
 import Successs from "../Assets/check.png";
-import { Modal, Button } from "react-bootstrap";
+import { Modal } from "react-bootstrap";
 
 import {
   check_vaild_save,
@@ -296,7 +296,7 @@ const RegisterMyVenue = () => {
         <Modal.Body>
           <div className="success_modal_register_my_venue ">
             <img src={Successs} alt="success" />
-            <h3>Your request have been submitted successfully !</h3>
+            <h3>Your Booking is Confirmed!</h3>
           </div>
         </Modal.Body>
       </Modal>

@@ -491,10 +491,10 @@ function Header() {
                 )}
               </li>
               <li className="nav-item"></li>
-            </ul>
+            </ul>{" "}
             {searchShow && (
               <div className="row m-auto">
-                <div className="col-md-12">
+                <div className="col-md-10">
                   <SearchBar />
                 </div>
               </div>
@@ -811,6 +811,7 @@ function Header() {
                         handleCloseLocationModal();
                         storeData("city_main", value.city);
                         storeData("country_main", value.country);
+                        window.location.reload();
                       }}
                     >
                       <img
