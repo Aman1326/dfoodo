@@ -608,10 +608,10 @@ const ProfilePage = () => {
                                                     alt="OnBoardingTick"
                                                   />
                                                   <p>
-                                                    {venue.booking_status === 0
+                                                    {venue.booking_status === 1
                                                       ? "Waiting for Confirmation"
                                                       : venue.booking_status ===
-                                                        1
+                                                        2
                                                       ? "Reservation Confirmed"
                                                       : venue.booking_status ===
                                                         3
