@@ -1,8 +1,8 @@
 import axios from "axios";
 import { retrieveData } from "../LocalConnection/LocalConnection.js";
 const appauth_key = "dfoodo@2029";
-let APL_LINK = "http://192.168.1.24:8000/";
-APL_LINK = "https://dfoodobackend.triosoft.ai/";
+let APL_LINK = "http://192.168.1.23:8000/";
+// APL_LINK = "https://dfoodobackend.triosoft.ai/";
 let Website_URL = "https://www.dfoodo.com/";
 let local_server_link_react = APL_LINK + "api/web_link/";
 let local_server_link_back = APL_LINK + "api/admin_link/";
