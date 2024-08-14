@@ -166,7 +166,8 @@ const ProfilePage = () => {
       if (Response.data.error) {
         handleError(Response.data.message);
       } else {
-        setFavrate(Response.data.message.like_lt[2]);
+        setFavrate(Response.data.message.like_lt);
+        console.log(Response.data.message.like_lt);
       }
     } catch (error) {
       handleError(error.message);
@@ -644,93 +645,91 @@ const ProfilePage = () => {
                 <div className="favourite_section2">
                   <h6>My Favorite Restaurant</h6>
                   <div className="container">
-                    {getFavrate &&
-                      getFavrate.length > 0 &&
-                      getFavrate.map((venue, index) => (
-                        <div className="fevorateContanrr" key={index}>
-                          <div className="leftCont">
-                            {venue.data.map((item, itemIndex) => (
-                              <div className="favImgs" key={itemIndex}>
-                                <img
-                                  src={`${APL_LINK}/assets/${
-                                    item.restaurant_image || ""
-                                  }`}
-                                  alt="venueImg"
-                                />
-                              </div>
-                            ))}
-                          </div>
-                          <div className="rightContainer">
-                            <div className="ContnnrFavcratCard">
-                              <div className="FaVCardcontent">
-                                {venue.data.map((item, itemIndex) => (
-                                  <div key={itemIndex}>
-                                    <h5>{item.restaurant_name || ""}</h5>
-                                    <div className="heart_section">
-                                      <button
-                                        onClick={() =>
-                                          handleRemoveFavrate(
-                                            index,
-                                            venue.primary_id
-                                          )
-                                        }
-                                      >
-                                        <img
-                                          src={HeartRed}
-                                          alt="Heart"
-                                          className="heart_icon favHeartIcon"
-                                        />
-                                      </button>
-                                    </div>
-                                    <p>{item.restaurant_full_address || ""}</p>
-                                    <div className="AVrageSection">
-                                      <img
-                                        className="ContctSvgIon"
-                                        src={contactus}
-                                        alt="cont"
-                                      />
-                                      <label>
-                                        ₹{item.restaurant_price} Average Price
-                                      </label>
-                                      <img
-                                        className="QuestionTOol"
-                                        src={qustionTOoltip}
-                                        alt="tooltip"
-                                      />
-                                    </div>
-                                    <div className="drinksSec">
-                                      {item.amenities?.map(
-                                        (amenity, amenityIndex) => (
-                                          <div
-                                            key={amenityIndex}
-                                            className="amenityItem"
-                                          >
-                                            <img
-                                              src={`${APL_LINK}/assets/${amenity.image}`}
-                                              alt={amenity.amenities_name}
-                                            />
-                                            <label>
-                                              {amenity.amenities_name}
-                                            </label>
-                                          </div>
+                    {getFavrate.map((venue, index) => (
+                      <div className="fevorateContanrr" key={index}>
+                        <div className="leftCont">
+                          {venue.data.map((item, itemIndex) => (
+                            <div className="favImgs" key={itemIndex}>
+                              <img
+                                src={`${APL_LINK}/assets/${
+                                  item.restaurant_image || ""
+                                }`}
+                                alt="venueImg"
+                              />
+                            </div>
+                          ))}
+                        </div>
+                        <div className="rightContainer">
+                          <div className="ContnnrFavcratCard">
+                            <div className="FaVCardcontent">
+                              {venue.data.map((item, itemIndex) => (
+                                <div key={itemIndex}>
+                                  <h5>{item.restaurant_name || ""}</h5>
+                                  <div className="heart_section">
+                                    <button
+                                      onClick={() =>
+                                        handleRemoveFavrate(
+                                          index,
+                                          venue.primary_id
                                         )
-                                      )}
-                                    </div>
-                                    <div className="TimingButtons">
-                                      <div className="timesBtns">
-                                        <p>17:30</p>
-                                        <div className="childtime">
-                                          -{item.discount_upto}%
+                                      }
+                                    >
+                                      <img
+                                        src={HeartRed}
+                                        alt="Heart"
+                                        className="heart_icon favHeartIcon"
+                                      />
+                                    </button>
+                                  </div>
+                                  <p>{item.restaurant_full_address || ""}</p>
+                                  <div className="AVrageSection">
+                                    <img
+                                      className="ContctSvgIon"
+                                      src={contactus}
+                                      alt="cont"
+                                    />
+                                    <label>
+                                      ₹{item.restaurant_price} Average Price
+                                    </label>
+                                    <img
+                                      className="QuestionTOol"
+                                      src={qustionTOoltip}
+                                      alt="tooltip"
+                                    />
+                                  </div>
+                                  <div className="drinksSec">
+                                    {item.amenities?.map(
+                                      (amenity, amenityIndex) => (
+                                        <div
+                                          key={amenityIndex}
+                                          className="amenityItem"
+                                        >
+                                          <img
+                                            src={`${APL_LINK}/assets/${amenity.image}`}
+                                            alt={amenity.amenities_name}
+                                          />
+                                          <label>
+                                            {amenity.amenities_name}
+                                          </label>
                                         </div>
+                                      )
+                                    )}
+                                  </div>
+                                  <div className="TimingButtons">
+                                    <div className="timesBtns">
+                                      <p>17:30</p>
+                                      <div className="childtime">
+                                        -{item.discount_upto}%
                                       </div>
                                     </div>
                                   </div>
-                                ))}
-                              </div>
+                                </div>
+                              ))}
                             </div>
                           </div>
                         </div>
-                      ))}
+                      </div>
+                    ))}
 
                     {showLoaderAdmin && <p>Loading...</p>}
                   </div>
