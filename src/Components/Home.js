@@ -251,11 +251,6 @@ function Home() {
               <div className="popularVenues_heading_container">
                 <h3>Popular Restaurants in {country} </h3>
                 <span className="seAll_span">
-                  <Link>
-                    <p>
-                      <strong>See All</strong>
-                    </p>
-                  </Link>
                   {!isMobile && (
                     <div className="pagination_controls">
                       <button
@@ -443,11 +438,6 @@ function Home() {
               <div className="popularVenues_heading_container">
                 <h3>Popular Restaurants in {city} </h3>
                 <span className="seAll_span">
-                  <Link>
-                    <p>
-                      <strong>See All</strong>
-                    </p>
-                  </Link>
                   {!isMobile && (
                     <div className="pagination_controls">
                       <button

@@ -1,8 +1,35 @@
-import React from "react";
+import React,{useState,useEffect} from "react";
 import Header from "./Header";
 import Footer from "./Footer";
-
+import DOMPurify from "dompurify";
+import {
+  server_post_data,
+  get_terms_privacy_data,
+} from "../ServiceConnection/serviceconnection";
 const TermsOfuse = () => {
+  
+  const [showLoaderAdmin, setshowLoaderAdmin] = useState(false);
+    const [policy,setPolicy ] = useState()
+  const master_data_get = async () => {
+    setshowLoaderAdmin(true);
+    await server_post_data(get_terms_privacy_data)
+      .then((Response) => {
+        console.log(Response.data.message);
+        if (Response.data.error) {
+          alert(Response.data.message);
+        } else {
+          setPolicy(Response.data.message.privacy_policy);
+        }
+        setshowLoaderAdmin(false);
+      })
+      .catch((error) => {
+        setshowLoaderAdmin(false);
+      });
+  };
+
+  useEffect(() => {
+    master_data_get();
+  }, []);
   return (
     <div className="howitworks_wrapper">
       <Header />
@@ -16,7 +43,12 @@ const TermsOfuse = () => {
       </div>
 
       <div className="container-lg privacy_policy_headingContainer">
-        <div className="termsAndConditions_points privacyPolicy_points">
+      <div
+                dangerouslySetInnerHTML={{
+                  __html: DOMPurify.sanitize(policy)
+                }}
+              />
+        {/* <div className="termsAndConditions_points privacyPolicy_points">
           <ul>
             <li>
               1.User Accounts and Registration
@@ -170,7 +202,7 @@ const TermsOfuse = () => {
               </ul>
             </li>
           </ul>
-        </div>
+        </div> */}
       </div>
       <Footer />
     </div>

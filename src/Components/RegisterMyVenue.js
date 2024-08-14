@@ -101,7 +101,7 @@ const RegisterMyVenue = () => {
                 >
                   <div className="row">
                     <div className="col-md-6">
-                      <label htmlFor="venueName">First Name</label>
+                      <label htmlFor="venueName">First Name*</label>
                       <input
                         type="text"
                         id="Owner_fname"
@@ -131,7 +131,7 @@ const RegisterMyVenue = () => {
                   </div>
                   <div className="row">
                     <div className="col-md-6">
-                      <label htmlFor="contactPerson">Your Email</label>
+                      <label htmlFor="contactPerson">Your Email*</label>
                       <input
                         type="text"
                         id="Email"
@@ -144,7 +144,7 @@ const RegisterMyVenue = () => {
                       />
                     </div>
                     <div className="col-md-6">
-                      <label htmlFor="contactEmail">Restaurant Name</label>
+                      <label htmlFor="contactEmail">Restaurant Name*</label>
                       <input
                         type="text"
                         id="restaurant_name"
@@ -159,9 +159,9 @@ const RegisterMyVenue = () => {
                   </div>
                   <div className="row">
                     <div className="col-md-6">
-                      <label htmlFor="phone">Restaurant Website</label>
+                      <label htmlFor="phone">Restaurant Website*</label>
                       <input
-                        type="text"
+                        type="email"
                         id="restaurant_website"
                         name="restaurant_website"
                         minLength={3}
@@ -172,7 +172,7 @@ const RegisterMyVenue = () => {
                       />
                     </div>
                     <div className="col-md-6">
-                      <label htmlFor="phone">Phone no.</label>
+                      <label htmlFor="phone">Phone no.*</label>
                       <input
                         type="text"
                         id="Contact"
@@ -187,7 +187,7 @@ const RegisterMyVenue = () => {
                   </div>
                   <div className="row">
                     <div className="col-md-12">
-                      <label htmlFor="additionalInfo">Restaurant Address</label>
+                      <label htmlFor="additionalInfo">Restaurant Address*</label>
                       <input
                         id="restaurant_address"
                         name="restaurant_address"
@@ -224,7 +224,7 @@ const RegisterMyVenue = () => {
                           )
                         }
                       >
-                        Next{" "}
+                        Submit{" "}
                       </Link>
                     </div>
                   </div>

@@ -1,9 +1,36 @@
-import React from "react";
+import React,{useState,useEffect} from "react";
 import Header from "./Header";
 import Footer from "./Footer";
+import DOMPurify from "dompurify";
 import "../Components/Css/TermsOfuse.css";
-
+import {
+  server_post_data,
+  get_terms_privacy_data,
+} from "../ServiceConnection/serviceconnection";
 const TermsOfuse = () => {
+
+  const [showLoaderAdmin, setshowLoaderAdmin] = useState(false);
+    const [terms,setTerms ] = useState()
+  const master_data_get = async () => {
+    setshowLoaderAdmin(true);
+    await server_post_data(get_terms_privacy_data)
+      .then((Response) => {
+        console.log(Response.data.message);
+        if (Response.data.error) {
+          alert(Response.data.message);
+        } else {
+          setTerms(Response.data.message.terms_condition);
+        }
+        setshowLoaderAdmin(false);
+      })
+      .catch((error) => {
+        setshowLoaderAdmin(false);
+      });
+  };
+
+  useEffect(() => {
+    master_data_get();
+  }, []);
   return (
     <div className="howitworks_wrapper">
       <Header />
@@ -15,7 +42,13 @@ const TermsOfuse = () => {
         </div>
       </div>
       <div className="container-lg privacy_policy_headingContainer">
-        <h5>
+
+      <div
+                dangerouslySetInnerHTML={{
+                  __html: DOMPurify.sanitize(terms)
+                }}
+              />
+        {/* <h5>
           Welcome to ShopUp App! These terms and conditions ("Terms") govern
           your use of our ecommerce mobile application (the "App") and the
           services provided therein. By accessing or using the App, you agree to
@@ -176,7 +209,7 @@ const TermsOfuse = () => {
               </ul>
             </li>
           </ul>
-        </div>
+        </div> */}
       </div>
       <Footer />
     </div>

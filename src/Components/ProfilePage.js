@@ -350,11 +350,11 @@ const ProfilePage = () => {
                 <h3>Hi, {customer_name}</h3>
                 <span className="d-flex g-2 mb-2">
                   <img src={phone} alt="phone" />
-                  <p>{customer_mobile_no}</p>
+                  <p>{" "}{customer_mobile_no}</p>
                 </span>
                 <span className="d-flex g-2">
                   <img src={message} alt="phone" />
-                  <p>{customer_email}</p>
+                  <p>{" "}{customer_email}</p>
                 </span>
               </div>
             </div>
@@ -1057,7 +1057,7 @@ const ProfilePage = () => {
                     <h5>Manage My Notification </h5>
                     <p>Newsletter</p>
                     <div className="toggle_switches_settings">
-                      <span>
+                      <span className="switch_case">
                         <label class="switch">
                           <input
                             type="checkbox"
@@ -1077,7 +1077,7 @@ const ProfilePage = () => {
                           by SMS
                         </p>
                       </span>
-                      <span>
+                      <span className="switch_case">
                         <label class="switch">
                           <input
                             type="checkbox"
