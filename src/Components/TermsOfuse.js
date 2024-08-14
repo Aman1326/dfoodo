@@ -11,21 +11,23 @@ const TermsOfuse = () => {
 
   const [showLoaderAdmin, setshowLoaderAdmin] = useState(false);
     const [terms,setTerms ] = useState()
-  const master_data_get = async () => {
-    setshowLoaderAdmin(true);
-    await server_post_data(get_terms_privacy_data)
-      .then((Response) => {
-        console.log(Response.data.message);
-        if (Response.data.error) {
-          alert(Response.data.message);
-        } else {
-          setTerms(Response.data.message.terms_condition);
-        }
-        setshowLoaderAdmin(false);
-      })
-      .catch((error) => {
-        setshowLoaderAdmin(false);
-      });
+    const master_data_get = async () => {
+      setshowLoaderAdmin(true);
+      let fd = new FormData()
+      await server_post_data(get_terms_privacy_data,fd)
+        .then((Response) => {
+          console.log(Response.data.message[0].privacy_policy
+          );
+          if (Response.data.error) {
+            alert(Response.data.message);
+          } else {
+            setTerms(Response.data.message[0].privacy_policy);
+          }
+          setshowLoaderAdmin(false);
+        })
+        .catch((error) => {
+          setshowLoaderAdmin(false);
+        }); 
   };
 
   useEffect(() => {

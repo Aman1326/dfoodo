@@ -6,27 +6,27 @@ import {
   server_post_data,
   get_terms_privacy_data,
 } from "../ServiceConnection/serviceconnection";
-const TermsOfuse = () => {
+const PrivacyPolicy = () => {
   
   const [showLoaderAdmin, setshowLoaderAdmin] = useState(false);
     const [policy,setPolicy ] = useState()
-  const master_data_get = async () => {
-    setshowLoaderAdmin(true);
-    await server_post_data(get_terms_privacy_data)
-      .then((Response) => {
-        console.log(Response.data.message);
-        if (Response.data.error) {
-          alert(Response.data.message);
-        } else {
-          setPolicy(Response.data.message.privacy_policy);
-        }
-        setshowLoaderAdmin(false);
-      })
-      .catch((error) => {
-        setshowLoaderAdmin(false);
-      });
-  };
-
+    const master_data_get = async () => {
+      setshowLoaderAdmin(true);
+      let fd = new FormData()
+      await server_post_data(get_terms_privacy_data,fd)
+        .then((Response) => {
+          console.log(Response.data.message[0].privacy_policy
+          );
+          if (Response.data.error) {
+            alert(Response.data.message);
+          } else {
+            setPolicy(Response.data.message[0].privacy_policy);
+          }
+          setshowLoaderAdmin(false);
+        })
+        .catch((error) => {
+          setshowLoaderAdmin(false);
+        }); }
   useEffect(() => {
     master_data_get();
   }, []);
@@ -207,6 +207,5 @@ const TermsOfuse = () => {
       <Footer />
     </div>
   );
-};
-
-export default TermsOfuse;
+}
+export default PrivacyPolicy;
