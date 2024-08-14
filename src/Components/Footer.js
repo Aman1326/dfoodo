@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useState, useEffect } from "react";
 import mainLogo from "../Assets/mainLogo.png";
 import "./Css/Footer.css";
 import logo1 from "../Assets/fb_logo.svg";
@@ -8,22 +8,38 @@ import logo4 from "../Assets/igIcon.svg";
 import logo5 from "../Assets/linkedInIcon.svg";
 import earth from "../Assets/earth.svg";
 import { Link } from "react-router-dom";
-const Footer = () => {
-  const containerRef = useRef(null);
+import { handleLinkClick } from "../CommonJquery/CommonJquery";
 
-  const scrollToTop = () => {
-    if (containerRef.current) {
-      containerRef.current.scrollTo({
-        top: 0,
-        behavior: "smooth", // Smooth scrolling animation
+import {
+  server_post_data,
+  get_all_faq_website,
+} from "../ServiceConnection/serviceconnection.js";
+import { handleError } from "../CommonJquery/CommonJquery.js";
+const Footer = () => {
+  const [getSocialLinks, SetSocialLinks] = useState([]);
+  const master_data_get = async () => {
+    await server_post_data(get_all_faq_website, null)
+      .then((Response) => {
+        if (Response.data.error) {
+          handleError(Response.data.message);
+        } else {
+          if (Response.data.message.data_faq_webite.length > 0) {
+            SetSocialLinks(Response.data.message.data_faq_webite[0]);
+          }
+        }
+      })
+      .catch((error) => {
+        console.log(error);
       });
-    }
   };
+  useEffect(() => {
+    master_data_get();
+  }, []);
   return (
     <div className="footer_section">
       <div className="container-lg">
         <div className="brandingFooter">
-          <Link onClick={scrollToTop} to="/">
+          <Link onClick={() => handleLinkClick("/")}>
             {" "}
             <img src={mainLogo} alt="mainlogo" />
           </Link>
@@ -34,7 +50,7 @@ const Footer = () => {
               <div className="footer_about_my_venue">
                 <strong>
                   <Link
-                    to="/aboutUs"
+                    onClick={() => handleLinkClick("/aboutUs")}
                     style={{
                       textDecoration: "none",
                       color: "var(--grey)",
@@ -48,7 +64,7 @@ const Footer = () => {
                 <ul>
                   <li>
                     <Link
-                      to="/getHelp"
+                      onClick={() => handleLinkClick("/getHelp")}
                       style={{
                         color: "var(--text-grey)",
                         textDecoration: "none",
@@ -59,7 +75,7 @@ const Footer = () => {
                   </li>
                   <li>
                     <Link
-                      to="/blogs"
+                      onClick={() => handleLinkClick("/blogs")}
                       style={{
                         color: "var(--text-grey)",
                         textDecoration: "none",
@@ -70,7 +86,7 @@ const Footer = () => {
                   </li>
                   <li>
                     <Link
-                      to="/registerMyVenue"
+                      onClick={() => handleLinkClick("/registerMyVenue")}
                       style={{
                         color: "var(--text-grey)",
                         textDecoration: "none",
@@ -81,7 +97,7 @@ const Footer = () => {
                   </li>
                   <li>
                     <Link
-                      to="/getHelp"
+                      onClick={() => handleLinkClick("/getHelp")}
                       style={{
                         color: "var(--text-grey)",
                         textDecoration: "none",
@@ -92,7 +108,7 @@ const Footer = () => {
                   </li>
                   <li>
                     <Link
-                      to="/"
+                      onClick={() => handleLinkClick("/")}
                       style={{
                         color: "var(--text-grey)",
                         textDecoration: "none",
@@ -113,10 +129,14 @@ const Footer = () => {
               </strong>
               <ul>
                 <li>
-                  <Link to="/termsOfUse">Terms of Use</Link>
+                  <Link onClick={() => handleLinkClick("/termsOfUse")}>
+                    Terms of Use
+                  </Link>
                 </li>
                 <li>
-                  <Link to="/privacyPolicy">Privacy and Cookies statement</Link>
+                  <Link onClick={() => handleLinkClick("/privacyPolicy")}>
+                    Privacy and Cookies statement
+                  </Link>
                 </li>
                 <li>
                   <Link>Cookie consent</Link>
@@ -131,7 +151,6 @@ const Footer = () => {
                 <img src={earth} alt="earth" />
                 <select>
                   <option>English</option>
-                  <option>Swedish</option>
                 </select>
               </div>
               <strong>
@@ -139,29 +158,49 @@ const Footer = () => {
               </strong>
               <ul className="social_links">
                 <li>
-                  <Link>
+                  <Link
+                    onClick={() =>
+                      handleLinkClick(getSocialLinks.website_facebook_link)
+                    }
+                  >
                     <img src={logo1} alt="logo1" />
                   </Link>
                 </li>
                 <li>
-                  <Link>
+                  <Link
+                    onClick={() =>
+                      handleLinkClick(getSocialLinks.website_twiter_link)
+                    }
+                  >
                     {" "}
                     <img src={logo2} alt="logo1" />
                   </Link>
                 </li>
                 <li>
-                  <Link>
+                  <Link
+                    onClick={() =>
+                      handleLinkClick(getSocialLinks.website_youtube_link)
+                    }
+                  >
                     <img src={logo3} alt="logo1" />
                   </Link>
                 </li>
                 <li>
-                  <Link>
+                  <Link
+                    onClick={() =>
+                      handleLinkClick(getSocialLinks.website_instagram_link)
+                    }
+                  >
                     {" "}
                     <img src={logo4} alt="logo1" />
                   </Link>
                 </li>
                 <li>
-                  <Link>
+                  <Link
+                    onClick={() =>
+                      handleLinkClick(getSocialLinks.website_ins_link)
+                    }
+                  >
                     <img src={logo5} alt="logo1" />
                   </Link>
                 </li>
@@ -171,7 +210,7 @@ const Footer = () => {
               </div>
             </div>
           </div>
-          <hr />
+          {/* <hr /> */}
           <div className="col-lg-10 post_footer_text mx-0">
             <p>
               Promotional offers are subject to conditions displayed on the

@@ -14,6 +14,7 @@ import "./Css/Blog2.css";
 const Blog2 = () => {
   const location = useLocation();
   const currentUrl = location.pathname.substring(1);
+  const [isMobile, setIsMobile] = useState(false);
   const [showLoaderAdmin, setshowLoaderAdmin] = useState(false);
   const [blogs, setBlogs] = useState(false);
   const master_data_get = async () => {
@@ -32,15 +33,13 @@ const Blog2 = () => {
         setshowLoaderAdmin(false);
       })
       .catch((error) => {
-        // setshowLoaderAdmin(false);
-        console.log(error);
+        setshowLoaderAdmin(false);
       });
   };
 
   useEffect(() => {
     master_data_get();
   }, []);
-  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
     const mediaQuery = window.matchMedia("(max-width: 767px)");

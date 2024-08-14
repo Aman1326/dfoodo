@@ -1,7 +1,6 @@
 import React from "react";
 import "./Css/AboutUs.css";
 import Header from "./Header";
-import bg from "../Assets/getHelpBg.png";
 import image from "../Assets/aboutus.png";
 import Footer from "./Footer";
 import DownloadApp from "./DownloadApp";
@@ -9,6 +8,7 @@ const AboutUs = () => {
   return (
     <>
       <Header />
+      
       <section className="section_wrapper_aboutus">
         <div className="about-us-background">
           <div className="about-us-overlay">

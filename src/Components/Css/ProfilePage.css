@@ -14,19 +14,6 @@
   margin: 0;
 }
 
-.camera_icon_background {
-  width: fit-content;
-  position: absolute;
-  bottom: 0;
-  padding: 0.5rem 0.5rem;
-  cursor: pointer;
-  right: 10px;
-  display: flex;
-  align-items: center;
-  border-radius: 50%;
-  background-color: var(--primary-color);
-}
-
 .profile_picture_section {
   background-color: #ffe9eb;
   padding: 2rem 2rem;
@@ -70,7 +57,6 @@
 }
 
 .tabs {
-  margin-top: -3rem;
   padding: 0.5rem 0.5rem;
 }
 
@@ -124,10 +110,14 @@
 
 .tab:last-child {
   border-bottom: none;
+  width: fit-content;
+  height: fit-content;
 }
 
 .active-tab {
   background-color: var(--light-grey);
+  width: fit-content;
+  height: fit-content;
 }
 
 .TabPanel {
@@ -135,9 +125,6 @@
   padding: 0;
 }
 
-.settings_section {
-  position: relative;
-}
 
 .tab-panel {
   display: block;
@@ -199,8 +186,8 @@
 .switch {
   position: relative;
   display: inline-block;
-  width: 55px;
-  height: 29px;
+  width: 38px;
+  height: 20px;
 }
 
 /* Hide default HTML checkbox */
@@ -225,29 +212,35 @@
 .slider:before {
   position: absolute;
   content: "";
-  height: 22px;
-  width: 22px;
-  left: 4px;
-  bottom: 4px;
+  height: 16px;
+  width: 16px;
+  left: 1px;
+  bottom: 2px;
   background-color: white;
   -webkit-transition: 0.4s;
   transition: 0.4s;
 }
 
-input:checked + .slider {
+input:checked+.slider {
   background-color: var(--primary-color);
 }
 
-input:focus + .slider {
+input:focus+.slider {
   box-shadow: 0 0 1px var(--primary-color);
 }
 
-input:checked + .slider:before {
-  -webkit-transform: translateX(26px);
-  -ms-transform: translateX(26px);
-  transform: translateX(26px);
+input:checked+.slider:before {
+  -webkit-transform: translateX(20px);
+  -ms-transform: translateX(20px);
+  transform: translateX(20px);
 }
-
+.switch_case {
+  display: flex;
+  align-items: center;
+  p{
+    margin: 0;
+  }
+}
 .slider.round {
   border-radius: 34px;
 }
@@ -456,6 +449,7 @@ input:checked + .slider:before {
     aspect-ratio: 1;
   }
 }
+
 /*------------new Favrate Section-------*/
 .favourite_section2 {
   position: relative;
@@ -466,6 +460,7 @@ input:checked + .slider:before {
   display: flex;
   flex-direction: column;
 }
+
 .fevorateContanrr {
   position: relative;
   gap: 1rem;
@@ -481,10 +476,12 @@ input:checked + .slider:before {
   border-radius: 10px;
   box-shadow: 0px 2px 2px 0px #0000002e;
 }
+
 .leftCont {
   display: flex;
   width: 30%;
 }
+
 .favImgs {
   position: relative;
   display: flex;
@@ -492,6 +489,7 @@ input:checked + .slider:before {
   align-items: center;
   width: 150px;
   height: 150px;
+
   img {
     height: 100%;
     width: 100%;
@@ -506,11 +504,13 @@ input:checked + .slider:before {
   padding: 0.4rem 1rem;
   background-color: #e33745;
 }
+
 .rightContainer {
   width: 100%;
   height: 100%;
   display: flex;
 }
+
 .FaVCardcontent {
   display: flex;
   margin: 0 !important;
@@ -520,14 +520,17 @@ input:checked + .slider:before {
 
   flex-direction: column;
   justify-content: center;
+
   p {
     font-size: 13px;
     margin: 0;
   }
+
   h5 {
     font-size: 16px;
   }
 }
+
 .AVrageSection {
   display: flex;
   align-items: center;
@@ -537,16 +540,19 @@ input:checked + .slider:before {
   border-radius: 5px;
   padding: 0.4rem 1.4rem;
   background-color: #f8e8e9;
+
   label {
     font-size: 14px;
 
     margin: 0 !important;
   }
+
   img {
     height: 18px;
     width: 18px;
   }
 }
+
 .QuestionTOol {
   height: 12px !important;
   width: 12px !important;
@@ -559,21 +565,25 @@ input:checked + .slider:before {
   padding: 7px;
   flex-wrap: wrap;
   align-items: center;
+
   label {
     font-size: 14px;
     margin: 0 !important;
   }
+
   img {
     height: 12px;
     width: 12px;
     margin-right: 3px;
   }
 }
+
 .TimingButtons {
   padding-top: 0.4rem;
   position: relative;
   display: flex;
 }
+
 .timesBtns {
   color: #535969;
   font-weight: 600;
@@ -582,10 +592,12 @@ input:checked + .slider:before {
   font-size: 15px;
   background-color: #faf8f8;
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+
   p {
     margin: 0;
   }
 }
+
 .childtime {
   color: #535969;
   padding: 0rem 0.4rem;
@@ -598,22 +610,75 @@ input:checked + .slider:before {
   font-size: 12px;
   position: absolute;
 }
+
 @media (max-width: 800px) {
   .fevorateContanrr {
     align-items: center;
     flex-direction: column;
   }
+
   .ContnnrFavcratCard {
     height: 100%;
     width: 100%;
     display: flex;
     justify-content: center;
   }
+
   .favImgs {
     width: 100%;
     height: 100%;
   }
+
   .leftCont {
     width: 100%;
+  }
+}
+
+.tab-panel {
+  display: block;
+}
+
+.back-button {
+  display: none;
+  /* Hide back button by default */
+}
+
+/* Styles for screens smaller than 1062px */
+@media (max-width: 1062px) {
+  .tab-list {
+    display: none;
+  }
+
+  .tab-panel.active {
+    width: 100%;
+    display: block;
+    padding: 0.5rem 1rem;
+    /* Show the active tab panel */
+  }
+
+  .back-button {
+    display: block;
+    /* Show back button on smaller screens */
+    margin-bottom: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    width: fit-content;
+    padding: 0.4rem 4rem;
+    font-family: "Roboto";
+    border: none;
+    border-radius: 5px;
+    background-color: var(--secondary-black);
+    color: var(--white);
+  }
+}
+
+@media (max-width: 575px) {
+  .container_profile_section_venue {
+    height: fit-content;
+  }
+
+  .profile_picture_section {
+    display: flex;
+    flex-direction: column;
   }
 }

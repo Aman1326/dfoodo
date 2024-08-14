@@ -39,6 +39,10 @@
   margin-bottom: 1rem;
 }
 
+.progress_text img {
+  width: 0.9rem;
+}
+
 .button-container {
   display: flex;
   justify-content: space-between;
@@ -54,21 +58,16 @@
 /* circular bar  */
 .Circualr_progressBar_section {
   display: flex;
-  gap: 2rem;
+  gap: 1rem;
   align-items: center;
-  justify-content: space-between;
+  justify-content: space-around;
   flex-direction: row;
-}
-
-.review_wrapper {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
 }
 
 .text_rating_sectin {
   display: flex;
   gap: 1rem;
+  justify-content: space-evenly;
   flex-direction: row;
   margin-top: 3rem;
 }
@@ -89,7 +88,7 @@
 
 .no_reviews p {
   font-size: 14px;
-  color: var(--text-grey);
+  color: var(--light-black);
   font-family: "Roboto";
 }
 
@@ -145,6 +144,7 @@
 .user_review_like_report_section {
   display: flex;
   flex-direction: row;
+  cursor: pointer;
   gap: 2rem;
 }
 
@@ -222,6 +222,7 @@
 
 @media screen and (max-width: 576px) {
   .columnAfter576 {
+    display: flex;
     flex-direction: column;
   }
 
@@ -231,5 +232,60 @@
 }
 
 .CircularProgressbar {
-  max-width: 250px;
+  max-width: 200px;
+}
+
+@media screen and (max-width: 1200px) {
+  .CircularProgressbar {
+    max-width: 170px !important;
+  }
+}
+
+@media screen and (max-width: 991px) {
+  .CircularProgressbar {
+    max-width: 150px !important;
+  }
+}
+
+.red_tick_section {
+  border: 1px solid lightgrey;
+  padding: 2rem 1rem;
+  border-radius: 5px;
+  margin: 2rem 1rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 1rem;
+  font-size: 16px;
+
+  p {
+    margin: 0;
+  }
+}
+.LikeImgg {
+  height: 14px !important;
+  width: 14px !important;
+}
+
+@media screen and (max-width: 576px) {
+  .circular_review_wrapper {
+    height: 100%;
+  }
+
+  .no_reviews p {
+    margin: 0;
+  }
+
+  .CircularProgressbar {
+    width: 100px;
+    height: 100px;
+  }
+
+  .Circualr_progressBar_section {
+    flex-direction: column;
+    gap: 0.7rem;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+  }
 }

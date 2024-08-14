@@ -12,9 +12,9 @@ import {
   inputdateformateChange,
 } from "../CommonJquery/CommonJquery";
 const Blog = () => {
+  const [showLoaderAdmin, setshowLoaderAdmin] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(6); // Adjust as needed
-  const [showLoaderAdmin, setshowLoaderAdmin] = useState(false);
   const [blogs, setBlogs] = useState([]);
   const [SEOloop, setSEOloop] = useState([]);
 
@@ -48,7 +48,6 @@ const Blog = () => {
       })
       .catch((error) => {
         setshowLoaderAdmin(false);
-        console.log(error);
       });
   };
 

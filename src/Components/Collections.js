@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./Css/Collections.css";
 
 import Slider from "react-slick";
@@ -10,7 +10,7 @@ import rightArrowSvg from "../Assets/rightArrowIcon.svg";
 import { APL_LINK } from "../ServiceConnection/serviceconnection";
 import { handleLinkClick } from "../CommonJquery/CommonJquery";
 import { Link } from "react-router-dom";
-const Collections = ({ data, SEOloop }) => {
+const Collections = ({ data, SEOloop, ImageLink }) => {
   //browse cities section
 
   // Custom Next Arrow
@@ -63,7 +63,7 @@ const Collections = ({ data, SEOloop }) => {
       {
         breakpoint: 600,
         settings: {
-          slidesToShow: 2,
+          slidesToShow: 3,
           slidesToScroll: 1,
           initialSlide: 2,
         },
@@ -71,7 +71,7 @@ const Collections = ({ data, SEOloop }) => {
       {
         breakpoint: 480,
         settings: {
-          slidesToShow: 1,
+          slidesToShow: 2,
           slidesToScroll: 1,
         },
       },
@@ -79,7 +79,7 @@ const Collections = ({ data, SEOloop }) => {
   };
 
   const match_and_return_seo_link = (v_id, catagory) => {
-    let data_seo_link_final = "/restro/" + catagory + "/" + v_id;
+    let data_seo_link_final = "/restro/catagory_detail/" + v_id;
     let data_seo_link = data_seo_link_final;
     if (SEOloop) {
       const matchedItem = SEOloop.find((data) => {
@@ -92,8 +92,22 @@ const Collections = ({ data, SEOloop }) => {
     }
     return data_seo_link_final;
   };
-  console.log(data);
+  //mobile condition
+  const [isMobile, setIsMobile] = useState(false);
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth < 992) {
+        setIsMobile(true);
+      } else {
+        setIsMobile(false);
+      }
+    };
 
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, [isMobile]);
   return (
     <div>
       {/* browse other cities */}
@@ -101,37 +115,82 @@ const Collections = ({ data, SEOloop }) => {
         <div className="browse_otherCities_section">
           <div className="container-lg">
             <div className="cities_mapped ">
-              <Slider {...settings}>
-                {data &&
-                  data.length > 0 &&
-                  data.map((venue, index) => (
-                    <div key={index} className="city-item">
-                      <Link
-                        onClick={() =>
-                          handleLinkClick(
-                            match_and_return_seo_link(
-                              venue.primary_id,
-                              venue.category_master_name
+              {isMobile ? (
+                <div className="scroll-container">
+                  {data &&
+                    data.length > 0 &&
+                    data.map((venue, index) => (
+                      <div key={index} className="city-item">
+                        <Link
+                          onClick={() =>
+                            handleLinkClick(
+                              match_and_return_seo_link(
+                                venue.primary_id,
+                                venue.category_master_name
+                              )
                             )
-                          )
-                        }
-                      >
-                        <img
-                          className="city-image"
-                          src={`${APL_LINK}/assets/${venue.category_master_image}`}
-                          alt={`Venue ${index + 1}`}
-                        />
-                        <div className="city_description">
-                          <h6>{venue.category_master_name}</h6>
-                          <span className="d-flex flex-row">
-                            <p>{venue.category_count} Places</p>
-                            <img src={right} alt="right" />
-                          </span>
-                        </div>
-                      </Link>
-                    </div>
-                  ))}
-              </Slider>
+                          }
+                        >
+                          <img
+                            className="city-image"
+                            src={`${
+                              APL_LINK + ImageLink + venue.category_master_image
+                            }`}
+                            alt={`Venue ${index + 1}`}
+                          />
+                          <div className="city_description">
+                            <h6>{venue.category_master_name}</h6>
+                            <span className="d-flex flex-row">
+                              <p>{venue.category_count} Places</p>
+                              <img src={right} alt="right" />
+                            </span>
+                          </div>
+                        </Link>
+                      </div>
+                    ))}
+                </div>
+              ) : (
+                <>
+                  {data && data.length > 0 && (
+                    <Slider {...settings}>
+                      {data &&
+                        data.length > 0 &&
+                        data.map((venue, index) => (
+                          <div key={index} className="city-item">
+                            <Link
+                              onClick={() =>
+                                handleLinkClick(
+                                  match_and_return_seo_link(venue.primary_id)
+                                )
+                              }
+                            >
+                              <img
+                                className="city-image"
+                                src={`${
+                                  APL_LINK +
+                                  ImageLink +
+                                  venue.category_master_image
+                                }`}
+                                alt={`Venue ${index + 1}`}
+                              />
+                              <div className="city_description">
+                                <h6>{venue.category_master_name}</h6>
+                                <span className="d-flex flex-row">
+                                  <p>{venue.category_count} Places</p>
+                                  <img
+                                    src={right}
+                                    alt="right"
+                                    id="right_arrow_small"
+                                  />
+                                </span>
+                              </div>
+                            </Link>
+                          </div>
+                        ))}
+                    </Slider>
+                  )}
+                </>
+              )}
             </div>
           </div>
         </div>

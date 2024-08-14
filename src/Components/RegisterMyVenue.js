@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import "./Css/RegisterMyVenue.css";
 import Footer from "./Footer";
 import Header from "./Header";
@@ -7,7 +7,7 @@ import picture2 from "../Assets/add_shopping_cart.svg";
 import picture3 from "../Assets/eye_tracking.svg";
 import { Link } from "react-router-dom";
 import Successs from "../Assets/check.png";
-import { Modal, Button } from "react-bootstrap";
+import { Modal } from "react-bootstrap";
 
 import {
   check_vaild_save,
@@ -18,6 +18,7 @@ import {
   handleError,
   handleIaphabetnumberChange,
   handleNumbersChange,
+  handleURLChange,
   ////handleSuccess,
 } from "../CommonJquery/CommonJquery.js";
 import {
@@ -26,10 +27,10 @@ import {
 } from "../ServiceConnection/serviceconnection.js";
 import $ from "jquery";
 const RegisterMyVenue = () => {
-  const handleSaveChangesdynamic = async (
-    form_data,
-    save_restaurantOwnerdetails
-  ) => {
+  //success modal
+  const [showModal, setShowModal] = useState(false);
+  const [showLoader, setShowLoader] = useState(false);
+  const handleSaveChangesdynamic = async (form_data, url_link) => {
     let vaild_data = check_vaild_save(form_data);
     // seterror_show("");
     if (!$("#availability").prop("checked")) {
@@ -37,35 +38,25 @@ const RegisterMyVenue = () => {
     }
     if (vaild_data) {
       let fd_from = combiled_form_data(form_data, null);
-      await server_post_data(save_restaurantOwnerdetails, fd_from)
+      setShowLoader(true);
+      await server_post_data(url_link, fd_from)
         .then((Response) => {
           if (Response.data.error) {
-            // handleError(Response.data.message);
+            handleError(Response.data.message);
           } else {
-            handleOpenModal();
+            setShowModal(true);
+            setTimeout(() => {
+              setShowModal(false);
+            }, 5000); // 3000ms = 3 seconds
             empty_form(form_data);
           }
+          setShowLoader(false);
         })
-        .catch((error) => {});
+        .catch((error) => {
+          setShowLoader(false);
+        });
     }
   };
-
-  //success modal
-  const [showModal, setShowModal] = useState(false);
-
-  const handleOpenModal = () => {
-    setShowModal(true);
-  };
-
-  useEffect(() => {
-    let timer;
-    if (showModal) {
-      timer = setTimeout(() => {
-        setShowModal(false);
-      }, 3000); // 3000ms = 3 seconds
-    }
-    return () => clearTimeout(timer);
-  }, [showModal]);
 
   return (
     <>
@@ -76,9 +67,6 @@ const RegisterMyVenue = () => {
           <div className="register-venue-overlay">
             <div className="container">
               <div className="row">
-                {/* <div className="image_overlay_getHelp">
-                  <img src={bg} alt="bg" />
-                </div> */}
                 <div className="col-lg-7 register-venue-content">
                   <h1>Hipster ipsum tattooed brunch I'm baby.</h1>
                   <p>
@@ -113,11 +101,14 @@ const RegisterMyVenue = () => {
                 >
                   <div className="row">
                     <div className="col-md-6">
-                      <label htmlFor="venueName">First Name</label>
+                      <label htmlFor="venueName">First Name*</label>
                       <input
                         type="text"
                         id="Owner_fname"
                         name="Owner_fname"
+                        minLength={3}
+                        maxLength={70}
+                        onInput={handleAphabetsChange}
                         className="form-control trio_mandatory"
                         placeholder="first name "
                       />
@@ -130,6 +121,9 @@ const RegisterMyVenue = () => {
                         type="text"
                         id="Owner_lname"
                         name="Owner_lname"
+                        minLength={3}
+                        maxLength={70}
+                        onInput={handleAphabetsChange}
                         className="form-control"
                         placeholder="last name"
                       />
@@ -137,21 +131,27 @@ const RegisterMyVenue = () => {
                   </div>
                   <div className="row">
                     <div className="col-md-6">
-                      <label htmlFor="contactPerson">Your Email</label>
+                      <label htmlFor="contactPerson">Your Email*</label>
                       <input
                         type="text"
                         id="Email"
                         name="Email"
+                        minLength={3}
+                        maxLength={70}
+                        onInput={handleEmailChange}
                         className="form-control trio_mandatory"
                         placeholder="Enter your Email"
                       />
                     </div>
                     <div className="col-md-6">
-                      <label htmlFor="contactEmail">Restaurant Name</label>
+                      <label htmlFor="contactEmail">Restaurant Name*</label>
                       <input
                         type="text"
                         id="restaurant_name"
                         name="restaurant_name"
+                        minLength={3}
+                        maxLength={70}
+                        onInput={handleIaphabetnumberChange}
                         className="form-control trio_mandatory"
                         placeholder="Enter restaurant name"
                       />
@@ -159,21 +159,27 @@ const RegisterMyVenue = () => {
                   </div>
                   <div className="row">
                     <div className="col-md-6">
-                      <label htmlFor="phone">Restaurant Email</label>
+                      <label htmlFor="phone">Restaurant Website*</label>
                       <input
-                        type="text"
+                        type="email"
                         id="restaurant_website"
                         name="restaurant_website"
+                        minLength={3}
+                        maxLength={70}
+                        onInput={handleURLChange}
                         className="form-control trio_mandatory"
-                        placeholder="Enter business Email Address"
+                        placeholder="Enter business Email Website"
                       />
                     </div>
                     <div className="col-md-6">
-                      <label htmlFor="phone">Phone no.</label>
+                      <label htmlFor="phone">Phone no.*</label>
                       <input
                         type="text"
                         id="Contact"
                         name="Contact"
+                        minLength={10}
+                        maxLength={10}
+                        onInput={handleNumbersChange}
                         className="form-control trio_mandatory"
                         placeholder="Enter phone no."
                       />
@@ -181,10 +187,13 @@ const RegisterMyVenue = () => {
                   </div>
                   <div className="row">
                     <div className="col-md-12">
-                      <label htmlFor="additionalInfo">Restaurant Address</label>
+                      <label htmlFor="additionalInfo">Restaurant Address*</label>
                       <input
                         id="restaurant_address"
                         name="restaurant_address"
+                        minLength={3}
+                        maxLength={300}
+                        onInput={handleIaphabetnumberChange}
                         className="form-control trio_mandatory"
                         placeholder="Restaurant Address"
                         rows="4"
@@ -215,7 +224,7 @@ const RegisterMyVenue = () => {
                           )
                         }
                       >
-                        Next{" "}
+                        Submit{" "}
                       </Link>
                     </div>
                   </div>
@@ -287,7 +296,7 @@ const RegisterMyVenue = () => {
         <Modal.Body>
           <div className="success_modal_register_my_venue ">
             <img src={Successs} alt="success" />
-            <h3>Your request have been submitted successfully !</h3>
+            <h3>Your Booking is Confirmed!</h3>
           </div>
         </Modal.Body>
       </Modal>
