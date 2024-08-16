@@ -49,8 +49,6 @@ const ProfilePage = () => {
   customer_name = retrieveData("customer_name");
   customer_mobile_no = retrieveData("customer_mobile_no");
   customer_email = retrieveData("customer_email");
-  const [activeTabIndex, setActiveTabIndex] = useState(0);
-  const [isTabPanelVisible, setIsTabPanelVisible] = useState(false);
   const [getFavrate, setFavrate] = useState([]);
   const [GetRegistration, setRegistration] = useState([]);
   const [SEOloop, setSEOloop] = useState([]);
@@ -63,13 +61,7 @@ const ProfilePage = () => {
   const [ImageLink, setImageLink] = useState("");
   const [rupees_icon_left, setrupees_icon_left] = useState("");
   const [rupees_icon_right, setrupees_icon_right] = useState([]);
-  const handleTabClick = (index) => {
-    setActiveTabIndex(index);
-    setIsTabPanelVisible(true);
-  };
-  const handleBackClick = () => {
-    setIsTabPanelVisible(false);
-  };
+
   useEffect(() => {
     master_data_get();
   }, []);
@@ -330,6 +322,18 @@ const ProfilePage = () => {
         console.log(error);
       });
   };
+
+  const [activeTabIndex, setActiveTabIndex] = useState(0);
+  const [isTabPanelVisible, setIsTabPanelVisible] = useState(true); // New state for visibility
+
+  const handleTabClick = (index) => {
+    setActiveTabIndex(index);
+    setIsTabPanelVisible(true); // Show TabPanel when a tab is clicked
+  };
+
+  const handleBackClick = () => {
+    setIsTabPanelVisible(false); // Hide TabPanel when back is clicked
+  };
   return (
     <>
       <Header />
@@ -380,306 +384,312 @@ const ProfilePage = () => {
                 </Tab>
               </TabList>
 
-              <TabPanel
-                className={`tab-panel ${
-                  isTabPanelVisible && activeTabIndex === 0 ? "active" : ""
-                }`}
-              >
-                <button className="back-button" onClick={handleBackClick}>
-                  Back
-                </button>
-                <section className="venue_about_section">
-                  <div className="tabs">
-                    <div className="tab-buttonss reservations_section">
-                      <button
-                        className={activeTab === "about" ? "active" : ""}
-                        onClick={() => setActiveTab("upcomming")}
-                        style={{
-                          color:
-                            activeTab === "upcomming"
-                              ? "var(--primary-color)"
-                              : "black",
-                          borderBottom:
-                            activeTab === "upcomming"
-                              ? "1px solid var(--primary-color)"
-                              : "none",
-                        }}
-                      >
-                        <h6>Upcoming</h6>
-                      </button>
-                      <button
-                        className={activeTab === "menu" ? "active" : ""}
-                        onClick={() => {
-                          setActiveTab("past&cancel");
-                        }}
-                        style={{
-                          color:
-                            activeTab === "past&cancel"
-                              ? "var(--primary-color)"
-                              : "black",
-                          borderBottom:
-                            activeTab === "past&cancel"
-                              ? "1px solid var(--primary-color)"
-                              : "none",
-                        }}
-                      >
-                        <h6>Past & Cancel</h6>
-                      </button>
-                    </div>
-                    <hr width={"100%"} style={{ marginTop: "0" }} />
-                    <div className="row">
-                      <div className="tab-content col-md-12">
-                        {activeTab === "upcomming" && (
-                          <div>
-                            <div className="container_venues_profile_page">
-                              <h6 className="profile_page_upcomming_section_heading">
-                                Upcoming reservations
-                              </h6>
-                              <div className="row">
-                                {GetRegistration &&
-                                  GetRegistration.length > 0 &&
-                                  GetRegistration.map(
-                                    (venue, index) =>
-                                      venue.type === "upcomming" && (
-                                        <div
-                                          key={index}
-                                          className="col-12 margin24px"
-                                        >
-                                          <div className="row m-0 px-2 container_profile_section_venue">
-                                            <div className="col-sm-4 px-0">
-                                              <Link
-                                                onClick={() =>
-                                                  handleLinkClick(
-                                                    match_and_return_seo_link(
-                                                      venue.data_res.primary_id
-                                                    )
-                                                  )
-                                                }
-                                                style={{
-                                                  textDecoration: "none",
-                                                }}
-                                              >
-                                                <div className="venuePage_image_container ProfilePage_image_container">
-                                                  <img
-                                                    src={
-                                                      APL_LINK +
-                                                      ImageLink +
-                                                      venue.data_res
-                                                        .restaurant_image
-                                                    }
-                                                    alt={
-                                                      venue.data_res
-                                                        .restaurant_name ||
-                                                      "Venue Image"
-                                                    }
-                                                  />
-                                                </div>
-                                              </Link>
-                                            </div>
-                                            <div className="col-sm-8 p-0">
-                                              <div className="venuePage_text_section ProfilePage_text_section">
-                                                <div className="venueContainer_rowtext">
-                                                  <div className="venueContainer_nameAndAddress">
-                                                    <h6>
-                                                      {
+              {isTabPanelVisible && (
+                <TabPanel
+                  className={`tab-panel ${
+                    isTabPanelVisible && activeTabIndex === 0 ? "active" : ""
+                  }`}
+                >
+                  <button className="back-button" onClick={handleBackClick}>
+                    Back
+                  </button>
+                  <section className="venue_about_section">
+                    <div className="tabs">
+                      <div className="tab-buttonss reservations_section">
+                        <button
+                          className={activeTab === "about" ? "active" : ""}
+                          onClick={() => setActiveTab("upcomming")}
+                          style={{
+                            color:
+                              activeTab === "upcomming"
+                                ? "var(--primary-color)"
+                                : "black",
+                            borderBottom:
+                              activeTab === "upcomming"
+                                ? "1px solid var(--primary-color)"
+                                : "none",
+                          }}
+                        >
+                          <h6>Upcoming</h6>
+                        </button>
+                        <button
+                          className={activeTab === "menu" ? "active" : ""}
+                          onClick={() => {
+                            setActiveTab("past&cancel");
+                          }}
+                          style={{
+                            color:
+                              activeTab === "past&cancel"
+                                ? "var(--primary-color)"
+                                : "black",
+                            borderBottom:
+                              activeTab === "past&cancel"
+                                ? "1px solid var(--primary-color)"
+                                : "none",
+                          }}
+                        >
+                          <h6>Past & Cancel</h6>
+                        </button>
+                      </div>
+                      <hr width={"100%"} style={{ marginTop: "0" }} />
+                      <div className="row">
+                        <div className="tab-content col-md-12">
+                          {activeTab === "upcomming" && (
+                            <div>
+                              <div className="container_venues_profile_page">
+                                <h6 className="profile_page_upcomming_section_heading">
+                                  Upcoming reservations
+                                </h6>
+                                <div className="row">
+                                  {GetRegistration &&
+                                    GetRegistration.length > 0 &&
+                                    GetRegistration.map(
+                                      (venue, index) =>
+                                        venue.type === "upcomming" && (
+                                          <div
+                                            key={index}
+                                            className="col-12 margin24px"
+                                          >
+                                            <div className="row m-0 px-2 container_profile_section_venue">
+                                              <div className="col-sm-4 px-0">
+                                                <Link
+                                                  onClick={() =>
+                                                    handleLinkClick(
+                                                      match_and_return_seo_link(
                                                         venue.data_res
-                                                          .restaurant_name
+                                                          .primary_id
+                                                      )
+                                                    )
+                                                  }
+                                                  style={{
+                                                    textDecoration: "none",
+                                                  }}
+                                                >
+                                                  <div className="venuePage_image_container ProfilePage_image_container">
+                                                    <img
+                                                      src={
+                                                        APL_LINK +
+                                                        ImageLink +
+                                                        venue.data_res
+                                                          .restaurant_image
                                                       }
-                                                    </h6>
+                                                      alt={
+                                                        venue.data_res
+                                                          .restaurant_name ||
+                                                        "Venue Image"
+                                                      }
+                                                    />
                                                   </div>
-                                                </div>
-                                                <span className="reservation_text">
-                                                  <img
-                                                    src={OnBoardingTick}
-                                                    alt="OnBoardingTick"
-                                                  />
-                                                  <p>
-                                                    {venue.booking_status === 1
-                                                      ? "Waiting for Confirmation"
-                                                      : venue.booking_status ===
-                                                        2
-                                                      ? "Reservation Confirmed"
-                                                      : venue.booking_status ===
-                                                        3
-                                                      ? "Reservation Complete"
-                                                      : venue.booking_status ===
-                                                        6
-                                                      ? "Reservation Canceled"
-                                                      : ""}
-                                                  </p>
-                                                </span>
+                                                </Link>
+                                              </div>
+                                              <div className="col-sm-8 p-0">
+                                                <div className="venuePage_text_section ProfilePage_text_section">
+                                                  <div className="venueContainer_rowtext">
+                                                    <div className="venueContainer_nameAndAddress">
+                                                      <h6>
+                                                        {
+                                                          venue.data_res
+                                                            .restaurant_name
+                                                        }
+                                                      </h6>
+                                                    </div>
+                                                  </div>
+                                                  <span className="reservation_text">
+                                                    <img
+                                                      src={OnBoardingTick}
+                                                      alt="OnBoardingTick"
+                                                    />
+                                                    <p>
+                                                      {venue.booking_status ===
+                                                      1
+                                                        ? "Waiting for Confirmation"
+                                                        : venue.booking_status ===
+                                                          2
+                                                        ? "Reservation Confirmed"
+                                                        : venue.booking_status ===
+                                                          3
+                                                        ? "Reservation Complete"
+                                                        : venue.booking_status ===
+                                                          6
+                                                        ? "Reservation Canceled"
+                                                        : ""}
+                                                    </p>
+                                                  </span>
 
-                                                <div className="venue_details_profile_page">
-                                                  <span className="people_span">
-                                                    <img
-                                                      src={contactus}
-                                                      alt="contactus"
-                                                    />
-                                                    <strong>
-                                                      {venue.no_of_guest}
-                                                    </strong>
-                                                  </span>
-                                                  <span className="people_span">
-                                                    <img
-                                                      src={calendar}
-                                                      alt="calendar"
-                                                    />
-                                                    <strong>
-                                                      {inputdateformateChange(
-                                                        venue.book_date
-                                                      )}{" "}
-                                                      at{" "}
-                                                      {formatTimeintotwodigit(
-                                                        venue.book_time
-                                                      )}
-                                                    </strong>
-                                                  </span>
-                                                </div>
-                                                <div className="venue_details_profile_page">
-                                                  <span
-                                                    className="people_span"
-                                                    onClick={() => {
-                                                      handleOpenCancelModal(
-                                                        venue
-                                                      );
-                                                    }}
-                                                  >
-                                                    <strong>
-                                                      <h6>Cancel</h6>
-                                                    </strong>
-                                                  </span>
+                                                  <div className="venue_details_profile_page">
+                                                    <span className="people_span">
+                                                      <img
+                                                        src={contactus}
+                                                        alt="contactus"
+                                                      />
+                                                      <strong>
+                                                        {venue.no_of_guest}
+                                                      </strong>
+                                                    </span>
+                                                    <span className="people_span">
+                                                      <img
+                                                        src={calendar}
+                                                        alt="calendar"
+                                                      />
+                                                      <strong>
+                                                        {inputdateformateChange(
+                                                          venue.book_date
+                                                        )}{" "}
+                                                        at{" "}
+                                                        {formatTimeintotwodigit(
+                                                          venue.book_time
+                                                        )}
+                                                      </strong>
+                                                    </span>
+                                                  </div>
+                                                  <div className="venue_details_profile_page">
+                                                    <span
+                                                      className="people_span"
+                                                      onClick={() => {
+                                                        handleOpenCancelModal(
+                                                          venue
+                                                        );
+                                                      }}
+                                                    >
+                                                      <strong>
+                                                        <h6>Cancel</h6>
+                                                      </strong>
+                                                    </span>
+                                                  </div>
                                                 </div>
                                               </div>
                                             </div>
                                           </div>
-                                        </div>
-                                      )
-                                  )}
+                                        )
+                                    )}
+                                </div>
                               </div>
                             </div>
-                          </div>
-                        )}
-                        {activeTab === "past&cancel" && (
-                          <div>
-                            <div className="container_venues_profile_page">
-                              <h6 className="profile_page_upcomming_section_heading">
-                                Past reservations
-                              </h6>
-                              <div className="row">
-                                {GetRegistration &&
-                                  GetRegistration.length > 0 &&
-                                  GetRegistration.map(
-                                    (venue, index) =>
-                                      venue.type === "past" && (
-                                        <div
-                                          key={index}
-                                          className="col-12 margin24px"
-                                        >
-                                          <div className="row m-0 px-2 container_profile_section_venue">
-                                            <div className="col-sm-4 px-0">
-                                              <Link
-                                                onClick={() =>
-                                                  handleLinkClick(
-                                                    match_and_return_seo_link(
-                                                      venue.data_res.primary_id
-                                                    )
-                                                  )
-                                                }
-                                                style={{
-                                                  textDecoration: "none",
-                                                }}
-                                              >
-                                                <div className="venuePage_image_container ProfilePage_image_container">
-                                                  <img
-                                                    src={
-                                                      APL_LINK +
-                                                      ImageLink +
-                                                      venue.data_res
-                                                        .restaurant_image
-                                                    }
-                                                    alt={
-                                                      venue.data_res
-                                                        .restaurant_name ||
-                                                      "Venue Image"
-                                                    }
-                                                  />
-                                                </div>
-                                              </Link>
-                                            </div>
-                                            <div className="col-sm-8 p-0">
-                                              <div className="venuePage_text_section ProfilePage_text_section">
-                                                <div className="venueContainer_rowtext">
-                                                  <div className="venueContainer_nameAndAddress">
-                                                    <h6>
-                                                      {
+                          )}
+                          {activeTab === "past&cancel" && (
+                            <div>
+                              <div className="container_venues_profile_page">
+                                <h6 className="profile_page_upcomming_section_heading">
+                                  Past reservations
+                                </h6>
+                                <div className="row">
+                                  {GetRegistration &&
+                                    GetRegistration.length > 0 &&
+                                    GetRegistration.map(
+                                      (venue, index) =>
+                                        venue.type === "past" && (
+                                          <div
+                                            key={index}
+                                            className="col-12 margin24px"
+                                          >
+                                            <div className="row m-0 px-2 container_profile_section_venue">
+                                              <div className="col-sm-4 px-0">
+                                                <Link
+                                                  onClick={() =>
+                                                    handleLinkClick(
+                                                      match_and_return_seo_link(
                                                         venue.data_res
-                                                          .restaurant_name
+                                                          .primary_id
+                                                      )
+                                                    )
+                                                  }
+                                                  style={{
+                                                    textDecoration: "none",
+                                                  }}
+                                                >
+                                                  <div className="venuePage_image_container ProfilePage_image_container">
+                                                    <img
+                                                      src={
+                                                        APL_LINK +
+                                                        ImageLink +
+                                                        venue.data_res
+                                                          .restaurant_image
                                                       }
-                                                    </h6>
+                                                      alt={
+                                                        venue.data_res
+                                                          .restaurant_name ||
+                                                        "Venue Image"
+                                                      }
+                                                    />
                                                   </div>
-                                                </div>
-                                                <span className="reservation_text">
-                                                  <img
-                                                    src={OnBoardingTick}
-                                                    alt="OnBoardingTick"
-                                                  />
-                                                  <p>
-                                                    {venue.booking_status === 1
-                                                      ? "Waiting for Confirmation"
-                                                      : venue.booking_status ===
-                                                        2
-                                                      ? "Reservation Confirmed"
-                                                      : venue.booking_status ===
-                                                        3
-                                                      ? "Reservation Complete"
-                                                      : venue.booking_status ===
-                                                        6
-                                                      ? "Reservation Canceled"
-                                                      : ""}
-                                                  </p>
-                                                </span>
+                                                </Link>
+                                              </div>
+                                              <div className="col-sm-8 p-0">
+                                                <div className="venuePage_text_section ProfilePage_text_section">
+                                                  <div className="venueContainer_rowtext">
+                                                    <div className="venueContainer_nameAndAddress">
+                                                      <h6>
+                                                        {
+                                                          venue.data_res
+                                                            .restaurant_name
+                                                        }
+                                                      </h6>
+                                                    </div>
+                                                  </div>
+                                                  <span className="reservation_text">
+                                                    <img
+                                                      src={OnBoardingTick}
+                                                      alt="OnBoardingTick"
+                                                    />
+                                                    <p>
+                                                      {venue.booking_status ===
+                                                      1
+                                                        ? "Waiting for Confirmation"
+                                                        : venue.booking_status ===
+                                                          2
+                                                        ? "Reservation Confirmed"
+                                                        : venue.booking_status ===
+                                                          3
+                                                        ? "Reservation Complete"
+                                                        : venue.booking_status ===
+                                                          6
+                                                        ? "Reservation Canceled"
+                                                        : ""}
+                                                    </p>
+                                                  </span>
 
-                                                <div className="venue_details_profile_page">
-                                                  <span className="people_span">
-                                                    <img
-                                                      src={contactus}
-                                                      alt="contactus"
-                                                    />
-                                                    <strong>
-                                                      {venue.no_of_guest}
-                                                    </strong>
-                                                  </span>
-                                                  <span className="people_span">
-                                                    <img
-                                                      src={calendar}
-                                                      alt="calendar"
-                                                    />
-                                                    <strong>
-                                                      {inputdateformateChange(
-                                                        venue.book_date
-                                                      )}{" "}
-                                                      at{" "}
-                                                      {formatTimeintotwodigit(
-                                                        venue.book_time
-                                                      )}
-                                                    </strong>
-                                                  </span>
+                                                  <div className="venue_details_profile_page">
+                                                    <span className="people_span">
+                                                      <img
+                                                        src={contactus}
+                                                        alt="contactus"
+                                                      />
+                                                      <strong>
+                                                        {venue.no_of_guest}
+                                                      </strong>
+                                                    </span>
+                                                    <span className="people_span">
+                                                      <img
+                                                        src={calendar}
+                                                        alt="calendar"
+                                                      />
+                                                      <strong>
+                                                        {inputdateformateChange(
+                                                          venue.book_date
+                                                        )}{" "}
+                                                        at{" "}
+                                                        {formatTimeintotwodigit(
+                                                          venue.book_time
+                                                        )}
+                                                      </strong>
+                                                    </span>
+                                                  </div>
                                                 </div>
                                               </div>
                                             </div>
                                           </div>
-                                        </div>
-                                      )
-                                  )}
+                                        )
+                                    )}
+                                </div>
                               </div>
                             </div>
-                          </div>
-                        )}
+                          )}
+                        </div>
                       </div>
                     </div>
-                  </div>
-                </section>
-              </TabPanel>
+                  </section>
+                </TabPanel>
+              )}
               <TabPanel
                 className={`tab-panel ${
                   isTabPanelVisible && activeTabIndex === 1 ? "active" : ""
@@ -1090,7 +1100,7 @@ const ProfilePage = () => {
                           <span class="slider round"></span>
                         </label>
                         <p>
-                          I agree to receive offeres and update from the Dfoodo
+                          I agree to receive offers and updates from the Dfoodo
                           by SMS
                         </p>
                       </span>

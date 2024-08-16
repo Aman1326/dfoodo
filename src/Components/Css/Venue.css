@@ -486,3 +486,9 @@
     margin-right: 2px;
   }
 }
+
+.filters_section_row.selected {
+  background-color: var(--primary-color);
+  color: var(--white);
+  /* change this to your preferred color */
+}

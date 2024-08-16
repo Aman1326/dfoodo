@@ -159,6 +159,12 @@ const Venue = () => {
       filter_name: "Alcohol Served  ",
     },
   ];
+  const [selectedFilter, setSelectedFilter] = useState(null);
+
+  const handleFilterClick = (index) => {
+    setSelectedFilter(index);
+  };
+
   const venues_data_labeled = GetVenueData;
   // pagination of popular venues
   const [currentPaginationPage, setCurrentPaginationPage] = useState(1);
@@ -287,7 +293,13 @@ const Venue = () => {
                     <img src={filter} alt="filter" /> Filter
                   </li>
                   {filters.map((text, index) => (
-                    <li key={index} className="filters_section_row">
+                    <li
+                      key={index}
+                      className={`filters_section_row ${
+                        selectedFilter === index ? "selected" : ""
+                      }`}
+                      onClick={() => handleFilterClick(index)}
+                    >
                       {" "}
                       <img src={text.filter_image} alt="filter_image" />
                       {text.filter_name}

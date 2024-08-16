@@ -194,45 +194,47 @@ const SearchBar = () => {
   return (
     <>
       <div className="searchBar_wrapper">
-        {!locationn.pathname.includes("restro_detail") && (
-          <div className="searchBar_container">
-            <div className="CalendarSection_searchbar">
-              <img src={calendar} alt="calendar" />
-              <DatePicker
-                onChange={setDate}
-                value={date}
-                className="datepicker"
-              />
-              <img src={line} alt="line" className="verticle_line" />
+        {!locationn.pathname.includes("restro_detail") &&
+          !locationn.pathname.includes("catagory_detail") && (
+            <div className="searchBar_container">
+              <div className="CalendarSection_searchbar">
+                <img src={calendar} alt="calendar" />
+                <DatePicker
+                  onChange={setDate}
+                  value={date}
+                  className="datepicker"
+                />
+                <img src={line} alt="line" className="verticle_line" />
+              </div>
+              <div className="locationSection_searchbar">
+                <img src={clock} alt="clock" />
+                <Select
+                  id="selectLocation"
+                  options={locations}
+                  onChange={handleLocationChange}
+                  placeholder="Time"
+                  styles={customStyles}
+                />
+                <img src={line} alt="line" className="verticle_line" />
+              </div>
+              <div className="locationSection_searchbar">
+                <img src={person} alt="clock" />
+                <Select
+                  id="selectPersons"
+                  options={personOptions}
+                  onChange={handlePersonChange}
+                  placeholder="People"
+                  styles={customStyles}
+                />
+              </div>
             </div>
-            <div className="locationSection_searchbar">
-              <img src={clock} alt="clock" />
-              <Select
-                id="selectLocation"
-                options={locations}
-                onChange={handleLocationChange}
-                placeholder="Time"
-                styles={customStyles}
-              />
-              <img src={line} alt="line" className="verticle_line" />
-            </div>
-            <div className="locationSection_searchbar">
-              <img src={person} alt="clock" />
-              <Select
-                id="selectPersons"
-                options={personOptions}
-                onChange={handlePersonChange}
-                placeholder="People"
-                styles={customStyles}
-              />
-            </div>
-          </div>
-        )}
+          )}
         <div className="padding04 row">
           <div
             className="seachVenue_section_searchbar"
             style={
-              locationn.pathname.includes("restro_detail")
+              locationn.pathname.includes("restro_detail") ||
+              locationn.pathname.includes("catagory_detail")
                 ? {
                     border: "1px solid grey",
                     marginRight: "15rem",
@@ -290,7 +292,8 @@ const SearchBar = () => {
         <div
           className="letsgo_button"
           style={
-            locationn.pathname.includes("restro_detail") && !isMobile
+            locationn.pathname.includes("restro_detail") ||
+            (locationn.pathname.includes("catagory_detail") && !isMobile)
               ? {
                   marginRight: "4rem",
                 }
