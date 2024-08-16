@@ -28,7 +28,11 @@ const get_all_timing_date_wise =
   local_server_link_back + "get_all_timing_date_wise";
 
 const city_list = local_server_link_react + "city_list/";
-const get_terms_privacy_data = local_server_link_react + "get_terms_privacy_data/";
+const get_terms_privacy_data =
+  local_server_link_react + "get_terms_privacy_data/";
+const get_favourite = local_server_link_react + "get_favourite/";
+const get_reservation_webapp =
+  local_server_link_react + "get_reservation_webapp/";
 
 const create_table_reservation_website =
   local_server_link_react + "create_table_reservation_website";
@@ -85,6 +89,8 @@ export {
   update_notifiction_sms_status,
   get_seo_data_website,
   city_list,
+  get_favourite,
   get_search_bar,
   get_terms_privacy_data,
+  get_reservation_webapp,
 };

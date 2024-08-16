@@ -163,7 +163,7 @@
   padding: 1rem 1rem;
   border: 1px solid grey;
   border-radius: 5px;
-  width: max-content;
+  width: 100%;
 
   p {
     color: var(--text-grey);
@@ -234,13 +234,16 @@ input:checked+.slider:before {
   -ms-transform: translateX(20px);
   transform: translateX(20px);
 }
+
 .switch_case {
   display: flex;
   align-items: center;
-  p{
+
+  p {
     margin: 0;
   }
 }
+
 .slider.round {
   border-radius: 34px;
 }
@@ -680,5 +683,9 @@ input:checked+.slider:before {
   .profile_picture_section {
     display: flex;
     flex-direction: column;
+    padding-left: 0;
+    padding-right: 0;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
   }
 }

@@ -16,12 +16,15 @@ import { PhoneInput } from "react-international-phone";
 import { Modal } from "react-bootstrap";
 import OnBoardingTick from "../Assets/OnBoardingTick.svg";
 import mainLogo from "../Assets/mainLogo.png";
+import qustionTOoltip from "../Assets/qustionTOoltip.svg";
 import {
   update_profile,
   get_profile,
   server_post_data,
   save_favourite,
+  get_favourite,
   cancel_booking,
+  get_reservation_webapp,
   update_notifiction_sms_status,
   APL_LINK,
 } from "../ServiceConnection/serviceconnection.js";
@@ -79,8 +82,8 @@ const ProfilePage = () => {
     const fd = new FormData();
     fd.append("call_id", customer_id);
     await server_post_data(get_profile, fd)
-    .then((Response) => {
-        console.log(Response.data.message)
+      .then((Response) => {
+        console.log(Response.data.message);
         if (Response.data.error) {
           // handleError(Response.data.message);
         } else {
@@ -390,11 +393,11 @@ const ProfilePage = () => {
                 <h3>Hi, {customer_name}</h3>
                 <span className="d-flex g-2 mb-2">
                   <img src={phone} alt="phone" />
-                  <p>{" "}{customer_mobile_no}</p>
+                  <p> {customer_mobile_no}</p>
                 </span>
                 <span className="d-flex g-2">
                   <img src={message} alt="phone" />
-                  <p>{" "}{customer_email}</p>
+                  <p> {customer_email}</p>
                 </span>
               </div>
             </div>
@@ -434,6 +437,16 @@ const ProfilePage = () => {
                       <button
                         className={activeTab === "about" ? "active" : ""}
                         onClick={() => setActiveTab("upcomming")}
+                        style={{
+                          color:
+                            activeTab === "upcomming"
+                              ? "var(--primary-color)"
+                              : "black",
+                          borderBottom:
+                            activeTab === "upcomming"
+                              ? "1px solid var(--primary-color)"
+                              : "none",
+                        }}
                       >
                         <h6>Upcoming</h6>
                       </button>
@@ -441,6 +454,16 @@ const ProfilePage = () => {
                         className={activeTab === "menu" ? "active" : ""}
                         onClick={() => {
                           setActiveTab("past&cancel");
+                        }}
+                        style={{
+                          color:
+                            activeTab === "past&cancel"
+                              ? "var(--primary-color)"
+                              : "black",
+                          borderBottom:
+                            activeTab === "past&cancel"
+                              ? "1px solid var(--primary-color)"
+                              : "none",
                         }}
                       >
                         <h6>Past & Cancel</h6>
@@ -717,83 +740,89 @@ const ProfilePage = () => {
                       getFavrate.map((venue, index) => (
                         <div className="fevorateContanrr" key={index}>
                           <div className="leftCont">
-                            {venue.data.map((item, itemIndex) => (
-                              <div className="favImgs" key={itemIndex}>
-                                <img
-                                  src={`${APL_LINK}/assets/${
-                                    item.restaurant_image || ""
-                                  }`}
-                                  alt="venueImg"
-                                />
-                              </div>
-                            ))}
+                            {venue &&
+                              venue.length > 0 &&
+                              venue.data.map((item, itemIndex) => (
+                                <div className="favImgs" key={itemIndex}>
+                                  <img
+                                    src={`${APL_LINK}/assets/${
+                                      item.restaurant_image || ""
+                                    }`}
+                                    alt="venueImg"
+                                  />
+                                </div>
+                              ))}
                           </div>
                           <div className="rightContainer">
                             <div className="ContnnrFavcratCard">
                               <div className="FaVCardcontent">
-                                {venue.data.map((item, itemIndex) => (
-                                  <div key={itemIndex}>
-                                    <h5>{item.restaurant_name || ""}</h5>
-                                    <div className="heart_section">
-                                      <button
-                                        onClick={() =>
-                                          handleRemoveFavrate(
-                                            index,
-                                            venue.primary_id
-                                          )
-                                        }
-                                      >
+                                {venue &&
+                                  venue.length > 0 &&
+                                  venue.data.map((item, itemIndex) => (
+                                    <div key={itemIndex}>
+                                      <h5>{item.restaurant_name || ""}</h5>
+                                      <div className="heart_section">
+                                        <button
+                                        // onClick={() =>
+                                        //   handleRemoveFavrate(
+                                        //     index,
+                                        //     venue.primary_id
+                                        //   )
+                                        // }
+                                        >
+                                          <img
+                                            src={HeartRed}
+                                            alt="Heart"
+                                            className="heart_icon favHeartIcon"
+                                          />
+                                        </button>
+                                      </div>
+                                      <p>
+                                        {item.restaurant_full_address || ""}
+                                      </p>
+                                      <div className="AVrageSection">
                                         <img
-                                          src={HeartRed}
-                                          alt="Heart"
-                                          className="heart_icon favHeartIcon"
+                                          className="ContctSvgIon"
+                                          src={contactus}
+                                          alt="cont"
                                         />
-                                      </button>
-                                    </div>
-                                    <p>{item.restaurant_full_address || ""}</p>
-                                    <div className="AVrageSection">
-                                      <img
-                                        className="ContctSvgIon"
-                                        src={contactus}
-                                        alt="cont"
-                                      />
-                                      <label>
-                                        ₹{item.restaurant_price} Average Price
-                                      </label>
-                                      <img
-                                        className="QuestionTOol"
-                                        src={qustionTOoltip}
-                                        alt="tooltip"
-                                      />
-                                    </div>
-                                    <div className="drinksSec">
-                                      {item.amenities?.map(
-                                        (amenity, amenityIndex) => (
-                                          <div
-                                            key={amenityIndex}
-                                            className="amenityItem"
-                                          >
-                                            <img
-                                              src={`${APL_LINK}/assets/${amenity.image}`}
-                                              alt={amenity.amenities_name}
-                                            />
-                                            <label>
-                                              {amenity.amenities_name}
-                                            </label>
+                                        <label>
+                                          ₹{item.restaurant_price} Average Price
+                                        </label>
+                                        <img
+                                          className="QuestionTOol"
+                                          src={qustionTOoltip}
+                                          alt="tooltip"
+                                        />
+                                      </div>
+                                      <div className="drinksSec">
+                                        {item.amenities?.map(
+                                          (amenity, amenityIndex) => (
+                                            <div
+                                              key={amenityIndex}
+                                              className="amenityItem"
+                                            >
+                                              <img
+                                                src={`${APL_LINK}/assets/${amenity.image}`}
+                                                alt={amenity.amenities_name}
+                                              />
+                                              <label>
+                                                {amenity.amenities_name}
+                                              </label>
+                                            </div>
+                                          )
+                                        )}
+                                      </div>
+                                      <div className="TimingButtons">
+                                        <div className="timesBtns">
+                                          <p>17:30</p>
+                                          <div className="childtime">
+                                            -{item.discount_upto}%
                                           </div>
-                                        )
-                                      )}
-                                    </div>
-                                    <div className="TimingButtons">
-                                      <div className="timesBtns">
-                                        <p>17:30</p>
-                                        <div className="childtime">
-                                          -{item.discount_upto}%
                                         </div>
                                       </div>
                                     </div>
-                                  </div>
-                                ))}
+                                  ))}
                               </div>
                             </div>
                           </div>
@@ -1103,7 +1132,7 @@ const ProfilePage = () => {
                     </div>
                     <button
                       className="loginButton mt-3"
-                      onClick={() => confirmVIP()}
+                      // onClick={() => confirmVIP()}
                     >
                       Logout
                     </button>
