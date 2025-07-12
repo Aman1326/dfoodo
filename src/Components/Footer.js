@@ -158,38 +158,26 @@ const Footer = () => {
               </strong>
               <ul className="social_links">
                 <li>
-                  <Link
-                    onClick={() =>
-                      handleLinkClick(getSocialLinks.website_facebook_link)
-                    }
-                  >
+                  <Link to={"#"}>
                     <img src={logo1} alt="logo1" />
                   </Link>
                 </li>
                 <li>
-                  <Link
-                    onClick={() =>
-                      handleLinkClick(getSocialLinks.website_twiter_link)
-                    }
-                  >
+                  <Link to={"#"}>
                     {" "}
                     <img src={logo2} alt="logo1" />
                   </Link>
                 </li>
                 <li>
                   <Link
-                    onClick={() =>
-                      handleLinkClick(getSocialLinks.website_youtube_link)
-                    }
+                   Link to={"#"}
                   >
                     <img src={logo3} alt="logo1" />
                   </Link>
                 </li>
                 <li>
                   <Link
-                    onClick={() =>
-                      handleLinkClick(getSocialLinks.website_instagram_link)
-                    }
+                   Link to={"#"}
                   >
                     {" "}
                     <img src={logo4} alt="logo1" />
@@ -197,9 +185,7 @@ const Footer = () => {
                 </li>
                 <li>
                   <Link
-                    onClick={() =>
-                      handleLinkClick(getSocialLinks.website_ins_link)
-                    }
+                   Link to={"#"}
                   >
                     <img src={logo5} alt="logo1" />
                   </Link>
