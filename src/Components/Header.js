@@ -57,129 +57,260 @@ function Header() {
   const [isPhoneNumberValid, setisPhoneNumberValid] = useState(false);
   const [isOTPValid, setisisOTPValid] = useState(false);
 
+  // const login_section_res = async () => {
+  //   let vaild = "0";
+  //   let login_otp = $("#opt_user").val();
+  //   let user_email = $("#user_email").val();
+  //   let user_name = $("#user_name").val();
+  //   let user_last = $("#user_last").val();
+
+  //   if (login_flag_res === "0") {
+  //     if (!validateMobile(userNumber)) {
+  //       vaild = "1";
+  //     }
+  //   }
+
+  //   if (login_flag_res === "1") {
+  //     if (parseInt(login_otp) === "") {
+  //       vaild = "1";
+  //     } else if (parseInt(login_otp) !== parseInt(presentotp)) {
+  //       vaild = "1";
+  //     } else {
+  //       if (complete_status_one === "0") {
+  //         $(".otp_section").hide();
+  //         $(".last_section").show();
+  //         login_flag_res = "2";
+  //         return;
+  //       } else {
+  //         storeData("customer_id", customer_id);
+  //         storeData("customer_name", customer_name);
+  //         storeData("customer_mobile_no", customer_mobile_no);
+  //         storeData("customer_email", customer_email);
+  //         setTimeout(() => {
+  //           window.location.reload();
+  //         }, 1000);
+  //       }
+  //     }
+  //   }
+  //   if (login_flag_res === "2") {
+  //     if ($.trim(user_name) === "" || $.trim(user_last) === "") {
+  //       vaild = "1";
+  //     }
+  //     if (user_email != "") {
+  //       if (!validateEmail(user_email)) {
+  //         vaild = "1";
+  //         handleError("Enter Vaild Email Id");
+  //         return;
+  //       }
+  //     }
+
+  //     if (!$("#user_checkbox").prop("checked")) {
+  //       vaild = "1";
+  //       handleError(
+  //         "Please agree to the terms and conditions before proceeding."
+  //       );
+  //       return;
+  //     }
+  //   }
+
+  //   if (vaild === "0") {
+  //     setshowLoaderAdmin(true);
+  //     const fd = new FormData();
+  //     fd.append("owner_moblie_no_without_zip", userNumber);
+  //     if (parseInt(login_flag_res) > 0) {
+  //       fd.append("click_type", "1");
+  //     } else {
+  //       fd.append("click_type", login_flag_res);
+  //     }
+  //     fd.append("email_id", user_email);
+  //     fd.append("owner_name", user_name);
+  //     fd.append("owner_lname", user_last);
+  //     await server_post_data(customer_login, fd)
+  //       .then((Response) => {
+  //         setshowLoaderAdmin(false);
+  //         if (Response.data.error) {
+  //           handleError(Response.data.message);
+  //         } else {
+  //           if (Response.data.message.data_guest.length > 0) {
+  //             setpresentotp(Response.data.message.guest_otp);
+  //             if (
+  //               Response.data.message.data_guest[0].guest_fname === "" ||
+  //               Response.data.message.data_guest[0].guest_fname === null
+  //             ) {
+  //               complete_status_one = "0";
+  //             } else {
+  //               complete_status_one = "1";
+  //             }
+  //             customer_id = Response.data.message.data_guest[0].primary_id;
+  //             customer_name =
+  //               Response.data.message.data_guest[0].guest_fname +
+  //               " " +
+  //               Response.data.message.data_guest[0].guest_lname;
+  //             customer_mobile_no =
+  //               Response.data.message.data_guest[0].guest_mobile_no;
+  //             customer_email = Response.data.message.data_guest[0].guest_email;
+
+  //             if (login_flag_res === "0") {
+  //               $(".hide_ssection_profile").hide();
+  //               $(".otp_section").show();
+  //               login_flag_res = "1";
+  //             } else {
+  //               storeData("customer_id", customer_id);
+  //               storeData("customer_name", customer_name);
+  //               storeData("customer_mobile_no", customer_mobile_no);
+  //               storeData("customer_email", customer_email);
+
+  //               setTimeout(() => {
+  //                 window.location.reload();
+  //               }, 1000);
+  //             }
+  //           }
+  //         }
+  //       })
+  //       .catch((error) => {
+  //         setshowLoaderAdmin(false);
+  //       });
+  //   } else {
+  //     if (login_flag_res === "0") {
+  //       handleError("Enter Vaild Mobile No");
+  //     } else if (login_flag_res === "1") {
+  //       handleError("Enter Vaild OTP");
+  //     } else {
+  //       handleError("Enter Vaild Full name");
+  //     }
+  //   }
+  // };
   const login_section_res = async () => {
-    let vaild = "0";
-    let login_otp = $("#opt_user").val();
-    let user_email = $("#user_email").val();
-    let user_name = $("#user_name").val();
-    let user_last = $("#user_last").val();
+  let valid = "0";
+  let login_otp = $("#opt_user").val();
+  let user_email = $("#user_email").val();
+  let user_name = $("#user_name").val();
+  let user_last = $("#user_last").val();
 
-    if (login_flag_res === "0") {
-      if (!validateMobile(userNumber)) {
-        vaild = "1";
-      }
+  if (login_flag_res === "0") {
+    if (!validateMobile(userNumber)) {
+      valid = "1";
     }
+  }
 
-    if (login_flag_res === "1") {
-      if (parseInt(login_otp) === "") {
-        vaild = "1";
-      } else if (parseInt(login_otp) !== parseInt(presentotp)) {
-        vaild = "1";
-      } else {
-        if (complete_status_one === "0") {
-          $(".otp_section").hide();
-          $(".last_section").show();
-          login_flag_res = "2";
-          return;
-        } else {
-          storeData("customer_id", customer_id);
-          storeData("customer_name", customer_name);
-          storeData("customer_mobile_no", customer_mobile_no);
-          storeData("customer_email", customer_email);
-          setTimeout(() => {
-            window.location.reload();
-          }, 1000);
-        }
-      }
+  if (login_flag_res === "1") {
+    if (parseInt(login_otp) === "") {
+      valid = "1";
+    } else if (parseInt(login_otp) !== parseInt(presentotp)) {
+      valid = "1";
     }
-    if (login_flag_res === "2") {
-      if ($.trim(user_name) === "" || $.trim(user_last) === "") {
-        vaild = "1";
-      }
-      if (user_email != "") {
-        if (!validateEmail(user_email)) {
-          vaild = "1";
-          handleError("Enter Vaild Email Id");
-          return;
-        }
-      }
+  }
 
-      if (!$("#user_checkbox").prop("checked")) {
-        vaild = "1";
-        handleError(
-          "Please agree to the terms and conditions before proceeding."
-        );
-        return;
-      }
+  if (login_flag_res === "2") {
+    if ($.trim(user_name) === "" || $.trim(user_last) === "") {
+      valid = "1";
     }
+    if (user_email !== "" && !validateEmail(user_email)) {
+      valid = "1";
+      handleError("Enter valid Email ID");
+      return;
+    }
+    if (!$("#user_checkbox").prop("checked")) {
+      valid = "1";
+      handleError("Please agree to the terms and conditions before proceeding.");
+      return;
+    }
+  }
 
-    if (vaild === "0") {
-      setshowLoaderAdmin(true);
-      const fd = new FormData();
-      fd.append("owner_moblie_no_without_zip", userNumber);
-      if (parseInt(login_flag_res) > 0) {
-        fd.append("click_type", "1");
-      } else {
-        fd.append("click_type", login_flag_res);
-      }
-      fd.append("email_id", user_email);
-      fd.append("owner_name", user_name);
-      fd.append("owner_lname", user_last);
-      await server_post_data(customer_login, fd)
-        .then((Response) => {
-          setshowLoaderAdmin(false);
-          if (Response.data.error) {
-            handleError(Response.data.message);
-          } else {
-            if (Response.data.message.data_guest.length > 0) {
-              setpresentotp(Response.data.message.guest_otp);
-              if (
-                Response.data.message.data_guest[0].guest_fname === "" ||
-                Response.data.message.data_guest[0].guest_fname === null
-              ) {
-                complete_status_one = "0";
-              } else {
-                complete_status_one = "1";
-              }
-              customer_id = Response.data.message.data_guest[0].primary_id;
-              customer_name =
-                Response.data.message.data_guest[0].guest_fname +
-                " " +
-                Response.data.message.data_guest[0].guest_lname;
-              customer_mobile_no =
-                Response.data.message.data_guest[0].guest_mobile_no;
-              customer_email = Response.data.message.data_guest[0].guest_email;
+  if (valid === "0") {
+    setshowLoaderAdmin(true);
 
-              if (login_flag_res === "0") {
-                $(".hide_ssection_profile").hide();
-                $(".otp_section").show();
-                login_flag_res = "1";
-              } else {
-                storeData("customer_id", customer_id);
-                storeData("customer_name", customer_name);
-                storeData("customer_mobile_no", customer_mobile_no);
-                storeData("customer_email", customer_email);
-
-                setTimeout(() => {
-                  window.location.reload();
-                }, 1000);
-              }
-            }
-          }
-        })
-        .catch((error) => {
-          setshowLoaderAdmin(false);
-        });
-    } else {
+    try {
       if (login_flag_res === "0") {
-        handleError("Enter Vaild Mobile No");
+        // STEP 1: Send OTP
+        const res = await fetch("http://localhost:5000/api/auth/send-otp", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ phoneNumber: userNumber })
+        });
+        const data = await res.json();
+
+        if (res.ok) {
+          console.log("OTP sent:", data);
+          $(".hide_ssection_profile").hide();
+          $(".otp_section").show();
+          login_flag_res = "1";
+          // Simulate backend OTP display (local only)
+          setpresentotp(prompt("Enter OTP received (check server log):"));
+        } else {
+          handleError(data.error || "Error sending OTP");
+        }
+
       } else if (login_flag_res === "1") {
-        handleError("Enter Vaild OTP");
-      } else {
-        handleError("Enter Vaild Full name");
+        // STEP 2: Verify OTP
+        const res = await fetch("http://localhost:5000/api/auth/verify-otp", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ phoneNumber: userNumber, otp: login_otp })
+        });
+        const data = await res.json();
+
+        if (res.ok) {
+          customer_id = data.user._id;
+          customer_mobile_no = data.user.phoneNumber;
+          complete_status_one = (!data.user.firstName) ? "0" : "1";
+
+          if (complete_status_one === "0") {
+            $(".otp_section").hide();
+            $(".last_section").show();
+            login_flag_res = "2";
+          } else {
+            storeData("customer_id", customer_id);
+            storeData("customer_mobile_no", customer_mobile_no);
+            storeData("customer_name", `${data.user.firstName} ${data.user.lastName}`);
+            storeData("customer_email", data.user.email);
+            setTimeout(() => window.location.reload(), 1000);
+          }
+        } else {
+          handleError(data.error || "Invalid OTP");
+        }
+
+      } else if (login_flag_res === "2") {
+        // STEP 3: Submit Profile Details
+        const res = await fetch("http://localhost:5000/api/auth/submit-details", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            phoneNumber: userNumber,
+            firstName: user_name,
+            lastName: user_last,
+            email: user_email
+          })
+        });
+        const data = await res.json();
+
+        if (res.ok) {
+          storeData("customer_id", data.user._id);
+          storeData("customer_mobile_no", data.user.phoneNumber);
+          storeData("customer_name", `${data.user.firstName} ${data.user.lastName}`);
+          storeData("customer_email", data.user.email);
+          setTimeout(() => window.location.reload(), 1000);
+        } else {
+          handleError(data.error || "Error saving details");
+        }
       }
+
+    } catch (err) {
+      console.error("Request failed:", err);
+      handleError("Something went wrong");
     }
-  };
+
+    setshowLoaderAdmin(false);
+  } else {
+    if (login_flag_res === "0") {
+      handleError("Enter Valid Mobile No");
+    } else if (login_flag_res === "1") {
+      handleError("Enter Valid OTP");
+    } else {
+      handleError("Enter Valid Full Name and Email");
+    }
+  }
+};
 
   $("#login_check_jquery").on("customEvent", function () {
     handleOpenLoginModal();
@@ -237,8 +368,8 @@ function Header() {
     latitude: null,
     longitude: null,
   });
-  const [city, setCity] = useState(retrieveData("city_main"));
-  const [error, setError] = useState(null);
+  const [city, setCity] = useState("");
+  const [error, setError] = useState("");
   const [state, setState] = useState("");
   const [cities, setCities] = useState([]);
   const detectLocation = () => {
@@ -305,64 +436,6 @@ function Header() {
       setError("Failed to retrieve cities");
     }
   };
-
-  const citiesInMadhyaPradesh = [
-    "Bhopal",
-    "Indore",
-    "Gwalior",
-    "Jabalpur",
-    "Ujjain",
-    "Sagar",
-    "Satna",
-    "Ratlam",
-    "Rewa",
-    "Dewas",
-    "Murwara (Katni)",
-    "Khandwa",
-    "Chhindwara",
-    "Guna",
-    "Vidisha",
-    "Shivpuri",
-    "Chhatarpur",
-    "Seoni",
-    "Dhar",
-    "Hoshangabad",
-    "Itarsi",
-    "Mandsaur",
-    "Damoh",
-    "Khargone",
-    "Neemuch",
-    "Pithampur",
-    "Singrauli",
-    "Burhanpur",
-    "Chhatarpur",
-    "Sehore",
-    "Bhind",
-    "Datia",
-    "Mandla",
-    "Narsinghpur",
-    "Betul",
-    "Shahdol",
-    "Harda",
-    "Dindori",
-    "Shajapur",
-    "Tikamgarh",
-    "Rajgarh",
-    "Umaria",
-    "Anuppur",
-    "Sheopur",
-    "Barwani",
-    "Raisen",
-    "Morena",
-    "Sidhi",
-    "Balaghat",
-    "Ashok Nagar",
-    "Agar Malwa",
-    "Alirajpur",
-    "Singrauli",
-    "Bina-Etawa",
-    "Nagda",
-  ];
 
   const [buttonClick, setButtonClick] = useState(false);
 
@@ -437,6 +510,66 @@ function Header() {
         console.log(error);
       });
   };
+
+  
+  const citiesInSelectedState = [
+    "Bhopal",
+    "Indore",
+    "Gwalior",
+    "Jabalpur",
+    "Ujjain",
+    "Sagar",
+    "Satna",
+    "Ratlam",
+    "Rewa",
+    "Dewas",
+    "Murwara (Katni)",
+    "Khandwa",
+    "Chhindwara",
+    "Guna",
+    "Vidisha",
+    "Shivpuri",
+    "Chhatarpur",
+    "Seoni",
+    "Dhar",
+    "Hoshangabad",
+    "Itarsi",
+    "Mandsaur",
+    "Damoh",
+    "Khargone",
+    "Neemuch",
+    "Pithampur",
+    "Singrauli",
+    "Burhanpur",
+    "Chhatarpur",
+    "Sehore",
+    "Bhind",
+    "Datia",
+    "Mandla",
+    "Narsinghpur",
+    "Betul",
+    "Shahdol",
+    "Harda",
+    "Dindori",
+    "Shajapur",
+    "Tikamgarh",
+    "Rajgarh",
+    "Umaria",
+    "Anuppur",
+    "Sheopur",
+    "Barwani",
+    "Raisen",
+    "Morena",
+    "Sidhi",
+    "Balaghat",
+    "Ashok Nagar",
+    "Agar Malwa",
+    "Alirajpur",
+    "Singrauli",
+    "Bina-Etawa",
+    "Nagda",
+  ];
+
 
   useEffect(() => {
     master_data_get();
@@ -794,10 +927,7 @@ function Header() {
                     {detectLocations.longitude}
                   </p>
                 )} */}
-                {city && (
-                  <p className="location_modal_text">Selected City: {city}</p>
-                )}
-                {state && <p className="location_modal_text">State: {state}</p>}
+                {state && <p className="location_modal_text">Your State: {state}</p>}
               </div>
 
               <div className="cities_mapped_locationModal">
@@ -839,10 +969,10 @@ function Header() {
           >
             {buttonClick ? "Hide Cities " : "Show Cities"}
           </button>
-          {citiesInMadhyaPradesh.length > 0 && buttonClick && (
+          {citiesInSelectedState.length > 0 && buttonClick && (
             <div className="mapped_cities_wrapper">
               <ul className="cities_mapped">
-                {citiesInMadhyaPradesh.map((cityName, index) => (
+                {citiesInSelectedState.map((cityName, index) => (
                   <li key={index}>
                     {cityName} {"|"}
                   </li>
