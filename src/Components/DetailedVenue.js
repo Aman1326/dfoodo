@@ -28,6 +28,9 @@ import AddBtn from "../Assets/addNewInput.svg";
 import crossIcon from "../Assets/crossicon.svg";
 import { Modal } from "react-bootstrap";
 import Successs from "../Assets/check.png";
+
+import Lightbox from "react-image-lightbox";
+
 import {
   server_post_data,
   get_restropage_webapp,
@@ -440,6 +443,21 @@ const DetailedVenue = () => {
       }
     };
   }, []);
+
+// for carousel in diaplaying the menu images
+  const [isOpen, setIsOpen] = useState(false);
+  const [photoIndex, setPhotoIndex] = useState(0);
+
+  const images =
+    detail.menuimages?.map(
+      (menu_img) => APL_LINK + ImageLink + menu_img.image_name
+    ) || [];
+
+  const handleImageClick = (index) => {
+    setPhotoIndex(index);
+    setIsOpen(true);
+  };
+
   return (
     <>
       <div className="detailed_venue_wrapper">
@@ -788,6 +806,7 @@ const DetailedVenue = () => {
                                           ImageLink +
                                           menu_img.image_name
                                         }
+                                        onClick={() => handleImageClick(idx)}
                                         alt="menu_img"
                                       />
                                     ))}
@@ -828,9 +847,25 @@ const DetailedVenue = () => {
                                       APL_LINK + ImageLink + menu_img.image_name
                                     }
                                     alt="menu_img"
+                                    className="menu_image_detailed_venuePage"
                                   />
                                 ))}
                             </div>
+
+                            {isOpen && (
+        <Lightbox
+          mainSrc={images[photoIndex]}
+          nextSrc={images[(photoIndex + 1) % images.length]}
+          prevSrc={images[(photoIndex + images.length - 1) % images.length]}
+          onCloseRequest={() => setIsOpen(false)}
+          onMovePrevRequest={() =>
+            setPhotoIndex((photoIndex + images.length - 1) % images.length)
+          }
+          onMoveNextRequest={() =>
+            setPhotoIndex((photoIndex + 1) % images.length)
+          }
+        />
+      )}
                           </div>
                         </div>
                       )}

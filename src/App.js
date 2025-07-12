@@ -19,6 +19,7 @@ import PrivacyPolicy from "./Components/PrivacyPolicy";
 import PageNotFound from "./Components/404.js";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import "react-image-lightbox/style.css";
 import {
   server_post_data,
   get_seo_data_website,

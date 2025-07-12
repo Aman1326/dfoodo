@@ -400,6 +400,7 @@
 
 .menu_image_wrapper img {
   width: 250px;
+  cursor: pointer;
 }
 
 .want_more_section {
